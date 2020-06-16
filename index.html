@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <title>RSLang</title>
+</head>
+<body>
+  <div class="modal_background">
+    <div class="modal_window">
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+        <div class="login-card">
+          <form class="sign-in-card" name="form-sign-in" method="post">
+            <div class="group group-user">
+              <label for="user" class="label">Username</label>
+              <input id="user" type="text" class="input" autocomlete="off" required>
+            </div>
+            <div class="group group-pass">
+              <label for="pass" class="label">Password</label>
+              <input id="pass" name="pass" type="password" class="input" autocomlete="off" required>
+              <div class="form-toggler">
+                <i class="fas fa-eye form-icon"></i>
+                <input id="password-toggler" type="checkbox" class="form-checkbox">
+              </div>
+            </div>
+            <div class="group group-check">
+              <input id="check" type="checkbox" class="check" checked>
+              <label for="check"><span class="icon"></span> Keep me Signed in</label>
+            </div>
+            <div class="group">
+              <input type="submit" class="button" value="Sign In">
+            </div>
+          </form>
+          <form class="sign-up-card" name="form-sign-up" method="post">
+            <div class="group">
+              <label for="user" class="label">Username</label>
+              <input id="user" type="text" class="input" required>
+            </div>
+            <div class="group">
+              <label for="pass" class="label">Password</label>
+              <input id="pass" type="password" class="input" data-type="password" required>
+            </div>
+            <div class="group">
+              <label for="pass" class="label">Repeat Password</label>
+              <input id="pass" type="password" class="input" data-type="password"required>
+            </div>
+            <div class="group">
+              <label for="pass" class="label">Email Address</label>
+              <input id="pass" type="email" name = "email" class="input" autocomlete="off" required>
+            </div>
+            <div class="group">
+              <input type="submit" class="button" value="Sign Up">
+            </div>
+            <div class="hr"></div>
+            <div class="foot-lnk">
+              <label for="tab-1">Already Member?</a>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+
