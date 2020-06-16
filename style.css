@@ -134,7 +134,7 @@ a{color:inherit;text-decoration:none}
 .modal_window .sign-up:checked + .tab + .login-card .sign-up-card{
 	transform:rotate(0);
 }
-.group-pass{
+.group{
   position: relative;
 }
 .form-toggler,
