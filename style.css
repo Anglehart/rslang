@@ -87,6 +87,7 @@ a{color:inherit;text-decoration:none}
 }
 .login-card .group .button{
 	background:#1161ee;
+	padding-top: 10px;
 }
 .login-card .group label .icon{
 	width:15px;
@@ -158,6 +159,10 @@ a{color:inherit;text-decoration:none}
   box-sizing: border-box;
   border: none;
   margin: 0;
+}
+.form-answer {
+	padding-bottom: 15px;
+	height: 33px;
 }
 
 .hr{
