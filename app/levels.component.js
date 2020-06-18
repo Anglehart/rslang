@@ -23,6 +23,8 @@ class Levels extends Component {
         document.querySelector('.word-translate').innerHTML = '';
         document.querySelectorAll('.level-buttons li').forEach((el) => {el.classList.remove('active-level')});
         event.target.classList.add('active-level');
+        document.querySelector('.score').innerHTML = '';
+        document.querySelector('.word-field').value = '';
         wordsComponent.getWords();
       })
     });
