@@ -1,4 +1,5 @@
 import control from './control.component.js';
+import words from './words.component.js';
 import storageService from './storage.service.js';
 
 class VoiceService {
@@ -7,7 +8,7 @@ class VoiceService {
     this.listening = false;
   }
 
-  startStop() {
+  voiceStartStop() {
     // Специально для тех, кто запретит доступ к микрофону
     navigator.getMedia = (navigator.getUserMedia
       || navigator.webkitGetUserMedia
@@ -26,19 +27,21 @@ class VoiceService {
       navigator.getMedia({ audio: true }, () => {
         this.recognation.start();
         this.listenRequest();
-        control.micOn();
       }, () => {});
     }
     this.listening = !this.listening;
   }
 
   listenRequest() {
+    control.micOn();
     this.recognation.addEventListener('result', (e) => {
       const transcript = Array.from(e.results)
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join('');
-      if (e.results[0].isFinal) {console.log(transcript)}
+      if (e.results[0].isFinal) {
+        words.checkWord(transcript);
+      }
     });
     this.recognation.addEventListener('end', this.recognation.start);
   }

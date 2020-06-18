@@ -6,6 +6,7 @@ class Words extends Component {
     super(config);
     this.dataLink = 'https://raw.githubusercontent.com/Anglehart/rslang-data/master/';
     this.defaultPic = '/app/assets/team17.jpg';
+    this.currentWords = null;
   }
 
   initComponent(){
@@ -34,6 +35,7 @@ class Words extends Component {
   }
 
   prepareData(data){
+    this.currentWords = data;
     data.forEach((item, i) => {
       const id = item.id;
       const word = item.word;
@@ -54,13 +56,15 @@ class Words extends Component {
   drawWords(id, word, audioUrl, imageUrl, translate, transcript){
     const wordItem = document.createElement('a');
     wordItem.onclick = () => {
-      const image = new Image();
-      image.src = imageUrl;
-      image.onload = () => {
-        this.changeImage(imageUrl);
-      };
-      new Audio(`${audioUrl}`).play();
-      this.changeTranslate(translate);
+      if(storageService.gameStatus() === 'false'){
+        const image = new Image();
+        image.src = imageUrl;
+        image.onload = () => {
+          this.changeImage(imageUrl);
+        };
+        new Audio(`${audioUrl}`).play();
+        this.changeTranslate(translate);
+      }
     };
     wordItem.innerHTML = `<p class="word">${word}</p><p class="transcript">${transcript}</p>`;
     wordItem.classList.add('word-item');
@@ -68,7 +72,7 @@ class Words extends Component {
   }
 
   changeImage(imageUrl){
-    document.querySelector('.word-image').style.background = `url(${imageUrl})`;
+    document.querySelector('.word-image').style.backgroundImage = `url(${imageUrl})`;
   }
 
   changeTranslate(translate){
@@ -77,6 +81,15 @@ class Words extends Component {
     wordTranslate.classList.add('word-translate');
     document.querySelector('.word-translate').replaceWith(wordTranslate);
   }
+
+  checkWord(word){
+    document.querySelector('.word-field').value = word;
+    this.currentWords.forEach((item) => {
+      if(item.word === word) console.log('Correct!');
+    });
+    console.log('ok')
+
+  }
 }
 
 const words = new Words({
@@ -84,6 +97,7 @@ const words = new Words({
   template: `
     <div class="word-image"></div>
     <div class="word-translate"></div>
+    <input class="word-field disable" type="text" class="input" readonly="">
     <div class="items-wrapper"></div>
   `,
 });

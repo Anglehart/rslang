@@ -10,8 +10,16 @@ class Control extends Component {
 
   initComponent() {
     document.querySelector('.speak-button').addEventListener('click', () => {
-      voiceService.startStop();
+      this.gameStartStop();
     })
+  }
+
+  gameStartStop() {
+    voiceService.voiceStartStop();
+    storageService.gameStartStop();
+    document.querySelector('.word-field').classList.toggle('disable');
+    document.querySelector('.word-translate').classList.toggle('disable');
+    document.querySelector('.speak-button').classList.toggle('activeBtn');
   }
 
   micOn(){

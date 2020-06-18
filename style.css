@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 main {
   position: relative;
   display: flex;
@@ -10,10 +13,10 @@ main {
   min-height: 100vh;
 }
 .word-image {
-  margin: auto;
+  margin: 0 auto 25px;
   width: 390px;
   height: 260px;
-  background-size: cover;
+  background-size: cover !important;
 }
 .word-translate {
   color: rgba(14, 30, 37, .7);
@@ -98,6 +101,12 @@ main {
   border-radius: 4px;
   transition: .15s;
   box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 2px 4px 0 rgba(14,30,37,.12);
+  cursor: pointer;
+}
+.activeBtn{
+  background: #009179;
+  color: #fff;
+  transition: .15s;
 }
 .control-wrapper {
   display: flex;
@@ -108,4 +117,28 @@ main {
 .speak-button {
   width: 100%;
   margin: 0 20px;
+}
+.disable {
+  display: none !important;
+}
+.word-field {
+  display: block;
+  border: 0;
+  border-bottom: 1px solid rgb(206, 212, 218);
+  background-color: transparent;
+  padding: 5px 20px;
+  margin: 0 auto;
+  margin-bottom: 14px;
+  width: 100%;
+  max-width: 390px;
+  height: 50px;
+  font-size: 20px;
+  line-height: 40px;
+  color: rgba(14, 30, 37, .7);
+  text-align: center;
+  font-size: 22px;
+  background-image: url(./app/assets/microphone.svg);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: 10px 15px;
 }
