@@ -4,6 +4,7 @@ export class Component {
     this.template = config.template;
     this.selector = config.selector;
     this.el = null;
+    this.defaultPic = '/app/assets/team17.jpg';
   }
 
   start() {

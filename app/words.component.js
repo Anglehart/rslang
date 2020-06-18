@@ -1,11 +1,11 @@
 import { Component } from './core.component.js';
 import storageService from './storage.service.js';
+import levels from './levels.component.js';
 
 class Words extends Component {
   constructor(config) {
     super(config);
     this.dataLink = 'https://raw.githubusercontent.com/Anglehart/rslang-data/master/';
-    this.defaultPic = '/app/assets/team17.jpg';
     this.currentWords = null;
   }
 
@@ -83,13 +83,15 @@ class Words extends Component {
     document.querySelector('.word-translate').replaceWith(wordTranslate);
   }
 
-  checkWord(word){
+  checkWord(transcript) {
+    const word = transcript.toLowerCase();
     document.querySelector('.word-field').value = word;
     this.currentWords.forEach((item) => {
       if(item.word === word) {
-        document.getElementById(`${item.id}`).classList.add('correctWord');
+        document.getElementById(`${item.id}`).classList.add('active-word');
         const imageUrl = `${this.dataLink}${item.image}`;
         this.changeImage(imageUrl);
+        levels.addStar();
       };
     });
   }

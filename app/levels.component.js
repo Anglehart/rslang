@@ -27,6 +27,12 @@ class Levels extends Component {
       })
     });
   }
+
+  addStar() {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    document.querySelector('.score').append(star);
+  }
 }
 
 const levels = new Levels({
@@ -39,6 +45,8 @@ const levels = new Levels({
       <li class="level3"></li>
       <li class="level4"></li>
       <li class="level5"></li>
-    </ul>`,
+    </ul>
+    <div class="score"></div>
+    `,
 });
 export default levels;

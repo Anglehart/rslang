@@ -1,7 +1,6 @@
 import { Component } from './core.component.js';
 import storageService from './storage.service.js';
 import voiceService from './voice.service.js';
-import wordsComponent from './words.component.js';
 
 class Control extends Component {
   constructor(config) {
@@ -11,6 +10,9 @@ class Control extends Component {
   initComponent() {
     document.querySelector('.speak-button').addEventListener('click', () => {
       this.gameStartStop();
+    })
+    document.querySelector('.restart-button').addEventListener('click', () => {
+      this.restartGame();
     })
     storageService.gameStop();
   }
@@ -23,12 +25,18 @@ class Control extends Component {
     document.querySelector('.speak-button').classList.toggle('activeBtn');
   }
 
-  micOn(){
-    console.log('mic is on');
-  }
-
-  micOff(){
-    console.log('mic is off');
+  restartGame() {
+    document.querySelectorAll('.word-item').forEach((item) => {
+      item.classList.remove('active-word');
+    });
+    storageService.gameStop();
+    voiceService.listening = true;
+    voiceService.voiceStartStop();
+    document.querySelector('.word-field').classList.add('disable');
+    document.querySelector('.word-translate').innerHTML = '';
+    document.querySelector('.speak-button').classList.remove('activeBtn');
+    document.querySelector('.word-image').style.backgroundImage = `url(${this.defaultPic})`;
+    document.querySelector('.score').innerHTML = '';
   }
 }
 

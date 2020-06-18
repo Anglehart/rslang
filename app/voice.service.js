@@ -16,9 +16,10 @@ class VoiceService {
       || navigator.msGetUserMedia);
 
     if (this.listening) {
-      this.recognation.removeEventListener('end', this.recognation.start);
-      this.recognation.stop();
-      control.micOff();
+      try {
+        this.recognation.removeEventListener('end', this.recognation.start);
+        this.recognation.stop();
+      } catch {}
     } else {
       const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
       this.recognation = new SpeechRecognition();
@@ -33,7 +34,6 @@ class VoiceService {
   }
 
   listenRequest() {
-    control.micOn();
     this.recognation.addEventListener('result', (e) => {
       const transcript = Array.from(e.results)
         .map((result) => result[0])
