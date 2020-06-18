@@ -36,7 +36,7 @@ main {
   line-height: 1.4;
   min-width: 200px;
   min-height: 70px;
-  margin: 10px;
+  margin: 10px 0;
   border: 1px solid rgb(206, 212, 218);
   border-radius: 5px;
   background-color: #fff;
@@ -87,4 +87,25 @@ main {
   top: 9px;
   right: 5px;
   background-color: #00c49d;
+}
+.btn {
+  font-size: 24px;
+  text-align: center;
+  padding: 15px 25px;
+  min-width: 200px;
+  color: #fff;
+  background: #00c49d;
+  border-radius: 4px;
+  transition: .15s;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 2px 4px 0 rgba(14,30,37,.12);
+}
+.control-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 30px;
+}
+.speak-button {
+  width: 100%;
+  margin: 0 20px;
 }
