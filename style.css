@@ -45,6 +45,11 @@ main {
   background-color: #fff;
   transition: .3s;
   box-sizing: border-box;
+  background: url(./app/assets/audio.svg);
+  background-repeat: no-repeat;
+  background-size: 14%;
+  background-position-y: center;
+  background-position-x: 15px;
 }
 .word-item p {
   margin: 0;
@@ -141,4 +146,8 @@ main {
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: 10px 15px;
+}
+.correctWord{
+  border: 1px solid rgb(0, 173, 159);
+  background-color: rgba(0, 173, 159, .15);
 }

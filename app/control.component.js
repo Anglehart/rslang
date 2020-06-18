@@ -12,6 +12,7 @@ class Control extends Component {
     document.querySelector('.speak-button').addEventListener('click', () => {
       this.gameStartStop();
     })
+    storageService.gameStop();
   }
 
   gameStartStop() {

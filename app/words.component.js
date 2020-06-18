@@ -9,7 +9,7 @@ class Words extends Component {
     this.currentWords = null;
   }
 
-  initComponent(){
+  initComponent() {
     this.getWords();
   }
 
@@ -57,22 +57,23 @@ class Words extends Component {
     const wordItem = document.createElement('a');
     wordItem.onclick = () => {
       if(storageService.gameStatus() === 'false'){
-        const image = new Image();
-        image.src = imageUrl;
-        image.onload = () => {
-          this.changeImage(imageUrl);
-        };
+        this.changeImage(imageUrl);
         new Audio(`${audioUrl}`).play();
         this.changeTranslate(translate);
       }
     };
+    wordItem.id = id;
     wordItem.innerHTML = `<p class="word">${word}</p><p class="transcript">${transcript}</p>`;
     wordItem.classList.add('word-item');
     document.querySelector('.items-wrapper').append(wordItem);
   }
 
-  changeImage(imageUrl){
-    document.querySelector('.word-image').style.backgroundImage = `url(${imageUrl})`;
+  changeImage(imageUrl) {
+    const image = new Image();
+    image.src = imageUrl;
+    image.onload = () => {
+      document.querySelector('.word-image').style.backgroundImage = `url(${imageUrl})`;
+    };
   }
 
   changeTranslate(translate){
@@ -85,10 +86,12 @@ class Words extends Component {
   checkWord(word){
     document.querySelector('.word-field').value = word;
     this.currentWords.forEach((item) => {
-      if(item.word === word) console.log('Correct!');
+      if(item.word === word) {
+        document.getElementById(`${item.id}`).classList.add('correctWord');
+        const imageUrl = `${this.dataLink}${item.image}`;
+        this.changeImage(imageUrl);
+      };
     });
-    console.log('ok')
-
   }
 }
 

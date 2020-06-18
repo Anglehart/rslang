@@ -8,12 +8,15 @@ class StorageService {
   }
 
   gameStartStop() {
-    console.log(this.gameStatus());
     if (this.gameStatus() === 'false') {
       localStorage.setItem('gameStatus', true);
     } else {
       localStorage.setItem('gameStatus', false);
     }
+  }
+
+  gameStop() {
+    localStorage.setItem('gameStatus', false);
   }
 
   gameStatus(){
