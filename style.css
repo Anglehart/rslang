@@ -10,8 +10,10 @@ main {
   min-height: 100vh;
 }
 .word-image {
-  display: block;
   margin: auto;
+  width: 390px;
+  height: 260px;
+  background-size: cover;
 }
 .word-translate {
   color: rgba(14, 30, 37, .7);
@@ -48,4 +50,41 @@ main {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+.active-level {
+  box-shadow: 0 0 0 2px #00c49d, inset 0 0 0 2px #ffffff, inset 0 0 0 3px #00c49d !important;
+}
+.level-buttons {
+  list-style: none;
+  display: flex;
+  padding: 15px 15px;
+  margin: 0;
+  justify-content: space-between;
+}
+.level-buttons li {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  padding: 10px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background-color: #00c49d;
+  background: radial-gradient(#00c49d 0%, #00c49d 50%, #ffffff 50%, #ffffff 100%);
+  margin-right: 10px;
+  box-shadow: 0 0 0 2px #ffffff;
+  cursor: pointer;
+  transition: .5s;
+  box-sizing: border-box;
+}
+.level-buttons li:nth-child(1)::before {
+  display: none;
+}
+.level-buttons li:before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  position: absolute;
+  top: 9px;
+  right: 5px;
+  background-color: #00c49d;
 }

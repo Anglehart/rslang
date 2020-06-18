@@ -5,6 +5,7 @@ class Words extends Component {
   constructor(config) {
     super(config);
     this.dataLink = 'https://raw.githubusercontent.com/Anglehart/rslang-data/master/';
+    this.defaultPic = '/app/assets/team17.jpg';
   }
 
   initComponent(){
@@ -12,8 +13,7 @@ class Words extends Component {
   }
 
   getWords() {
-    //const currentLevel = storageService.getLevel();
-    const currentLevel = 0;
+    const currentLevel = storageService.getLevel();
     const page = this.randomInteger(0, 29);
     const halfOfArray = this.randomInteger(1, 2);
     const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${currentLevel}`;
@@ -43,7 +43,7 @@ class Words extends Component {
       const transcript = item.transcription;
       this.drawWords(id, word, audioUrl, imageUrl, translate, transcript);
     });
-
+    document.querySelector('.word-image').style.background = `url(${this.defaultPic})`;
   }
 
   randomInteger(min, max) {
@@ -54,8 +54,12 @@ class Words extends Component {
   drawWords(id, word, audioUrl, imageUrl, translate, transcript){
     const wordItem = document.createElement('a');
     wordItem.onclick = () => {
+      const image = new Image();
+      image.src = imageUrl;
+      image.onload = () => {
+        this.changeImage(imageUrl);
+      };
       new Audio(`${audioUrl}`).play();
-      this.changeImage(imageUrl);
       this.changeTranslate(translate);
     };
     wordItem.innerHTML = `<p class="word">${word}</p><p class="transcript">${transcript}</p>`;
@@ -64,10 +68,7 @@ class Words extends Component {
   }
 
   changeImage(imageUrl){
-    const wordImage = document.createElement('img');
-    wordImage.src = imageUrl;
-    wordImage.classList.add('word-image');
-    document.querySelector('.word-image').replaceWith(wordImage);
+    document.querySelector('.word-image').style.background = `url(${imageUrl})`;
   }
 
   changeTranslate(translate){
@@ -81,7 +82,7 @@ class Words extends Component {
 const words = new Words({
   selector: '.words-wrapper',
   template: `
-    <img class="word-image" src="/app/assets/team17.jpg">
+    <div class="word-image"></div>
     <div class="word-translate"></div>
     <div class="items-wrapper"></div>
   `,
