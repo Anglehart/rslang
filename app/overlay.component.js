@@ -74,16 +74,6 @@ class Overlay extends Component {
     document.querySelector('main').classList.remove('hidden');
     document.querySelector('.results').classList.add('hidden');
   }
-
-  showWinGame() {
-    document.querySelector('main').classList.add('hidden');
-    document.querySelector('.win-game').classList.remove('hidden');
-  }
-
-  hideWinGame() {
-    document.querySelector('main').classList.remove('hidden');
-    document.querySelector('.win-game').classList.add('hidden');
-  }
 }
 
 const overlay = new Overlay({
