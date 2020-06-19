@@ -5,6 +5,7 @@ export class Component {
     this.selector = config.selector;
     this.el = null;
     this.defaultPic = '/app/assets/team17.jpg';
+    this.dataLink = 'https://raw.githubusercontent.com/Anglehart/rslang-data/master/';
   }
 
   start() {

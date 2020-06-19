@@ -1,6 +1,7 @@
 import { Component } from './core.component.js';
 import storageService from './storage.service.js';
 import voiceService from './voice.service.js';
+import overlay from './overlay.component.js';
 
 class Control extends Component {
   constructor(config) {
@@ -11,9 +12,8 @@ class Control extends Component {
     document.querySelector('.speak-button').addEventListener('click', () => {
       if (storageService.gameStatus() === 'false') this.gameStartStop();
     })
-    document.querySelector('.restart-button').addEventListener('click', () => {
-      this.restartGame();
-    })
+    document.querySelector('.restart-button').addEventListener('click', () => { this.restartGame(); })
+    document.querySelector('.results-button').addEventListener('click', () => { overlay.showResults(); })
     storageService.gameStop();
   }
 

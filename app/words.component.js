@@ -1,16 +1,32 @@
 import { Component } from './core.component.js';
 import storageService from './storage.service.js';
 import levels from './levels.component.js';
+import overlay from './overlay.component.js';
+import voiceService from './voice.service.js';
 
 class Words extends Component {
   constructor(config) {
     super(config);
-    this.dataLink = 'https://raw.githubusercontent.com/Anglehart/rslang-data/master/';
     this.correctWords = [];
     this.inCorrectWords = [];
   }
 
   initComponent() {
+    this.newGame();
+  }
+
+  newGame() {
+    try{
+      document.querySelector('.items-wrapper').innerHTML = '';
+      storageService.gameStop();
+      voiceService.listening = true;
+      voiceService.voiceStartStop();
+      document.querySelector('.word-field').classList.add('disable');
+      document.querySelector('.word-translate').innerHTML = '';
+      document.querySelector('.speak-button').classList.remove('activeBtn');
+      document.querySelector('.word-image').style.backgroundImage = `url(${this.defaultPic})`;
+      document.querySelector('.score').innerHTML = '';
+    } catch{};
     this.getWords();
   }
 
@@ -37,6 +53,7 @@ class Words extends Component {
 
   prepareData(data){
     this.inCorrectWords = data;
+    overlay.drawResults(this.correctWords, this.inCorrectWords);
     data.forEach((item, i) => {
       const id = item.id;
       const word = item.word.toLowerCase();
@@ -96,6 +113,7 @@ class Words extends Component {
         this.correctWords.push(item);
         const wordIndex = this.inCorrectWords.indexOf(item);
         this.inCorrectWords.splice(wordIndex, 1);
+        overlay.drawResults(this.correctWords, this.inCorrectWords);
       };
     });
   }
