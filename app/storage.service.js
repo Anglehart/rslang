@@ -19,7 +19,7 @@ class StorageService {
     localStorage.setItem('gameStatus', false);
   }
 
-  gameStatus(){
+  gameStatus() {
     return localStorage.getItem('gameStatus');
   }
 }

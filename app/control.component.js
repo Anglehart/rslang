@@ -9,7 +9,7 @@ class Control extends Component {
 
   initComponent() {
     document.querySelector('.speak-button').addEventListener('click', () => {
-      this.gameStartStop();
+      if (storageService.gameStatus() === 'false') this.gameStartStop();
     })
     document.querySelector('.restart-button').addEventListener('click', () => {
       this.restartGame();

@@ -6,7 +6,8 @@ class Words extends Component {
   constructor(config) {
     super(config);
     this.dataLink = 'https://raw.githubusercontent.com/Anglehart/rslang-data/master/';
-    this.currentWords = null;
+    this.correctWords = [];
+    this.inCorrectWords = [];
   }
 
   initComponent() {
@@ -35,10 +36,10 @@ class Words extends Component {
   }
 
   prepareData(data){
-    this.currentWords = data;
+    this.inCorrectWords = data;
     data.forEach((item, i) => {
       const id = item.id;
-      const word = item.word;
+      const word = item.word.toLowerCase();
       const audioUrl = `${this.dataLink}${item.audio}`;
       const imageUrl = `${this.dataLink}${item.image}`;
       const translate = item.wordTranslate;
@@ -86,12 +87,15 @@ class Words extends Component {
   checkWord(transcript) {
     const word = transcript.toLowerCase();
     document.querySelector('.word-field').value = word;
-    this.currentWords.forEach((item) => {
+    this.inCorrectWords.forEach((item) => {
       if(item.word === word) {
         document.getElementById(`${item.id}`).classList.add('active-word');
         const imageUrl = `${this.dataLink}${item.image}`;
         this.changeImage(imageUrl);
         levels.addStar();
+        this.correctWords.push(item);
+        const wordIndex = this.inCorrectWords.indexOf(item);
+        this.inCorrectWords.splice(wordIndex, 1);
       };
     });
   }

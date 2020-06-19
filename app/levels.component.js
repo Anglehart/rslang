@@ -1,6 +1,7 @@
 import { Component } from './core.component.js';
 import storageService from './storage.service.js';
 import wordsComponent from './words.component.js';
+import control from './control.component.js';
 
 class Levels extends Component {
   constructor(config) {
@@ -26,6 +27,7 @@ class Levels extends Component {
         document.querySelector('.score').innerHTML = '';
         document.querySelector('.word-field').value = '';
         wordsComponent.getWords();
+        control.restartGame();
       })
     });
   }
