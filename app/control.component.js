@@ -2,6 +2,7 @@ import { Component } from './core.component.js';
 import storageService from './storage.service.js';
 import voiceService from './voice.service.js';
 import overlay from './overlay.component.js';
+import words from './words.component.js';
 
 class Control extends Component {
   constructor(config) {
@@ -37,6 +38,7 @@ class Control extends Component {
     document.querySelector('.speak-button').classList.remove('activeBtn');
     document.querySelector('.word-image').style.backgroundImage = `url(${this.defaultPic})`;
     document.querySelector('.score').innerHTML = '';
+    overlay.drawResults([], words.currentWords);
   }
 }
 

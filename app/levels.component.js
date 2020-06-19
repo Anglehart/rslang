@@ -26,8 +26,7 @@ class Levels extends Component {
         event.target.classList.add('active-level');
         document.querySelector('.score').innerHTML = '';
         document.querySelector('.word-field').value = '';
-        wordsComponent.getWords();
-        control.restartGame();
+        wordsComponent.newGame();
       })
     });
   }

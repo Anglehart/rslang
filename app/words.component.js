@@ -7,6 +7,7 @@ import voiceService from './voice.service.js';
 class Words extends Component {
   constructor(config) {
     super(config);
+    this.currentWords = [];
     this.correctWords = [];
     this.inCorrectWords = [];
   }
@@ -23,9 +24,12 @@ class Words extends Component {
       voiceService.voiceStartStop();
       document.querySelector('.word-field').classList.add('disable');
       document.querySelector('.word-translate').innerHTML = '';
+      document.querySelector('.word-translate').classList.remove('disable');
       document.querySelector('.speak-button').classList.remove('activeBtn');
       document.querySelector('.word-image').style.backgroundImage = `url(${this.defaultPic})`;
       document.querySelector('.score').innerHTML = '';
+      this.correctWords = [];
+      this.inCorrectWords = [];
     } catch{};
     this.getWords();
   }
@@ -51,8 +55,9 @@ class Words extends Component {
     })
   }
 
-  prepareData(data){
-    this.inCorrectWords = data;
+  prepareData(data) {
+    this.currentWords = [...data];
+    this.inCorrectWords = [...data];
     overlay.drawResults(this.correctWords, this.inCorrectWords);
     data.forEach((item, i) => {
       const id = item.id;
