@@ -12,9 +12,12 @@ class Overlay extends Component {
     this.showIntro();
     document.querySelector('.intro-btn').addEventListener('click', () => {this.hideIntro()});
     document.querySelector('.return').addEventListener('click', () => {this.hideResults()});
-    document.querySelector('.new-game').addEventListener('click', () => {
-      this.hideResults();
-      wordsComponent.newGame();
+    document.querySelectorAll('.new-game').forEach((item) => {
+      item.addEventListener('click', () => {
+        this.hideResults();
+        this.hideWinGame();
+        wordsComponent.newGame();
+      });
     });
   }
 
@@ -70,6 +73,16 @@ class Overlay extends Component {
   hideResults() {
     document.querySelector('main').classList.remove('hidden');
     document.querySelector('.results').classList.add('hidden');
+  }
+
+  showWinGame() {
+    document.querySelector('main').classList.add('hidden');
+    document.querySelector('.win-game').classList.remove('hidden');
+  }
+
+  hideWinGame() {
+    document.querySelector('main').classList.remove('hidden');
+    document.querySelector('.win-game').classList.add('hidden');
   }
 }
 

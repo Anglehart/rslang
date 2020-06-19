@@ -121,6 +121,7 @@ class Words extends Component {
         overlay.drawResults(this.correctWords, this.inCorrectWords);
       };
     });
+    if (this.inCorrectWords.length === 0) overlay.showWinGame();
   }
 }
 

@@ -15,7 +15,8 @@ h1 {
   font-weight: 300;
 }
 .intro,
-.results {
+.results,
+.win-game {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +31,15 @@ h1 {
   transition: .5s;
   background-image: url(./app/assets/bg.png);
   background-size: cover;
+}
+.win-container p {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 300;
+  color: #fff;
+  opacity: .8;
 }
 .intro-btn {
   font-weight: 300;
