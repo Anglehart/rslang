@@ -1,17 +1,11 @@
 import { Component } from './core.component.js';
-import storageService from './storage.service.js';
 import wordsComponent from './words.component.js';
-import control from './control.component.js';
 
 class Overlay extends Component {
-  constructor(config) {
-    super(config);
-  }
-
   initComponent() {
     this.showIntro();
-    document.querySelector('.intro-btn').addEventListener('click', () => {this.hideIntro()});
-    document.querySelector('.return').addEventListener('click', () => {this.hideResults()});
+    document.querySelector('.intro-btn').addEventListener('click', () => { this.hideIntro(); });
+    document.querySelector('.return').addEventListener('click', () => { this.hideResults(); });
     document.querySelectorAll('.new-game').forEach((item) => {
       item.addEventListener('click', () => {
         this.hideResults();
@@ -78,6 +72,6 @@ class Overlay extends Component {
 
 const overlay = new Overlay({
   selector: '.overlay',
-  template: ``,
+  template: '',
 });
 export default overlay;

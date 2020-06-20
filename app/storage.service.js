@@ -1,9 +1,9 @@
 class StorageService {
-  setLevel(levelId){
+  setLevel(levelId) {
     localStorage.setItem('level', levelId);
   }
 
-  getLevel(){
+  getLevel() {
     return localStorage.getItem('level');
   }
 

@@ -5,16 +5,12 @@ import overlay from './overlay.component.js';
 import words from './words.component.js';
 
 class Control extends Component {
-  constructor(config) {
-    super(config);
-  }
-
   initComponent() {
     document.querySelector('.speak-button').addEventListener('click', () => {
       if (storageService.gameStatus() === 'false') this.gameStartStop();
-    })
-    document.querySelector('.restart-button').addEventListener('click', () => { this.restartGame(); })
-    document.querySelector('.results-button').addEventListener('click', () => { overlay.showResults(); })
+    });
+    document.querySelector('.restart-button').addEventListener('click', () => { this.restartGame(); });
+    document.querySelector('.results-button').addEventListener('click', () => { overlay.showResults(); });
     storageService.gameStop();
   }
 

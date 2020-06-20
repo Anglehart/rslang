@@ -1,13 +1,8 @@
 import { Component } from './core.component.js';
 import storageService from './storage.service.js';
 import wordsComponent from './words.component.js';
-import control from './control.component.js';
 
 class Levels extends Component {
-  constructor(config) {
-    super(config);
-  }
-
   initComponent() {
     let currentLevel = 0;
     if (!storageService.getLevel()) {
@@ -22,12 +17,12 @@ class Levels extends Component {
         storageService.setLevel(i);
         document.querySelector('.items-wrapper').innerHTML = '';
         document.querySelector('.word-translate').innerHTML = '';
-        document.querySelectorAll('.level-buttons li').forEach((el) => {el.classList.remove('active-level')});
+        document.querySelectorAll('.level-buttons li').forEach((el) => { el.classList.remove('active-level'); });
         event.target.classList.add('active-level');
         document.querySelector('.score').innerHTML = '';
         document.querySelector('.word-field').value = '';
         wordsComponent.newGame();
-      })
+      });
     });
   }
 

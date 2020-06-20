@@ -17,7 +17,7 @@ class Words extends Component {
   }
 
   newGame() {
-    try{
+    try {
       document.querySelector('.items-wrapper').innerHTML = '';
       storageService.gameStop();
       voiceService.listening = true;
@@ -30,7 +30,7 @@ class Words extends Component {
       document.querySelector('.score').innerHTML = '';
       this.correctWords = [];
       this.inCorrectWords = [];
-    } catch{};
+    } finally { console.log('Start new game'); }
     this.getWords();
   }
 
@@ -41,26 +41,26 @@ class Words extends Component {
     const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${currentLevel}`;
 
     fetch(url)
-    .then((response) => {
-      if (response.ok) return response;
-      return Promise.reject();
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      if (halfOfArray === 1) return data.slice(0, 10);
-      return data.slice(10);
-    })
-    .then((data) => {
-      this.prepareData(data);
-    })
+      .then((response) => {
+        if (response.ok) return response;
+        return Promise.reject();
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (halfOfArray === 1) return data.slice(0, 10);
+        return data.slice(10);
+      })
+      .then((data) => {
+        this.prepareData(data);
+      });
   }
 
   prepareData(data) {
     this.currentWords = [...data];
     this.inCorrectWords = [...data];
     overlay.drawResults(this.correctWords, this.inCorrectWords);
-    data.forEach((item, i) => {
-      const id = item.id;
+    data.forEach((item) => {
+      const { id } = item;
       const word = item.word.toLowerCase();
       const audioUrl = `${this.dataLink}${item.audio}`;
       const imageUrl = `${this.dataLink}${item.image}`;
@@ -72,14 +72,14 @@ class Words extends Component {
   }
 
   randomInteger(min, max) {
-    let rand = min - 0.5 + Math.random() * (max - min + 1);
+    const rand = min - 0.5 + Math.random() * (max - min + 1);
     return Math.round(rand);
   }
 
-  drawWords(id, word, audioUrl, imageUrl, translate, transcript){
+  drawWords(id, word, audioUrl, imageUrl, translate, transcript) {
     const wordItem = document.createElement('a');
     wordItem.onclick = () => {
-      if(storageService.gameStatus() === 'false'){
+      if (storageService.gameStatus() === 'false') {
         this.changeImage(imageUrl);
         new Audio(`${audioUrl}`).play();
         this.changeTranslate(translate);
@@ -99,7 +99,7 @@ class Words extends Component {
     };
   }
 
-  changeTranslate(translate){
+  changeTranslate(translate) {
     const wordTranslate = document.createElement('div');
     wordTranslate.innerHTML = translate;
     wordTranslate.classList.add('word-translate');
@@ -110,7 +110,7 @@ class Words extends Component {
     const word = transcript.toLowerCase();
     document.querySelector('.word-field').value = word;
     this.inCorrectWords.forEach((item) => {
-      if(item.word === word) {
+      if (item.word === word) {
         document.getElementById(`${item.id}`).classList.add('active-word');
         const imageUrl = `${this.dataLink}${item.image}`;
         this.changeImage(imageUrl);
@@ -119,7 +119,7 @@ class Words extends Component {
         const wordIndex = this.inCorrectWords.indexOf(item);
         this.inCorrectWords.splice(wordIndex, 1);
         overlay.drawResults(this.correctWords, this.inCorrectWords);
-      };
+      }
     });
     if (this.inCorrectWords.length === 0) overlay.showResults();
   }

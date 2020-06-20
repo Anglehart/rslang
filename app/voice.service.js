@@ -1,6 +1,4 @@
-import control from './control.component.js';
 import words from './words.component.js';
-import storageService from './storage.service.js';
 
 class VoiceService {
   constructor() {
@@ -19,7 +17,7 @@ class VoiceService {
       try {
         this.recognation.removeEventListener('end', this.recognation.start);
         this.recognation.stop();
-      } catch {}
+      } catch (ex) {}
     } else {
       const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
       this.recognation = new SpeechRecognition();
