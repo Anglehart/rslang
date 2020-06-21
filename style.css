@@ -20,11 +20,7 @@ h1 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  min-height: calc(100vh - 20px);
   text-align: center;
   padding: 10px;
   transition: .5s;
@@ -45,9 +41,10 @@ h1 {
   opacity: .8;
 }
 .hidden {
-  opacity: 0;
+  /* opacity: 0;
   visibility: hidden;
-  pointer-events: none;
+  pointer-events: none; */
+  display: none;
 }
 .results-container {
   width: 100%;
@@ -58,6 +55,7 @@ h1 {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 2px 4px 0 rgba(14,30,37,.12);
+  box-sizing: border-box;
 }
 .statsWord {
   flex-direction: row;
@@ -69,7 +67,7 @@ h1 {
   cursor: pointer;
   background: url(./app/assets/audio.svg);
   background-repeat: no-repeat;
-  background-size: 3%;
+  background-size: 20px;
   background-position-y: center;
   background-position-x: 15px;
 }
@@ -82,9 +80,26 @@ h1 {
 .statsWord p span {
   color: #0e1e25;
 }
+.errors span,
+.success span {
+  color: #fff;
+  border-radius: 100%;
+  padding: 3px;
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  text-align: center;
+}
+.success span {
+  background-color: green;
+}
+.errors span {
+  background-color: red;
+}
 .btn-wrapper {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 .btn-wrapper .btn {
   margin: 10px;
@@ -102,9 +117,11 @@ main {
 }
 .word-image {
   margin: 0 auto 25px;
-  width: 390px;
+  max-width: 390px;
   height: 260px;
   background-size: cover !important;
+  width: 100%;
+  background-position-x: center !important;
 }
 .word-translate {
   color: rgba(14, 30, 37, .7);
@@ -127,7 +144,7 @@ main {
   line-height: 1.4;
   min-width: 200px;
   min-height: 70px;
-  margin: 10px 0;
+  margin: 10px;
   border: 1px solid rgb(206, 212, 218);
   border-radius: 5px;
   background-color: #fff;
@@ -155,9 +172,11 @@ main {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 .score {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .star {
@@ -225,10 +244,12 @@ main {
   justify-content: space-between;
   width: 100%;
   margin-top: 30px;
+  flex-wrap: wrap;
 }
 .speak-button {
   width: 100%;
   margin: 0 20px;
+  max-width: calc(100% - 600px);
 }
 .disable {
   display: none !important;
@@ -253,8 +274,24 @@ main {
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: 10px 15px;
+  box-sizing: border-box;
 }
 .active-word{
   border: 1px solid rgb(0, 173, 159);
   background-color: rgba(0, 173, 159, .15);
+}
+
+@media (max-width: 790px) {
+  .btn {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px;
+    box-sizing: border-box;
+  }
+  .items-wrapper {
+    justify-content: space-around;
+  }
+  .results-container {
+    padding: 10px;
+  }
 }
