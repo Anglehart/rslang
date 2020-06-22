@@ -1,0 +1,59 @@
+/* DivTable.com */
+
+.table {
+  display: table;
+  width: 100%;
+}
+
+.tableRow {
+  display: table-row;
+}
+
+.tableRow:not(:last-child)>.tableCell{
+  border-bottom: 1px solid #999999;
+}
+
+.tableHeading {
+  background-color: #EEE;
+  display: table-header-group;
+}
+
+.tableCell, .tableHead {
+  border-left: 1px solid #999999;
+  display: table-cell;
+  padding: 3px 10px;
+  width: 5%;
+  height: 3vw;
+}
+
+.tableHeading {
+  background-color: #EEE;
+  display: table-header-group;
+  font-weight: bold;
+}
+
+.tableFoot {
+  background-color: #EEE;
+  display: table-footer-group;
+  font-weight: bold;
+}
+
+.tableBody {
+  display: table-row-group;
+}
+
+.tableRow:nth-child(2n)>.tableCell {
+  background: #e9f5f7;
+}
+
+.tableRow:nth-child(2n-1)>.tableCell {
+  background: #fbfcfe;
+}
+
+.checkboxCell, .audioCell, .idCell, .statistic_1Cell, .statistic_2Cell{
+  width: 5%;
+}
+
+.wordCell, .transkriptCell, .translateCell{
+  width: 25%;
+}
