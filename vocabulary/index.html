@@ -7,16 +7,15 @@
   <title>Vocabulary</title>
   <link rel="stylesheet" href="./index.css">
   <link rel="stylesheet" href="./table.css">
-  <script src="./index.js"></script>
 </head>
 
 <body>
   <header class="header"></header>
   <main class="main bg-green">
     <div class="tabs-row">
-      <div class="tab--link bg-green active-bg">Learning</div>
-      <div class="tab--link bg-blue">Difficult</div>
-      <div class="tab--link bg-red">Removed</div>
+      <div class="tab--link bg-green active-bg" data-mode_color="green">К изучению</div>
+      <div class="tab--link bg-blue" data-mode_color="blue">Сложные</div>
+      <div class="tab--link bg-red" data-mode_color="red">Удаленные</div>
     </div>
     <div class="table">
       <div class="tableBody">
@@ -60,11 +59,21 @@
           <div class="tableCell statistic_1Cell">&nbsp;</div>
           <div class="tableCell statistic_2Cell">&nbsp;</div>
         </div>
+        <div class="tableRow">
+          <div class="tableCell checkboxCell">&nbsp;</div>
+          <div class="tableCell audioCell">&nbsp;</div>
+          <div class="tableCell idCell">&nbsp;</div>
+          <div class="tableCell wordCell">&nbsp;</div>
+          <div class="tableCell transkriptCell">&nbsp;</div>
+          <div class="tableCell translateCell">&nbsp;</div>
+          <div class="tableCell statistic_1Cell">&nbsp;</div>
+          <div class="tableCell statistic_2Cell">&nbsp;</div>
+        </div>
       </div>
     </div>
-    <!-- table.com -->
   </main>
   <footer class="footer"></footer>
+  <script src="./index.js"></script>
 </body>
 
 </html>
