@@ -14,46 +14,25 @@ const buttonSignUp = document.getElementById('sign-up');
 const buttonSignIn = document.getElementById('sign-in');
 const signInFormAnswer = document.getElementById('sign-in-answer');
 const signUpFormAnswer = document.getElementById('sign-up-answer');
-const safeUserInfo = document.getElementById('check');
-const passwordConfirm= document.getElementById('password-confirm');
+const passwordConfirm = document.getElementById('password-confirm');
 const hints = document.querySelectorAll('small');
 
 const responsesSignUp = {
   422: 'incorrect e-mail or password',
   200: 'successful creation',
-  417: 'current email is already used'
-}
+  417: 'current email is already used',
+};
 
 const responsesSignIn = {
   200: 'Successful operation',
   401: 'Access token is missing or invalid',
-  404: 'User not found'
-}
+  404: 'User not found',
+};
 
-modalWindow.addEventListener('click', (event) => {
-  if (event.target === togglerSignIn) {
-      transformPassword(togglerSignIn,passwordSignIn);
-  } else if (event.target === togglerSignUp) {
-      transformPassword(togglerSignUp,passwordSignUp);
-      transformPassword(togglerSignUp,passwordConfirm);
-  } else if (event.target === tabSignIn) {
-      resetForm(signUpFormAnswer,formSignUp);
-      emailSignIn.focus();
-  } else if (event.target ===  tabSignUp) {
-      resetForm(signInFormAnswer,formSignIn);
-      emailSignUp.focus();
-  } else if (event.target === buttonSignUp){
-      event.preventDefault();
-      createUser({ "email": `${emailSignUp.value}`, "password": `${passwordSignUp.value}` });
-  } else if (event.target === buttonSignIn){
-      event.preventDefault();
-      loginUser({ "email": `${emailSignIn.value}`, "password": `${passwordSignIn.value}` })
-  }
-});
-function resetForm(formAnswer,form) {
+function resetForm(formAnswer, form) {
   document.querySelectorAll('.complete').forEach((element) => {
     element.remove();
-  })
+  });
   hints.forEach((element) => {
     element.innerHTML = '';
   });
@@ -62,7 +41,7 @@ function resetForm(formAnswer,form) {
 }
 
 function validateEmail(data) {
-  let testData = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const testData = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   return testData.test(data);
 }
 
@@ -75,29 +54,28 @@ let checkmarkIcon;
 function createCheckmarkIcon(parent) {
   checkmarkIcon = document.createElement('i');
   checkmarkIcon.className = 'fa fa-check complete';
-  checkmarkIcon.setAttribute('aria-hidden','true');
+  checkmarkIcon.setAttribute('aria-hidden', 'true');
   parent.after(checkmarkIcon);
-};
-
-let checkmark = document.getElementsByClassName('complete');
-emailSignIn.onblur = function() {
-  if (!validateEmail(emailSignIn.value)) {
-    document.getElementById('alert-email-sign-in').innerHTML = 'Invalid email address!';
-      if(checkmarkIcon) {
-        checkmarkIcon.remove();
-      }
-      buttonSignIn.disabled = false;
-  } else {
-     document.getElementById('alert-email-sign-in').innerHTML = '';
-      createCheckmarkIcon(emailSignIn);
-      buttonSignIn.disabled = true;
-  }
 }
 
-passwordSignIn.onblur = function() {
+emailSignIn.onblur = function () {
+  if (!validateEmail(emailSignIn.value)) {
+    document.getElementById('alert-email-sign-in').innerHTML = 'Invalid email address!';
+    if (checkmarkIcon) {
+      checkmarkIcon.remove();
+    }
+    buttonSignIn.disabled = false;
+  } else {
+    document.getElementById('alert-email-sign-in').innerHTML = '';
+    createCheckmarkIcon(emailSignIn);
+    buttonSignIn.disabled = true;
+  }
+};
+
+passwordSignIn.onblur = function () {
   if (!validatePassword(passwordSignIn.value)) {
     document.getElementById('alert-password-sign-in').innerHTML = 'Invalid password';
-    if(checkmarkIcon) {
+    if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
     buttonSignIn.disabled = true;
@@ -106,13 +84,13 @@ passwordSignIn.onblur = function() {
     createCheckmarkIcon(passwordSignIn);
     buttonSignIn.disabled = false;
   }
-}
+};
 
-emailSignUp.onblur = function() {
-  let status = emailSignUp.value;
+emailSignUp.onblur = function () {
+  const status = emailSignUp.value;
   if (!validateEmail(status)) {
     document.getElementById('alert-email-sign-up').innerHTML = 'Invalid email address!';
-    if(checkmarkIcon) {
+    if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
     buttonSignUp.disabled = true;
@@ -120,13 +98,13 @@ emailSignUp.onblur = function() {
     document.getElementById('alert-email-sign-up').innerHTML = '';
     createCheckmarkIcon(emailSignUp);
     buttonSignUp.disabled = false;
-    }
-}
+  }
+};
 
-passwordSignUp.onblur = function() {
+passwordSignUp.onblur = function () {
   if (!validatePassword(passwordSignUp.value)) {
-    document.getElementById('alert-password-sign-up').innerHTML = 'Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character';
-    if(checkmarkIcon) {
+    document.getElementById('alert-password-sign-up').innerHTML = 'Invalid password';
+    if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
     buttonSignUp.disabled = true;
@@ -135,33 +113,9 @@ passwordSignUp.onblur = function() {
     createCheckmarkIcon(passwordSignUp);
     buttonSignUp.disabled = false;
   }
-}
+};
 
-passwordConfirm.onblur = function(event) {
-  if(event.target === iconEye) {
-    transformPassword(togglerSignUp, passwordSignUp);
-    transformPassword(togglerSignUp, passwordConfirm);
-  } else if (passwordSignUp.value != passwordConfirm.value) {
-    document.getElementById('alert-confirm-password').innerHTML = "Passwords don't match";
-    if(checkmarkIcon) {
-      checkmarkIcon.remove();
-    }
-      buttonSignUp.disabled = true;
-  } else {
-    document.getElementById('alert-confirm-password').innerHTML = '';
-    createCheckmarkIcon(passwordConfirm);
-  }
-}
-
-function answerSignUpForm(value) {
-  signUpFormAnswer.innerText = value;
-}
-
-function answerSignInForm(value) {
-  signInFormAnswer.innerText = value;
-}
-
-function transformPassword(toggler,password) {
+function transformPassword(toggler, password) {
   if (toggler.checked) {
     password.type = 'text';
   } else {
@@ -172,44 +126,70 @@ function transformPassword(toggler,password) {
   });
 }
 
+passwordConfirm.onblur = function (event) {
+  if (event.target === iconEye) {
+    transformPassword(togglerSignUp, passwordSignUp);
+    transformPassword(togglerSignUp, passwordConfirm);
+  } else if (passwordSignUp.value !== passwordConfirm.value) {
+    document.getElementById('alert-confirm-password').innerHTML = "Passwords don't match";
+    if (checkmarkIcon) {
+      checkmarkIcon.remove();
+    }
+    buttonSignUp.disabled = true;
+  } else {
+    document.getElementById('alert-confirm-password').innerHTML = '';
+    createCheckmarkIcon(passwordConfirm);
+  }
+};
+
+function answerSignUpForm(value) {
+  signUpFormAnswer.innerText = value;
+}
+
+function answerSignInForm(value) {
+  signInFormAnswer.innerText = value;
+}
+
 function createUser(user) {
   const url = 'https://afternoon-falls-25894.herokuapp.com/users';
   return fetch(url, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(user),
   }).then((res) => {
     answerSignUpForm(responsesSignUp[res.status]);
-      if (res.status === 200) {
-        return res.json();
-      }
-    })
+    if (res.status === 200) {
+      signUpFormAnswer.style.color = '#BEEE62';
+      return res.json();
+    }
+  })
     .then((data) => {
       console.log(data);
     })
     .catch((error) => {
       console.log(error.message);
     });
-  }
+}
 
-function loginUser (user) {
+function loginUser(user) {
   const url = 'https://afternoon-falls-25894.herokuapp.com/signin';
   return fetch(url, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(user),
   }).then((res) => {
     answerSignInForm(responsesSignIn[res.status]);
     if (res.status === 200) {
+      signInFormAnswer.style.color = '#BEEE62';
       return res.json();
     }
-    })
+  })
     .then((data) => {
       console.log(data);
       sessionStorage.setItem('email', user.email);
@@ -220,8 +200,26 @@ function loginUser (user) {
       console.log(error.message);
     });
 }
-
+modalWindow.addEventListener('click', (event) => {
+  if (event.target === togglerSignIn) {
+    transformPassword(togglerSignIn, passwordSignIn);
+  } else if (event.target === togglerSignUp) {
+    transformPassword(togglerSignUp, passwordSignUp);
+    transformPassword(togglerSignUp, passwordConfirm);
+  } else if (event.target === tabSignIn) {
+    resetForm(signUpFormAnswer, formSignUp);
+    emailSignIn.focus();
+  } else if (event.target === tabSignUp) {
+    resetForm(signInFormAnswer, formSignIn);
+    emailSignUp.focus();
+  } else if (event.target === buttonSignUp) {
+    event.preventDefault();
+    createUser({ email: `${emailSignUp.value}`, password: `${passwordSignUp.value}` });
+  } else if (event.target === buttonSignIn) {
+    event.preventDefault();
+    loginUser({ email: `${emailSignIn.value}`, password: `${passwordSignIn.value}` });
+  }
+});
 console.log(sessionStorage.getItem('email'));
 console.log(sessionStorage.getItem('userId'));
 console.log(sessionStorage.getItem('token'));
-

@@ -163,7 +163,8 @@ a{color:inherit;text-decoration:none}
 }
 .form-answer {
 	padding-bottom: 15px;
-	height: 33px;
+  height: 33px;
+  color: red;
 }
 .hr{
 	height:2px;

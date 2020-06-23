@@ -52,7 +52,8 @@
             <small id="alert-password-sign-up" class="small"></small>
             <div class="group">
               <label for="pass" class="label">Confirm password</label>
-              <input id="password-confirm" type="password" class="input" autocomlete="off" required>
+              <input id="password-confirm" type="password" class="input" autocomlete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
+              pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[+-_@$!%*?&#.,;:])[A-Za-z\d+-_@$!%*?&#.,;:]{8,}$/" required>
               <small id="alert-confirm-password" class="small"></small>
             </div>
             <div id="sign-up-answer" class="form-answer"></div>
