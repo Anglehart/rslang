@@ -29,33 +29,19 @@ const responsesSignIn = {
   401: 'Access token is missing or invalid',
   404: 'User not found'
 }
-let checkmarkHtml = document.querySelectorAll('complete');
+
 modalWindow.addEventListener('click', (event) => {
   if (event.target === togglerSignIn) {
       transformPassword(togglerSignIn,passwordSignIn);
   } else if (event.target === togglerSignUp) {
       transformPassword(togglerSignUp,passwordSignUp);
       transformPassword(togglerSignUp,passwordConfirm);
-  } else if (event.target ===  tabSignIn) {
+  } else if (event.target === tabSignIn) {
+      resetForm(signUpFormAnswer,formSignUp);
       emailSignIn.focus();
-      formSignUp.reset();
-      signInFormAnswer.innerText = '';
-      checkmarkHtml.forEach((element) => {
-        element.classList.remove('active');
-      })
-      hints.forEach((element) => {
-        element.innerHTML = '';
-      });
   } else if (event.target ===  tabSignUp) {
+      resetForm(signInFormAnswer,formSignIn);
       emailSignUp.focus();
-      formSignIn.reset();
-      signUpFormAnswer.innerText = '';
-      checkmarkHtml.forEach((element) => {
-        element.classList.remove('active');
-      })
-      hints.forEach((element) => {
-        element.innerHTML = '';
-      });
   } else if (event.target === buttonSignUp){
       event.preventDefault();
       createUser({ "email": `${emailSignUp.value}`, "password": `${passwordSignUp.value}` });
@@ -64,6 +50,16 @@ modalWindow.addEventListener('click', (event) => {
       loginUser({ "email": `${emailSignIn.value}`, "password": `${passwordSignIn.value}` })
   }
 });
+function resetForm(formAnswer,form) {
+  document.querySelectorAll('.complete').forEach((element) => {
+    element.remove();
+  })
+  hints.forEach((element) => {
+    element.innerHTML = '';
+  });
+  formAnswer.innerText = '';
+  form.reset();
+}
 
 function validateEmail(data) {
   let testData = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -75,27 +71,39 @@ function validatePassword(data) {
   return testData.test(data);
 }
 
+let checkmarkIcon;
+function createCheckmarkIcon(parent) {
+  checkmarkIcon = document.createElement('i');
+  checkmarkIcon.className = 'fa fa-check complete';
+  checkmarkIcon.setAttribute('aria-hidden','true');
+  parent.after(checkmarkIcon);
+};
+
 let checkmark = document.getElementsByClassName('complete');
 emailSignIn.onblur = function() {
   if (!validateEmail(emailSignIn.value)) {
     document.getElementById('alert-email-sign-in').innerHTML = 'Invalid email address!';
-    checkmark[0].classList.remove('active');
-    buttonSignIn.disabled = true;
+      if(checkmarkIcon) {
+        checkmarkIcon.remove();
+      }
+      buttonSignIn.disabled = false;
   } else {
-    document.getElementById('alert-email-sign-in').innerHTML = '';
-    checkmark[0].classList.add('active');
-    buttonSignIn.disabled = false;
+     document.getElementById('alert-email-sign-in').innerHTML = '';
+      createCheckmarkIcon(emailSignIn);
+      buttonSignIn.disabled = true;
   }
 }
 
 passwordSignIn.onblur = function() {
   if (!validatePassword(passwordSignIn.value)) {
     document.getElementById('alert-password-sign-in').innerHTML = 'Invalid password';
-    checkmark[1].classList.remove('active');
+    if(checkmarkIcon) {
+      checkmarkIcon.remove();
+    }
     buttonSignIn.disabled = true;
   } else {
     document.getElementById('alert-password-sign-in').innerHTML = '';
-    checkmark[1].classList.add('active');
+    createCheckmarkIcon(passwordSignIn);
     buttonSignIn.disabled = false;
   }
 }
@@ -104,11 +112,13 @@ emailSignUp.onblur = function() {
   let status = emailSignUp.value;
   if (!validateEmail(status)) {
     document.getElementById('alert-email-sign-up').innerHTML = 'Invalid email address!';
-    checkmark[2].classList.remove('active');
+    if(checkmarkIcon) {
+      checkmarkIcon.remove();
+    }
     buttonSignUp.disabled = true;
   } else {
     document.getElementById('alert-email-sign-up').innerHTML = '';
-    checkmark[2].classList.add('active');
+    createCheckmarkIcon(emailSignUp);
     buttonSignUp.disabled = false;
     }
 }
@@ -116,25 +126,30 @@ emailSignUp.onblur = function() {
 passwordSignUp.onblur = function() {
   if (!validatePassword(passwordSignUp.value)) {
     document.getElementById('alert-password-sign-up').innerHTML = 'Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character';
-    checkmark[3].classList.remove('active');
+    if(checkmarkIcon) {
+      checkmarkIcon.remove();
+    }
     buttonSignUp.disabled = true;
   } else {
     document.getElementById('alert-password-sign-up').innerHTML = '';
-    checkmark[3].classList.add('active');
+    createCheckmarkIcon(passwordSignUp);
     buttonSignUp.disabled = false;
   }
 }
+
 passwordConfirm.onblur = function(event) {
   if(event.target === iconEye) {
     transformPassword(togglerSignUp, passwordSignUp);
     transformPassword(togglerSignUp, passwordConfirm);
   } else if (passwordSignUp.value != passwordConfirm.value) {
     document.getElementById('alert-confirm-password').innerHTML = "Passwords don't match";
-      checkmark[4].classList.remove('active');
+    if(checkmarkIcon) {
+      checkmarkIcon.remove();
+    }
       buttonSignUp.disabled = true;
   } else {
     document.getElementById('alert-confirm-password').innerHTML = '';
-    checkmark[4].classList.add('active');
+    createCheckmarkIcon(passwordConfirm);
   }
 }
 

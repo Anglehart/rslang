@@ -14,17 +14,15 @@
         <input id="tab-sign-up" type="radio" name="tab" class="sign-up"><label for="tab-sign-up" class="tab">Sign Up</label>
         <div class="login-card">
           <form action="https://afternoon-falls-25894.herokuapp.com/" id="form-sign-in" class="sign-in-card" name="form-sign-in" method="post">
-            <div class="group">
+            <div id="email-group-sign-in" class="group">
               <label for="pass" class="label">Usermail</label>
               <input id="email-sign-in" type="email" name = "email" class="input" autocomlete="off" autofocus required>
-              <i class="fa fa-check complete" aria-hidden="true"></i>
               <small id="alert-email-sign-in" class="small hint"></small>
             </div>
-            <div class="group" id="group-email">
+            <div class="group">
               <label for="pass" class="label">Password</label>
               <input id="sign-in-password" name="pass" type="password" class="input" autocomlete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
               pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[+-_@$!%*?&#.,;:])[A-Za-z\d+-_@$!%*?&#.,;:]{8,}$/" required>
-              <i class="fa fa-check complete" aria-hidden="true"></i>
               <div class="form-toggler">
                 <i id="form-icon" class="fas fa-eye form-icon"></i>
                 <input id="toggler-sign-in" type="checkbox" class="form-checkbox">
@@ -33,29 +31,19 @@
             <small id="alert-password-sign-in" class="small"></small>
             <div id="sign-in-answer" class="form-answer"></div>
             <div class="group">
-              <input id="check" type="checkbox" class="check">
-              <label for="check"><span class="icon"></span> Keep me Signed in</label>
-            </div>
-            <div class="group">
               <input id="sign-in" type="submit" class="button" value="Sign In">
             </div>
           </form>
           <form action="https://afternoon-falls-25894.herokuapp.com/users" id="form-sign-up" class="sign-up-card" name="form-sign-up" method="post">
-            <!-- <div class="group">
-              <label for="user" class="label">Username</label>
-              <input id="user" type="text" class="input" required>
-            </div> -->
             <div class="group">
               <label for="pass" class="label">Email Address</label>
               <input id="email-sign-up" type="email" name = "email" class="input email-input" autocomlete="off" required>
-              <i class="fa fa-check complete" aria-hidden="true"></i>
               <small id="alert-email-sign-up" class="small"></small>
             </div>
             <div class="group">
               <label for="pass" class="label">Password</label>
               <input id="sign-up-password" type="password" class="input" autocomlete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
               pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[+-_@$!%*?&#.,;:])[A-Za-z\d+-_@$!%*?&#.,;:]{8,}$/" required>
-              <i class="fa fa-check complete" aria-hidden="true"></i>
               <div class="form-toggler">
                 <i id="form-icon" class="fas fa-eye form-icon"></i>
                 <input id="toggler-sign-up" type="checkbox" class="form-checkbox">
@@ -65,7 +53,6 @@
             <div class="group">
               <label for="pass" class="label">Confirm password</label>
               <input id="password-confirm" type="password" class="input" autocomlete="off" required>
-              <i class="fa fa-check complete" aria-hidden="true"></i>
               <small id="alert-confirm-password" class="small"></small>
             </div>
             <div id="sign-up-answer" class="form-answer"></div>

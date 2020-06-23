@@ -179,7 +179,7 @@ a{color:inherit;text-decoration:none}
 	color: #232323;
 }
 .complete{
-	visibility: hidden;
+	/* visibility: hidden; */
   position: absolute;
   top: 50%;
   right: 3%;
@@ -187,4 +187,7 @@ a{color:inherit;text-decoration:none}
 }
 small {
 	color: red
+}
+.active {
+  visibility: visible;
 }
