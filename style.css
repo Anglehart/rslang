@@ -1,0 +1,46 @@
+.hidden {
+  width: 0px !important;
+  height: 0px !important;
+}
+.level-page {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+.level-button, .page-button, .start-button {
+  cursor: pointer;
+  padding: 5px;
+  background: #e1f5fe;
+  font-size: 18px;
+  width: 100px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+  text-align: center;
+}
+.level-list, .page-list {
+  list-style: none;
+  padding: 0;
+  width: 100px;
+  transition: 0.1s;
+  overflow: hidden;
+  position: absolute;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+  margin: 0;
+}
+.level-list {
+  height: 186px;
+}
+.page-list {
+  height: 310px;
+}
+
+.level-list li, .page-list li { 
+  cursor: pointer;
+  padding: 5px;
+  white-space: nowrap;
+  font-size: 18px;
+  background: #fff;
+}
+.level-list li:hover, .page-list li:hover{
+  background: #e1f5fe;
+}
