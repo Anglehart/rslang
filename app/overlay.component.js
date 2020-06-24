@@ -9,7 +9,6 @@ class Overlay extends Component {
     document.querySelectorAll('.new-game').forEach((item) => {
       item.addEventListener('click', () => {
         this.hideResults();
-        this.hideWinGame();
         wordsComponent.newGame();
       });
     });
