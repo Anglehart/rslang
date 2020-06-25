@@ -22,10 +22,15 @@ class Savannah {
     this.closeButton.id = 'closeButton';
     this.container.append(this.closeButton);
 
+    this.iconsContainer = document.createElement('div');
+    this.iconsContainer.className = 'icons-container';
+    this.gamePage.append(this.iconsContainer);
+
     this.resultsContainer = document.createElement('div');
     this.resultsContainer.className = 'results-container';
     this.gamePage.append(this.resultsContainer);
-
+    
+    this.createReaultsIcon();
     this.word = document.createElement('div');
     this.word.className = 'word';
     this.word.id = 'word';
@@ -44,6 +49,7 @@ class Savannah {
     this.translationNumber1.innerText = '1 ';
     this.translation1.append(this.translationNumber1);
     this.translationWord1 = document.createElement('span');
+    this.translationWord1.className = 'translationWord';
     this.translation1.append(this.translationWord1);
 
     this.translation2 = document.createElement('div');
@@ -53,6 +59,7 @@ class Savannah {
     this.translationNumber2.innerText = '2 ';
     this.translation2.append(this.translationNumber2);
     this.translationWord2 = document.createElement('span');
+    this.translationWord2.className = 'translationWord';
     this.translation2.append(this.translationWord2);
 
     this.translation3 = document.createElement('div');
@@ -62,6 +69,7 @@ class Savannah {
     this.translationNumber3.innerText = '3 ';
     this.translation3.append(this.translationNumber3);
     this.translationWord3 = document.createElement('span');
+    this.translationWord3.className = 'translationWord';
     this.translation3.append(this.translationWord3);
 
     this.translation4 = document.createElement('div');
@@ -71,18 +79,68 @@ class Savannah {
     this.translationNumber4.innerText = '4 ';
     this.translation4.append(this.translationNumber4);
     this.translationWord4 = document.createElement('span');
+    this.translationWord4.className = 'translationWord';
     this.translation4.append(this.translationWord4);
-
-    
-    Array.from(this.answers.children).forEach((translation) => {
-     
-      translation.addEventListener('click', () => {
-        translation.classList.add('active');
-      });
-      
+    this.answerHandled = false;
+    this.closeButton.addEventListener('click', () => {
+      clearInterval(this.timer);
+      this.gamePage.style.display = 'none';
+      this.mainPage.style.display = 'block';
+    });
+    this.gamePage.addEventListener('click', (event) => {
+      const selectedTranslation = event.target.closest('.translation');
+      if (selectedTranslation && !this.answerHandled) {
+        this.answerHandled = true;
+        clearInterval(this.timer);
+        this.checkAnswer(selectedTranslation);
+      }
     });
   }
 
+  checkAnswer(selectedTranslation) {
+    const translationWord = selectedTranslation.querySelector('.translationWord');
+    if (translationWord.innerText === this.word.getAttribute('data')) {
+      selectedTranslation.classList.add('active');
+      this.createRightIcon();
+      //move background, add sound
+    } else {
+      selectedTranslation.classList.add('fail');
+      this.searchRightTranslation();
+      this.createFailIcon();
+      //add sound
+    }
+    this.startNextRound();
+  }
+
+  searchRightTranslation() {
+    let rightWord;
+    const translationWords = Array.from(this.answers.querySelectorAll('.translationWord'));
+    translationWords.forEach((translationWord) => {
+      if(translationWord.innerText === this.word.getAttribute('data')) {
+        rightWord = translationWord;
+        translationWord.parentNode.classList.add('active');
+      }
+    })
+    
+    console.log(rightWord);
+    return rightWord;
+  }
+
+  gameStatistics = {
+    fail : [],
+    succsses : []
+  }
+  getGamePage() {
+    return this.gamePage;
+  }
+
+  createReaultsIcon() {
+    for (let i = 0; i < 10; ++i) {
+      let heartIcon = document.createElement('i');
+      heartIcon.className = 'fa-2x fas fa-heart';
+      this.iconsContainer.append(heartIcon);
+    }
+  }
   createMainPage () {
     this.mainPage = document.createElement('div');
     this.mainPage.className = 'main-page';
@@ -163,12 +221,12 @@ class Savannah {
 
   createRightIcon() {
     this.heartIcon = document.createElement('i');
-    this.heartIcon.className = 'fa-2x fas fa-heart';
+    this.heartIcon.className = 'fa-2x fas fa-heart success';
     this.resultsContainer.append(this.heartIcon);
   }
   createFailIcon() {
     this.heartIcon = document.createElement('i');
-    this.heartIcon.className = 'fa-2x far fa-heart';
+    this.heartIcon.className = 'fa-2x fas fa-heart fail-icon';
     this.resultsContainer.append(this.heartIcon);
   }
 
@@ -190,6 +248,7 @@ class Savannah {
     setTimeout(() => this.startNextRound(), 3000);
   }
 
+  
   startNextRound() {
     this.getWords()
       .then(() => {
@@ -199,6 +258,11 @@ class Savannah {
         this.timer = setInterval(() => this.moveWordDown(), 8);
         this.timeStarted = Date.now();
         this.wordPosition = 0;
+        Array.from(this.answers.children).forEach((answer) => {
+          answer.classList.remove('active');
+          answer.classList.remove('fail');
+        });
+        this.answerHandled = false;
       });
   }
 
@@ -208,7 +272,7 @@ class Savannah {
   }
 
   getWords() {
-    const page = this.randomInteger(0,29);
+    const page = this.randomInteger(0, 29);
     console.log(page);
     const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=0`;
     return fetch(url)
@@ -234,7 +298,7 @@ class Savannah {
     console.log(randomWord);
     console.log(data[1].word);
     this.word.innerText = data[randomWord].word;
-    this.word.setAttribute('data', `data[randomWord].wordTranslate`);
+    this.word.setAttribute('data', data[randomWord].wordTranslate);
     console.log(arrayOfAnswers);
     return arrayOfAnswers;
   }
@@ -264,6 +328,7 @@ class Savannah {
     const now = Date.now();
     if (now - this.timeStarted > timeForAnswer) {
       clearInterval(this.timer);
+      this.startNextRound();
       this.createFailIcon();
       //time is expired, wrong answer
       return;
@@ -280,6 +345,7 @@ class Savannah {
   getContainer() {
     return this.container;
   }
+  
 }
 
 export default Savannah;
