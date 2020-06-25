@@ -118,7 +118,7 @@ const createCanvasElements = async (
 
           ctx.clip();
 
-          ctx.drawImage(img, startXPointCropImage, startYPointCropImage, canvasWidth + radius, canvasHeight, 0, 0, canvasWidth + radius, canvasHeight);
+          //ctx.drawImage(img, startXPointCropImage, startYPointCropImage, canvasWidth + radius, canvasHeight, 0, 0, canvasWidth + radius, canvasHeight);
 
           ctx.shadowColor = colorShadowBorder;
           ctx.strokeStyle = colorBorder;

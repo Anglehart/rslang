@@ -9,13 +9,14 @@ class Puzzle extends Component {
     this.correctWords = [];
     this.inCorrectWords = [];
   }
-  
+
   createBackground(words, image) {
     const wordsArray = [];
     words.forEach((item, i) => {
       if (i < 10) wordsArray.push(item.textExample);
     });
-      
+    console.log(`https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`);
+
     cropService({
       src: `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`,
       wordsList: wordsArray,
@@ -34,7 +35,7 @@ class Puzzle extends Component {
       document.querySelector('.puzzle-wrapper').append(...res);
     })
   }
-  
+
 }
 
 const puzzle = new Puzzle({

@@ -41,7 +41,7 @@ body {
   height: 340px;
 }
 
-.level-list li, .page-list li { 
+.level-list li, .page-list li {
   cursor: pointer;
   padding: 5px;
   white-space: nowrap;
@@ -62,5 +62,6 @@ body {
   text-align: center;
 }
 .clip-svg {
-  clip-path: url(#myClip);
+  -webkit-clip-path: polygon(calc(100% - 30px) 0, calc(100% - 30px) 40%, 100% 30%, 100% 70%, calc(100% - 30px) 60%, calc(100% - 30px) 100%, 0% 100%, 0 60%, 30px 70%, 30px 30%, 0 40%, 0% 0%);
+  clip-path: polygon(calc(100% - 30px) 0, calc(100% - 30px) 40%, 100% 30%, 100% 70%, calc(100% - 30px) 60%, calc(100% - 30px) 100%, 0% 100%, 0 60%, 30px 70%, 30px 30%, 0 40%, 0% 0%);
 }
