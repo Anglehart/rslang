@@ -14,6 +14,7 @@ class NetworkService {
   async prepareData(){
     const words = await this.getWordsArray();
     const background = this.getBackgroundImage();
+    return [words, background];
   }
   
   getWordsArray() {
@@ -30,7 +31,7 @@ class NetworkService {
     .then((data) => {
       const sortedArray = [];
       data.forEach((item) => {
-        item.textExample = item.textExample.replace(/[^\w\s]|_/g, '').replace(/\s+/g, ' ');
+        item.textExample = item.textExample.replace(/<b>/g, '').replace(/<\/b>/g, '').replace(/[^\w\s]|_/g, '').replace(/\s+/g, ' ');
         if (item.textExample.split(' ').length <= 10) sortedArray.push(item);
       });
       return sortedArray;

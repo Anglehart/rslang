@@ -1,4 +1,5 @@
 import { Component } from './core.component.js';
+import puzzle from './puzzle.component.js';
 import storageService from './storage.service.js';
 import networkService from './network.service.js';
 
@@ -29,8 +30,9 @@ class Levels extends Component {
     
   }
 
-  startNewGame() {
-    networkService.prepareData();
+  async startNewGame() {
+    const data = await networkService.prepareData();
+    puzzle.createBackground(data[0], data[1]);
   }
 
   choseLevel(levelId) {
