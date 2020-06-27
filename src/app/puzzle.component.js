@@ -1,6 +1,8 @@
+import dragula from '../../node_modules/dragula/dragula';
 import { Component } from './core.component';
 import storageService from './storage.service';
 import cropService from './crop.service';
+
 
 class Puzzle extends Component {
   constructor(config) {
@@ -21,7 +23,9 @@ class Puzzle extends Component {
       src: `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`,
       wordsList: wordsArray,
     }).then(res => {
-      document.querySelector('.puzzle-wrapper').append(...res);
+      document.querySelector('.game-prepare').append(...res);
+    }).then(() => {
+      dragula([document.querySelector('.game-field'), document.querySelector('.row-1')]);
     })
   }
 
@@ -30,7 +34,8 @@ class Puzzle extends Component {
 const puzzle = new Puzzle({
   selector: '.puzzle-wrapper',
   template: `
-
+    <div class="game-field"></div>
+    <div class="game-prepare"></div>
   `,
 });
 export default puzzle;

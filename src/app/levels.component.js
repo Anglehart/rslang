@@ -33,6 +33,8 @@ class Levels extends Component {
   async startNewGame() {
     const data = await networkService.prepareData();
     puzzle.createBackground(data[0], data[1]);
+    document.querySelector('.game-field').innerHTML = '';
+    document.querySelector('.game-prepare').innerHTML = '';
   }
 
   choseLevel(levelId) {
