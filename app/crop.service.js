@@ -31,124 +31,99 @@ const createCanvasElements = async (
   }
 
   return new Promise((resolve, reject) => {
-
-    const img = new Image();
-
-    img.src = src;
-
-    img.onload = () => {
-      const imgWidth = img.width;
-      const imgHeight = img.height;
-      const groupsWords = wordsList.map(word => word.split(' '));
-      const groupsRow = groupsWords.length;
-      const EXTRA_WIDTH_VALUE = parseInt(extraWidthValue);
-      const result = [];
-
-      let startYPointCropImage = 0;
-
-      groupsWords.forEach((words, i) => {
-        const row = document.createElement('div');
-        const wordCount = words.length;
-        const letterCounts = words.reduce((acc, val) => acc + val.replace(/<[^>]*>/g, '').length, 0);
-        const reduceLength = letterCounts * EXTRA_WIDTH_VALUE;
-        const extraWidth = Math.round(reduceLength / wordCount);
-        const onePart = Math.round((imgWidth - reduceLength) / letterCounts);
-        const canvasHeight = Math.round(imgHeight / groupsRow);
-
-        let widthCount = 0;
-
-
-        row.classList.add(`group-words`);
-        row.classList.add(`row-${i + 1}`);
-
-        words.forEach((w, j) => {
-          const word = w.replace(/<[^>]*>/g, '');
-          const canvas = document.createElement('canvas');
-
-          canvas.classList.add('canvas-item');
-          canvas.classList.add(`canvas-row-${i + 1}`);
-          canvas.classList.add(`canvas-item-${j + 1}`);
-          canvas.setAttribute('data-item', `${i + 1}-${j + 1}`);
-          canvas.setAttribute('data-word', word);
-
-          const ctx = canvas.getContext('2d');
-          let canvasWidth = (word.length * onePart) + extraWidth;
-
-          if (j === wordCount - 1) {
-            canvasWidth = imgWidth - widthCount;
-            widthCount += canvasWidth;
-          } else {
-            widthCount += canvasWidth;
+  
+      const resImg = new Image();
+      resImg.crossOrigin = 'anonymous';
+      resImg.src = src;
+      resImg.onload = () => {     
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(resImg, 0, 0);
+        var BOX_WIDTH = 1200;
+        var BOX_HEIGHT = 600;
+        var width = resImg.width;
+        var height = resImg.height;
+          if (width > BOX_WIDTH) {
+              height *= BOX_WIDTH / width;
+              width = BOX_WIDTH;
+          } else { 
+            width = BOX_WIDTH; 
+            height *= BOX_HEIGHT / height;
           }
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(resImg, 0, 0, width, height);
+        const sourceUrl = canvas.toDataURL("image/png");
+        console.log(width, height);
+        document.querySelector('.canvas-helper').src = sourceUrl;  
+        //
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = sourceUrl; 
+        
+        img.onload = () => {
+          
+          const imgWidth = 1200;
+          const imgHeight = 600;
+          const groupsWords = wordsList.map(word => word.split(' '));
+          const groupsRow = 10;
+          const puzzleWidth = 19;
+          const rowHeight = 60;
+          const EXTRA_WIDTH_VALUE = parseInt(extraWidthValue);
+          const result = [];
+    
+          groupsWords.forEach((wordsRow, i) => {
+            const row = document.createElement('div');
+            const wordCount = wordsRow.length;
+            const letterCounts = wordsRow.reduce((acc, val) => acc + val.replace(/<[^>]*>/g, '').length, 0);
+            const itemHeight = Math.round(imgHeight / groupsRow);
+            const realWidth = imgWidth - ( 50 * wordCount );
+            let widthCount = 0;
+    
+            row.classList.add(`group-words`);
+            row.classList.add(`row-${i + 1}`);
+    
+            wordsRow.forEach((oneWord, j) => {
+              const word = oneWord.replace(/<[^>]*>/g, '');
+              const div = document.createElement('div');
+              let oneWordWidth = Math.round((realWidth / letterCounts) * oneWord.length) + puzzleWidth + 50;
+              div.classList.add('div-item');
+              div.classList.add(`div-row-${i + 1}`);
+              div.classList.add(`div-item-${j + 1}`);
+              div.setAttribute('data-item', `${i + 1}-${j + 1}`);
+              if (j === wordCount - 1) oneWordWidth = imgWidth - widthCount;
+              div.style.width = `${oneWordWidth}px`;
+              div.style.height = `${itemHeight}px`;
+              div.innerHTML = word;
+              
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
+              canvas.width = oneWordWidth;
+              canvas.height = rowHeight;
+              ctx.drawImage(img,
+                widthCount, i * rowHeight,   // Start at 10 pixels from the left and the top of the image (crop),
+                oneWordWidth, rowHeight,   // "Get" a `80 * 30` (w * h) area from the source image (crop),
+                0, 0,     // Place the result at 0, 0 in the canvas,
+                oneWordWidth, rowHeight); // With as width / height: 160 * 60 (scale)
+              var backUrl = canvas.toDataURL("image/png");
+              
+              div.style.backgroundImage = `url(${backUrl})`;
+              widthCount += (oneWordWidth - puzzleWidth);
+              row.append(div);
+            
+            })
+            result.push(row);
+          });
+          resolve(result);
+        };
+    
+        img.onerror = err => {
+          console.log(err);
+          reject(err);
+        }
+      }
+    
 
-          const x1 = 0;
-          const y1 = Math.round(canvasHeight / 3);
-          const y2 = Math.round((canvasHeight / 3) * 2);
-          const centerY = canvasHeight / 2;
-          const radius = Math.round((canvasHeight / 3) / 2);
-          const startXPointCropImage = widthCount- canvasWidth;
-          const fontSize = Math.round(canvasHeight / 4);
-
-          ctx.canvas.width = canvasWidth + radius;
-          ctx.canvas.height = canvasHeight;
-
-          ctx.beginPath();
-
-          if (j) {
-            ctx.arc(x1, centerY, radius, Math.PI / 2, Math.PI * 1.5, true);
-          }
-
-          ctx.lineTo(0, y1);
-          ctx.lineTo(0, 0);
-          ctx.lineTo(canvasWidth, 0);
-          ctx.lineTo(canvasWidth, y1);
-
-          if (j !== wordCount - 1) {
-            ctx.arc(canvasWidth, centerY, radius, Math.PI * 1.5, Math.PI / 2, false);
-          }
-
-          ctx.lineTo(canvasWidth, y2);
-          ctx.lineTo(canvasWidth, canvasHeight);
-          ctx.lineTo(0, canvasHeight);
-          ctx.lineTo(0, y2);
-
-          if (!j) {
-            ctx.lineTo(0, y1);
-          }
-
-          ctx.clip();
-
-          //ctx.drawImage(img, startXPointCropImage, startYPointCropImage, canvasWidth + radius, canvasHeight, 0, 0, canvasWidth + radius, canvasHeight);
-
-          ctx.shadowColor = colorShadowBorder;
-          ctx.strokeStyle = colorBorder;
-          ctx.shadowBlur = shadowPuzzle;
-          ctx.lineWidth = borderPuzzle;
-          ctx.stroke();
-          ctx.globalCompositeOperation = 'destination-in';
-          ctx.fill();
-          ctx.globalCompositeOperation = 'source-over';
-          ctx.beginPath();
-          ctx.shadowColor = colorShadowText;
-          ctx.shadowBlur = shadowText;
-          ctx.lineWidth = borderText;
-          ctx.strokeStyle = colorText;
-          ctx.font = `${fontType} ${fontSize * fontRatio}pt ${fontFamily}`;
-          ctx.textAlign = 'center';
-          ctx.fillStyle = solidTextColor;
-          ctx[fontStyle](word, canvasWidth  / 2 + radius / 2, canvasHeight / 2 + fontSize / 3);
-          row.append(canvas);
-        })
-        startYPointCropImage += canvasHeight
-        result.push(row);
-      });
-      resolve(result);
-    };
-
-    img.onerror = err => {
-      console.log(err);
-      reject(err);
-    }
   })
 };
 

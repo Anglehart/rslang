@@ -20,17 +20,6 @@ class Puzzle extends Component {
     cropService({
       src: `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`,
       wordsList: wordsArray,
-      fontFamily: 'Arial',
-      fontRatio: 0.7,
-      fontType: 'bold',
-      borderPuzzle: 1,
-      shadowPuzzle: 2,
-      borderText: 1,
-      shadowText: 10,
-      colorBorder: 'rgb(255,255,250)',
-      colorShadowText: 'black',
-      solidTextColor: 'white',
-      fontStyle: 'fillText'
     }).then(res => {
       document.querySelector('.puzzle-wrapper').append(...res);
     })

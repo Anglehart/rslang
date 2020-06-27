@@ -33,6 +33,8 @@ body {
   position: absolute;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
   margin: 0;
+  position: absolute;
+  z-index: 1;
 }
 .level-list {
   height: 204px;
@@ -54,6 +56,8 @@ body {
 .puzzle-wrapper {
   width: 1200px;
   margin: auto;
+  height: 600px;
+  background-size: cover;
 }
 .canvas-item {
   margin-right: -12px;
@@ -62,6 +66,33 @@ body {
   text-align: center;
 }
 .clip-svg {
-  -webkit-clip-path: polygon(calc(100% - 30px) 0, calc(100% - 30px) 40%, 100% 30%, 100% 70%, calc(100% - 30px) 60%, calc(100% - 30px) 100%, 0% 100%, 0 60%, 30px 70%, 30px 30%, 0 40%, 0% 0%);
-  clip-path: polygon(calc(100% - 30px) 0, calc(100% - 30px) 40%, 100% 30%, 100% 70%, calc(100% - 30px) 60%, calc(100% - 30px) 100%, 0% 100%, 0 60%, 30px 70%, 30px 30%, 0 40%, 0% 0%);
+}
+.canvas-helper {
+  position: absolute;
+  top: 40px;
+  opacity: 0;
+  z-index: -1;
+  left: calc(50% - 600px);
+}
+.group-words {
+  display: flex;
+  margin-bottom: 1px;
+}
+.div-item {
+  color: #fff;
+  background: #a0a0ee;
+  box-sizing: border-box;
+  margin-left: -19px;
+  text-align: center;
+  line-height: 60px;
+  -webkit-clip-path: polygon(calc(100% - 20px) 0, calc(100% - 20px) 40%, 100% 30%, 100% 70%, calc(100% - 20px) 60%, calc(100% - 20px) 100%, 0% 100%, 0 60%, 20px 70%, 20px 30%, 0 40%, 0% 0%);
+  clip-path: polygon(calc(100% - 20px) 0, calc(100% - 20px) 40%, 100% 30%, 100% 70%, calc(100% - 20px) 60%, calc(100% - 20px) 100%, 0% 100%, 0 calc(60% + 1px), 20px calc(70% + 1px), 20px calc(30% - 1px), 0 calc(40% - 1px), 0% 0%);
+}
+
+.group-words .div-item:first-child {
+  margin: 0;
+  clip-path: polygon(0 0, 0% 100%, calc(100% - 20px) 100%, calc(100% - 20px) 60%, 100% 70%, 100% 30%, calc(100% - 20px) 40%, calc(100% - 20px) 0);
+}
+.group-words .div-item:last-child {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0 calc(60% + 1px), 20px calc(70% + 1px), 20px calc(30% - 1px), 0 calc(40% - 1px));
 }
