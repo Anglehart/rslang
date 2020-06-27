@@ -10,6 +10,7 @@ class Puzzle extends Component {
     this.currentWords = [];
     this.correctWords = [];
     this.inCorrectWords = [];
+    this.currentRound = 0;
   }
 
   createBackground(words, image) {
@@ -25,10 +26,17 @@ class Puzzle extends Component {
     }).then(res => {
       document.querySelector('.game-prepare').append(...res);
     }).then(() => {
-      dragula([document.querySelector('.game-field'), document.querySelector('.row-1')]);
+      this.startNewRound(this.currentRound);
     })
   }
-
+  
+  startNewRound(round) {
+    const gameRow = document.createElement('div');
+    gameRow.classList.add('game-row');
+    gameRow.classList.add(`row-round-${round}`);
+    document.querySelector('.game-field').append(gameRow);
+    dragula([document.querySelector(`.row-round-${round}`), document.querySelector('.row-1')]);
+  }
 }
 
 const puzzle = new Puzzle({
