@@ -2,29 +2,34 @@ import dragula from '../../node_modules/dragula/dragula';
 import { Component } from './core.component';
 import storageService from './storage.service';
 import cropService from './crop.service';
+import overlay from './overlay.component';
 
 
 class Puzzle extends Component {
   constructor(config) {
     super(config);
     this.currentRound = 1;
-    this.wordsArray = [];
+    this.sentences = [];
+    this.wordsObjects = [];
     this.rightOrder = [];
     this.background = '';
     this.allRounds = 10;
   }
 
   createBackground(words, image) {
+    this.wordsObjects = words;
+    console.log(words);
+    
     if (words.length < 10) this.allRounds = words.length;
-    this.wordsArray = [];
+    this.sentences = [];
     words.forEach((item, i) => {
-      if (i < this.allRounds) this.wordsArray.push(item.textExample);
+      if (i < this.allRounds) this.sentences.push(item.textExample);
     });
     this.background = `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`;
     
     cropService({
       src: `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`,
-      wordsList: this.wordsArray,
+      wordsList: this.sentences,
     }).then(res => {
       document.querySelector('.game-prepare').append(...res);
     }).then(() => {
@@ -33,8 +38,10 @@ class Puzzle extends Component {
   }
   
   startNewRound() {
+    this.currentMP3 = `https://raw.githubusercontent.com/Anglehart/rslang-data/master/${this.wordsObjects[this.currentRound].audioExample}`;
+    this.currentSentence = `${this.sentences[this.currentRound]}`;
     const round = this.currentRound;
-    this.rightOrder = this.wordsArray[round - 1].split(' ');
+    this.rightOrder = this.sentences[round - 1].split(' ');
     const gameRow = document.createElement('div');
     gameRow.classList.add('game-row');
     gameRow.classList.add(`row-round-${round}`);
@@ -61,6 +68,7 @@ class Puzzle extends Component {
       }
     });
     if (count === this.rightOrder.length) {
+      overlay.drawCorrect(this.currentSentence, this.currentMP3);
       document.querySelector('.giveup-button').classList.add('hidden-button');
       document.querySelector('.continue-button').classList.remove('hidden-button');
       document.querySelector('.check-button').classList.add('hidden-button');
@@ -68,6 +76,7 @@ class Puzzle extends Component {
   }
   
   giveUp() {
+    overlay.drawInCorrect(this.currentSentence, this.currentMP3);
     const correctRow = [];
     for (let i = 1; i <= this.rightOrder.length; i += 1) {
       const word = document.getElementById(`${this.currentRound}-${i}`);

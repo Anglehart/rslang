@@ -1,6 +1,7 @@
 import { Component } from './core.component.js';
 import storageService from './storage.service.js';
 import puzzle from './puzzle.component.js';
+import overlay from './overlay.component.js';
 
 class Control extends Component {
   initComponent() {
@@ -12,6 +13,9 @@ class Control extends Component {
     })
     document.querySelector('.continue-button').addEventListener('click', () => {
       puzzle.continueGame();
+    })
+    document.querySelector('.result-button').addEventListener('click', () => {
+      overlay.showResults();
     })
   }
 }
