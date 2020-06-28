@@ -31,7 +31,14 @@ const createCanvasElements = async (
   }
 
   return new Promise((resolve, reject) => {
-  
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1)); 
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+      
       const resImg = new Image();
       resImg.crossOrigin = 'anonymous';
       resImg.src = src;
@@ -54,9 +61,8 @@ const createCanvasElements = async (
         canvas.height = height;
         ctx.drawImage(resImg, 0, 0, width, height);
         const sourceUrl = canvas.toDataURL("image/png");
-        console.log(width, height);
         document.querySelector('.canvas-helper').src = sourceUrl;  
-        //
+
         const img = new Image();
         img.crossOrigin = 'anonymous';
         img.src = sourceUrl; 
@@ -79,9 +85,10 @@ const createCanvasElements = async (
             const itemHeight = Math.round(imgHeight / groupsRow);
             const realWidth = imgWidth - ( 50 * wordCount );
             let widthCount = 0;
-    
+
             row.classList.add(`group-words`);
             row.classList.add(`row-${i + 1}`);
+            const rndOrder = [];
     
             wordsRow.forEach((oneWord, j) => {
               const word = oneWord.replace(/<[^>]*>/g, '');
@@ -90,7 +97,7 @@ const createCanvasElements = async (
               div.classList.add('div-item');
               div.classList.add(`div-row-${i + 1}`);
               div.classList.add(`div-item-${j + 1}`);
-              div.setAttribute('data-item', `${i + 1}-${j + 1}`);
+              div.id = `${i + 1}-${j + 1}`;
               if (j === wordCount - 1) oneWordWidth = imgWidth - widthCount;
               div.style.width = `${oneWordWidth}px`;
               div.style.height = `${itemHeight}px`;
@@ -109,9 +116,12 @@ const createCanvasElements = async (
               
               div.style.backgroundImage = `url(${backUrl})`;
               widthCount += (oneWordWidth - puzzleWidth);
-              row.append(div);
-            
+              rndOrder.push(div);
             })
+            
+            shuffleArray(rndOrder).forEach((item) => {
+              row.append(item);
+            });
             result.push(row);
           });
           resolve(result);

@@ -7,10 +7,7 @@ import paintings5 from './backgrounds/level5';
 import paintings6 from './backgrounds/level6';
 
 class NetworkService {
-  constructor(config) {
 
-  }
-  
   async prepareData(){
     const words = await this.getWordsArray();
     const background = this.getBackgroundImage();

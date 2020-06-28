@@ -31,6 +31,7 @@ class Levels extends Component {
   }
 
   async startNewGame() {
+    document.querySelector('.check-button').classList.remove('hidden-button');
     const data = await networkService.prepareData();
     puzzle.createBackground(data[0], data[1]);
     document.querySelector('.game-field').innerHTML = '';
@@ -59,7 +60,7 @@ const levels = new Levels({
   template: `
     <div class="level-page">
     <div>
-      <div class="level-button">LEVEL 1</div>
+      <div class="btn level-button">LEVEL 1</div>
       <ul class="level-list hidden">
         <li value="1">LEVEL 1</li>
         <li value="2">LEVEL 2</li>
@@ -70,7 +71,7 @@ const levels = new Levels({
       </ul>
     </div>
     <div>
-      <div class="page-button">PAGE 1</div>
+      <div class="btn page-button">PAGE 1</div>
         <ul class="page-list hidden">
         <li value="1">PAGE 1</li>
         <li value="2">PAGE 2</li>
@@ -84,7 +85,7 @@ const levels = new Levels({
         <li value="10">PAGE 10</li>
       </ul>
     </div>
-      <div class="start-button">START!</div>
+      <div class="btn start-button">START!</div>
     </div>
     `,
 });

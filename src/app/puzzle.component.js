@@ -7,22 +7,24 @@ import cropService from './crop.service';
 class Puzzle extends Component {
   constructor(config) {
     super(config);
-    this.currentWords = [];
-    this.correctWords = [];
-    this.inCorrectWords = [];
-    this.currentRound = 0;
+    this.currentRound = 1;
+    this.wordsArray = [];
+    this.rightOrder = [];
+    this.background = '';
+    this.allRounds = 10;
   }
 
   createBackground(words, image) {
-    const wordsArray = [];
+    if (words.length < 10) this.allRounds = words.length;
+    this.wordsArray = [];
     words.forEach((item, i) => {
-      if (i < 10) wordsArray.push(item.textExample);
+      if (i < this.allRounds) this.wordsArray.push(item.textExample);
     });
-    console.log(`https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`);
-
+    this.background = `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`;
+    
     cropService({
       src: `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`,
-      wordsList: wordsArray,
+      wordsList: this.wordsArray,
     }).then(res => {
       document.querySelector('.game-prepare').append(...res);
     }).then(() => {
@@ -30,12 +32,77 @@ class Puzzle extends Component {
     })
   }
   
-  startNewRound(round) {
+  startNewRound() {
+    const round = this.currentRound;
+    this.rightOrder = this.wordsArray[round - 1].split(' ');
     const gameRow = document.createElement('div');
     gameRow.classList.add('game-row');
     gameRow.classList.add(`row-round-${round}`);
     document.querySelector('.game-field').append(gameRow);
-    dragula([document.querySelector(`.row-round-${round}`), document.querySelector('.row-1')]);
+    document.querySelectorAll(`.group-words`).forEach((item) => {
+      item.classList.remove('show-group-row');
+    });
+    document.querySelector(`.row-${round}`).classList.add('show-group-row');
+    dragula([document.querySelector(`.row-round-${round}`), document.querySelector(`.row-${round}`)]);
+  }
+  
+  checkRoundResult() {
+    let count = 0;
+    document.querySelectorAll(`.row-round-${this.currentRound} .div-item`).forEach((item, i) => {
+      if (item.innerHTML === this.rightOrder[i]) {
+        item.classList.add('correct-word');
+        setTimeout(() => {item.classList.remove('correct-word');}, 2000);
+        count += 1;
+      } else {
+        document.querySelector('.giveup-button').classList.remove('hidden-button');
+        item.classList.add('incorrect-word');
+        setTimeout(() => {item.classList.remove('incorrect-word');}, 2000);
+        return false;
+      }
+    });
+    if (count === this.rightOrder.length) {
+      document.querySelector('.giveup-button').classList.add('hidden-button');
+      document.querySelector('.continue-button').classList.remove('hidden-button');
+      document.querySelector('.check-button').classList.add('hidden-button');
+    }
+  }
+  
+  giveUp() {
+    const correctRow = [];
+    for (let i = 1; i <= this.rightOrder.length; i += 1) {
+      const word = document.getElementById(`${this.currentRound}-${i}`);
+      correctRow.push(word);
+    }
+    document.querySelector('.show-group-row').innerHTML = '';
+    document.querySelector(`.row-round-${this.currentRound}`).innerHTML = '';
+    correctRow.forEach((item) => {
+      document.querySelector(`.row-round-${this.currentRound}`).append(item);
+    });
+    document.querySelector('.giveup-button').classList.add('hidden-button');
+    document.querySelector('.continue-button').classList.remove('hidden-button');
+    document.querySelector('.check-button').classList.add('hidden-button');
+  }
+  
+  continueGame(){
+    document.getElementById(`${this.currentRound}-1`).classList.add('first-item');
+    document.getElementById(`${this.currentRound}-${this.rightOrder.length}`).classList.add('last-item');
+    this.currentRound += 1;
+    document.querySelector('.giveup-button').classList.add('hidden-button');
+    document.querySelector('.continue-button').classList.add('hidden-button');
+    if (this.currentRound > this.allRounds) {
+      document.querySelector('.result-button').classList.remove('hidden-button');
+      this.gameEnd();
+    } else {
+      document.querySelector('.check-button').classList.remove('hidden-button');
+      this.startNewRound();
+    }
+  }
+  
+  gameEnd() {
+    document.querySelector('.game-field').style.backgroundImage = `url(${this.background})`;
+    document.querySelectorAll('.game-row').forEach((item) => {
+      item.classList.add('rows-game-end');
+    });  
   }
 }
 

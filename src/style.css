@@ -15,15 +15,20 @@ body {
   justify-content: space-around;
   width: 50%;
 }
-.level-button, .page-button, .start-button {
+.btn {
   cursor: pointer;
   padding: 5px;
   background: #e1f5fe;
   font-size: 18px;
-  width: 100px;
+  min-width: 100px;
   box-sizing: border-box;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
   text-align: center;
+  height: 36px;
+  margin: 10px;
+}
+.hidden-button {
+  display: none;
 }
 .level-list, .page-list {
   list-style: none;
@@ -55,8 +60,6 @@ body {
   background: #e1f5fe;
 }
 .puzzle-wrapper {
-  width: 1200px;
-  margin: auto;
   height: 600px;
   background-size: cover;
 }
@@ -64,7 +67,9 @@ body {
   margin-right: -12px;
 }
 .control-wrapper {
-  text-align: center;
+  margin: 100px auto 20px;
+  display: flex;
+  justify-content: center;
 }
 .clip-svg {
 }
@@ -76,12 +81,18 @@ body {
   left: calc(50% - 600px);
 }
 .group-words {
-  display: flex;
+  display: none;
   margin-bottom: 1px;
+  height: 61px;
+  background: aliceblue;
+  padding-left: 19px;
+}
+.show-group-row {
+  display: flex;
 }
 .div-item {
+  cursor: pointer;
   color: #fff;
-  background: #a0a0ee;
   box-sizing: border-box;
   margin-left: -19px;
   text-align: center;
@@ -89,26 +100,44 @@ body {
   -webkit-clip-path: polygon(calc(100% - 20px) 0, calc(100% - 20px) 40%, 100% 30%, 100% 70%, calc(100% - 20px) 60%, calc(100% - 20px) 100%, 0% 100%, 0 60%, 20px 70%, 20px 30%, 0 40%, 0% 0%);
   clip-path: polygon(calc(100% - 20px) 0, calc(100% - 20px) 40%, 100% 30%, 100% 70%, calc(100% - 20px) 60%, calc(100% - 20px) 100%, 0% 100%, 0 calc(60% + 1px), 20px calc(70% + 1px), 20px calc(30% - 1px), 0 calc(40% - 1px), 0% 0%);
 }
-
-.group-words .div-item:first-child,
-.game-row .div-item:first-child {
-  margin: 0;
+.correct-word {
+  background: #3f8c3f !important;
+}
+.incorrect-word {
+  background: #b32f2f !important;
+}
+.first-item {
+  margin-left: -19px;
   clip-path: polygon(0 0, 0% 100%, calc(100% - 20px) 100%, calc(100% - 20px) 60%, 100% 70%, 100% 30%, calc(100% - 20px) 40%, calc(100% - 20px) 0);
 }
-.group-words .div-item:last-child,
-.game-row .div-item:last-child {
+.last-item {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0 calc(60% + 1px), 20px calc(70% + 1px), 20px calc(30% - 1px), 0 calc(40% - 1px));
+  margin-right: 0px;
 }
 .game-prepare {
+  margin: auto;
+  width: 1200px;
+  margin-top: 20px;
   height: 61px;
-  overflow: hidden;
+  background: aliceblue;
 }
 .game-field {
-  height: 600px;
+  height: 609px;
+  width: 1200px;
+  margin: auto;
+  border: 2px solid gray;
+  background-size: cover;
+}
+.rows-game-end {
+  opacity: 0 !important;
 }
 .game-row {
   height: 61px;
   display: flex;
+  padding-left: 19px;
+  background: #d9d9d9;
+  opacity: 1;
+  transition: 0.5s;
 }
 /*Dragula*/
 .gu-mirror {
