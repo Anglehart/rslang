@@ -86,6 +86,8 @@ class Savannah {
     this.translationWord4.className = 'translationWord';
     this.translation4.append(this.translationWord4);
     this.answerHandled = false;
+    this.countRoundsGame = 0;
+    this.backgroundPosition = 100;
     this.closeButton.addEventListener('click', () => {
       clearInterval(this.timer);
       this.gamePage.style.display = 'none';
@@ -100,18 +102,19 @@ class Savannah {
       }
     });
   }
- 
+
   checkAnswer(selectedTranslation) {
     const translationWord = selectedTranslation.querySelector('.translationWord');
     const word = {word: this.word.innerText, translation: this.word.getAttribute('data')};
     if (translationWord.innerText === this.word.getAttribute('data')) {
       selectedTranslation.classList.add('active');
-      this.createRightIcon();
+      // this.createRightIcon();
       new Audio('audio/correct.mp3').play();
-      this.container.style.backgroundPositionY = '90%';
+      this.backgroundPosition -= 10;
+      this.container.style.backgroundPositionY = `${this.backgroundPosition}%`;
       this.gameStatistics.success.push(word);
       console.log(this.gameStatistics.success);
-      //move background, add sound
+      //move background
     } else {
       selectedTranslation.classList.add('fail');
       this.searchRightTranslation(); 
@@ -145,12 +148,13 @@ class Savannah {
   }
 
   createReaultsIcon() {
-    for (let i = 0; i < 7; ++i) {
+    for (let i = 0; i < 5; ++i) {
       let heartIcon = document.createElement('i');
       heartIcon.className = 'fa-2x fas fa-heart';
       this.iconsContainer.append(heartIcon);
     }
   }
+
   createMainPage () {
     this.mainPage = document.createElement('div');
     this.mainPage.className = 'main-page';
@@ -333,13 +337,16 @@ class Savannah {
     wordContainer.append(statisticTranslation);
   }
 
-  createRightIcon() {
-    this.heartIcon = document.createElement('i');
-    this.heartIcon.className = 'fa-2x fas fa-heart success';
-    this.resultsContainer.append(this.heartIcon);
-  }
+  // createRightIcon() {
+  //   this.heartIcon = document.createElement('i');
+  //   this.heartIcon.className = 'fa-2x fas fa-heart success-icon';
+  //   this.resultsContainer.append(this.heartIcon);
+  // }
 
   createFailIcon() {
+    // Array.from(this.iconsContainer.children).forEach((icon) => {
+    //   icon.classList.add('fail-icon');
+    // })
     this.heartIcon = document.createElement('i');
     this.heartIcon.className = 'fa-2x fas fa-heart fail-icon';
     this.resultsContainer.append(this.heartIcon);
@@ -377,7 +384,7 @@ class Savannah {
   }
   
   startNextRound() {
-    if (this.resultsContainer.children.length !== 7) {
+    if (this.resultsContainer.children.length !== 5 ) {
       this.getWords()
       .then(() => {
         this.image.remove();
@@ -391,6 +398,8 @@ class Savannah {
           answer.classList.remove('fail');
         });
         this.answerHandled = false;
+        this.countRoundsGame += 1;
+        console.log(this.countRoundsGame);
       });
     } else {
       clearInterval(this.timer);

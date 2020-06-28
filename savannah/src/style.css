@@ -330,7 +330,7 @@ body {
   height: 32px;
   display: flex;
   /* flex-direction: row; */
-  color: #ff000061;
+  color: red;
   padding: 20px;
 }
 .results-container {
@@ -341,14 +341,15 @@ body {
   height: 32px;
   display: flex;
   padding: 20px;
+  color: red;
   /* flex-direction: row-reverse; */
 
 }
 .fail-icon{
  
-  opacity: 0.2;
+  opacity: 0.2 !important;
 }
-.success {
+.success-icon {
   
   color: red;
 }
