@@ -6,27 +6,18 @@ body {
 
 }
 .container {
-  /* display: none;
-  background-position: center;
-  width: 100vw;
-  height: 100vh;
-  background-image: url(images/background.png);
-  background-repeat: no-repeat;
-  background-size: cover; */
+  background-size: cover; 
   display: none;
   width: 100vw;
   height: 100vh;
   background-repeat: no-repeat;
-  background-position-y: 100%;
   background-position-x: center;
   transition: all 1s ease;
   background-image: url(images/background.png);
   position: relative;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   overflow: hidden;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -54,6 +45,7 @@ body {
   right: 0;
   left: 0;
 }
+
 .text {
   max-width: 565px;
   margin: 0 auto 58px;
@@ -86,22 +78,26 @@ body {
   width: 20px;
   height: 20px;
   background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTS02LTZoMzB2MzBILTZ6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0RFREVERSIgZD0iTTE3Ljc1IDIuMDEyTDE1Ljk4OC4yNSA5IDcuMjM4IDIuMDEyLjI1LjI1IDIuMDEyIDcuMjM4IDkgLjI1IDE1Ljk4OGwxLjc2MiAxLjc2Mkw5IDEwLjc2Mmw2Ljk4OCA2Ljk4OCAxLjc2Mi0xLjc2MkwxMC43NjIgOXoiLz4KICAgIDwvZz4KPC9zdmc+Cg==) no-repeat;
-  /* background-size: cover; */
-  /* position: absolute;
-  top: 27px;
-  right: 27px; */
   cursor: pointer;
   padding-right: 30px;
 }
+
 .main-page {
   display:block;
+  max-width: 1440px;
+  margin: auto;
 }
+
 .game-page {
+  max-width: 1440px;
+  margin: auto;
   display:none;
   position: relative;
 }
 
 .final-page {
+  max-width: 1440px;
+  margin: auto;
   width: 100%;
   max-width: 784px;
   min-height: 646px;
@@ -116,6 +112,7 @@ body {
   align-items: center;
   box-sizing: border-box;
 }
+
 .failied-results {
   font-size: 12px;
   font-weight: 700;
@@ -125,6 +122,7 @@ body {
   color: red;
   text-align: start;
 }
+
 .success-results {
   font-size: 12px;
   font-weight: 700;
@@ -134,22 +132,21 @@ body {
   color: green;
   text-align: start;
 }
-/* .result-container {
-  display: inline-flex;
- 
-} */
+
 .word-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 16px;
 }
+
 .final-title {
   font-size: 34px;
   font-weight: 300;
   line-height: .85;
   color: #37383c;
 }
+
 .final-container {
   display: flex;
   flex-direction: column;
@@ -186,9 +183,11 @@ body {
   line-height: 1.25;
   color: #37383c;
 }
+
 .tr {
  margin-right: 6px;
 }
+
 .line {
   width: 100%;
   height: 1px;
@@ -209,17 +208,6 @@ body {
   margin-top: 24px;
 }
 
-/* .results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 337px;
-  width: 100%;
-  max-width: 542px;
-  margin-top: 0;
-  position: relative;
-  overflow: auto;
-} */
 .word {
   position: fixed;
   left: 45%;
@@ -231,27 +219,14 @@ body {
   letter-spacing: 1px;
   height: 100%;
   width: 100%;
-  /* transform: translate(0);
-  transition: all 5s ease-in; */
 }
 
 .answers {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 40vh 10vw;
-
-  /* position: absolute;
-  top: 45vh; */
-  /* margin-top: -30px;
-  right: 0; */
-  /* left: 25%; */
+  padding: 40vh 5vw;
   text-align: center;
-  /* min-height: 50%;
-  padding-top: 100px; */
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center; */
 }
 
 .translation {
@@ -275,16 +250,13 @@ body {
   user-select: none;
 }
 
-/* .level-container {
-  /* position: absolute;
-  top: 7px; 
-} */
 .level-buttons {
   display: flex;
   list-style: none;
   justify-content: space-between;
   line-height: 10px;
 }
+
 .level-buttons li{
   padding: 10px;
   border-radius: 50%;
@@ -300,39 +272,35 @@ body {
 .active {
   background-color: #00c49d;
 }
+
 .fail {
   background-color: #ff2b007a;
 }
+
 .ready {
   display: none;
 }
+
 .ready-active {
-  /* display: block;
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  top: 50%;
-  left: 35%; */
   display: block;
-  position: relative;
-  margin: auto;
-  margin-top: 100px;
+  position: absolute;
   height: 40px;
   width: 40px;
+  top: 50%;
+  left: 50%;
   text-align: center;
+  font-size: 4rem;
+  color: #fff;
 }
 
 .icons-container {
   z-index: 1;
-  /* position: absolute;
-  right: 60px;
-  top: 23px; */
   height: 32px;
   display: flex;
-  /* flex-direction: row; */
   color: red;
   padding: 20px;
 }
+
 .results-container {
   width: 225px;
   z-index: 10;
@@ -342,15 +310,13 @@ body {
   display: flex;
   padding: 20px;
   color: red;
-  /* flex-direction: row-reverse; */
-
 }
+
 .fail-icon{
- 
   opacity: 0.2 !important;
 }
+
 .success-icon {
-  
   color: red;
 }
 

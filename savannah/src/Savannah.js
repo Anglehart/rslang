@@ -25,10 +25,6 @@ class Savannah {
     this.iconsContainer.className = 'icons-container';
     this.header.append(this.iconsContainer);
 
-    this.resultsContainer = document.createElement('div');
-    this.resultsContainer.className = 'results-container';
-    this.header.append(this.resultsContainer);
-
     this.closeButton = document.createElement('div');
     this.closeButton.className = 'close';
     this.closeButton.id = 'closeButton';
@@ -108,20 +104,18 @@ class Savannah {
     const word = {word: this.word.innerText, translation: this.word.getAttribute('data')};
     if (translationWord.innerText === this.word.getAttribute('data')) {
       selectedTranslation.classList.add('active');
-      // this.createRightIcon();
       new Audio('audio/correct.mp3').play();
       this.backgroundPosition -= 10;
       this.container.style.backgroundPositionY = `${this.backgroundPosition}%`;
       this.gameStatistics.success.push(word);
-      console.log(this.gameStatistics.success);
       //move background
     } else {
       selectedTranslation.classList.add('fail');
+      this.createFailIcon();
       this.searchRightTranslation(); 
-      new Audio ('audio/failed.mp3');
+      new Audio ('audio/failed.mp3').play();
       this.gameStatistics.fail.push(word);
       console.log(this.gameStatistics.fail);
-      this.createFailIcon();
       //add sound
     }
     this.startNextRound();
@@ -148,10 +142,12 @@ class Savannah {
   }
 
   createReaultsIcon() {
-    for (let i = 0; i < 5; ++i) {
+    for (let i = 0; i < 5; i++) {
       let heartIcon = document.createElement('i');
       heartIcon.className = 'fa-2x fas fa-heart';
+      heartIcon.setAttribute('data', i);
       this.iconsContainer.append(heartIcon);
+      
     }
   }
 
@@ -281,12 +277,12 @@ class Savannah {
       let words = [];
       if (type === typeResult.fail) {
         results.className = 'failied-results';
-        results.innerText = 'ошибок: ';
+        resultsText.innerText = 'ошибок: ';
         resultsNumber.innerText = this.gameStatistics.fail.length;
         words = this.gameStatistics.fail;
       } else {
         results.className = 'success-results';
-        results.innerText = 'знаю: ';
+        resultsText.innerText = 'знаю: ';
         resultsNumber.innerText = this.gameStatistics.success.length;
         words = this.gameStatistics.success;
       }
@@ -302,7 +298,7 @@ class Savannah {
           this.finalPage.style.display = 'none';
           //add countdown
           setTimeout(() => this.mainPage.style.display = 'block', 1000);
-          new Audio('audio/notification.mp3')
+          
           // this.mainPage.style.display = 'block';
         }
       })
@@ -310,6 +306,7 @@ class Savannah {
 
     createResults(typeResult.fail, );
     createResults(typeResult.success, );
+    new Audio('audio/notification.mp3').play();
   }
 
   createStatisticWord(parent, word) {
@@ -337,38 +334,39 @@ class Savannah {
     wordContainer.append(statisticTranslation);
   }
 
-  // createRightIcon() {
-  //   this.heartIcon = document.createElement('i');
-  //   this.heartIcon.className = 'fa-2x fas fa-heart success-icon';
-  //   this.resultsContainer.append(this.heartIcon);
-  // }
 
   createFailIcon() {
-    // Array.from(this.iconsContainer.children).forEach((icon) => {
-    //   icon.classList.add('fail-icon');
-    // })
-    this.heartIcon = document.createElement('i');
-    this.heartIcon.className = 'fa-2x fas fa-heart fail-icon';
-    this.resultsContainer.append(this.heartIcon);
+    let min = 5;
+    let successIcon;
+    Array.from(this.iconsContainer.children).forEach((icon) => {
+      const num = icon.getAttribute('data');
+      if (!icon.closest('.fail-icon') && num < min){
+        min = num;
+        successIcon = icon;
+      }
+    });
+    successIcon.classList.add('fail-icon');
   }
 
   createCountdown () {
-    // this.countdownContainer = document.createElement('div');
-    // this.countdownContainer.className = 'ready-active';
-    // this.container.append(this.countdownContainer);
+    this.countdownContainer = document.createElement('div');
+    this.countdownContainer.className = 'ready-active';
+    this.container.append(this.countdownContainer);
 
-    // this.countdownNumber = document.createElement('div');
-    // this.countdownContainer.append(this.countdownNumber);
-    // let countdown = 3;
-    // this.countdownNumber.innerText = countdown;
-    // setInterval(function() {
-    //   countdown = --countdown <= 0 ? 3 : countdown;
-    //   this.countdownNumber.innerText = countdown;
-    // }, 1000);
-    this.image = document.createElement('img');
-    this.image.className = 'ready-active';
-    this.image.setAttribute('src','images/ready.jpg');
-    this.container.append(this.image);
+    this.countdownNumber = document.createElement('div');
+    this.countdownContainer.append(this.countdownNumber);
+  }
+  current_count = 3;
+  countDown() {
+    let countVal = '';
+      if (this.current_count >= 1) {
+        countVal = this.current_count;
+        this.current_count--;
+      }
+      else {
+        clearInterval(this.count);
+      }
+    this.countdownNumber.innerText = countVal;
   }
   createContainer() {
     this.container = document.createElement('div');
@@ -378,16 +376,19 @@ class Savannah {
 
   startClicked() {
     this.mainPage.style.display = 'none';
-    new Audio('audio/round.mp3');
+    new Audio('audio/round.mp3').play();
     this.createCountdown();
+    this.countDown();
+    this.count = setInterval(() => this.countDown(), 1000);
     setTimeout(() => this.startNextRound(), 3000);
   }
-  
+
   startNextRound() {
-    if (this.resultsContainer.children.length !== 5 ) {
+    if (!this.iconsContainer.children[4].closest('.fail-icon') || !this.countRoundsGame === 20) {
       this.getWords()
       .then(() => {
-        this.image.remove();
+        this.countdownContainer.remove();
+        // this.image.remove();
         this.mainPage.style.display = 'none';
         this.gamePage.style.display = 'block';
         this.timer = setInterval(() => this.moveWordDown(), 8);
@@ -404,11 +405,10 @@ class Savannah {
     } else {
       clearInterval(this.timer);
       this.gamePage.style.display = 'none';
-      this.createFinalPage();
+      setTimeout(() => this.createFinalPage(), 1000);
     }
-    
   }
-
+  
   randomInteger(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
@@ -466,7 +466,11 @@ class Savannah {
     if (now - this.timeStarted > timeForAnswer) {
       clearInterval(this.timer);
       this.startNextRound();
+      new Audio ('audio/failed.mp3').play();
       this.createFailIcon();
+      this.searchRightTranslation(); 
+      const word = {word: this.word.innerText, translation: this.word.getAttribute('data')};
+      this.gameStatistics.fail.push(word);
       //time is expired, wrong answer
       return;
     }
