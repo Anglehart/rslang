@@ -58,7 +58,7 @@ class Puzzle extends Component {
       item.classList.remove('show-group-row');
     });
     document.querySelector(`.row-${round}`).classList.add('show-group-row');
-    dragula([document.querySelector(`.row-round-${round}`), document.querySelector(`.row-${round}`)]);
+    this.drake = dragula([document.querySelector(`.row-round-${round}`), document.querySelector(`.row-${round}`)], {direction: 'horizontal'});
   }
   
   checkRoundResult() {
@@ -101,6 +101,7 @@ class Puzzle extends Component {
   }
   
   continueGame(){
+    this.drake.destroy();
     document.getElementById(`${this.currentRound}-1`).classList.add('first-item');
     document.getElementById(`${this.currentRound}-${this.rightOrder.length}`).classList.add('last-item');
     this.currentRound += 1;
