@@ -173,6 +173,11 @@ function addWordMeaningInCard(wordInfo) {
   cardMeaning.innerHTML = wordInfo.textMeaning;
 }
 
+function addWordMeaningTranslateInCard(wordInfo) {
+  const cardMeaningTranslate = document.querySelector('.card_meaning-translate');
+  cardMeaningTranslate.textContent = wordInfo.textMeaningTranslate;
+}
+
 function addWordTranslateInCard(wordInfo) {
   const wordTranslate = document.querySelector('.card_word-translate');
   wordTranslate.textContent = wordInfo.wordTranslate;
@@ -183,13 +188,20 @@ function addWordTranscriptionInCard(wordInfo) {
   wordTranscription.textContent = wordInfo.transcription;
 }
 
-function addInputInTextExample() {
+
+function addInputInTextExample(length) {
   const cardPhrase = document.querySelector('.card_phrase b');
+
   cardPhrase.textContent = '';
-  // console.log(cardPhrase);
 
   const input = document.createElement('input');
+  input.style.width = `${length / 2 + 0.5}rem`;
+  input.style.fontSize = '1em';
   cardPhrase.append(input);
+
+  // const input = document.createElement('div');
+  // input.setAttribute('contenteditable', true);
+  // cardPhrase.append(input);
 }
 
 function addInputInWordMeaning() {
@@ -220,15 +232,21 @@ const getWords = async (words) => {
 
   console.log(content[randomWord]);
 
+  const word = content[randomWord].textExample.split('<b>')[1].split('</b>')[0];
+  const wordLength = word.length;
+  console.log(word, wordLength);
+
   addImg(content[randomWord]);
 
   addTextExampleInCard(content[randomWord]);
-  addInputInTextExample();
+  addInputInTextExample(wordLength);
 
   addTextExampleTranslateInCard(content[randomWord]);
 
   addWordMeaningInCard(content[randomWord]);
   addInputInWordMeaning();
+
+  addWordMeaningTranslateInCard(content[randomWord]);
 
   addWordTranslateInCard(content[randomWord]);
 
