@@ -34,6 +34,14 @@ class Puzzle extends Component {
       document.querySelector('.game-prepare').append(...res);
     }).then(() => {
       this.startNewRound(this.currentRound);
+    }).then(() => {
+      document.querySelectorAll('.div-item').forEach((item, i) => {
+        item.addEventListener('click', () => {
+          if (event.target.parentNode.classList.contains('show-group-row')) {
+            document.querySelector(`.row-round-${this.currentRound}`).append(event.target);
+          }    
+        })
+      });
     })
   }
   
