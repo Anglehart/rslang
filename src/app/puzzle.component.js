@@ -9,6 +9,7 @@ class Puzzle extends Component {
   constructor(config) {
     super(config);
     this.currentRound = 1;
+    this.currentWord = {};
     this.sentences = [];
     this.wordsObjects = [];
     this.rightOrder = [];
@@ -19,14 +20,14 @@ class Puzzle extends Component {
   createBackground(words, image) {
     this.wordsObjects = words;
     console.log(words);
-    
+
     if (words.length < 10) this.allRounds = words.length;
     this.sentences = [];
     words.forEach((item, i) => {
       if (i < this.allRounds) this.sentences.push(item.textExample);
     });
     this.background = `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`;
-    
+
     cropService({
       src: `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`,
       wordsList: this.sentences,
@@ -39,15 +40,14 @@ class Puzzle extends Component {
         item.addEventListener('click', () => {
           if (event.target.parentNode.classList.contains('show-group-row')) {
             document.querySelector(`.row-round-${this.currentRound}`).append(event.target);
-          }    
+          }
         })
       });
     })
   }
-  
+
   startNewRound() {
-    this.currentMP3 = `https://raw.githubusercontent.com/Anglehart/rslang-data/master/${this.wordsObjects[this.currentRound].audioExample}`;
-    this.currentSentence = `${this.sentences[this.currentRound]}`;
+    this.currentWord = this.wordsObjects[this.currentRound - 1];
     const round = this.currentRound;
     this.rightOrder = this.sentences[round - 1].split(' ');
     const gameRow = document.createElement('div');
@@ -60,7 +60,7 @@ class Puzzle extends Component {
     document.querySelector(`.row-${round}`).classList.add('show-group-row');
     this.drake = dragula([document.querySelector(`.row-round-${round}`), document.querySelector(`.row-${round}`)], {direction: 'horizontal'});
   }
-  
+
   checkRoundResult() {
     let count = 0;
     document.querySelectorAll(`.row-round-${this.currentRound} .div-item`).forEach((item, i) => {
@@ -76,15 +76,15 @@ class Puzzle extends Component {
       }
     });
     if (count === this.rightOrder.length) {
-      overlay.drawCorrect(this.currentSentence, this.currentMP3);
+      overlay.drawCorrect(this.currentWord);
       document.querySelector('.giveup-button').classList.add('hidden-button');
       document.querySelector('.continue-button').classList.remove('hidden-button');
       document.querySelector('.check-button').classList.add('hidden-button');
     }
   }
-  
+
   giveUp() {
-    overlay.drawInCorrect(this.currentSentence, this.currentMP3);
+    overlay.drawInCorrect(this.currentWord);
     const correctRow = [];
     for (let i = 1; i <= this.rightOrder.length; i += 1) {
       const word = document.getElementById(`${this.currentRound}-${i}`);
@@ -99,7 +99,7 @@ class Puzzle extends Component {
     document.querySelector('.continue-button').classList.remove('hidden-button');
     document.querySelector('.check-button').classList.add('hidden-button');
   }
-  
+
   continueGame(){
     this.drake.destroy();
     document.getElementById(`${this.currentRound}-1`).classList.add('first-item');
@@ -115,12 +115,12 @@ class Puzzle extends Component {
       this.startNewRound();
     }
   }
-  
+
   gameEnd() {
     document.querySelector('.game-field').style.backgroundImage = `url(${this.background})`;
     document.querySelectorAll('.game-row').forEach((item) => {
       item.classList.add('rows-game-end');
-    });  
+    });
   }
 }
 

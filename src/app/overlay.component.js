@@ -2,28 +2,50 @@ import { Component } from './core.component';
 import puzzle from './puzzle.component';
 
 class Overlay extends Component {
-  /*initComponent() {
+  constructor(config){
+    super(config);
+    this.iKnow = [];
+    this.iDontKnow = [];
+  }
+
+  initComponent() {
     this.showIntro();
     document.querySelector('.intro-btn').addEventListener('click', () => { this.hideIntro(); });
-    document.querySelector('.return').addEventListener('click', () => { this.hideResults(); });
-    document.querySelectorAll('.new-game').forEach((item) => {
-      item.addEventListener('click', () => {
-        this.hideResults();
-        wordsComponent.newGame();
-      });
-    });
-  }*/
+    // document.querySelector('.return').addEventListener('click', () => { this.hideResults(); });
+    //document.querySelectorAll('.new-game').forEach((item) => {
+    //  item.addEventListener('click', () => {
+    //    this.hideResults();
+    //    wordsComponent.newGame();
+    //  });
+    //});
+  }
 
-  drawCorrect(sentence, mp3) {
-    console.log(sentence);
-    console.log(mp3);
+  drawCorrect(word) {
+    this.iKnow.push(word.id);
+    const currentMP3 = `https://raw.githubusercontent.com/Anglehart/rslang-data/master/${word.audioExample}`;
+    const div = document.createElement('div');
+    div.classList.add('statsWord');
+    div.innerHTML = `<p>${word.textExample}</p>`;
+    document.querySelector('.success').after(div);
+    div.onclick = () => {
+      new Audio(currentMP3).play();
+    };
+    document.querySelector('.success span').innerHTML = this.iKnow.length;
   }
-  
-  drawInCorrect(sentence, mp3) {
-    console.log(sentence);
-    console.log(mp3);
+
+  drawInCorrect(word) {
+    this.iDontKnow.push(word.id);
+    const currentMP3 = `https://raw.githubusercontent.com/Anglehart/rslang-data/master/${word.audioExample}`;
+    const div = document.createElement('div');
+    div.classList.add('statsWord');
+    div.innerHTML = `<p>${word.textExample}</p>`;
+    document.querySelector('.errors').after(div);
+    div.onclick = () => {
+      new Audio(currentMP3).play();
+    };
+    document.querySelector('.errors span').innerHTML = this.iDontKnow.length;
   }
-  
+
   showIntro() {
     document.querySelector('main').classList.add('disable');
     document.querySelector('.intro').classList.remove('disable');

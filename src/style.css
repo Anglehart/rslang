@@ -11,32 +11,86 @@ body {
   height: 0px !important;
 }
 .disable {
-  display: none;
+  display: none !important;
+}
+h1 {
+  font-size: 40px;
+  margin: -100px auto 40px;
+  color: #000;
+  opacity: 1;
+  text-transform: uppercase;
+  letter-spacing: 13px;
+  font-weight: 300;
+}
+.intro,
+.results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: calc(100vh - 20px);
+  text-align: center;
+  padding: 10px;
+  transition: .5s;
+  background-image: url(./app/assets/bg.jpg);
+  background-size: cover;
+}
+.intro p {
+  max-width: 600px;
+  margin: 0 auto 60px;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 300;
+  color: #000;
+  opacity: .8;
 }
 .level-page {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 50%;
+  margin: 20px 0;
 }
 .btn {
-  cursor: pointer;
-  padding: 5px;
-  background: #e1f5fe;
-  font-size: 18px;
-  min-width: 100px;
-  box-sizing: border-box;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+  font-size: 21px;
   text-align: center;
-  height: 36px;
-  margin: 10px;
+  padding: 10px;
+  min-width: 200px;
+  color: #fff;
+  background: #d7925b;
+  border-radius: 4px;
+  transition: .15s;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 2px 4px 0 rgba(14,30,37,.12);
+  cursor: pointer;
+}
+.level-button, .start-button, .page-button {
+  text-align: center;
+  padding: 10px 25px;
+  color: #fff;
+  background: #d7925b;
+  border-radius: 4px;
+  transition: .15s;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 2px 4px 0 rgba(14,30,37,.12);
+  cursor: pointer;
+  font-size: 16px;
+  min-width: 100px;
+}
+.intro-btn {
+  font-weight: 300;
+  font-size: 24px;
+  text-align: center;
+  padding: 15px 20px;
 }
 .hidden-button {
   display: none;
 }
+.levels-wrapper {
+  width: 1200px;
+  margin: auto;
+}
 .level-list, .page-list {
   list-style: none;
   padding: 0;
-  width: 100px;
+  width: 150px;
   transition: 0.1s;
   overflow: hidden;
   position: absolute;
@@ -44,6 +98,7 @@ body {
   margin: 0;
   position: absolute;
   z-index: 1;
+  border-radius: 4px;
 }
 .level-list {
   height: 204px;
@@ -70,7 +125,7 @@ body {
   margin-right: -12px;
 }
 .control-wrapper {
-  margin: 100px auto 20px;
+  margin: 110px auto 20px;
   display: flex;
   justify-content: center;
 }
@@ -217,4 +272,19 @@ body {
 }
 .errors span {
   background-color: red;
+}
+.btn-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.warning {
+  display: none;
+}
+@media (max-width: 1220px) {
+  .warning {
+    display: block;
+  }
+  .intro-btn, .intro-about {
+    display: none;
+  }
 }
