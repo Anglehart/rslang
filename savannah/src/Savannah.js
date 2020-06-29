@@ -97,6 +97,11 @@ class Savannah {
         this.checkAnswer(selectedTranslation);
       }
     });
+    // this.gamePage.addEventListener('keypress', (event) => {
+    //   const keyName = event.key;
+    //   const target = event.target;
+    //   if (keyName === '1')
+    // })
   }
 
   checkAnswer(selectedTranslation) {
