@@ -13,7 +13,7 @@ a{color:inherit;text-decoration:none}
 	width:100%;
 	margin:auto;
 	max-width:525px;
-	min-height:670px;
+	min-height:620px;
 	position:relative;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
@@ -87,8 +87,10 @@ a{color:inherit;text-decoration:none}
 }
 .login-card .group .button{
 	background:#1161ee;
-	padding-top: 10px;
+  padding-top: 10px;
+  cursor: pointer;
 }
+
 .login-card .group label .icon{
 	width:15px;
 	height:15px;
@@ -144,7 +146,8 @@ a{color:inherit;text-decoration:none}
   position: absolute;
   width: 18px;
 	height: 18px;
-	left: 3px;
+  left: 3px;
+  cursor: pointer;
 }
 .form-toggler {
   cursor: pointer;

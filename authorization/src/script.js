@@ -192,9 +192,9 @@ function loginUser(user) {
   })
     .then((data) => {
       console.log(data);
-      sessionStorage.setItem('email', user.email);
-      sessionStorage.setItem('userId', data.userId);
-      sessionStorage.setItem('token', data.token);
+      localStorage.setItem('email', user.email);
+      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('token', data.token);
     })
     .catch((error) => {
       console.log(error.message);
@@ -220,6 +220,6 @@ modalWindow.addEventListener('click', (event) => {
     loginUser({ email: `${emailSignIn.value}`, password: `${passwordSignIn.value}` });
   }
 });
-console.log(sessionStorage.getItem('email'));
-console.log(sessionStorage.getItem('userId'));
-console.log(sessionStorage.getItem('token'));
+console.log(localStorage.getItem('email'));
+console.log(localStorage.getItem('userId'));
+console.log(localStorage.getItem('token'));
