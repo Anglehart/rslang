@@ -1,3 +1,10 @@
+import {
+  addImg, addTextExampleInCard, addTextExampleTranslateInCard, addWordMeaningInCard, addWordMeaningTranslateInCard, addWordTranslateInCard, addWordTranscriptionInCard,
+  addInputInTextExample, addInputInWordMeaning,
+} from './layout/scripts/add-fields';
+import addMultiColorResult from './layout/scripts/multi-color-result';
+import checkInput from './layout/scripts/check-word';
+
 
 // let token;
 // let userId;
@@ -147,71 +154,10 @@ Statistic
 */
 // ------------------------
 
+// eslint-disable-next-line max-len
 // let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5Mjg0MjA3NywiZXhwIjoxNTkyODU2NDc3fQ.2E9iVX-64pS-AK7XzM2li53S8PXrgITd9XPyXwE1y5M';
 // let userId;
 
-function addImg(wordInfo) {
-  const imageWrapper = document.querySelector('.card_img');
-  const img = document.createElement('img');
-  img.src = `https://raw.githubusercontent.com/svirskia/rslang-data/master/${wordInfo.image}`;
-
-  imageWrapper.append(img);
-}
-
-function addTextExampleInCard(wordInfo) {
-  const cardPhrase = document.querySelector('.card_phrase');
-  cardPhrase.innerHTML = wordInfo.textExample;
-}
-
-function addTextExampleTranslateInCard(wordInfo) {
-  const cardTranslate = document.querySelector('.card_phrase-translate');
-  cardTranslate.textContent = wordInfo.textExampleTranslate;
-}
-
-function addWordMeaningInCard(wordInfo) {
-  const cardMeaning = document.querySelector('.card_meaning');
-  cardMeaning.innerHTML = wordInfo.textMeaning;
-}
-
-function addWordMeaningTranslateInCard(wordInfo) {
-  const cardMeaningTranslate = document.querySelector('.card_meaning-translate');
-  cardMeaningTranslate.textContent = wordInfo.textMeaningTranslate;
-}
-
-function addWordTranslateInCard(wordInfo) {
-  const wordTranslate = document.querySelector('.card_word-translate');
-  wordTranslate.textContent = wordInfo.wordTranslate;
-}
-
-function addWordTranscriptionInCard(wordInfo) {
-  const wordTranscription = document.querySelector('.card_word-transcription');
-  wordTranscription.textContent = wordInfo.transcription;
-}
-
-
-function addInputInTextExample(length) {
-  const cardPhrase = document.querySelector('.card_phrase b');
-
-  cardPhrase.textContent = '';
-
-  const input = document.createElement('input');
-  input.style.width = `${length / 2 + 0.5}rem`;
-  input.style.fontSize = '1em';
-  cardPhrase.append(input);
-
-  // const input = document.createElement('div');
-  // input.setAttribute('contenteditable', true);
-  // cardPhrase.append(input);
-}
-
-function addInputInWordMeaning() {
-  const cardMeaning = document.querySelector('.card_meaning i');
-  cardMeaning.textContent = '';
-  // console.log(cardMeaning);
-
-  const input = document.createElement('input');
-  cardMeaning.append(input);
-}
 
 const getWords = async (words) => {
   const randomGroup = Math.floor(Math.random() * 6);
@@ -240,8 +186,13 @@ const getWords = async (words) => {
 
   addTextExampleInCard(content[randomWord]);
   addInputInTextExample(wordLength);
+  // checkInput();
 
   addTextExampleTranslateInCard(content[randomWord]);
+
+  addMultiColorResult();
+
+  checkInput(word);
 
   addWordMeaningInCard(content[randomWord]);
   addInputInWordMeaning();
