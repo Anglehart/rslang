@@ -8,20 +8,20 @@
   <title>RSLang</title>
 </head>
 <body>
-  <div class="modal_background">
+  <div id="modal-background" class="modal_background">
     <div id="modal_window" class="modal_window">
-        <input id="tab-sign-in" type="radio" name="tab" class="sign-in" checked><label for="tab-sign-in" class="tab">Sign In</label>
-        <input id="tab-sign-up" type="radio" name="tab" class="sign-up"><label for="tab-sign-up" class="tab">Sign Up</label>
+        <input id="tab-sign-in" type="radio" name="tab" class="sign-in" checked><label for="tab-sign-in" class="tab">Вход</label>
+        <input id="tab-sign-up" type="radio" name="tab" class="sign-up"><label for="tab-sign-up" class="tab">Регистрация</label>
         <div class="login-card">
           <form action="https://afternoon-falls-25894.herokuapp.com/" id="form-sign-in" class="sign-in-card" name="form-sign-in" method="post">
             <div id="email-group-sign-in" class="group">
-              <label for="pass" class="label">Usermail</label>
-              <input id="email-sign-in" type="email" name = "email" class="input" autocomlete="off" autofocus required>
+              <label for="pass" class="label">Электронная почта</label>
+              <input id="email-sign-in" type="email" name = "email" class="input" autocomplete="off" autofocus required>
               <small id="alert-email-sign-in" class="small hint"></small>
             </div>
             <div class="group">
-              <label for="pass" class="label">Password</label>
-              <input id="sign-in-password" name="pass" type="password" class="input" autocomlete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
+              <label for="pass" class="label">Пароль</label>
+              <input id="sign-in-password" name="pass" type="password" class="input" autocomplete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
               pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[+-_@$!%*?&#.,;:])[A-Za-z\d+-_@$!%*?&#.,;:]{8,}$/" required>
               <div class="form-toggler">
                 <i id="form-icon" class="fas fa-eye form-icon"></i>
@@ -31,18 +31,18 @@
             <small id="alert-password-sign-in" class="small"></small>
             <div id="sign-in-answer" class="form-answer"></div>
             <div class="group">
-              <input id="sign-in" type="submit" class="button" value="Sign In">
+              <input id="sign-in" type="submit" class="button" value="Войти">
             </div>
           </form>
           <form action="https://afternoon-falls-25894.herokuapp.com/users" id="form-sign-up" class="sign-up-card" name="form-sign-up" method="post">
             <div class="group">
-              <label for="pass" class="label">Email Address</label>
-              <input id="email-sign-up" type="email" name = "email" class="input email-input" autocomlete="off" required>
+              <label for="pass" class="label">Электронная почта</label>
+              <input id="email-sign-up" type="email" name = "email" class="input email-input" autocomplete="off" required>
               <small id="alert-email-sign-up" class="small"></small>
             </div>
             <div class="group">
-              <label for="pass" class="label">Password</label>
-              <input id="sign-up-password" type="password" class="input" autocomlete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
+              <label for="pass" class="label">Пароль</label>
+              <input id="sign-up-password" type="password" class="input" autocomplete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
               pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[+-_@$!%*?&#.,;:])[A-Za-z\d+-_@$!%*?&#.,;:]{8,}$/" required>
               <div class="form-toggler">
                 <i id="form-icon" class="fas fa-eye form-icon"></i>
@@ -51,19 +51,19 @@
             </div>
             <small id="alert-password-sign-up" class="small"></small>
             <div class="group">
-              <label for="pass" class="label">Confirm password</label>
-              <input id="password-confirm" type="password" class="input" autocomlete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
+              <label for="pass" class="label">Подтверждение пароля</label>
+              <input id="password-confirm" type="password" class="input" autocomplete="off" title="Must contain minimum 8 characters, at least one number,one uppercase and lowercase letter and one special character"
               pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[+-_@$!%*?&#.,;:])[A-Za-z\d+-_@$!%*?&#.,;:]{8,}$/" required>
               <small id="alert-confirm-password" class="small"></small>
             </div>
             <div id="sign-up-answer" class="form-answer"></div>
 
             <div class="group">
-              <input id="sign-up" type="submit" class="button" value="Sign Up">
+              <input id="sign-up" type="submit" class="button" value="Регистрация">
             </div>
             <div class="hr"></div>
             <div class="foot-lnk">
-              <label for="tab-sign-in">Already Member?</a>
+              <label for="tab-sign-in">Уже зарегестрированы?</a>
             </div>
           </form>
         </div>

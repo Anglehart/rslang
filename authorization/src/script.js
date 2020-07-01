@@ -18,15 +18,15 @@ const passwordConfirm = document.getElementById('password-confirm');
 const hints = document.querySelectorAll('small');
 
 const responsesSignUp = {
-  422: 'incorrect e-mail or password',
-  200: 'successful creation',
-  417: 'current email is already used',
+  422: 'Неверный адрес электронной почты или пароль',
+  200: 'Вы успешно зарегестрированы',
+  417: 'Текущий адрес электронной почты уже используется',
 };
 
 const responsesSignIn = {
-  200: 'Successful operation',
+  200: 'Вы успешно зашли в систему',
   401: 'Access token is missing or invalid',
-  404: 'User not found',
+  404: 'Пользователь не найден',
 };
 
 function resetForm(formAnswer, form) {
@@ -60,7 +60,7 @@ function createCheckmarkIcon(parent) {
 
 emailSignIn.onblur = function () {
   if (!validateEmail(emailSignIn.value)) {
-    document.getElementById('alert-email-sign-in').innerHTML = 'Invalid email address!';
+    document.getElementById('alert-email-sign-in').innerHTML = 'Неверный адрес электронной почты';
     if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
@@ -74,7 +74,7 @@ emailSignIn.onblur = function () {
 
 passwordSignIn.onblur = function () {
   if (!validatePassword(passwordSignIn.value)) {
-    document.getElementById('alert-password-sign-in').innerHTML = 'Invalid password';
+    document.getElementById('alert-password-sign-in').innerHTML = 'Неверный пароль';
     if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
@@ -89,7 +89,7 @@ passwordSignIn.onblur = function () {
 emailSignUp.onblur = function () {
   const status = emailSignUp.value;
   if (!validateEmail(status)) {
-    document.getElementById('alert-email-sign-up').innerHTML = 'Invalid email address!';
+    document.getElementById('alert-email-sign-up').innerHTML = 'Неверный адрес электронной почты';
     if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
@@ -103,7 +103,7 @@ emailSignUp.onblur = function () {
 
 passwordSignUp.onblur = function () {
   if (!validatePassword(passwordSignUp.value)) {
-    document.getElementById('alert-password-sign-up').innerHTML = 'Invalid password';
+    document.getElementById('alert-password-sign-up').innerHTML = 'Неверный пароль';
     if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
@@ -131,7 +131,7 @@ passwordConfirm.onblur = function (event) {
     transformPassword(togglerSignUp, passwordSignUp);
     transformPassword(togglerSignUp, passwordConfirm);
   } else if (passwordSignUp.value !== passwordConfirm.value) {
-    document.getElementById('alert-confirm-password').innerHTML = "Passwords don't match";
+    document.getElementById('alert-confirm-password').innerHTML = 'Пароли не совпадают';
     if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
