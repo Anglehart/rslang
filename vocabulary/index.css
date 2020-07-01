@@ -26,7 +26,7 @@
 
 .tabs-row {
   display: flex;
-  width: 768px;
+  width: 800px;
   justify-content: space-around;
 }
 
@@ -41,6 +41,18 @@
 .tab--link:hover {
   cursor: pointer;
   background: #1119;
+}
+
+.tab--button{
+  padding: 10px 20px;
+  /* height: ; */
+  margin: 0% 10% ;
+  width: 80%;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  background: grey;
+  color: rgb(241, 232, 232);
 }
 
 .main {
@@ -63,4 +75,8 @@
 
 .active-bg {
   background: #0000;
+}
+
+.none {
+  display: none;
 }

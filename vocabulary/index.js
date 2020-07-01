@@ -1,6 +1,18 @@
 function changeTable(color) {
-  // here request to dataBase with userID and with rules for words
+  // here request to dataBase with userID and rules for words
   console.log(`change to ${color}`);
+
+  const del = document.querySelector('div.del-button');
+  const add = document.querySelector('div.add-button');
+
+  if (color === 'red') {
+    del.classList.add('none');
+    add.classList.remove('none');
+  }
+  else if (color === 'green' || 'blue') {
+    del.classList.remove('none');
+    add.classList.add('none');
+  }
 }
 
 function change() {
@@ -10,7 +22,7 @@ function change() {
   const change_on = change_on_element.getAttribute('data-mode_color')
   const main = document.querySelector('main.main');
 
-  if (active_color !== change_on) {
+  if (active_color !== change_on && event.target.nodeName === 'DIV') {
     active_color_element.classList.remove('active-bg');
     change_on_element.classList.add('active-bg');
     main.classList = (`main bg-${change_on}`);
