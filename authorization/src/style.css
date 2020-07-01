@@ -4,6 +4,7 @@ body{
 	background:#c8c8c8;
 	font:600 16px/18px 'Open Sans',sans-serif;
 }
+
 *,:after,:before{box-sizing:border-box}
 .clearfix:after,.clearfix:before{content:'';display:table}
 .clearfix:after{clear:both;display:block}
@@ -17,6 +18,7 @@ a{color:inherit;text-decoration:none}
 	position:relative;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
+
 .modal_window{
 	width:100%;
 	height:100%;
@@ -24,6 +26,7 @@ a{color:inherit;text-decoration:none}
 	padding:90px 70px 50px 70px;
 	background:rgba(45, 60, 100, 0.9);
 }
+
 .modal_window .sign-in-card,
 .modal_window .sign-up-card{
 	top:0;
@@ -35,16 +38,19 @@ a{color:inherit;text-decoration:none}
 	backface-visibility:hidden;
 	transition:all .4s linear;
 }
+
 .modal_window .sign-in,
 .modal_window .sign-up,
 .login-card .group .check{
 	display:none;
 }
+
 .modal_window .tab,
 .login-card .group .label,
 .login-card .group .button{
 	text-transform:uppercase;
 }
+
 .modal_window .tab{
 	font-size:22px;
 	margin-right:15px;
@@ -53,20 +59,24 @@ a{color:inherit;text-decoration:none}
 	display:inline-block;
 	border-bottom:2px solid transparent;
 }
+
 .modal_window .sign-in:checked + .tab,
 .modal_window .sign-up:checked + .tab{
 	color:#fff;
 	border-color:#1161ee;
 }
+
 .login-card{
 	min-height:345px;
 	position:relative;
 	perspective:1000px;
 	transform-style:preserve-3d;
 }
+
 .login-card .group{
 	margin-bottom:15px;
 }
+
 .login-card .group .label,
 .login-card .group .input,
 .login-card .group .button{
@@ -74,6 +84,7 @@ a{color:inherit;text-decoration:none}
 	color:#fff;
 	display:block;
 }
+
 .login-card .group .input,
 .login-card .group .button{
 	border:none;
@@ -81,10 +92,12 @@ a{color:inherit;text-decoration:none}
 	border-radius:25px;
 	background:rgba(255,255,255,.1);
 }
+
 .login-card .group .label{
 	color:#aaa;
 	font-size:12px;
 }
+
 .login-card .group .button{
 	background:#1161ee;
   padding-top: 10px;
@@ -99,6 +112,7 @@ a{color:inherit;text-decoration:none}
 	display:inline-block;
 	background:rgba(255,255,255,.1);
 }
+
 .login-card .group label .icon:before,
 .login-card .group label .icon:after{
 	content:'';
@@ -108,38 +122,48 @@ a{color:inherit;text-decoration:none}
 	position:absolute;
 	transition:all .2s ease-in-out 0s;
 }
+
 .login-card .group label .icon:before{
 	left:3px;
 	width:5px;
 	bottom:6px;
 	transform:scale(0) rotate(0);
 }
+
 .login-card .group label .icon:after{
 	top:6px;
 	right:0;
 	transform:scale(0) rotate(0);
 }
+
 .login-card .group .check:checked + label{
 	color:#fff;
 }
+
 .login-card .group .check:checked + label .icon{
 	background:#1161ee;
 }
+
 .login-card .group .check:checked + label .icon:before{
 	transform:scale(1) rotate(45deg);
 }
+
 .login-card .group .check:checked + label .icon:after{
 	transform:scale(1) rotate(-45deg);
 }
+
 .modal_window .sign-in:checked + .tab + .sign-up + .tab + .login-card .sign-in-card{
 	transform:rotate(0);
 }
+
 .modal_window .sign-up:checked + .tab + .login-card .sign-up-card{
 	transform:rotate(0);
 }
+
 .group{
   position: relative;
 }
+
 .form-toggler,
 .form-icon,
 .form-checkbox {
@@ -149,6 +173,7 @@ a{color:inherit;text-decoration:none}
   left: 3px;
   cursor: pointer;
 }
+
 .form-toggler {
   cursor: pointer;
   right: 15px;
@@ -156,6 +181,7 @@ a{color:inherit;text-decoration:none}
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
 .form-checkbox {
   opacity: 0;
   filter: alpha(opacity=0);
@@ -164,24 +190,29 @@ a{color:inherit;text-decoration:none}
   border: none;
   margin: 0;
 }
+
 .form-answer {
 	padding-bottom: 15px;
   height: 33px;
   color: red;
 }
+
 .hr{
 	height:2px;
 	margin:60px 0 50px 0;
 	background:rgba(255,255,255,.2);
 }
+
 .foot-lnk{
 	text-align:center;
 }
+
 .button:hover {
 	background: #fff;
 	border: 1px solid #fff;
 	color: #232323;
 }
+
 .complete{
 	/* visibility: hidden; */
   position: absolute;
@@ -189,9 +220,11 @@ a{color:inherit;text-decoration:none}
   right: 3%;
   color: #BEEE62;
 }
+
 small {
 	color: red
 }
+
 .active {
   visibility: visible;
 }
