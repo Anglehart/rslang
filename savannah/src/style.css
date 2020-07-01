@@ -12,8 +12,10 @@ body {
   height: 100vh;
   background-repeat: no-repeat;
   background-position-x: center;
+  background-position-y: 100%;
+  min-height: calc(100vh - 20px);
   transition: all 1s ease;
-  background-image: url(images/background.png);
+  background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, 0.4)),url(images/nature.jpg);
   position: relative;
   overflow: hidden;
 }
@@ -219,6 +221,7 @@ body {
   letter-spacing: 1px;
   height: 100%;
   width: 100%;
+  color: white;
 }
 
 .answers {

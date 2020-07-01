@@ -1,7 +1,7 @@
 const timeForAnswer = 5000; // 5 sec
 
 class Savannah {
-  constructor () {
+  constructor () {  
     this.createContainer();
     this.createMainPage();
     this.createGamePage();
@@ -97,20 +97,34 @@ class Savannah {
         this.checkAnswer(selectedTranslation);
       }
     });
-    // this.gamePage.addEventListener('keypress', (event) => {
-    //   const keyName = event.key;
-    //   const target = event.target;
-    //   if (keyName === '1')
-    // })
-  }
 
+    document.addEventListener('keypress', (event) => {
+      if (!this.gameStarted || this.answerHandled) return;
+      const keyName = event.key;
+      switch (keyName) {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+          Array.from(this.answers.querySelectorAll('.translation')).forEach((translation) => {
+            const selectedTranslation = translation;
+            if (keyName === translation.innerText.charAt(0)) {
+              this.answerHandled = true;
+              clearInterval(this.timer);
+              this.checkAnswer(selectedTranslation);
+            }
+          })
+      }
+    });
+  }
+  
   checkAnswer(selectedTranslation) {
     const translationWord = selectedTranslation.querySelector('.translationWord');
     const word = {word: this.word.innerText, translation: this.word.getAttribute('data')};
     if (translationWord.innerText === this.word.getAttribute('data')) {
       selectedTranslation.classList.add('active');
       new Audio('audio/correct.mp3').play();
-      this.backgroundPosition -= 10;
+      this.backgroundPosition -= 5;
       this.container.style.backgroundPositionY = `${this.backgroundPosition}%`;
       this.gameStatistics.success.push(word);
       //move background
@@ -152,7 +166,6 @@ class Savannah {
       heartIcon.className = 'fa-2x fas fa-heart';
       heartIcon.setAttribute('data', i);
       this.iconsContainer.append(heartIcon);
-      
     }
   }
 
@@ -208,7 +221,7 @@ class Savannah {
     this.description.append(this.descriptionTitle);
 
     this.textTitle = document.createElement('span');
-    this.textTitle.innerText = 'саванна';
+    this.textTitle.innerText = 'Savannah';
     this.descriptionTitle.append(this.textTitle);
 
     this.descriptionText = document.createElement('div');
@@ -216,18 +229,21 @@ class Savannah {
     this.description.append(this.descriptionText);
 
     this.text = document.createElement('span');
-    this.text.innerText = `Тренировка Саванна развивает словарный запас.
-    Чем больше слов ты знаешь, тем больше очков опыта получишь.`;
+    this.text.innerText = `Savannah training develops vocabulary.
+    You need to choose the translation of the word`;
     this.descriptionText.append(this.text);
 
     this.startButton = document.createElement('button');
     this.startButton.className = 'start-button';
     this.startButton.id = 'startButton';
     this.startButton.type = 'button';
-    this.startButton.innerHTML = 'Начать';
+    this.startButton.innerHTML = 'Start';
     this.description.append(this.startButton);
-
-    this.startButton.addEventListener('click', () => this.startClicked());
+    this.startButtonClicked = false;
+    this.startButton.addEventListener('click', () => {
+      this.startButtonClicked = true;
+      this.startClicked();
+    });
     this.levelButtons.addEventListener('click', (event) => {
       Array.from(this.levelButtons.children).forEach((levelButton) => {
         levelButton.classList.remove('active');
@@ -245,7 +261,7 @@ class Savannah {
 
     this.finalTitle = document.createElement('div');
     this.finalTitle.className = 'final-title';
-    this.finalTitle.innerText = 'В этот раз не получилось, но продолжай тренироваться!';
+    this.finalTitle.innerText = '';
     this.finalPage.append(this.finalTitle);
 
     this.finalContainer = document.createElement('div');
@@ -253,13 +269,13 @@ class Savannah {
     this.finalPage.append(this.finalContainer);
 
     this.continueButton = document.createElement('button');
-    this.continueButton.innerText = 'Начать игру заново'; 
+    this.continueButton.innerText = 'Restart'; 
     this.continueButton.id = 'continueButton';
     this.continueButton.className = 'continue-button';
     this.finalPage.append(this.continueButton);
 
     this.homePageButton = document.createElement('button');
-    this.homePageButton.innerText = 'Вернуться на главную';
+    this.homePageButton.innerText = 'Choose a game';
     this.homePageButton.id = 'homePageButton';
     this.homePageButton.className = 'continue-button';
     this.finalPage.append(this.homePageButton);
@@ -300,7 +316,7 @@ class Savannah {
           this.finalPage.style.display = 'none';
           this.mainPage.style.display = 'block';
         } else if (event.target === this.continueButton) {
-          this.finalPage.style.display = 'none';
+          this.clearPreviousDataGame();
           //add countdown
           setTimeout(() => this.mainPage.style.display = 'block', 1000);
           
@@ -388,11 +404,32 @@ class Savannah {
     setTimeout(() => this.startNextRound(), 3000);
   }
 
+  clearPreviousDataGame() {
+  this.gameStatistics.fail = [];
+  this.gameStatistics.success = [];
+  this.finalPage.remove();
+  this.countdownContainer.remove(); 
+  this.current_count = 3;
+  clearInterval(this.count);
+    Array.from(this.iconsContainer.children).forEach((icon) => {
+      icon.classList.remove('fail-icon');
+    });
+    this.countRoundsGame = 0;
+    this.backgroundPosition = 100;
+    this.container.style.backgroundPositionY = `${this.backgroundPosition}%`;
+}
+
   startNextRound() {
-    if (!this.iconsContainer.children[4].closest('.fail-icon') || !this.countRoundsGame === 20) {
+    if (this.iconsContainer.children[4].closest('.fail-icon') || this.countRoundsGame === 10 ) {
+      this.gameStarted = false;
+      clearInterval(this.timer);
+      this.gamePage.style.display = 'none';
+      setTimeout(() => this.createFinalPage(), 1000);
+    } else {
+      this.gameStarted = true;
       this.getWords()
       .then(() => {
-        this.countdownContainer.remove();
+        // this.countdownContainer.remove();
         // this.image.remove();
         this.mainPage.style.display = 'none';
         this.gamePage.style.display = 'block';
@@ -407,10 +444,6 @@ class Savannah {
         this.countRoundsGame += 1;
         console.log(this.countRoundsGame);
       });
-    } else {
-      clearInterval(this.timer);
-      this.gamePage.style.display = 'none';
-      setTimeout(() => this.createFinalPage(), 1000);
     }
   }
   
@@ -491,7 +524,6 @@ class Savannah {
   getContainer() {
     return this.container;
   }
-  
 }
 
 export default Savannah;
