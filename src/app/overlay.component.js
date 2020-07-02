@@ -14,22 +14,26 @@ class Overlay extends Component {
     this.showIntro();
     document.querySelector('.intro-btn').addEventListener('click', () => { this.hideIntro(); });
     document.querySelector('.return').addEventListener('click', () => { this.hideResults(); });
-    document.querySelector('.new-game').addEventListener('click', () => { 
-      const curPage = storageService.getPage();
-      const curLvl = storageService.getLevel();
-      if (curPage === '10' && curLvl !== '6') {
-        storageService.setLevel(Number(curLvl) + 1);
-        storageService.setPage('1');
-      } else if (curPage === '10' && curLvl === '6') {
-        storageService.setPage('1');
-        storageService.setLevel('1');
-      } else {
-        storageService.setPage(Number(curPage) + 1);
-      }
-      levels.startNewGame();
-      this.hideResults();
-      this.clearResults();
-    });
+    document.querySelector('.new-game').addEventListener('click', () => { this.newGame(); });
+  }
+
+  newGame() {
+    const curPage = storageService.getPage();
+    const curLvl = storageService.getLevel();
+    if (curPage === '10' && curLvl !== '6') {
+      storageService.setLevel(Number(curLvl) + 1);
+      storageService.setPage('1');
+    } else if (curPage === '10' && curLvl === '6') {
+      storageService.setPage('1');
+      storageService.setLevel('1');
+    } else {
+      storageService.setPage(Number(curPage) + 1);
+    }
+    this.hideResults();
+    this.clearResults();
+    this.iKnow = [];
+    this.iDontKnow = [];
+    levels.startNewGame();
   }
 
   drawCorrect(word) {
@@ -81,7 +85,7 @@ class Overlay extends Component {
   }
   clearResults() {
     document.querySelectorAll('.statsWord').forEach((item) => {
-      item.remove()
+      item.remove();
     });
   }
 }
