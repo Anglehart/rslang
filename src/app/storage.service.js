@@ -14,6 +14,19 @@ class StorageService {
   getPage() {
     return localStorage.getItem('page');
   }
+  
+  getUserId() {
+    return localStorage.getItem('userId');
+  }
+  getToken() {
+    return localStorage.getItem('token');
+  }
+  setSound(onOff){
+    localStorage.setItem('sound', onOff);
+  }
+  getSound(){
+    return localStorage.getItem('sound');
+  }
 
   gameStartStop() {
     if (this.gameStatus() === 'false') {

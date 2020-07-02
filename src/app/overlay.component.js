@@ -1,5 +1,7 @@
 import { Component } from './core.component';
 import puzzle from './puzzle.component';
+import levels from './levels.component';
+import storageService from './storage.service';
 
 class Overlay extends Component {
   constructor(config){
@@ -11,13 +13,23 @@ class Overlay extends Component {
   initComponent() {
     this.showIntro();
     document.querySelector('.intro-btn').addEventListener('click', () => { this.hideIntro(); });
-    // document.querySelector('.return').addEventListener('click', () => { this.hideResults(); });
-    //document.querySelectorAll('.new-game').forEach((item) => {
-    //  item.addEventListener('click', () => {
-    //    this.hideResults();
-    //    wordsComponent.newGame();
-    //  });
-    //});
+    document.querySelector('.return').addEventListener('click', () => { this.hideResults(); });
+    document.querySelector('.new-game').addEventListener('click', () => { 
+      const curPage = storageService.getPage();
+      const curLvl = storageService.getLevel();
+      if (curPage === '10' && curLvl !== '6') {
+        storageService.setLevel(Number(curLvl) + 1);
+        storageService.setPage('1');
+      } else if (curPage === '10' && curLvl === '6') {
+        storageService.setPage('1');
+        storageService.setLevel('1');
+      } else {
+        storageService.setPage(Number(curPage) + 1);
+      }
+      levels.startNewGame();
+      this.hideResults();
+      this.clearResults();
+    });
   }
 
   drawCorrect(word) {
@@ -66,6 +78,11 @@ class Overlay extends Component {
   hideResults() {
     document.querySelector('main').classList.remove('disable');
     document.querySelector('.results').classList.add('disable');
+  }
+  clearResults() {
+    document.querySelectorAll('.statsWord').forEach((item) => {
+      item.remove()
+    });
   }
 }
 

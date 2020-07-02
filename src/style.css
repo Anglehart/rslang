@@ -61,6 +61,7 @@ h1 {
   transition: .15s;
   box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 2px 4px 0 rgba(14,30,37,.12);
   cursor: pointer;
+  margin: 0 20px;
 }
 .level-button, .start-button, .page-button {
   text-align: center;
@@ -86,6 +87,7 @@ h1 {
 .levels-wrapper {
   width: 1200px;
   margin: auto;
+  display: flex;
 }
 .level-list, .page-list {
   list-style: none;
@@ -99,6 +101,7 @@ h1 {
   position: absolute;
   z-index: 1;
   border-radius: 4px;
+  margin: 0 20px;
 }
 .level-list {
   height: 204px;
@@ -118,7 +121,7 @@ h1 {
   background: #e1f5fe;
 }
 .puzzle-wrapper {
-  height: 600px;
+  height: 700px;
   background-size: cover;
 }
 .canvas-item {
@@ -149,6 +152,7 @@ h1 {
   display: flex;
 }
 .div-item {
+  background-color: gray;
   cursor: pointer;
   color: #fff;
   box-sizing: border-box;
@@ -157,6 +161,9 @@ h1 {
   line-height: 60px;
   -webkit-clip-path: polygon(calc(100% - 20px) 0, calc(100% - 20px) 40%, 100% 30%, 100% 70%, calc(100% - 20px) 60%, calc(100% - 20px) 100%, 0% 100%, 0 60%, 20px 70%, 20px 30%, 0 40%, 0% 0%);
   clip-path: polygon(calc(100% - 20px) 0, calc(100% - 20px) 40%, 100% 30%, 100% 70%, calc(100% - 20px) 60%, calc(100% - 20px) 100%, 0% 100%, 0 calc(60% + 1px), 20px calc(70% + 1px), 20px calc(30% - 1px), 0 calc(40% - 1px), 0% 0%);
+}
+.hide-background {
+  background-image: none !important;
 }
 .correct-word {
   background: #3f8c3f !important;
@@ -178,6 +185,12 @@ h1 {
   margin-top: 20px;
   height: 61px;
   background: aliceblue;
+}
+.game-prepare p {
+  text-align: center;
+  font-size: 22px;
+  line-height: 60px;
+  color: #555;
 }
 .game-field {
   height: 609px;
@@ -279,6 +292,62 @@ h1 {
 }
 .warning {
   display: none;
+}
+.tips-field {
+  width: 1200px;
+  height: 90px;
+  margin: auto;
+}
+.translate-tip {
+  text-align: center;
+  font-style: italic;
+  color: #555;
+}
+.audio-tip {
+  height: 30px;
+  width: 30px;
+  margin: auto;
+  background: url(./app/assets/speaker.png);
+  background-position: center;
+  cursor: pointer;
+}
+.audio-tip-wrapper {
+  height: 30px;
+}
+.tip {
+  width: 40px;
+  height: 40px;
+  background-color: #c2c2c2;
+      background-position-x: 0%;
+      background-position-y: 0%;
+      background-repeat: repeat;
+      background-image: none;
+  margin: 1px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tips-page {
+  display: flex;
+  justify-content: right;
+  margin: 20px 0;
+  width: 50%;
+}
+.speaker-button {
+  background-image: url(./app/assets/speaker.png);
+}
+.list-button {
+  background-image: url(./app/assets/list.png);
+}
+.picture-button {
+  background-image: url(./app/assets/picture.png);
+}
+.melody-button {
+  background-image: url(./app/assets/melody.png);
+}
+.active-tip {
+  background-color: #d7925b;
 }
 @media (max-width: 1220px) {
   .warning {
