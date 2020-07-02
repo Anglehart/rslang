@@ -16,6 +16,10 @@ const signInFormAnswer = document.getElementById('sign-in-answer');
 const signUpFormAnswer = document.getElementById('sign-up-answer');
 const passwordConfirm = document.getElementById('password-confirm');
 const hints = document.querySelectorAll('small');
+const alertEmailSignIn = document.getElementById('alert-email-sign-in');
+const alertPasswordSignIn = document.getElementById('alert-password-sign-in');
+const alertEmailSignUp = document.getElementById('alert-email-sign-up');
+const alertPasswordSignUp = document.getElementById('alert-password-sign-up');
 
 const responsesSignUp = {
   422: 'Неверный адрес электронной почты или пароль',
@@ -57,63 +61,59 @@ function createCheckmarkIcon(parent) {
   checkmarkIcon.setAttribute('aria-hidden', 'true');
   parent.after(checkmarkIcon);
 }
-
-emailSignIn.onblur = function () {
-  if (!validateEmail(emailSignIn.value)) {
-    document.getElementById('alert-email-sign-in').innerHTML = 'Неверный адрес электронной почты';
-    if (checkmarkIcon) {
-      checkmarkIcon.remove();
-    }
-    buttonSignIn.disabled = false;
-  } else {
-    document.getElementById('alert-email-sign-in').innerHTML = '';
-    createCheckmarkIcon(emailSignIn);
-    buttonSignIn.disabled = true;
-  }
+const answerValidation = {
+  empty: 'Введите адрес электронной почты',
+  invalid: 'Неверный адрес электронной почты',
+  valid: '',
 };
-
-passwordSignIn.onblur = function () {
-  if (!validatePassword(passwordSignIn.value)) {
-    document.getElementById('alert-password-sign-in').innerHTML = 'Неверный пароль';
-    if (checkmarkIcon) {
-      checkmarkIcon.remove();
-    }
-    buttonSignIn.disabled = true;
-  } else {
-    document.getElementById('alert-password-sign-in').innerHTML = '';
-    createCheckmarkIcon(passwordSignIn);
-    buttonSignIn.disabled = false;
+function showInvalidData(inputAlert, submit, invalidText) {
+  inputAlert.innerHTML = invalidText;
+  if (checkmarkIcon) {
+    checkmarkIcon.remove();
   }
-};
+  submit.disabled = true;
+}
 
-emailSignUp.onblur = function () {
-  const status = emailSignUp.value;
-  if (!validateEmail(status)) {
-    document.getElementById('alert-email-sign-up').innerHTML = 'Неверный адрес электронной почты';
-    if (checkmarkIcon) {
-      checkmarkIcon.remove();
-    }
-    buttonSignUp.disabled = true;
+function showValidData(inputAlert, submit, validText) {
+  inputAlert.innerHTML = validText;
+  submit.disabled = false;
+}
+
+function showEmailAlert(input, inputAlert, submit, validText, invalidText) {
+  if (!validateEmail(input.value)) {
+    showInvalidData(inputAlert, submit, invalidText);
   } else {
-    document.getElementById('alert-email-sign-up').innerHTML = '';
-    createCheckmarkIcon(emailSignUp);
-    buttonSignUp.disabled = false;
+    showValidData(inputAlert, submit, validText);
+    createCheckmarkIcon(input);
   }
-};
+}
+function showPasswordAlert(input, inputAlert, submit, validText, invalidText) {
+  if (!validatePassword(input.value)) {
+    showInvalidData(inputAlert, submit, invalidText);
+  } else {
+    showValidData(inputAlert, submit, validText);
+    createCheckmarkIcon(input);
+  }
+}
 
-passwordSignUp.onblur = function () {
-  if (!validatePassword(passwordSignUp.value)) {
-    document.getElementById('alert-password-sign-up').innerHTML = 'Неверный пароль';
+function checkMatch() {
+  if (passwordSignUp.value !== passwordConfirm.value) {
+    document.getElementById('alert-confirm-password').innerHTML = 'Пароли не совпадают';
     if (checkmarkIcon) {
       checkmarkIcon.remove();
     }
     buttonSignUp.disabled = true;
   } else {
-    document.getElementById('alert-password-sign-up').innerHTML = '';
-    createCheckmarkIcon(passwordSignUp);
-    buttonSignUp.disabled = false;
+    document.getElementById('alert-confirm-password').innerHTML = '';
+    createCheckmarkIcon(passwordConfirm);
   }
-};
+}
+
+emailSignIn.addEventListener('blur', () => showEmailAlert(emailSignIn, alertEmailSignIn, buttonSignIn, answerValidation.valid, answerValidation.invalid));
+passwordSignIn.addEventListener('blur', () => showPasswordAlert(passwordSignIn, alertPasswordSignIn, buttonSignIn, answerValidation.valid, answerValidation.invalid));
+emailSignUp.addEventListener('blur', () => showEmailAlert(emailSignUp, alertEmailSignUp, buttonSignUp, answerValidation.valid, answerValidation.invalid));
+passwordSignUp.addEventListener('blur', () => showPasswordAlert(passwordSignUp, alertPasswordSignUp, buttonSignUp, answerValidation.valid, answerValidation.invalid));
+passwordConfirm.addEventListener('blur', () => checkMatch());
 
 function transformPassword(toggler, password) {
   if (toggler.checked) {
@@ -125,22 +125,6 @@ function transformPassword(toggler, password) {
     element.classList.toggle('fa-eye-slash');
   });
 }
-
-passwordConfirm.onblur = function (event) {
-  if (event.target === iconEye) {
-    transformPassword(togglerSignUp, passwordSignUp);
-    transformPassword(togglerSignUp, passwordConfirm);
-  } else if (passwordSignUp.value !== passwordConfirm.value) {
-    document.getElementById('alert-confirm-password').innerHTML = 'Пароли не совпадают';
-    if (checkmarkIcon) {
-      checkmarkIcon.remove();
-    }
-    buttonSignUp.disabled = true;
-  } else {
-    document.getElementById('alert-confirm-password').innerHTML = '';
-    createCheckmarkIcon(passwordConfirm);
-  }
-};
 
 function answerSignUpForm(value) {
   signUpFormAnswer.innerText = value;
@@ -214,10 +198,10 @@ modalWindow.addEventListener('click', (event) => {
     emailSignUp.focus();
   } else if (event.target === buttonSignUp) {
     event.preventDefault();
-    createUser({ email: `${emailSignUp.value}`, password: `${passwordSignUp.value}` });
+    createUser({ email: emailSignUp.value, password: passwordSignUp.value });
   } else if (event.target === buttonSignIn) {
     event.preventDefault();
-    loginUser({ email: `${emailSignIn.value}`, password: `${passwordSignIn.value}` });
+    loginUser({ email: emailSignIn.value, password: passwordSignIn.value });
   }
 });
 console.log(localStorage.getItem('email'));
