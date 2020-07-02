@@ -240,6 +240,7 @@ class Savannah {
     this.startButton.innerHTML = 'Start';
     this.description.append(this.startButton);
     this.startButtonClicked = false;
+    this.level;
     this.startButton.addEventListener('click', () => {
       this.startButtonClicked = true;
       this.startClicked();
@@ -250,6 +251,8 @@ class Savannah {
       });
       if (event.target.closest('li')){
         event.target.classList.add('active');
+        this.level = +event.target.innerText - 1;;
+        console.log(this.level);
       }
     });
   }
@@ -451,10 +454,11 @@ class Savannah {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
   }
-
+ 
   getWords() {
     const page = this.randomInteger(0, 29);
-    const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=0`;
+    const group = this.level;
+    const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
     return fetch(url)
       .then((res) => res.json())
       .then((data) => {
