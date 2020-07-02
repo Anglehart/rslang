@@ -19,7 +19,6 @@ class Puzzle extends Component {
   }
 
   createBackground(words, image) {
-    console.log(image);
     this.currentRound = 1;
     this.wordsObjects = words;
     if (words.length < 10) this.allRounds = words.length;
@@ -50,7 +49,6 @@ class Puzzle extends Component {
 
   startNewRound() {
     this.currentWord = this.wordsObjects[this.currentRound - 1];
-    console.log(this.currentWord);
     const round = this.currentRound;
     this.rightOrder = this.sentences[round - 1].split(' ');
     const gameRow = document.createElement('div');

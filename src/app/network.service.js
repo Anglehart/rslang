@@ -38,7 +38,7 @@ class NetworkService {
   getBackgroundImage() {
     const temp = [paintings1, paintings2, paintings3, paintings4, paintings5, paintings6];
     const currentLevel = storageService.getLevel() - 1;
-    const randImg = this.randomInteger(0, 29);
+    const randImg = this.randomInteger(0, temp[currentLevel].length - 1);
     return temp[currentLevel][randImg];
   }
   

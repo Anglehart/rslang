@@ -330,7 +330,7 @@ h1 {
 }
 .tips-page {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   margin: 20px 0;
   width: 50%;
 }
