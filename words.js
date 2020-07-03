@@ -1,12 +1,14 @@
+
+
 // TODO: удалить перед пулреквестом
-// функция для тестов. потом данные 
+// функция для тестов
 function setLocalStorage() {
   localStorage.setItem('email', 'team17@mail.ru');
   localStorage.setItem('password', 'RsSchool2020!');
   localStorage.setItem('userId', '5eefa4639896e10017eea40c');
   localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5Mzc3MDcxMCwiZXhwIjoxNTkzNzg1MTEwfQ.jYgMB40UWR44oRh2_DaUC8ATgG0IbEIoiHvT0HGdF1c');
 }
-setLocalStorage();
+// setLocalStorage();
 
 
 // TODO: не забыть потом поменять на sessionStorage
@@ -133,3 +135,5 @@ async function downDifficulty(wordId) {
   const difficulty = (currDiffuculty > 0 ? currDiffuculty - 1 : currDiffuculty);
   updateWord(wordId, difficulty);
 }
+
+export { setLocalStorage };

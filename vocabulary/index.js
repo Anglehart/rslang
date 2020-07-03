@@ -1,9 +1,26 @@
+import * as words from '../words';
+import addRow from './tableContent';
+import css from './index.css';
+import table from './table.css';
+
+const testData ={
+  idWord: 1,
+  word: 'cat',
+  transkription: '[cat]',
+  translate: 'кот',
+  created: '21.12.2012',
+  last: '03.07.2020',
+}
+
+words.setLocalStorage();
+
+const del = document.querySelector('button.del-button');
+const add = document.querySelector('button.add-button');
+
 function changeTable(color) {
+  // addRow(testData);
   // here request to dataBase with userID and rules for words
   console.log(`change to ${color}`);
-
-  const del = document.querySelector('div.del-button');
-  const add = document.querySelector('div.add-button');
 
   if (color === 'red') {
     del.classList.add('none');

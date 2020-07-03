@@ -48,12 +48,16 @@
   /* height: ; */
   margin: 0% 10% ;
   width: 80%;
+  min-width: 160px;
   text-align: center;
   font-weight: 500;
   font-size: 18px;
   background: grey;
   color: rgb(241, 232, 232);
+  border: 0
 }
+
+
 
 .main {
   width: 100%;
