@@ -3,22 +3,29 @@ import addRow from './tableContent';
 import css from './index.css';
 import table from './table.css';
 
-const testData ={
-  idWord: 1,
-  word: 'cat',
-  transkription: '[cat]',
-  translate: 'кот',
-  created: '21.12.2012',
-  last: '03.07.2020',
-}
-
 words.setLocalStorage();
+
+// const testData = {
+//   idWord: 1,
+//   word: 'cat',
+//   transkription: '[cat]',
+//   translate: 'кот',
+//   created: '21.12.2012',
+//   last: '03.07.2020',
+// }
+// addRow(testData);
 
 const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
 
+function drawTable(){
+  const data = words.getWords();
+
+}
+words.getWords();
+// drawTable();
+
 function changeTable(color) {
-  // addRow(testData);
   // here request to dataBase with userID and rules for words
   console.log(`change to ${color}`);
 

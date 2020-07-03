@@ -1,4 +1,4 @@
-
+import addRow from './vocabulary/tableContent';
 
 // TODO: удалить перед пулреквестом
 // функция для тестов
@@ -6,7 +6,8 @@ function setLocalStorage() {
   localStorage.setItem('email', 'team17@mail.ru');
   localStorage.setItem('password', 'RsSchool2020!');
   localStorage.setItem('userId', '5eefa4639896e10017eea40c');
-  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5Mzc3MDcxMCwiZXhwIjoxNTkzNzg1MTEwfQ.jYgMB40UWR44oRh2_DaUC8ATgG0IbEIoiHvT0HGdF1c');
+  localStorage.setItem('token',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5MzgwOTYyMywiZXhwIjoxNTkzODI0MDIzfQ.-f2d6NOwADQKkoBddAKSsWbIDTbnZ4EvqruCiZ1mZtA');
 }
 // setLocalStorage();
 
@@ -47,6 +48,22 @@ async function addWord(wordId, difficulty) {
 }
 
 
+async function getWordData(id, difficulty, time) {
+  const url = `https://afternoon-falls-25894.herokuapp.com/words/${id}`;
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+      Accept: 'application/json',
+      'Content-Type': 'applications/json',
+    },
+  });
+  let data = await res.json();
+  data.difficulty =  difficulty;
+  data.time = time;
+  addRow(data);
+}
+
 // TODO: изменить консольлог на ретурн
 // выдает список (массив объектов) всех слов пользователя
 async function getWords() {
@@ -60,8 +77,7 @@ async function getWords() {
     },
   });
   const data = await res.json();
-  console.log(data);
-  return data;
+  data.forEach(e => getWordData(e.wordId, e.difficulty, e.optional.time));
 }
 
 
@@ -136,4 +152,4 @@ async function downDifficulty(wordId) {
   updateWord(wordId, difficulty);
 }
 
-export { setLocalStorage };
+export { setLocalStorage, getWords };

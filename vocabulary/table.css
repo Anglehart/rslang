@@ -28,9 +28,8 @@
   height: 3vw;
 }
 
-.tableCell:first-child, .tableHead:first-child{
+.tableCell:first-child, .tableHead:first-child {
   border-left: 0;
-
 }
 
 .tableHeading {
@@ -57,10 +56,14 @@
   background: #fbfcfe;
 }
 
+.tableRow:first-child>.tableCell {
+  background: rgba(128, 128, 128, 0.404);
+}
+
 .checkboxCell, .audioCell, .idCell, .statistic_1Cell, .statistic_2Cell {
   width: 5%;
 }
 
-.wordCell, .transkriptCell, .translateCell {
+.wordCell, .transcriptCell, .translateCell {
   width: 25%;
 }
