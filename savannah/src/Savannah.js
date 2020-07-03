@@ -31,11 +31,15 @@ class Savannah {
     this.header.append(this.closeButton);
 
     this.createReaultsIcon();
+    this.question = document.createElement('div');
+    this.question.className = 'question';
+    this.gamePage.append(this.question);
+
     this.word = document.createElement('div');
     this.word.className = 'word';
     this.word.id = 'word';
     this.word.innerText = 'word';
-    this.gamePage.append(this.word);
+    this.question.append(this.word);
 
     this.answers = document.createElement('div');
     this.answers.className = 'answers';
@@ -240,7 +244,7 @@ class Savannah {
     this.startButton.innerHTML = 'Start';
     this.description.append(this.startButton);
     this.startButtonClicked = false;
-    this.level;
+    this.level = 0;
     this.startButton.addEventListener('click', () => {
       this.startButtonClicked = true;
       this.startClicked();
@@ -507,6 +511,7 @@ class Savannah {
     const now = Date.now();
     if (now - this.timeStarted > timeForAnswer) {
       clearInterval(this.timer);
+      this.word.classList.add('fade-out');
       this.startNextRound();
       new Audio ('audio/failed.mp3').play();
       this.createFailIcon();

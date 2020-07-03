@@ -208,21 +208,36 @@ body {
   padding: 10px 42px;
   margin-top: 24px;
 }
-
-.word {
-  position: fixed;
-  left: 45%;
+.question {
+  position: relative;
+  left: 0;
   top: 0;
   font-size: 48px;
   line-height: 1;
   font-weight: 300;
   white-space: nowrap;
+  color: #fff;
   letter-spacing: 1px;
   height: 100%;
   width: 100%;
+}
+.word {
+  position: absolute;
+  left: 45%;
+  top: 0;
+  /* font-size: 48px;
+  line-height: 1;
+  font-weight: 300;
+  white-space: nowrap;
+  letter-spacing: 1px; */
+  height: 100%;
+  width: 200px;
   color: white;
 }
-
+.fade-out {
+  transition: opacity 1s;
+  opacity: 0;
+}
 .answers {
   /* display: flex;
   justify-content: space-between;
