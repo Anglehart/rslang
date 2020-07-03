@@ -1,105 +1,135 @@
-
-
+// TODO: удалить перед пулреквестом
+// функция для тестов. потом данные 
 function setLocalStorage() {
   localStorage.setItem('email', 'team17@mail.ru');
   localStorage.setItem('password', 'RsSchool2020!');
   localStorage.setItem('userId', '5eefa4639896e10017eea40c');
-  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5MzcxNDI5MywiZXhwIjoxNTkzNzI4NjkzfQ.ZAd9yGal3i9wAJkxa0os-8X0h0A0QFIi2QuFw6Jfo6U');
+  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5Mzc3MDcxMCwiZXhwIjoxNTkzNzg1MTEwfQ.jYgMB40UWR44oRh2_DaUC8ATgG0IbEIoiHvT0HGdF1c');
 }
 setLocalStorage();
 
+
+// TODO: не забыть потом поменять на sessionStorage
+// возможно вначале стоит проверить данные на существование, а потом отдовать 
+// на случай если кто-то будет баловаться и вручную удалит данные из консоли
 function getEmail() {
-  const email = localStorage.getItem('email');
-  return email;
+  return localStorage.getItem('email');
 }
 function getUserId() {
-  const userId = localStorage.getItem('userId');
-  return userId;
+  return localStorage.getItem('userId');
 }
 function getToken() {
-  const token = localStorage.getItem('token');
-  return token;
+  return localStorage.getItem('token');
 }
 
-async function addWord(wordId) {
+
+// TODO: изменить консольлог на ретурн
+// добавляет слово пользователю. возвращает слово если добавилось успешно и текст ошибки, если неуспешно
+// можно не проверять слово. т.к. если слово уже существует, то будет соответсвующая ошибка
+async function addWord(wordId, difficulty) {
   const url = `https://afternoon-falls-25894.herokuapp.com/users/${getUserId()}/words/${wordId}`;
-  fetch(url, {
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${getToken()}`,
       Accept: 'application/json',
       'Content-Type': 'applications/json',
     },
-  }).then((data) => {
-    console.log(data);
-  })
-
+    body: {
+      'difficulty': `${(difficulty ? difficulty : -3)}`,
+      'optional': {}
+    }
+  });
+  const data = (await res.ok ? await res.json() : `${res.status}: ${await res.text()}`);
+  console.log(data);
 }
 
 
+// TODO: изменить консольлог на ретурн
+// выдает список (массив объектов) всех слов пользователя
 async function getWords() {
-  const url = `https://afternoon-falls-25894.herokuapp.com/users/${getUserId()}/words/`
-  fetch(url, {
+  const url = `https://afternoon-falls-25894.herokuapp.com/users/${getUserId()}/words/`;
+  const res = await fetch(url, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${getToken()}`,
       Accept: 'application/json',
       'Content-Type': 'applications/json',
     },
-  }).then((data) => {
-    console.log(data);
-  })
-  // return
+  });
+  const data = await res.json();
+  console.log(data);
+  return data;
 }
 
 
+// TODO: изменить консольлог на ретурн
 // проверка слова на его нахождение в базе
+// возвращает слово если есть, и текст с ошибкой если нет
 async function checkWord(wordId) {
-  const url = `https://afternoon-falls-25894.herokuapp.com/users/${getUserId()}/words/${wordId}`
-  fetch(url, {
+  const url = `https://afternoon-falls-25894.herokuapp.com/users/${getUserId()}/words/${wordId}`;
+  const res = await fetch(url, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${getToken()}`,
       Accept: 'application/json',
       'Content-Type': 'applications/json',
     },
-  }).then((data) => {
-    console.log(data);
-  })
-  // return boolean
-}
-
-addWord('5e9f5ee35eb9e72bc21af4a1');
-getWords();
-
-function checkDifficulty(wordId) {
-  // проверка сложности слова
-
-  // retrun int
+  });
+  const data = (await res.ok ? await res.json() : `${res.status}: ${await res.text()}`);
+  console.log(data);
 }
 
 
+// TODO: изменить консольлог на ретурн
+// изменяет слово. возвращает измененное слово, иначе возвращает ошибку
+async function updateWord(wordId, difficulty) {
+  const url = `https://afternoon-falls-25894.herokuapp.com/users/${getUserId()}/words/${wordId}`;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+      Accept: 'application/json',
+      'Content-Type': 'applications/json',
+    },
+    body: {
+      'difficulty': `${difficulty}`,
+      'optional': {}
+    }
+  });
+  const data = (await res.ok ? await res.json() : `${res.status}: ${await res.text()}`);
+  console.log(data);
+}
+
+
+// возвращает сложность (int)
+async function checkDifficulty(wordId) {
+  const data = await checkWord(wordId);
+  return data.difficulty;
+}
+
+
+// изменяет сложность слова на "-1", что дизменяет его категорию на  "удаленные"
 function delet(wordId) {
-  // задаем слову difficult: -1 
-
-  // return "Done!"
+  updateWord(wordId, -1);
 }
 
+
+// изменяет сложность слова на "2", что изменяет его категорию на "к изучению"
 function restore(wordId) {
-  // задаем слову difficult: 2(?)
-
-  // return "Done!"
+  updateWord(wordId, 2);
 }
 
+
+// изменяет сложность слова на "3"
 function upDifficulty(wordId) {
-  // изменяем текущий 'difficult' на '3'
-
-  // return "Done!"
+  updateWord(wordId, 3);
 }
 
-function downDifficulty(wordId) {
-  // отнимаетм от текущего значения 'difficult'  1
-  // если 0, то оставляем 0
 
-  // return "Done!"
+// уменьшает сложность слова на "1", если его текущая сложность не менее 1 включительно
+async function downDifficulty(wordId) {
+  const currDiffuculty = await checkDifficulty(wordId);
+  const difficulty = (currDiffuculty > 0 ? currDiffuculty - 1 : currDiffuculty);
+  updateWord(wordId, difficulty);
 }
