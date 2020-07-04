@@ -43,8 +43,9 @@ class Savannah {
 
   checkAnswer(selectedTranslation) {
     const translationWord = selectedTranslation.querySelector('.translationWord');
-    const word = {word: this.ui.word.innerText, translation: this.ui.word.getAttribute('data')};
-    if (translationWord.innerText === this.ui.word.getAttribute('data')) {
+    const word = this.questionWord;
+    // const word = {word: this.ui.word.innerText, translation: this.ui.word.getAttribute('data')};
+    if (translationWord.innerText === word.wordTranslate) {
       selectedTranslation.classList.add('active');
       new Audio('audio/correct.mp3').play();
       this.ui.backgroundPosition -= 5;
@@ -200,12 +201,25 @@ class Savannah {
 
   getArrayOfAnswers(data) {
     let numReserve = this.getArrayOfRandomNumbers();
-    const randomWord = this.randomInteger(0,19);
-    let arrayOfAnswers = [data[randomWord].wordTranslate, data[numReserve[0]].wordTranslate, data[numReserve[1]].wordTranslate, data[numReserve[2]].wordTranslate];
-    this.ui.word.innerText = data[randomWord].word;
-    this.ui.word.setAttribute('data', data[randomWord].wordTranslate);
+    this.getQuestionWord(data);
+    // const randomWord = this.randomInteger(0,19);
+    let arrayOfAnswers = [this.questionWord.wordTranslate, data[numReserve[0]].wordTranslate, data[numReserve[1]].wordTranslate, data[numReserve[2]].wordTranslate];
+    this.ui.word.innerText = this.questionWord.word;
+    this.ui.word.setAttribute('data', this.questionWord.wordTranslate);
+    // console.log(data[randomWord]);
     return arrayOfAnswers;
   }
+  questionWord;
+
+  getQuestionWord(data) {
+    const randomWord = this.randomInteger(0,19);
+    this.questionWord = data[randomWord];
+    console.log(this.questionWord);
+    return this.questionWord;
+  }
+  // setQuestionWord() {
+  //   this.ui.word.innerText = this.questionWord.word;
+  // }
 
   getArrayOfRandomNumbers() {
   let numReserve = [];
@@ -237,7 +251,8 @@ class Savannah {
       new Audio ('audio/failed.mp3').play();
       this.createFailIcon();
       this.searchRightTranslation(); 
-      const word = {word: this.ui.word.innerText, translation: this.ui.word.getAttribute('data')};
+      const word = this.questionWord;
+      // const word = {word: this.ui.word.innerText, translation: this.ui.word.getAttribute('data')};
       this.gameStatistics.fail.push(word);
       //time is expired, wrong answer
       return;

@@ -198,10 +198,15 @@ class SavannahUI {
     const wordContainer = document.createElement('div');
     wordContainer.className = 'word-container';
     parent.append(wordContainer);
-
+    
     const audioIcon = document.createElement('i');
     audioIcon.className = 'fa fa-volume-down';
     wordContainer.append(audioIcon);
+
+    const audio = document.createElement('audio');
+    const audioUrl = 'https://raw.githubusercontent.com/Mikisum/rslang-data/master/';
+    audio.setAttribute('src', audioUrl + word.audio);
+    audioIcon.append(audio);
 
     const statisticWord = document.createElement('span');
     statisticWord.className = 'statistic_word';
@@ -215,7 +220,7 @@ class SavannahUI {
 
     const statisticTranslation = document.createElement('span');
     statisticTranslation.className = 'statictic_word-translate';
-    statisticTranslation.innerText = word.translation;
+    statisticTranslation.innerText = word.wordTranslate;
     wordContainer.append(statisticTranslation);
   }
 
@@ -252,15 +257,16 @@ class SavannahUI {
     });
 
     this.finalPage.addEventListener('click', (event) => {
-      if (event.target === this.homePageButton) {
+      if (event.target.className === "fa fa-volume-down") {
+        event.target.firstElementChild.play();
+        console.log(event.target);
+      } else if (event.target.id === homePageButton) {
         this.finalPage.style.display = 'none';
         this.mainPage.style.display = 'block';
-      } else if (event.target === this.continueButton) {
+      } else if (event.target.id === continueButton) {
         this.clearPreviousDataGame();
         //add countdown
         setTimeout(() => this.mainPage.style.display = 'block', 1000);
-        
-        // this.mainPage.style.display = 'block';
       }
     });
   }
@@ -294,7 +300,6 @@ class SavannahUI {
     this.createFinalResults(this.typeResult.fail, statistics);
     this.createFinalResults(this.typeResult.success, statistics);
   }
-
 }
 
 export default SavannahUI;
