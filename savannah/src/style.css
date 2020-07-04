@@ -235,7 +235,7 @@ body {
   color: white;
 }
 .fade-out {
-  transition: opacity 1s;
+  transition: 1s linear;
   opacity: 0;
 }
 .answers {
