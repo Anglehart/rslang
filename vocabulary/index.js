@@ -18,7 +18,7 @@ words.setLocalStorage();
 const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
 
-function drawTable(){
+function drawTable() {
   const data = words.getWords();
 
 }

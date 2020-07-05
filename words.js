@@ -7,7 +7,7 @@ function setLocalStorage() {
   localStorage.setItem('password', 'RsSchool2020!');
   localStorage.setItem('userId', '5eefa4639896e10017eea40c');
   localStorage.setItem('token',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5Mzg3ODY2OCwiZXhwIjoxNTkzODkzMDY4fQ.7sPzbSY_FK69JKBYBfJNEUthks0gSBdbUi8ooXgAqVE');
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5Mzk2OTc2NiwiZXhwIjoxNTkzOTg0MTY2fQ.MTNvTizPx6UwbzpDmCbiFEOmdEM_D4MdvxsVU1Nluxo');
 }
 // setLocalStorage();
 
@@ -31,6 +31,7 @@ function getToken() {
 // можно не проверять слово. т.к. если слово уже существует, то будет соответсвующая ошибка
 async function addWord(wordId, difficulty) {
   const url = `https://afternoon-falls-25894.herokuapp.com/users/${getUserId()}/words/${wordId}`;
+  const now = new Date();
   const res = await fetch(url, {
     method: 'POST',
     headers: {
@@ -40,7 +41,9 @@ async function addWord(wordId, difficulty) {
     },
     body: {
       'difficulty': `${(difficulty ? difficulty : -3)}`,
-      'optional': {}
+      'optional': {
+        'time': now.getTime()
+      }
     }
   });
   const data = (await res.ok ? await res.json() : `${res.status}: ${await res.text()}`);
@@ -59,7 +62,7 @@ async function getWordData(id, difficulty, time) {
     },
   });
   let data = await res.json();
-  data.difficulty =  difficulty;
+  data.difficulty = difficulty;
   data.time = time;
   addRow(data);
 }
@@ -145,11 +148,11 @@ function upDifficulty(wordId) {
 }
 
 
-// уменьшает сложность слова на "1", если его текущая сложность не менее 1 включительно
+// уменьшает сложность слова на "1", если его текущая сложность > 0
 async function downDifficulty(wordId) {
   const currDiffuculty = await checkDifficulty(wordId);
   const difficulty = (currDiffuculty > 0 ? currDiffuculty - 1 : currDiffuculty);
   updateWord(wordId, difficulty);
 }
 
-export { setLocalStorage, getWords, downDifficulty, upDifficulty, restore, delet, updateWord, addWord, checkWord, getWordData};
+export { setLocalStorage, getWords, downDifficulty, upDifficulty, restore, delet, updateWord, addWord, checkWord, getWordData };

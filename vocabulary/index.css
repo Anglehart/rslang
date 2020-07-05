@@ -43,10 +43,10 @@
   background: #1119;
 }
 
-.tab--button{
+.tab--button {
   padding: 10px 20px;
   /* height: ; */
-  margin: 0% 10% ;
+  margin: 0% 10%;
   width: 80%;
   min-width: 160px;
   text-align: center;
@@ -56,8 +56,6 @@
   color: rgb(241, 232, 232);
   border: 0
 }
-
-
 
 .main {
   width: 100%;
