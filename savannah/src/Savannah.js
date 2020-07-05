@@ -1,5 +1,5 @@
 import SavannahUI from './SavannahUI.js';
-const timeForAnswer = 5000; // 5 sec
+const timeForAnswer = 5000;
 
 class Savannah {
 
@@ -25,7 +25,7 @@ class Savannah {
         case '2':
         case '3':
         case '4':
-          Array.from(this.answers.querySelectorAll('.translation')).forEach((translation) => {
+          Array.from(this.ui.answers.querySelectorAll('.translation')).forEach((translation) => {
             const selectedTranslation = translation;
             if (keyName === translation.innerText.charAt(0)) {
               this.handleAnswer(selectedTranslation);
@@ -44,14 +44,13 @@ class Savannah {
   checkAnswer(selectedTranslation) {
     const translationWord = selectedTranslation.querySelector('.translationWord');
     const word = this.questionWord;
-    // const word = {word: this.ui.word.innerText, translation: this.ui.word.getAttribute('data')};
     if (translationWord.innerText === word.wordTranslate) {
       selectedTranslation.classList.add('active');
       new Audio('audio/correct.mp3').play();
-      this.ui.backgroundPosition -= 5;
+      // let part =  this.ui.backgroundPosition/10;
+      this.ui.backgroundPosition -= 15;
       this.ui.container.style.backgroundPositionY = `${this.ui.backgroundPosition}%`;
       this.gameStatistics.success.push(word);
-      //move background
     } else {
       selectedTranslation.classList.add('fail');
       this.createFailIcon();
@@ -84,6 +83,20 @@ class Savannah {
   finishGame() {
     this.ui.createFinalPage(this.gameStatistics);
     new Audio('audio/notification.mp3').play();
+
+    this.ui.finalPage.addEventListener('click', (event) => {
+      if (event.target.className === "fa fa-volume-down") {
+        event.target.firstElementChild.play();
+        console.log(event.target);
+      } else if (event.target.id === 'homePageButton') {
+        this.clearPreviousDataGame();
+        //choose a game
+        this.ui.mainPage.style.display = 'block';
+      } else if (event.target.id === 'continueButton') {
+        this.clearPreviousDataGame();
+        setTimeout(() => this.ui.mainPage.style.display = 'block', 1000);
+      }
+    });
   }
 
   createFailIcon() {
@@ -146,17 +159,15 @@ class Savannah {
   }
 
   startNextRound() {
-    if (this.ui.iconsContainer.children[4].closest('.fail-icon') || this.ui.countRoundsGame === 10 ) {
-      this.gameStarted = false;
+    if (this.ui.iconsContainer.children[3].closest('.fail-icon') || this.ui.countRoundsGame === 10 ) {
       clearInterval(this.timer);
       this.ui.gamePage.style.display = 'none';
       setTimeout(() => this.finishGame(), 1000);
+      this.gameStarted = false;
     } else {
       this.gameStarted = true;
       this.getWords()
       .then(() => {
-        // this.countdownContainer.remove();
-        // this.image.remove();
         this.ui.mainPage.style.display = 'none';
         this.ui.gamePage.style.display = 'block';
         this.timer = setInterval(() => this.moveWordDown(), 8);
@@ -168,7 +179,6 @@ class Savannah {
         });
         this.ui.answerHandled = false;
         this.ui.countRoundsGame += 1;
-        console.log(this.ui.countRoundsGame);
       });
     }
   }
@@ -202,11 +212,9 @@ class Savannah {
   getArrayOfAnswers(data) {
     let numReserve = this.getArrayOfRandomNumbers();
     this.getQuestionWord(data);
-    // const randomWord = this.randomInteger(0,19);
     let arrayOfAnswers = [this.questionWord.wordTranslate, data[numReserve[0]].wordTranslate, data[numReserve[1]].wordTranslate, data[numReserve[2]].wordTranslate];
     this.ui.word.innerText = this.questionWord.word;
     this.ui.word.setAttribute('data', this.questionWord.wordTranslate);
-    // console.log(data[randomWord]);
     return arrayOfAnswers;
   }
   questionWord;
@@ -217,13 +225,9 @@ class Savannah {
     console.log(this.questionWord);
     return this.questionWord;
   }
-  // setQuestionWord() {
-  //   this.ui.word.innerText = this.questionWord.word;
-  // }
 
   getArrayOfRandomNumbers() {
   let numReserve = [];
-  let arrayOfRandomAnswers = [];
     while (numReserve.length < 3) {
       let randomNumber = Math.ceil(Math.random() * 19);
       let found = false;
@@ -246,15 +250,12 @@ class Savannah {
     const now = Date.now();
     if (now - this.timeStarted > timeForAnswer) {
       clearInterval(this.timer);
-      this.ui.word.classList.add('fade-out');
       this.startNextRound();
       new Audio ('audio/failed.mp3').play();
       this.createFailIcon();
       this.searchRightTranslation(); 
       const word = this.questionWord;
-      // const word = {word: this.ui.word.innerText, translation: this.ui.word.getAttribute('data')};
       this.gameStatistics.fail.push(word);
-      //time is expired, wrong answer
       return;
     }
     this.wordPosition += 0.1;

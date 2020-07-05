@@ -256,19 +256,7 @@ class SavannahUI {
       this.createStatisticWord(container, word);
     });
 
-    this.finalPage.addEventListener('click', (event) => {
-      if (event.target.className === "fa fa-volume-down") {
-        event.target.firstElementChild.play();
-        console.log(event.target);
-      } else if (event.target.id === homePageButton) {
-        this.finalPage.style.display = 'none';
-        this.mainPage.style.display = 'block';
-      } else if (event.target.id === continueButton) {
-        this.clearPreviousDataGame();
-        //add countdown
-        setTimeout(() => this.mainPage.style.display = 'block', 1000);
-      }
-    });
+    
   }
 
   createFinalPage(statistics) {

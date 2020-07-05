@@ -15,7 +15,7 @@ body {
   background-position-y: 100%;
   min-height: calc(100vh - 20px);
   transition: all 1s ease;
-  background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, 0.4)),url(images/nature.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, 0.4)),url(images/back.jpg);
   position: relative;
   overflow: hidden;
 }
@@ -233,6 +233,10 @@ body {
   height: 100%;
   width: 200px;
   color: white;
+}
+.fade-in {
+  transition: 1s linear;
+  transform: scale(2);
 }
 .fade-out {
   transition: 1s linear;
