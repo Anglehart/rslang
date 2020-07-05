@@ -1,3 +1,7 @@
+.settings-form {
+  width: 1200px;
+  margin: auto;  
+}
 .message {
   opacity: 0;
   transition: .5s;
@@ -5,4 +9,10 @@
 }
 .showMessage {
   opacity: 1;
+}
+.error {
+  color: red;
+}
+.success {
+  color: green;
 }

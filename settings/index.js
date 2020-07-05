@@ -91,8 +91,8 @@ function checkRequired() {
 
 function showMessage(boolean) {
   const Message = document.querySelector('.message');
-  Message.innerHTML = 'Number of words and cards must be between 10 and 50.';
-  if (boolean) Message.innerHTML = 'Settings saved!';
+  Message.innerHTML = '<p class="error">Number of words and cards must be between 10 and 50.</p>';
+  if (boolean) Message.innerHTML = '<p class="success">Settings saved!</p>';
   Message.classList.add('showMessage');
   setTimeout(() => { Message.classList.remove('showMessage') }, 3000);
 }
