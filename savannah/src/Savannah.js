@@ -1,5 +1,5 @@
 import SavannahUI from './SavannahUI.js';
-const timeForAnswer = 5000;
+// const timeForAnswer = 5000;
 
 class Savannah {
 
@@ -11,14 +11,26 @@ class Savannah {
     });
 
     this.ui.gamePage.addEventListener('click', (event) => {
+      this.ui.word.classList.remove('animation');
       const selectedTranslation = event.target.closest('.translation');
       if (selectedTranslation && !this.ui.answerHandled) {
         this.handleAnswer(selectedTranslation);
       }
     });
+    this.ui.word.addEventListener('animationend', () => {
+      if(!this.ui.answerHandled)
+      this.ui.word.classList.remove('animation');
+      this.startNextRound();
+      new Audio ('audio/failed.mp3').play();
+      this.createFailIcon();
+      this.searchRightTranslation(); 
+      const word = this.questionWord;
+      this.gameStatistics.fail.push(word);
+    })
 
     document.addEventListener('keypress', (event) => {
       if (!this.gameStarted || this.ui.answerHandled) return;
+      this.ui.word.classList.remove('animation');
       const keyName = event.key;
       switch (keyName) {
         case '1':
@@ -37,7 +49,7 @@ class Savannah {
 
   handleAnswer(selectedTranslation) {
     this.ui.answerHandled = true;
-    clearInterval(this.timer);
+    // clearInterval(this.timer);
     this.checkAnswer(selectedTranslation);
   }
 
@@ -160,7 +172,7 @@ class Savannah {
 
   startNextRound() {
     if (this.ui.iconsContainer.children[3].closest('.fail-icon') || this.ui.countRoundsGame === 10 ) {
-      clearInterval(this.timer);
+      // clearInterval(this.timer);
       this.ui.gamePage.style.display = 'none';
       setTimeout(() => this.finishGame(), 1000);
       this.gameStarted = false;
@@ -170,9 +182,10 @@ class Savannah {
       .then(() => {
         this.ui.mainPage.style.display = 'none';
         this.ui.gamePage.style.display = 'block';
-        this.timer = setInterval(() => this.moveWordDown(), 8);
-        this.timeStarted = Date.now();
-        this.wordPosition = 0;
+        this.ui.word.classList.add('animation');
+        // this.timer = setInterval(() => this.moveWordDown(), 8);
+        // this.timeStarted = Date.now();
+        // this.wordPosition = 0;
         Array.from(this.ui.answers.children).forEach((answer) => {
           answer.classList.remove('active');
           answer.classList.remove('fail');
@@ -182,6 +195,7 @@ class Savannah {
       });
     }
   }
+ 
   
   randomInteger(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
@@ -247,9 +261,9 @@ class Savannah {
   }
 
   moveWordDown() {
-    const now = Date.now();
+    // const now = Date.now();
     if (now - this.timeStarted > timeForAnswer) {
-      clearInterval(this.timer);
+      // clearInterval(this.timer);
       this.startNextRound();
       new Audio ('audio/failed.mp3').play();
       this.createFailIcon();

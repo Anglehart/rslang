@@ -242,6 +242,35 @@ body {
   transition: 1s linear;
   opacity: 0;
 }
+
+.animation {
+  animation: move 5s linear;  
+  animation-fill-mode: forwards;
+}
+.animation-fail {
+
+}
+@keyframes move {
+  0% {
+    transform: translateY(-5vh) scale(2.5);
+    opacity: 0.5;
+  }
+  5% {
+      opacity: 1;
+  }
+  10% {
+      transform: translateY(5vh) scale(1);
+  }
+  90% {
+      transform: translateY(45vh) scale(1);
+      opacity: 1;
+  }
+
+  100% {
+    transform: translateY(50vh) scale(3);
+    opacity: 0;
+  }
+}
 .answers {
   /* display: flex;
   justify-content: space-between;
