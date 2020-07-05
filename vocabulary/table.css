@@ -67,3 +67,8 @@
 .wordCell, .transcriptCell, .translateCell {
   width: 25%;
 }
+
+.fa-play{
+  font-size: 1.5em;
+  padding: 20px 0 0 0;
+}
