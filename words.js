@@ -7,7 +7,7 @@ function setLocalStorage() {
   localStorage.setItem('password', 'RsSchool2020!');
   localStorage.setItem('userId', '5eefa4639896e10017eea40c');
   localStorage.setItem('token',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5MzgwOTYyMywiZXhwIjoxNTkzODI0MDIzfQ.-f2d6NOwADQKkoBddAKSsWbIDTbnZ4EvqruCiZ1mZtA');
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5Mzg3ODY2OCwiZXhwIjoxNTkzODkzMDY4fQ.7sPzbSY_FK69JKBYBfJNEUthks0gSBdbUi8ooXgAqVE');
 }
 // setLocalStorage();
 
@@ -152,4 +152,4 @@ async function downDifficulty(wordId) {
   updateWord(wordId, difficulty);
 }
 
-export { setLocalStorage, getWords };
+export { setLocalStorage, getWords, downDifficulty, upDifficulty, restore, delet, updateWord, addWord, checkWord, getWordData};
