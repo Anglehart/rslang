@@ -5,6 +5,7 @@ window.onload = function() {
   // Конец
   
   loadSettings();
+  checkRequired();
 }
 
 function saveSettings() {
@@ -67,7 +68,24 @@ function drawForm(data) {
   for (key in data.optional) {
     if (key !== 'cardsPerDay') {
       document.getElementById(key).checked = data.optional[key];
+      document.getElementById(key).addEventListener('click', () => { checkRequired(); })
     } 
+  }
+}
+
+function checkRequired() {
+  const a = document.getElementById('showTranslation');
+  const b = document.getElementById('showTextMeaning');
+  const c = document.getElementById('showTextExample');
+  a.disabled = '';
+  b.disabled = '';
+  c.disabled = '';
+  if (a.checked == false && b.checked == false) { 
+    c.disabled = 'true';
+  } else if(a.checked == false && c.checked == false) {
+    b.disabled = 'true';
+  } else if(b.checked == false && c.checked == false) {
+    a.disabled = 'true';
   }
 }
 
