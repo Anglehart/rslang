@@ -5,7 +5,6 @@ window.onload = function() {
   // Конец
   
   loadSettings();
-  checkRequired();
 }
 
 function saveSettings() {
@@ -71,6 +70,7 @@ function drawForm(data) {
       document.getElementById(key).addEventListener('click', () => { checkRequired(); })
     } 
   }
+  checkRequired();
 }
 
 function checkRequired() {
