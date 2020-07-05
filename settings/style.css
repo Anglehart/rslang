@@ -1,0 +1,8 @@
+.message {
+  opacity: 0;
+  transition: .5s;
+  height: 30px;
+}
+.showMessage {
+  opacity: 1;
+}

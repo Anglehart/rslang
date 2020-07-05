@@ -5,28 +5,25 @@ window.onload = function() {
   // Конец
   
   loadSettings();
-  document.querySelector('.save-btn').addEventListener('click', () => {
-    setSettings();
-  })
 }
 
 function saveSettings() {
+  const WordsPerDay = Number(document.getElementById('wordsPerDay').value);
+  const CardsPerDay = Number(document.getElementById('cardsPerDay').value);
+  if (WordsPerDay < 10 || WordsPerDay > 50 || CardsPerDay < 10 || CardsPerDay > 50) {
+    showMessage(false);
+    return false;
+  }
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
-  const data = {
-    "wordsPerDay": 20,
-    "optional": {
-      "cardsPerDay": 20,
-      "showTranslation": true,
-      "showTextMeaning": true,
-      "showTextExample": true,
-      "showAnswerButton": true,
-      "showDeleteButton": true,
-      "showDifficultWordsButton": true,
-      "showWordsStatusButtons": true
-    }
-  }
-    
+  let data = {};
+  data.optional = {};
+  data.wordsPerDay = WordsPerDay;
+  data.optional.cardsPerDay = CardsPerDay;
+  document.querySelectorAll('input[type=checkbox]').forEach((item) => {
+    data.optional[item.id] = item.checked; 
+  });
+      
   fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
     method: 'PUT',
     headers: {
@@ -36,6 +33,11 @@ function saveSettings() {
     },
     body: JSON.stringify(data),
   })
+  .then(() => {
+    showMessage(true);
+    document.getElementById('wordsPerDay').value = WordsPerDay;
+    document.getElementById('cardsPerDay').value = CardsPerDay;
+  });
 }
 
 function loadSettings() {
@@ -59,7 +61,22 @@ function loadSettings() {
 }
 
 function drawForm(data) {
-  document.querySelector('.wordsPerDay').innerHTML = data.wordsPerDay;
+  document.querySelector('#wordsPerDay').value = data.wordsPerDay;
+  document.querySelector('#cardsPerDay').value = data.optional.cardsPerDay;
+  
+  for (key in data.optional) {
+    if (key !== 'cardsPerDay') {
+      document.getElementById(key).checked = data.optional[key];
+    } 
+  }
+}
+
+function showMessage(boolean) {
+  const Message = document.querySelector('.message');
+  Message.innerHTML = 'Number of words and cards must be between 10 and 50.';
+  if (boolean) Message.innerHTML = 'Settings saved!';
+  Message.classList.add('showMessage');
+  setTimeout(() => { Message.classList.remove('showMessage') }, 3000);
 }
 
 // Эту функцию нужно запустить сразу после регистрации пользователя. 
