@@ -23,8 +23,8 @@ function addRow(data) {
     <div class="tableCell wordCell">${data.word}</div>
     <div class="tableCell transcriptCell">${data.transcription}</div></div>
     <div class="tableCell translateCell">${data.wordTranslate}</div>
-    <div class="tableCell statistic_1Cell">${getDate(data.time)}</div>
-    <div class="tableCell statistic_2Cell">${data.last}</div>
+    <div class="tableCell statistic_1Cell">${getDate(data.firstTime)}</div>
+    <div class="tableCell statistic_2Cell">${getDate(data.lastTime)}</div>
   `;
   tableBody.appendChild(rowDiv);
   rowDiv.querySelector('div.audioCell').addEventListener('click', () => {

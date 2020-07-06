@@ -1,28 +1,18 @@
-import * as words from '../words';
+import wordLibrary from '../words';
 import addRow from './tableContent';
 import css from './index.css';
 import table from './table.css';
 
-words.setLocalStorage();
-
-// const testData = {
-//   idWord: 1,
-//   word: 'cat',
-//   transkription: '[cat]',
-//   translate: 'кот',
-//   created: '21.12.2012',
-//   last: '03.07.2020',
-// }
-// addRow(testData);
+wordLibrary.setLocalStorage();
 
 const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
 
 function drawTable() {
-  const data = words.getWords();
+  const data = wordLibrary.getWords();
 
 }
-words.getWords();
+wordLibrary.getWords();
 // drawTable();
 
 function changeTable(color) {
