@@ -24,7 +24,7 @@ const alertPasswordSignUp = document.getElementById('alert-password-sign-up');
 const responsesSignUp = {
   422: 'Неверный адрес электронной почты или пароль',
   200: 'Вы успешно зарегестрированы',
-  417: 'Текущий адрес электронной почты уже используется',
+  417: 'Адрес электронной почты уже используется',
 };
 
 const responsesSignIn = {
@@ -150,9 +150,7 @@ function createUser(user) {
       return res.json();
     }
   })
-    .then((data) => {
-      console.log(data);
-    })
+    .then(() => loginUser({ email: emailSignUp.value, password: passwordSignUp.value }))
     .catch((error) => {
       console.log(error.message);
     });
@@ -184,6 +182,35 @@ function loginUser(user) {
       console.log(error.message);
     });
 }
+function setBasicSettings() {
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
+  const data = {
+    wordsPerDay: 20,
+    optional: {
+      cardsPerDay: 20,
+      showTranslation: true,
+      showTextMeaning: true,
+      showTextExample: true,
+      showAnswerButton: true,
+      showDeleteButton: true,
+      showDifficultWordsButton: true,
+      showWordsStatusButtons: true,
+    },
+  };
+
+  fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(data);
+}
+
 modalWindow.addEventListener('click', (event) => {
   if (event.target === togglerSignIn) {
     transformPassword(togglerSignIn, passwordSignIn);
@@ -199,6 +226,7 @@ modalWindow.addEventListener('click', (event) => {
   } else if (event.target === buttonSignUp) {
     event.preventDefault();
     createUser({ email: emailSignUp.value, password: passwordSignUp.value });
+    setBasicSettings();
   } else if (event.target === buttonSignIn) {
     event.preventDefault();
     loginUser({ email: emailSignIn.value, password: passwordSignIn.value });
