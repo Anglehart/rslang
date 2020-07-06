@@ -483,7 +483,7 @@ height: 65px;
 
 .center{
   text-align: center;
-padding: 80px 40px 0;
+padding: 35px 40px 0;
 }
 
 .polosa-text {
@@ -545,6 +545,11 @@ padding: 80px 40px 0;
  }
 
  #right, #left{
+  color: rgba(246, 28, 32, .7);
+   margin-top: 5px;
+ }
+
+ #right:hover, #left:hover{
    color:rgba(246, 28, 32, 1);
    margin-top: 5px;
  }
@@ -796,6 +801,10 @@ footer {
       display: flex;
       max-width: 5000px;
   }
+
+  #section1 img {
+    margin-left: 50%;
+}
 }
 @media (min-width: 1401px) {
 
@@ -834,18 +843,20 @@ footer {
  display: block;
  margin: 0 85px 70px;
    }
+}
 
-   .line {
-       position: absolute;
-       top: 50%;
-       transform: translateY(-50%);
-       width: 100%;
-       text-align: center;
-   }
-
+@media (max-width: 1339px) {
 .nav-toggle {display: block;}
 
 .contener{display: none;}
+
+.line {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+}
 }
 
 @media (max-width: 900px) {
