@@ -1,3 +1,6 @@
+import addMultiColorResult from './multi-color-result';
+import getRandomWord from './get-random-word';
+// import checkInput from './check-word';/
 
 function addImg(wordInfo) {
   const imageWrapper = document.querySelector('.card_img');
@@ -11,14 +14,6 @@ function addTextExampleInCard(wordInfo) {
   const cardPhrase = document.querySelector('.card_phrase');
   cardPhrase.innerHTML = wordInfo.textExample;
 }
-
-// function checkInput() {
-//   const input = document.querySelector('.card_phrase b input');
-//   // cardPhrase.innerHTML = wordInfo.textExample;
-//   console.log(input);
-//   console.log(input.value);
-
-// }
 
 function addTextExampleTranslateInCard(wordInfo) {
   const cardTranslate = document.querySelector('.card_phrase-translate');
@@ -70,7 +65,28 @@ function addInputInWordMeaning() {
   cardMeaning.append(input);
 }
 
-export {
-  addImg, addTextExampleInCard, addTextExampleTranslateInCard, addWordMeaningInCard, addWordMeaningTranslateInCard, addWordTranslateInCard, addWordTranscriptionInCard,
-  addInputInTextExample, addInputInWordMeaning,
-};
+async function addCardFields(word, wordLength) {
+  // const randomWord = await getRandomWord();
+  // const splittedWord = randomWord.textExample.split('<b>')[1].split('</b>')[0];
+  // const splittedWordLength = splittedWord.length;
+
+  addImg(word);
+
+  addTextExampleInCard(word);
+  addInputInTextExample(wordLength);
+
+  addTextExampleTranslateInCard(word);
+
+  addMultiColorResult();
+
+  addWordMeaningInCard(word);
+  addInputInWordMeaning();
+
+  addWordMeaningTranslateInCard(word);
+
+  addWordTranslateInCard(word);
+
+  addWordTranscriptionInCard(word);
+}
+
+export default addCardFields;
