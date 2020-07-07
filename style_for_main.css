@@ -410,7 +410,7 @@ height: 65px;
 
 /*--------------------------------Section2------------------------------------- */
 
-.cherta {
+.grey-line {
     border-bottom: 2px solid #e5e5e5;
     margin: 0 auto;
 }
@@ -419,7 +419,7 @@ height: 65px;
   background: #fbfcfe;
 }
 
-.polosa {
+.dividing-line {
   flex-direction: row;
     margin: auto;
     padding: 40px 40px 0px 40px;
@@ -427,12 +427,12 @@ height: 65px;
 
 .polya{padding-bottom: 40px;}
 
-.cherta, .polosa {
+.grey-line, .dividing-line {
     display: flex;
     max-width: 1065px;
 }
 
-.polosa-background {
+.dividing-line-background {
     background-image: url(img/board.png);
     height: 201px;
     min-width: 185px;
@@ -443,7 +443,7 @@ height: 65px;
 }
 
 
-.polosa-background1 {
+.dividing-line-background1 {
     background-image: url(img/dictionary.png);
     height: 130px;
     min-width: 200px;
@@ -453,7 +453,7 @@ height: 65px;
     margin-left: 48px;
 }
 
-.polosa-background2 {
+.dividing-line-background2 {
     background-image: url(img/info.png);
     height: 201px;
     min-width: 110px;
@@ -464,7 +464,7 @@ height: 65px;
 }
 
 
-.polosa-background3 {
+.dividing-line-background3 {
     background-image: url(img/team.png);
     height: 130px;
     min-width: 200px;
@@ -486,7 +486,7 @@ height: 65px;
 padding: 35px 40px 0;
 }
 
-.polosa-text {
+.dividing-line-text {
     color: #777;
     flex-grow: 1;
     font-size: 17px;
@@ -495,7 +495,7 @@ padding: 35px 40px 0;
     text-align: left;
 }
 
-.polosa-opisanie {
+.dividing-line-opisanie {
     color: rgba(246, 28, 32, .7);
     cursor: pointer;
     font-size: 15px;
@@ -505,7 +505,7 @@ padding: 35px 40px 0;
     text-decoration: none;
 }
 
-.polosa-opisanie:hover {color: rgba(246, 28, 32, 1);}
+.dividing-line-opisanie:hover {color: rgba(246, 28, 32, 1);}
 
 /*--------------------------------Section3------------------------------------- */
 
@@ -797,7 +797,7 @@ footer {
   .text{
     margin: auto;
   }
-  .cherta {
+  .grey-line {
       display: flex;
       max-width: 5000px;
   }
@@ -888,35 +888,35 @@ iframe{
   .center {
       padding: 65px 40px 0;
   }
-.polosa {
+.dividing-line {
   flex-direction: column-reverse;
 }
 
-.polosa-background{
+.dividing-line-background{
     margin: auto;
     min-width: 120px;
     height: 120px;
 }
-.polosa-background1{
+.dividing-line-background1{
     margin: auto;
     min-width: 90px;
     height: 120px;
 }
 
-.polosa-background2{
+.dividing-line-background2{
     margin: auto;
     min-width: 90px;
     height: 120px;
 }
-.polosa-background3{
+.dividing-line-background3{
     margin: auto;
     min-width: 90px;
     height: 120px;
 }
 
-.zagolovok, .polosa-text{text-align: center;}
+.zagolovok, .dividing-line-text{text-align: center;}
 
-.polosa-opisanie{
+.dividing-line-opisanie{
   display: block;
   text-align: center;
 }
