@@ -1,4 +1,3 @@
-
 const tableBody = document.querySelector('div.tableBody');
 
 function rowCount() {
@@ -30,7 +29,7 @@ function addRow(data) {
   rowDiv.querySelector('div.audioCell').addEventListener('click', () => {
     const audio = new Audio(`data:audio/mpeg;base64,${data.audio}`);
     audio.play();
-  })
+  });
 }
 
 export default addRow;
