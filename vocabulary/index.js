@@ -3,7 +3,7 @@ import addRow from './tableContent';
 import css from './index.css';
 import table from './table.css';
 
-wordLibrary.setLocalStorage();
+// wordLibrary.setLocalStorage();
 
 const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
