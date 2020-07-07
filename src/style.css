@@ -6,6 +6,39 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif;
 }
+main {
+  width: 1200px;
+  margin: auto;
+}
+.game-wrapper {
+  width: 70%;
+}
 .disable {
   display: none;
+}
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.option, .question {
+  color: #fff;
+  margin: 15px 2px;
+  background: linear-gradient(#2b2269, #2c1e40);
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 20px;
+}
+.question {
+  padding: 20px 45px;
+  clip-path: polygon(0 50%, 5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%);
+}
+.question:first-letter {
+  text-transform: uppercase;
+}
+.option {
+  cursor: pointer;
+  min-width: calc(50% - 30px);
+  padding: 20px;
+  clip-path: polygon(0 50%, 10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%);
 }

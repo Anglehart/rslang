@@ -17,13 +17,12 @@ class NetworkService {
       group = 5;
     }
     const wordArray = await this.getWords(group);
-    const finalArr = await this.wordsAPI(wordArray);
-    return finalArr;
+    const definition = await this.wordsAPI(wordArray[0]);
+    return [wordArray, definition];
   }
 
-  async wordsAPI(array) {
-    const definition = array[0].word;
-    return fetch(`https://wordsapiv1.p.rapidapi.com/words/${definition}/definitions`, {
+  async wordsAPI(word) {
+    return fetch(`https://wordsapiv1.p.rapidapi.com/words/${word.word}/definitions`, {
     	'method': 'GET',
     	'headers': {
     		'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
@@ -32,8 +31,7 @@ class NetworkService {
     })
     .then((response) => response.json())
     .then(response => {
-    	array.push(response.definitions[0].definition);
-      return array;
+      return response.definitions[0].definition;
     })
     .catch(err => {
     	console.log(err);
