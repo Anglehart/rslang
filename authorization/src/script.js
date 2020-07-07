@@ -80,7 +80,7 @@ function showValidData(inputAlert, submit, validText) {
 }
 
 function showAlert(input, inputAlert, submit, validateFn) {
-  if (input === '') {
+  if (input.value === '') {
     showInvalidData(inputAlert, submit, answerValidation.empty);
   } else if (!validateFn(input.value)) {
     showInvalidData(inputAlert, submit, answerValidation.invalid);
