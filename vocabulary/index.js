@@ -4,17 +4,11 @@ import addRow from './tableContent';
 import css from './index.css';
 import table from './table.css';
 
-// wordLibrary.setLocalStorage();
 
 const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
 
-function drawTable() {
-  const data = wordLibrary.getWords();
-}
-
 wordLibrary.getWords();
-// drawTable();
 
 function changeTable(color) {
   console.log(`change to ${color}`);

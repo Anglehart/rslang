@@ -100,7 +100,7 @@ class WordLibrary {
         'Content-Type': 'applications/json',
       },
     });
-    const data = (await res.ok ? await res.json() : `${res.status}: ${await res.text()}`);
+    const data = (res.ok ? res.json() : `${res.status}: ${await res.text()}`);
     return data;
   }
 
