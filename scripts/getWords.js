@@ -48,9 +48,9 @@ function getWords(arrTrue, arrFalse) {
       const imageUrl = `${this.dataLink}${data[halfOfArray].image}`;
       sessionStorage.truefalse = 0;
       document.querySelectorAll('.cell').forEach((item, i) => {
-        item.onclick = function slova() {
-          const zzz = event.target.id;
-          slova1(data[halfOfArray], item, imageUrl, mini, zzz);
+        item.onclick = function speech() {
+          const syllable = event.target.id;
+          speech1(data[halfOfArray], item, imageUrl, mini, syllable);
         };
       });
 
@@ -62,12 +62,12 @@ function getWords(arrTrue, arrFalse) {
       });
 
       document.onkeypress = function pressenter() {
-        const obj1 = document.getElementById('igra');
+        const obj1 = document.getElementById('acting');
         const display = window.getComputedStyle(obj1, null).getPropertyValue('display');
         if (display === 'flex') {
           if (event.keyCode === 13) {
             if (document.querySelector('.dontKnow').classList.contains('hide') === true) {
-              schet();
+              score();
               contin();
             } else if (trueCh === arrTrue.length && falseCh === arrFalse.length) {
               arrFalse.push(mini);
@@ -79,28 +79,28 @@ function getWords(arrTrue, arrFalse) {
           if (pointEvent !== 'none') {
             if (event.keyCode === 49) {
               const item = document.getElementById('c1');
-              const zzz = 'c1';
-              slova1(data[halfOfArray], item, imageUrl, mini, zzz);
+              const syllable = 'c1';
+              speech1(data[halfOfArray], item, imageUrl, mini, syllable);
             }
             if (event.keyCode === 50) {
               const item = document.getElementById('c2');
-              const zzz = 'c2';
-              slova1(data[halfOfArray], item, imageUrl, mini, zzz);
+              const syllable = 'c2';
+              speech1(data[halfOfArray], item, imageUrl, mini, syllable);
             }
             if (event.keyCode === 51) {
               const item = document.getElementById('c3');
-              const zzz = 'c3';
-              slova1(data[halfOfArray], item, imageUrl, mini, zzz);
+              const syllable = 'c3';
+              speech1(data[halfOfArray], item, imageUrl, mini, syllable);
             }
             if (event.keyCode === 52) {
               const item = document.getElementById('c4');
-              const zzz = 'c4';
-              slova1(data[halfOfArray], item, imageUrl, mini, zzz);
+              const syllable = 'c4';
+              speech1(data[halfOfArray], item, imageUrl, mini, syllable);
             }
             if (event.keyCode === 53) {
               const item = document.getElementById('c5');
-              const zzz = 'c5';
-              slova1(data[halfOfArray], item, imageUrl, mini, zzz);
+              const syllable = 'c5';
+              speech1(data[halfOfArray], item, imageUrl, mini, syllable);
             }
           }
         }
