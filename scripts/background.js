@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-function schet() {
+function score() {
   const nums = Math.floor(100 / Number(localStorage.allCounter));
-  if (typeof cot === 'undefined' || cot === 0) {
-    sessionStorage.chis = 100 - nums;
-    cot = 1;
-    document.querySelector('.igra').style.backgroundPositionY = `${sessionStorage.chis}%`;
-  } else if (cot === 1) {
-    sessionStorage.chis -= nums;
-    document.querySelector('.igra').style.backgroundPositionY = `${sessionStorage.chis}%`;
+  if (typeof verification === 'undefined' || verification === 0) {
+    sessionStorage.numeric = 100 - nums;
+    verification = 1;
+    document.querySelector('.acting').style.backgroundPositionY = `${sessionStorage.numeric}%`;
+  } else if (verification === 1) {
+    sessionStorage.numeric -= nums;
+    document.querySelector('.acting').style.backgroundPositionY = `${sessionStorage.numeric}%`;
   }
 }
 
