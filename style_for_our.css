@@ -297,12 +297,12 @@ p {
   bottom: 0;
 }
 
-.cherta {
+.grey-line {
     border-bottom: 2px solid #e5e5e5;
     margin: 0 auto;
 }
 
-.polosa {
+.dividing-line {
   flex-direction: row;
     margin: auto;
     padding: 40px 40px 0px 40px;
@@ -310,12 +310,12 @@ p {
 
 .polya{padding-bottom: 40px;}
 
-.cherta, .polosa {
+.grey-line, .dividing-line {
     display: flex;
     max-width: 1065px;
 }
 
-.polosa-background {
+.dividing-line-background {
     background-image: url(img/idea.svg);
     height: 170px;
     min-width: 140px;
@@ -326,7 +326,7 @@ p {
 }
 
 
-.polosa-background1 {
+.dividing-line-background1 {
     background-image: url(img/clock.svg);
     height: 130px;
     min-width: 200px;
@@ -336,7 +336,7 @@ p {
     margin-left: 48px;
 }
 
-.zagolovok {
+.headline {
     color: #3c3c3c;
     font-size: 24px;
     line-height: 26px;
@@ -348,7 +348,7 @@ p {
 padding: 35px 40px 0;
 }
 
-.polosa-text {
+.dividing-line-text {
     color: #777;
     flex-grow: 1;
     font-size: 17px;
@@ -415,12 +415,12 @@ li .card img{
   border-radius: 20px 20px 0 0;
 }
 
-li .seti img{
-  height: 20px;
-  width: 20px;
+li .web img{
+  height: 30px;
+  width: 30px;
 }
 
-li .seti{
+li .web{
   margin: 24px 0;
   padding-bottom: 20px;
 }
@@ -503,22 +503,22 @@ footer {
   .center {
       padding: 65px 40px 0;
   }
-.polosa {
+.dividing-line {
   flex-direction: column-reverse;
 }
 
-.polosa-background{
+.dividing-line-background{
     margin: auto;
     min-width: 120px;
     height: 120px;
 }
-.polosa-background1{
+.dividing-line-background1{
     margin: auto;
     min-width: 90px;
     height: 120px;
 }
 
-.zagolovok, .polosa-text{text-align: center;}
+.headline, .dividing-line-text{text-align: center;}
 
 }
 
