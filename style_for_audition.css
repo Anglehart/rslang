@@ -22,7 +22,7 @@ font-family: "Roboto", sans-serif;
 @-o-keyframes      fade-in {   0% { opacity: 0.3; }   100% { opacity: 1; }   }
 @keyframes         fade-in {   0% { opacity: 0.3; }   100% { opacity: 1; }   }
 
-.igra, .kolvo-slov, .intro, .b-popup{
+.acting, .wordСount, .intro, .b-popup{
   -webkit-animation: fade-in 1s linear;
   -moz-animation: fade-in 1s linear;
   -o-animation: fade-in 1s linear;
@@ -48,7 +48,7 @@ background-position-x: center;
 overflow: hidden;
 }
 
-.kolvo-slov{
+.wordСount{
   display: none;
   align-items: center;
   flex-direction: column;
@@ -101,7 +101,7 @@ border-radius: 10px;
     color: #fff;
 }
 
-.igra p {
+.acting p {
     max-width: 600px;
     margin: 30px auto 0 10px;
     font-size: 25px;
@@ -111,7 +111,7 @@ border-radius: 10px;
     cursor: pointer;
 }
 
-.qwe {
+.noise {
 float: left;
 margin-bottom: -5px;
 }
@@ -122,7 +122,7 @@ margin-bottom: -5px;
 
 .hide{display: none;}
 
-.kolvo-slov p{
+.wordСount p{
   max-width: 600px;
   margin: 0 auto 0px;
   font-size: 18px;
@@ -181,7 +181,7 @@ margin-bottom: -5px;
   background: bisque;
 }
 
-#spisok ul{
+#catalog ul{
   display: grid;
   grid-template-areas:
   "a a a"
@@ -189,7 +189,7 @@ margin-bottom: -5px;
   padding-left: 0px;
 }
 
-#spisok-level ul{
+#catalog-level ul{
   display: grid;
   grid-template-areas:
   "a a a"
@@ -198,16 +198,16 @@ margin-bottom: -5px;
   padding-bottom: 20px;
 }
 
-#spisok li, #spisok-level li{
+#catalog li, #catalog-level li{
   list-style: none;
 }
 
-#spisok li::before{
+#catalog li::before{
   content: "";
   float: left;
 }
 
-#spisok-level li::before{
+#catalog-level li::before{
   content: "";
   float: left;
 }
@@ -217,9 +217,9 @@ margin-bottom: -5px;
 }
 
 
-/*---------------------------------igra--------------------------------*/
+/*---------------------------------acting--------------------------------*/
 
-.igra{
+.acting{
     display: none;
     align-items: center;
     flex-direction: column;
@@ -381,18 +381,18 @@ font-size: 23px;
   overflow-y: scroll;
 }
 
-.vivod-zvuk{
+.consequence-sound{
   width: 20px;
   height: 20px;
   cursor: pointer;
   padding-right: 10px;
 }
 
-.vivod{
+.consequence{
   padding-left: 20px;
 }
 
-.vivod-text{
+.consequence-text{
     position: relative;
     bottom: 4px;
     padding-right: 10px;
@@ -414,7 +414,7 @@ font-size: 23px;
   float: left;
 }
 
-.btn-vivod {
+.btn-consequence {
   font-size: 16px;
   text-align: center;
   padding: 15px 25px;
@@ -469,7 +469,7 @@ font-size: 23px;
     padding-left: 0px;
   }
 
-  .btn-vivod {
+  .btn-consequence {
     margin: 5px;
     padding: 10px;
   }
@@ -477,7 +477,7 @@ font-size: 23px;
 
 @media(max-width: 999px){
 
-#spisok ul, #spisok-level ul{
+#catalog ul, #catalog-level ul{
   display: grid;
   grid-template-areas:
   "a a"
@@ -493,7 +493,7 @@ font-size: 23px;
     padding-right: 5px;
   }
 
-.intro p, .kolvo-slov p{
+.intro p, .wordСount p{
   font-size: 25px;
   max-width: 600px;
   line-height: 1.4;
@@ -502,7 +502,7 @@ font-size: 23px;
   margin: 10px;
 }
 
-.igra p {
+.acting p {
     max-width: 600px;
     font-size: 20px;
     line-height: 1.4;
@@ -523,13 +523,13 @@ h3 span {font-size: 60px;}
 
 .little-sound{padding-top: 0px;}
 
-.qwe{padding-top: 10px;}
+.noise{padding-top: 10px;}
 
 }
 
 @media (min-width: 320px) and (max-width: 599px){
 
-#spisok ul, #spisok-level ul{
+#catalog ul, #catalog-level ul{
   display: grid;
   grid-template-areas:
   "a"
@@ -549,7 +549,7 @@ h3 span {font-size: 60px;}
   font-size: 20px;
 }
 
-.intro p, .kolvo-slov p {
+.intro p, .wordСount p {
     max-width: 600px;
     font-size: 25px;
     line-height: 1.4;
@@ -558,7 +558,7 @@ h3 span {font-size: 60px;}
     margin: 10px;
 }
 
-.igra p {
+.acting p {
     max-width: 600px;
     font-size: 20px;
     line-height: 1.4;
