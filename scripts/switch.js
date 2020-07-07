@@ -3,7 +3,7 @@
 const but = document.querySelector('.intro-btn');
 but.addEventListener('click', () => {
   document.querySelector('.intro').style.display = 'none';
-  document.querySelector('.kolvo-slov').style.display = 'flex';
+  document.querySelector('.wordСount').style.display = 'flex';
 });
 
 document.querySelectorAll('.continue-btn').forEach((item, i) => {
@@ -33,8 +33,8 @@ document.querySelectorAll('.continue-btn2').forEach((item1, i1) => {
 });
 
 document.querySelector('.start').addEventListener('click', () => {
-  document.querySelector('.kolvo-slov').style.display = 'none';
-  document.querySelector('.igra').style.display = 'flex';
+  document.querySelector('.wordСount').style.display = 'none';
+  document.querySelector('.acting').style.display = 'flex';
   repeat();
-  document.querySelector('.sound').innerHTML = '<img class = "poster" alt="sound" src ="img/zvuk.png"></img>';
+  document.querySelector('.sound').innerHTML = '<img class = "poster" alt="sound" src ="img/sound.png"></img>';
 });
