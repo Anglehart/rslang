@@ -52,15 +52,15 @@ function splitLetters(word) {
   wordArray.push(letters);
 }
 
-function animateLetterOut(cw, i) {
+function animateLetterOut(useword, i) {
   setTimeout(() => {
-    cw[i].className = 'letter out';
+    useword[i].className = 'letter out';
   }, i * 80);
 }
 
-function animateLetterIn(nw, i) {
+function animateLetterIn(nextword, i) {
   setTimeout(() => {
-    nw[i].className = 'letter in';
+    nextword[i].className = 'letter in';
   }, 340 + (i * 80));
 }
 
@@ -70,16 +70,16 @@ for (let i = 0; i < words.length; i += 1) {
 }
 
 function changeWord() {
-  const cw = wordArray[currentWord];
-  const nw = currentWord === words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
-  for (let i = 0; i < cw.length; i += 1) {
-    animateLetterOut(cw, i);
+  const useword = wordArray[currentWord];
+  const nextword = currentWord === words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
+  for (let i = 0; i < useword.length; i += 1) {
+    animateLetterOut(useword, i);
   }
 
-  for (let i = 0; i < nw.length; i += 1) {
-    nw[i].className = 'letter behind';
-    nw[0].parentElement.style.opacity = 1;
-    animateLetterIn(nw, i);
+  for (let i = 0; i < nextword.length; i += 1) {
+    nextword[i].className = 'letter behind';
+    nextword[0].parentElement.style.opacity = 1;
+    animateLetterIn(nextword, i);
   }
 
   currentWord = (currentWord === wordArray.length - 1) ? 0 : currentWord + 1;
