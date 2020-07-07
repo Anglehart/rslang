@@ -69,18 +69,18 @@ function drawForm(data) {
 }
 
 function checkRequired() {
-  const a = document.getElementById('showTranslation');
-  const b = document.getElementById('showTextMeaning');
-  const c = document.getElementById('showTextExample');
-  a.disabled = '';
-  b.disabled = '';
-  c.disabled = '';
-  if (a.checked == false && b.checked == false) { 
-    c.disabled = 'true';
-  } else if(a.checked == false && c.checked == false) {
-    b.disabled = 'true';
-  } else if(b.checked == false && c.checked == false) {
-    a.disabled = 'true';
+  const translation = document.getElementById('showTranslation');
+  const meaning = document.getElementById('showTextMeaning');
+  const example = document.getElementById('showTextExample');
+  translation.disabled = '';
+  meaning.disabled = '';
+  example.disabled = '';
+  if (translation.checked == false && meaning.checked == false) { 
+    example.disabled = 'true';
+  } else if(translation.checked == false && example.checked == false) {
+    meaning.disabled = 'true';
+  } else if(meaning.checked == false && example.checked == false) {
+    translation.disabled = 'true';
   }
 }
 
