@@ -425,7 +425,7 @@ height: 65px;
     padding: 40px 40px 0px 40px;
 }
 
-.polya{padding-bottom: 40px;}
+.square{padding-bottom: 40px;}
 
 .grey-line, .dividing-line {
     display: flex;
@@ -474,7 +474,7 @@ height: 65px;
     margin-left: 48px;
 }
 
-.zagolovok {
+.headline {
     color: #3c3c3c;
     font-size: 24px;
     line-height: 26px;
@@ -914,7 +914,7 @@ iframe{
     height: 120px;
 }
 
-.zagolovok, .dividing-line-text{text-align: center;}
+.headline, .dividing-line-text{text-align: center;}
 
 .dividing-line-opisanie{
   display: block;
