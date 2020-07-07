@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable prefer-const */
 this.dataLink = 'https://raw.githubusercontent.com/Anglehart/rslang-data/master/';
-let cot;
+let verification;
 let arrTrue = [];
 let arrFalse = [];
 if (localStorage.allCounter === undefined || localStorage.allCounter === null) {
@@ -20,7 +20,7 @@ function repeat() {
     num1 += 1;
     localStorage.currentCounter = num1;
   } else {
-    cot = 0;
+    verification = 0;
     setTimeout(statistic, 1000);
   }
 }
