@@ -79,19 +79,13 @@ function showValidData(inputAlert, submit, validText) {
   submit.disabled = false;
 }
 
-function showEmailAlert(input, inputAlert, submit, validText, invalidText) {
-  if (!validateEmail(input.value)) {
-    showInvalidData(inputAlert, submit, invalidText);
+function showAlert(input, inputAlert, submit, validateFn) {
+  if (input === '') {
+    showInvalidData(inputAlert, submit, answerValidation.empty);
+  } else if (!validateFn(input.value)) {
+    showInvalidData(inputAlert, submit, answerValidation.invalid);
   } else {
-    showValidData(inputAlert, submit, validText);
-    createCheckmarkIcon(input);
-  }
-}
-function showPasswordAlert(input, inputAlert, submit, validText, invalidText) {
-  if (!validatePassword(input.value)) {
-    showInvalidData(inputAlert, submit, invalidText);
-  } else {
-    showValidData(inputAlert, submit, validText);
+    showValidData(inputAlert, submit, answerValidation.valid);
     createCheckmarkIcon(input);
   }
 }
@@ -109,10 +103,10 @@ function checkMatch() {
   }
 }
 
-emailSignIn.addEventListener('blur', () => showEmailAlert(emailSignIn, alertEmailSignIn, buttonSignIn, answerValidation.valid, answerValidation.invalid));
-passwordSignIn.addEventListener('blur', () => showPasswordAlert(passwordSignIn, alertPasswordSignIn, buttonSignIn, answerValidation.valid, answerValidation.invalid));
-emailSignUp.addEventListener('blur', () => showEmailAlert(emailSignUp, alertEmailSignUp, buttonSignUp, answerValidation.valid, answerValidation.invalid));
-passwordSignUp.addEventListener('blur', () => showPasswordAlert(passwordSignUp, alertPasswordSignUp, buttonSignUp, answerValidation.valid, answerValidation.invalid));
+emailSignIn.addEventListener('blur', () => showAlert(emailSignIn, alertEmailSignIn, buttonSignIn, validateEmail));
+passwordSignIn.addEventListener('blur', () => showAlert(passwordSignIn, alertPasswordSignIn, buttonSignIn, validatePassword));
+emailSignUp.addEventListener('blur', () => showAlert(emailSignUp, alertEmailSignUp, buttonSignUp, validateEmail));
+passwordSignUp.addEventListener('blur', () => showAlert(passwordSignUp, alertPasswordSignUp, buttonSignUp, validatePassword));
 passwordConfirm.addEventListener('blur', () => checkMatch());
 
 function transformPassword(toggler, password) {
