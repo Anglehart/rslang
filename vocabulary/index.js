@@ -8,7 +8,14 @@ import table from './table.css';
 const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
 
-wordLibrary.getWords();
+// wordLibrary.setLocalStorage();
+
+async function start() {
+  const allWords = await wordLibrary.getWords();
+  allWords.forEach((element) => wordLibrary.getWordData(element));
+  console.log( await wordLibrary.getWords());
+}
+start();
 
 function changeTable(color) {
   console.log(`change to ${color}`);

@@ -9,7 +9,7 @@ class WordLibrary {
     localStorage.setItem('password', 'RsSchool2020!');
     localStorage.setItem('userId', '5eefa4639896e10017eea40c');
     localStorage.setItem('token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDA1NTQ3NCwiZXhwIjoxNTk0MDY5ODc0fQ.jRJS2VS5L_zHyhoQ9fhnpjqvZjzN3Y0N5sxTKd3yOSE');
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDE0NjQxMCwiZXhwIjoxNTk0MTYwODEwfQ.hgw6iirIXt8QyhB9uZ3q0AAB91QTVx153lKipoa1vw8');
   }
 
   // служебные методы
@@ -28,21 +28,37 @@ class WordLibrary {
   // TODO: не забыть потом поменять на sessionStorage
   // возможно вначале стоит проверить данные на существование, а потом отдавать
   // на случай если кто-то будет баловаться и вручную удалит данные из консоли
-  async getWordData(id, difficulty, firstTime, lastTime) {
-    const url = `https://afternoon-falls-25894.herokuapp.com/words/${id}`;
+  async getWordData(b) {
+    const a = await b;
+    const url = `https://afternoon-falls-25894.herokuapp.com/words/${a.wordId}`;
     const res = await fetch(url, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${this.getToken()}`,
         Accept: 'application/json',
-        'Content-Type': 'applications/json',
+        'Content-Type': 'application/json',
       },
     });
     const data = await res.json();
-    data.difficulty = difficulty;
-    data.firstTime = firstTime;
-    data.lastTime = lastTime;
+    data.difficulty = a.difficulty;
+    data.firstTime = a.optional.firstTime;
+    data.lastTime = a.optional.lastTime;
     addRow(data);
+  }
+
+  // Удаляем слово из словая пользователя
+  async deleteWordFromUser(id){
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words/${id}`;
+    const res = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    // const data = await res.json();
+    console.log(res);
   }
 
   // TODO: изменить консольлог на ретурн
@@ -51,23 +67,24 @@ class WordLibrary {
   async addWord(wordId, difficulty) {
     const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words/${wordId}`;
     const now = new Date();
+    const body = {
+      difficulty: `${(difficulty || '2')}`,
+      optional: {
+        firstTime: now.getTime(),
+        lastTime: now.getTime(),
+      },
+    };
     const res = await fetch(url, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${this.getToken()}`,
         Accept: 'application/json',
-        'Content-Type': 'applications/json',
+        'Content-Type': 'application/json',
       },
-      body: {
-        difficulty: `${(difficulty || 2)}`,
-        optional: {
-          firstTime: now.getTime(),
-          lastTime: now.getTime(),
-        },
-      },
+      body: JSON.stringify(body),
     });
-    const data = (await res.ok ? await res.json() : `${res.status}: ${await res.text()}`);
-    console.log(data);
+    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
+    console.log(res.status);
   }
 
   // выдает список (массив объектов) всех слов пользователя
@@ -78,13 +95,12 @@ class WordLibrary {
       headers: {
         Authorization: `Bearer ${this.getToken()}`,
         Accept: 'application/json',
-        'Content-Type': 'applications/json',
+        'Content-Type': 'application/json',
       },
     });
     const data = await res.json();
-    data.forEach((e) => this.getWordData(
-      e.wordId, e.difficulty, e.optional.firstTime, e.optional.lastTime,
-    ));
+    console.log()
+    return data;
   }
 
   // TODO: изменить консольлог на ретурн
@@ -97,10 +113,11 @@ class WordLibrary {
       headers: {
         Authorization: `Bearer ${this.getToken()}`,
         Accept: 'application/json',
-        'Content-Type': 'applications/json',
+        'Content-Type': 'application/json',
       },
     });
-    const data = (res.ok ? res.json() : `${res.status}: ${await res.text()}`);
+    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
+    // console.log(res.json());
     return data;
   }
 
@@ -110,22 +127,23 @@ class WordLibrary {
     const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words/${wordId}`;
     const now = new Date();
     const firstTime = await this.checkFirstTime(wordId);
+    const body = {
+      difficulty: `${difficulty}`,
+      optional: {
+        firstTime: `${firstTime}`,
+        lastTime: `${now}`,
+      },
+    }
     const res = await fetch(url, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${this.getToken()}`,
         Accept: 'application/json',
-        'Content-Type': 'applications/json',
+        'Content-Type': 'application/json',
       },
-      body: {
-        difficulty: `${difficulty}`,
-        optional: {
-          firstTime: `${firstTime}`,
-          lastTime: `${now}`,
-        },
-      },
+      body: JSON.stringify(body),
     });
-    const data = (await res.ok ? await res.json() : `${res.status}: ${await res.text()}`);
+    const data = (res.ok ? res.json() : `${res.status}: ${await res.text()}`);
     console.log(data);
   }
 
@@ -137,6 +155,9 @@ class WordLibrary {
 
   async checkFirstTime(wordId) {
     const data = await this.checkWord(wordId);
+    if (!data.optional.firstTime) {
+      data.optional.firstTime = new Date();
+    }
     return data.optional.firstTime;
   }
 
