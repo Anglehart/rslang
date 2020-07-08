@@ -28,6 +28,13 @@ main {
   box-sizing: border-box;
   text-align: center;
   font-size: 20px;
+  min-height: 67px;
+}
+.active-answer {
+  background: linear-gradient(#da7a14, #74440e);
+}
+.correct-answer {
+  background: linear-gradient(#2f8625, #3a5b3a);
 }
 .question {
   padding: 20px 45px;
