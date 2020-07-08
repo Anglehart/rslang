@@ -9,7 +9,7 @@ class WordLibrary {
     localStorage.setItem('password', 'RsSchool2020!');
     localStorage.setItem('userId', '5eefa4639896e10017eea40c');
     localStorage.setItem('token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDE0NjQxMCwiZXhwIjoxNTk0MTYwODEwfQ.hgw6iirIXt8QyhB9uZ3q0AAB91QTVx153lKipoa1vw8');
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDIwMTM1NywiZXhwIjoxNTk0MjE1NzU3fQ.OT1p6QJcYXcR8z4TqgDylQd4e6mP5hKAK58pA91SE3k');
   }
 
   // служебные методы
@@ -47,7 +47,7 @@ class WordLibrary {
   }
 
   // Удаляем слово из словая пользователя
-  async deleteWordFromUser(id){
+  async deleteWordFromUser(id) {
     const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words/${id}`;
     const res = await fetch(url, {
       method: 'DELETE',
@@ -57,8 +57,8 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
     });
-    // const data = await res.json();
-    console.log(res);
+    const data = await res.json();
+    console.log(data);
   }
 
   // TODO: изменить консольлог на ретурн
@@ -84,7 +84,7 @@ class WordLibrary {
       body: JSON.stringify(body),
     });
     const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    console.log(res.status);
+    return data;
   }
 
   // выдает список (массив объектов) всех слов пользователя
@@ -99,7 +99,6 @@ class WordLibrary {
       },
     });
     const data = await res.json();
-    console.log()
     return data;
   }
 
@@ -116,9 +115,36 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
     });
-    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    // console.log(res.json());
+    const data = await (res.ok ? res.json() : `${res.status}: ${res.text()}`);
     return data;
+  }
+
+  // для тестового изменения даты слов
+  async updateWordTest(wordId, difficulty, minus) {
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${await this.getUserId()}/words/${wordId}`;
+    const now = new Date();
+    await now.setDate(now.getDate() - minus);
+    const firstTime = now;
+    console.log(firstTime);
+    // const firstTime = await this.checkFirstTime(wordId);
+    const body = await {
+      difficulty: `${difficulty}`,
+      optional: {
+        firstTime: `${await firstTime}`,
+        lastTime: ` ${now}`,
+      },
+    };
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
+    console.log(data);
   }
 
   // TODO: изменить консольлог на ретурн
@@ -133,7 +159,7 @@ class WordLibrary {
         firstTime: `${firstTime}`,
         lastTime: `${now}`,
       },
-    }
+    };
     const res = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -143,7 +169,7 @@ class WordLibrary {
       },
       body: JSON.stringify(body),
     });
-    const data = (res.ok ? res.json() : `${res.status}: ${await res.text()}`);
+    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
     console.log(data);
   }
 
