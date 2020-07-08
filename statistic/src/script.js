@@ -38,9 +38,7 @@ function getUserWord(data) {
       console.log(data);
     })
 }
-
-
-
+let array = [];
 function getUseraggregatedWords(data) {
   const url = `https://afternoon-falls-25894.herokuapp.com/users/${data.userId}/aggregatedWords?wordsPerPage=20&onlyUserWords=true&filter={"userWord.difficulty":"0"}`;
   return fetch(url, {
@@ -63,20 +61,30 @@ function getUseraggregatedWords(data) {
       console.log(data);
       let words = data;
       words[0].paginatedResults.forEach((result) => {
+        array.push(new Date(result.userWord.optional.lastTime));
         points.push({x:new Date(result.userWord.optional.lastTime), y:result.wordsPerExampleSentence});
       })
+      points.sort((a, b) => {
+        return a.x-b.x;
+      });
+
       console.log(points);
-      drawChart();
-      // words.forEach((time) => {
-      //   data.userWord.optional.lastTime
-      //   dataPoints.push()
-      // })
-      
+      console.log(unique(array));
+      drawChart();      
     })
 }
-// function shuffle(array) {
-//   array.sort(() => Math.random() - 0.5);
-// }
+function unique(arr) {
+  let result = [];
+
+  for (let element of arr) {
+    if (!result.includes(element)) {
+      result.push(element);
+    }
+  }
+  return result;
+}
+
+
 let points = [];
 let chart;
 function drawChart() {
