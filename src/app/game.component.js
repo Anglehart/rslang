@@ -7,14 +7,16 @@ class Game extends Component {
   constructor(config) {
     super(config);
     this.currentRound = 0;
-    this.currentRound = {};
+    this.currentAnswer = '';
   }
 
   initComponent(){
     this.startNewGame();
+    document.querySelector('.new-game-btn').addEventListener('click', () => this.startNewGame());
   }
 
   startNewGame() {
+    document.querySelector('.new-game-btn').classList.add('disable');
     this.currentRound = 1;
     this.startNewRound();
   }
@@ -25,7 +27,6 @@ class Game extends Component {
     const wordsArray = arr[0];
     const question = arr[1];
     this.drawQuestion(wordsArray, question);
-    console.log(this.currentRound);
     this.currentRound += 1;
     this.currentAnswer = wordsArray[0];
   }
@@ -71,11 +72,12 @@ class Game extends Component {
     document.querySelectorAll('.option').forEach((obj) => {
       obj.style.pointerEvents = 'none';
     });
+    document.querySelector('.new-game-btn').classList.remove('disable');
   }
 }
 
 const game = new Game({
   selector: '.game-wrapper',
-  template: '<div class="question"></div><div class="answers"></div>',
+  template: '<div class="question"></div><div class="answers"></div><div class="new-game-btn disable">New game?</div>',
 });
 export default game;
