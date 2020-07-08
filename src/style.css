@@ -2,16 +2,24 @@
 /*@import 'node_modules/dragula/dragula';*/
 body {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 main {
-  width: 1200px;
-  margin: auto;
+  width: 800px;
+  margin-top: 30px;
+}
+aside {
+  width: 300px;
+  margin-top: 30px;
 }
 .game-wrapper {
-  width: 70%;
+
 }
 .disable {
   display: none !important;
@@ -60,4 +68,49 @@ main {
   width: 165px;
   margin: 30px auto;
   border-radius: 5px;
+}
+.rounds-wrapper {
+  width: 100%;
+  background: url(./app/assets/back.jpg);
+  background-size: cover;
+  border-radius: 5px;
+}
+.wordRow {
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+}
+.currentRound {
+  background: #fc9e05;
+  color: #000;
+}
+.tips-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.tip {
+  width: 100px;
+  height: 62px;
+  background-size: cover;
+  cursor: pointer;
+}
+.tip-5050 {
+  background-image: url(./app/assets/5050_normal.png);
+}
+.tip-expert {
+  background-image: url(./app/assets/expert_normal.png);
+}
+.tip-lang {
+  background-image: url(./app/assets/lang_normal.png);
+}
+.used-tip {
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+.win{
+  text-align: center;
+  font-size: 25px;
+  color: #34712e;
+  font-weight: bold;
+  margin-top: 15px;
 }

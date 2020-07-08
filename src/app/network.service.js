@@ -58,6 +58,9 @@ class NetworkService {
       }
       return array;
     })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   randomInteger(min, max) {
