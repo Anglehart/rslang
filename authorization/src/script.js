@@ -183,6 +183,8 @@ function setBasicSettings() {
     wordsPerDay: 20,
     optional: {
       cardsPerDay: 20,
+      showImage: true,
+      showTranscription: true,
       showTranslation: true,
       showTextMeaning: true,
       showTextExample: true,
