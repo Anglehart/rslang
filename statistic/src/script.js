@@ -93,15 +93,16 @@ function drawChart() {
     },
     axisY:{
       title: 'Percentage',
-		  suffix: '%"'
+      suffix: '%',
+      
     },
     data: [{      
-      type: "line",
+      type: "spline",
+      includeZero: false,
       xValueType: "dateTime",
 		  yValueFormatString: "#,##0.##\"%\"",
       dataPoints: points
     }]
   });
   chart.render();
-  
   }
