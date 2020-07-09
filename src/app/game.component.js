@@ -2,6 +2,7 @@ import { Component } from './core.component';
 import overlay from './overlay.component';
 import rounds from './rounds.component';
 import network from './network.service';
+import stats from './stats.service';
 
 
 class Game extends Component {
@@ -17,6 +18,9 @@ class Game extends Component {
     document.querySelector('.tip-5050').addEventListener('click', () => this.tip5050());
     document.querySelector('.tip-expert').addEventListener('click', () => this.tipExpert());
     document.querySelector('.tip-lang').addEventListener('click', () => this.tipLang());
+    localStorage.setItem('userId', '5eefa4639896e10017eea40c');
+    localStorage.setItem('token',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDMyNTc0MCwiZXhwIjoxNTk0MzQwMTQwfQ.QRum8ZdeAtFt7pbenNh938Nw8h8oM2wdVz03yZqvXlk');
   }
 
   startNewGame() {
@@ -51,7 +55,6 @@ class Game extends Component {
       option.dataId = item.id;
       option.innerHTML = `<span class="opt-word">${item.word}</span><span class="opt-trans disable">${item.wordTranslate}</span>`;
       if (network.randomInteger(0, 1) === 0) {
-        console.log(0)
         document.querySelector('.answers').append(option);
       } else {
         document.querySelector('.answers').prepend(option);
@@ -73,7 +76,6 @@ class Game extends Component {
   }
 
   checkAnswer(answer) {
-
     document.querySelectorAll('.option').forEach((item) => {
       item.style.pointerEvents = 'none';
     });
@@ -85,10 +87,10 @@ class Game extends Component {
       if (answer.id === 'option0') {
         document.querySelector('.currentRound').innerHTML = answer.dataWord;
         if(this.currentRound === 16) {
-          //lib.correct(answer.dataId) - отправка на бэк правильного слова
+          stats.correct(answer.dataId);
           this.winGame();
         } else {
-          //lib.correct(answer.dataId) - отправка на бэк правильного слова
+          stats.correct(answer.dataId);
           this.startNewRound();
         }
       } else {
@@ -110,7 +112,7 @@ class Game extends Component {
       obj.style.pointerEvents = 'none';
     });
     document.querySelector('.new-game-btn').classList.remove('disable');
-    console.log(answerId); //отправка на бэк ошибки
+    stats.wrong(answerId);
   }
 
   tip5050() {
