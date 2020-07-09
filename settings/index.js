@@ -5,7 +5,7 @@ window.onload = function() {
 function saveSettings() {
   const WordsPerDay = Number(document.getElementById('wordsPerDay').value);
   const CardsPerDay = Number(document.getElementById('cardsPerDay').value);
-  if (WordsPerDay < 10 || WordsPerDay > 50 || CardsPerDay < 10 || CardsPerDay > 50) {
+  if (WordsPerDay < 10 || WordsPerDay > 100 || CardsPerDay < 10 || CardsPerDay > 100) {
     showMessage(false);
     return false;
   }
