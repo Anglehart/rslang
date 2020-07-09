@@ -5,6 +5,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
+  background: url(./app/assets/back.png);
+  background-size: cover;
+  backdrop-filter: grayscale(50%);
+  min-height: 100vh;
 }
 .hidden {
   width: 0px !important;
@@ -198,6 +202,7 @@ h1 {
   margin: auto;
   border: 2px solid gray;
   background-size: cover;
+  background-color: #fff;
 }
 .rows-game-end {
   opacity: 0 !important;

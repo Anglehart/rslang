@@ -2,6 +2,7 @@ import dragula from '../../node_modules/dragula/dragula';
 import { Component } from './core.component';
 import storageService from './storage.service';
 import cropService from './crop.service';
+import stats from './stats.service';
 import overlay from './overlay.component';
 
 class Puzzle extends Component {
@@ -90,6 +91,7 @@ class Puzzle extends Component {
     });
     if (count === this.rightOrder.length) {
       overlay.drawCorrect(this.currentWord);
+      stats.correct(this.currentWord.id);
       document.querySelector('.giveup-button').classList.add('hidden-button');
       document.querySelector('.continue-button').classList.remove('hidden-button');
       document.querySelector('.check-button').classList.add('hidden-button');
@@ -98,6 +100,7 @@ class Puzzle extends Component {
 
   giveUp() {
     overlay.drawInCorrect(this.currentWord);
+    stats.wrong(this.currentWord.id);
     const correctRow = [];
     for (let i = 1; i <= this.rightOrder.length; i += 1) {
       const word = document.getElementById(`${this.currentRound}-${i}`);
@@ -141,6 +144,11 @@ class Puzzle extends Component {
   }
 
   gameEnd() {
+    if (overlay.iKnow.length === 10) {
+      stats.updateStats('puzzle', true);
+    } else {
+      stats.updateStats('puzzle', false);
+    }
     document.querySelector('.game-field').style.backgroundImage = `url(${this.background})`;
     document.querySelectorAll('.game-row').forEach((item) => {
       item.classList.add('rows-game-end');
