@@ -21,6 +21,7 @@ class Game extends Component {
 
   startNewGame() {
     document.querySelector('.new-game-btn').classList.add('disable');
+    document.querySelector('.win').classList.add('disable');
     document.querySelectorAll('.tip').forEach((item) => {
       item.classList.remove('used-tip');
     })
@@ -55,7 +56,7 @@ class Game extends Component {
     document.querySelectorAll('.option').forEach((item) => {
       item.addEventListener('click', () => {
         if (event.currentTarget.classList.contains('active-answer')) {
-          this.checkAnswer(event.target);
+          this.checkAnswer(event.currentTarget);
         } else {
           document.querySelectorAll('.option').forEach((obj) => {
             obj.classList.remove('active-answer');
@@ -65,18 +66,18 @@ class Game extends Component {
       })
     });
   }
-  
+
   checkAnswer(answer) {
+
     document.querySelectorAll('.option').forEach((item) => {
       item.style.pointerEvents = 'none';
     });
-    
+
     for (let i = 0; i <= 800; i += 200) {
       setTimeout(() => { document.getElementById('option0').classList.toggle('correct-answer') }, i);
     }
     setTimeout(() => {
       if (answer.id === 'option0') {
-        console.log(answer);
         document.querySelector('.currentRound').innerHTML = answer.dataWord;
         if(this.currentRound === 16) {
           //lib.correct(answer.dataId) - отправка на бэк правильного слова
@@ -90,7 +91,7 @@ class Game extends Component {
       }
     }, 1500);
   };
-  
+
   winGame(){
     document.querySelectorAll('.option').forEach((obj) => {
       obj.style.pointerEvents = 'none';
@@ -98,7 +99,7 @@ class Game extends Component {
     document.querySelector('.new-game-btn').classList.remove('disable');
     document.querySelector('.win').classList.remove('disable');
   }
-  
+
   loseGame(answerId) {
     document.querySelectorAll('.option').forEach((obj) => {
       obj.style.pointerEvents = 'none';
@@ -106,7 +107,7 @@ class Game extends Component {
     document.querySelector('.new-game-btn').classList.remove('disable');
     console.log(answerId); //отправка на бэк ошибки
   }
-  
+
   tip5050() {
     document.querySelector('.tip-5050').classList.add('used-tip');
     document.getElementById('option2').innerHTML = '';
@@ -114,13 +115,13 @@ class Game extends Component {
     document.getElementById('option2').style.pointerEvents = 'none';
     document.getElementById('option3').style.pointerEvents = 'none';
   }
-  
+
   tipExpert(){
     document.querySelector('.tip-expert').classList.add('used-tip');
     document.querySelectorAll('.option').forEach((item) => { item.classList.remove('active-answer') })
     document.getElementById('option0').classList.add('active-answer');
   }
-  
+
   tipLang(){
     document.querySelector('.tip-lang').classList.add('used-tip');
     document.querySelectorAll('.opt-word').forEach((item) => item.classList.add('disable'));
