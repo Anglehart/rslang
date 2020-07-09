@@ -44,8 +44,6 @@
 }
 
 .tab--button {
-  padding: 10px 20px;
-  /* height: ; */
   margin: 0% 10%;
   width: 80%;
   min-width: 160px;
@@ -81,4 +79,9 @@
 
 .none {
   display: none;
+}
+
+.active-row{
+  background: rgb(32, 32, 32);
+  color: #fff;
 }

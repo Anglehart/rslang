@@ -46,4 +46,31 @@ function change() {
 
 changeTable('green');
 
+function deletWords() {
+  const words = tableContent.checkActiveRow()
+  if (words){
+    words.forEach(element => {
+      const wordId = element.getAttribute('data-wordid');
+      wordLibrary.remove(wordId)
+    });
+  }else{
+    console.log('nothing to delet!');
+  }
+}
+
+function restoreWords() {
+  const words = tableContent.checkActiveRow()
+  if (words){
+    words.forEach(element => {
+      const wordId = element.getAttribute('data-wordid');
+      wordLibrary.restore(wordId)
+    });
+  }else{
+    console.log('nothing to delet!');
+  }
+}
+
+document.querySelector('button.del-button').addEventListener('click', deletWords);
+document.querySelector('button.add-button').addEventListener('click', restoreWords);
+
 document.querySelector('div.tabs-row').addEventListener('click', change);

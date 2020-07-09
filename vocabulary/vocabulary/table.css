@@ -48,16 +48,24 @@
   display: table-row-group;
 }
 
+.active-row>div.tableCell{
+  background: rgb(32, 32, 32);
+}
+
 .tableRow:nth-child(2n)>.tableCell {
   background: #ffffff00;
 }
 
 .tableRow:nth-child(2n-1)>.tableCell {
-  background: #fbfcfe;
+  background: #fbfcfe9e;
 }
 
 .tableRow:first-child>.tableCell {
   background: rgba(128, 128, 128, 0.404);
+}
+
+.active-row:nth-child(n)>div.tableCell{
+  background: rgb(32, 32, 32);
 }
 
 .checkboxCell, .audioCell, .idCell, .statistic_1Cell, .statistic_2Cell {
