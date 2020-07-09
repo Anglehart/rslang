@@ -16,9 +16,6 @@ class Game extends Component {
     document.querySelector('.tip-5050').addEventListener('click', () => this.tip5050());
     document.querySelector('.tip-expert').addEventListener('click', () => this.tipExpert());
     document.querySelector('.tip-lang').addEventListener('click', () => this.tipLang());
-    localStorage.setItem('userId', '5eefa4639896e10017eea40c');
-    localStorage.setItem('token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDMyNTc0MCwiZXhwIjoxNTk0MzQwMTQwfQ.QRum8ZdeAtFt7pbenNh938Nw8h8oM2wdVz03yZqvXlk');
   }
 
   startNewGame() {
