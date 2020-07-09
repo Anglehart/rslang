@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="style_for_our.css" rel="stylesheet">
 <title>RS Lang</title>
-<link rel="icon" href="img/logo.png" type="image/x-icon">
+<link rel="icon" href="../Main/img/logo.png" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -18,10 +18,9 @@
 
   <nav id="nav" class="nav">
       <ul class="menu">
-          <li><a href="#">Изучение слов</a></li>
-          <li><a href="#">Статистика</a></li>
-          </li>
-          <li><a href="#">Словарь</a></li>
+        <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Изучение слов</a></li>
+        <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Статистика</a></li>
+        <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Словарь</a></li>
           <li class="p_menu"><a class = "link">Мини-игры</a>
               <ul class="v_menu">
                 <li><a href="#">SpeakIt</a></li>
@@ -32,23 +31,23 @@
                 <li><a href="#">Своя игра</a></li>
               </ul>
           </li>
-          <li><a href="https://rs-lang.netlify.app/">Промо-страница</a></li>
-          <li><a href="#">Вход</a></li>
+          <li><a href="../main/index.html">Промо-страница</a></li>
+          <li><a onclick="changePageSide()" id="butSide">Вход</a></li>
             </ul>
     </nav>
 
   <div class="line">
-    <p class="dropdown"><img src="img/logo.png" alt="Логотип"></p>
+    <p class="dropdown"><img src="../Main/img/logo.png" alt="Логотип"></p>
     <h3 class="dropdown">RS Lang</h3>
     <span class = "contener">
       <div class="dropdown">
-      <a href="#" class="dropbtn">Изучение слов</a>
+      <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Изучение слов</a>
       </div>
   <div class="dropdown">
-    <a href="#" class="dropbtn">Статистика</a>
+    <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Статистика</a>
   </div>
   <div class="dropdown">
-  <a href="#" class="dropbtn">Словарь</a>
+  <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Словарь</a>
   </div>
   <div class="dropdown">
     <button class="dropbtn">Мини-игры</button>
@@ -62,10 +61,10 @@
     </div>
   </div>
   <div class="dropdown">
-  <a href="https://rs-lang.netlify.app/" class="dropbtn">Промо-страница</a>
+  <a href="../main/index.html" class="dropbtn">Промо-страница</a>
   </div>
   <div class="dropdown">
-    <button class="button-input">Вход</button>
+    <button class="button-input" id = "but-autoriz" data-hover="Выход" onclick="changePage()"><a id = "autoriz" onclick="changePage('../authorization/src/index.html')">Вход</a></button>
   </div>
 </span>
 </div>
@@ -106,17 +105,17 @@
 </div>
     </li>
 
-<li>
-    <div class="card">
-      <img src="https://avatars0.githubusercontent.com/u/14945495?s=400&u=a02a7840c836fd842e7caeb63a175b98d054da32&v=4" alt="John" style="width:100%">
-      <h1>Щипунов Борис</h1>
-      <p class="title">Генеральный директор и основатель, пример</p>
-      <p>Гарвардский университет</p>
-      <div class="web">
-        <a href="https://github.com/Anglehart"><img class="icon" src="img/github.svg"></img></a>
-      </div>
-    </div>
-</li>
+    <li>
+        <div class="card">
+          <img src="https://cdn.discordapp.com/attachments/724631049732096092/730139116850642974/1zGWEgAhIRI.jpg" alt="John" style="width:100%">
+          <h1>Кобзарев Борис</h1>
+          <p class="title">Генеральный директор и основатель, пример</p>
+          <p>Гарвардский университет</p>
+          <div class="web">
+            <a href="https://github.com/Anglehart"><img class="icon" src="img/github.svg"></img></a>
+          </div>
+        </div>
+    </li>
 
 <li>
     <div class="card">
@@ -188,6 +187,6 @@
 </footer>
 
 
-<script src="scripts/script_for_our.js"></script>
+<script src="script_for_our.js"></script>
 </body>
 </html>
