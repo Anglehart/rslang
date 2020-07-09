@@ -1,22 +1,21 @@
-import { Component } from './core.component.js';
-import storageService from './storage.service.js';
-import puzzle from './puzzle.component.js';
-import overlay from './overlay.component.js';
+import { Component } from './core.component';
+import puzzle from './puzzle.component';
+import overlay from './overlay.component';
 
 class Control extends Component {
   initComponent() {
     document.querySelector('.check-button').addEventListener('click', () => {
       puzzle.checkRoundResult();
-    })
+    });
     document.querySelector('.giveup-button').addEventListener('click', () => {
       puzzle.giveUp();
-    })
+    });
     document.querySelector('.continue-button').addEventListener('click', () => {
       puzzle.continueGame();
-    })
+    });
     document.querySelector('.result-button').addEventListener('click', () => {
       overlay.showResults();
-    })
+    });
   }
 }
 

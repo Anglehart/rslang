@@ -6,7 +6,7 @@ class StorageService {
   getLevel() {
     return localStorage.getItem('level');
   }
-  
+
   setPage(pageId) {
     localStorage.setItem('page', pageId);
   }
@@ -14,17 +14,20 @@ class StorageService {
   getPage() {
     return localStorage.getItem('page');
   }
-  
+
   getUserId() {
     return localStorage.getItem('userId');
   }
+
   getToken() {
     return localStorage.getItem('token');
   }
-  setSound(onOff){
+
+  setSound(onOff) {
     localStorage.setItem('sound', onOff);
   }
-  getSound(){
+
+  getSound() {
     return localStorage.getItem('sound');
   }
 

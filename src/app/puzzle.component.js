@@ -4,7 +4,6 @@ import storageService from './storage.service';
 import cropService from './crop.service';
 import overlay from './overlay.component';
 
-
 class Puzzle extends Component {
   constructor(config) {
     super(config);
@@ -32,19 +31,19 @@ class Puzzle extends Component {
     cropService({
       src: `https://raw.githubusercontent.com/Anglehart/rslang_data_paintings/master/${image.cutSrc}`,
       wordsList: this.sentences,
-    }).then(res => {
+    }).then((res) => {
       document.querySelector('.game-prepare').append(...res);
     }).then(() => {
       this.startNewRound(this.currentRound);
     }).then(() => {
-      document.querySelectorAll('.div-item').forEach((item, i) => {
+      document.querySelectorAll('.div-item').forEach((item) => {
         item.addEventListener('click', () => {
           if (event.target.parentNode.classList.contains('show-group-row')) {
             document.querySelector(`.row-round-${this.currentRound}`).append(event.target);
           }
-        })
+        });
       });
-    })
+    });
   }
 
   startNewRound() {
@@ -55,11 +54,11 @@ class Puzzle extends Component {
     gameRow.classList.add('game-row');
     gameRow.classList.add(`row-round-${round}`);
     document.querySelector('.game-field').append(gameRow);
-    document.querySelectorAll(`.group-words`).forEach((item) => {
+    document.querySelectorAll('.group-words').forEach((item) => {
       item.classList.remove('show-group-row');
     });
     document.querySelector(`.row-${round}`).classList.add('show-group-row');
-    this.drake = dragula([document.querySelector(`.row-round-${round}`), document.querySelector(`.row-${round}`)], {direction: 'horizontal'});
+    this.drake = dragula([document.querySelector(`.row-round-${round}`), document.querySelector(`.row-${round}`)], { direction: 'horizontal' });
     document.querySelector('.translate-tip').innerHTML = this.currentWord.textExampleTranslate;
     const currentMP3 = `https://raw.githubusercontent.com/Anglehart/rslang-data/master/${this.currentWord.audioExample}`;
     document.querySelector('.audio-tip').onclick = () => {
@@ -70,7 +69,7 @@ class Puzzle extends Component {
     }
     document.querySelectorAll('.show-group-row .div-item').forEach((item) => {
       item.classList.add('hide-background');
-    });  
+    });
     this.clearTips();
   }
 
@@ -79,14 +78,15 @@ class Puzzle extends Component {
     document.querySelectorAll(`.row-round-${this.currentRound} .div-item`).forEach((item, i) => {
       if (item.innerHTML === this.rightOrder[i]) {
         item.classList.add('correct-word');
-        setTimeout(() => {item.classList.remove('correct-word');}, 1000);
+        setTimeout(() => { item.classList.remove('correct-word'); }, 1000);
         count += 1;
       } else {
         document.querySelector('.giveup-button').classList.remove('hidden-button');
         item.classList.add('incorrect-word');
-        setTimeout(() => {item.classList.remove('incorrect-word');}, 1000);
+        setTimeout(() => { item.classList.remove('incorrect-word'); }, 1000);
         return false;
       }
+      return true;
     });
     if (count === this.rightOrder.length) {
       overlay.drawCorrect(this.currentWord);
@@ -113,7 +113,7 @@ class Puzzle extends Component {
     document.querySelector('.check-button').classList.add('hidden-button');
   }
 
-  continueGame(){
+  continueGame() {
     this.drake.destroy();
     document.getElementById(`${this.currentRound}-1`).classList.add('first-item');
     document.getElementById(`${this.currentRound}-${this.rightOrder.length}`).classList.add('last-item');
@@ -128,9 +128,10 @@ class Puzzle extends Component {
       this.startNewRound();
     }
   }
+
   clearTips() {
     document.querySelector('.speaker-button').classList.remove('active-tip');
-    document.querySelector('.list-button').classList.remove('active-tip'); 
+    document.querySelector('.list-button').classList.remove('active-tip');
     document.querySelector('.picture-button').classList.remove('active-tip');
     document.querySelector('.audio-tip').classList.add('disable');
     document.querySelector('.translate-tip').classList.add('disable');

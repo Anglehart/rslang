@@ -1,10 +1,9 @@
 import { Component } from './core.component';
-import puzzle from './puzzle.component';
 import levels from './levels.component';
 import storageService from './storage.service';
 
 class Overlay extends Component {
-  constructor(config){
+  constructor(config) {
     super(config);
     this.iKnow = [];
     this.iDontKnow = [];
@@ -72,8 +71,6 @@ class Overlay extends Component {
     document.querySelector('.intro').classList.add('disable');
   }
 
-
-
   showResults() {
     document.querySelector('main').classList.add('disable');
     document.querySelector('.results').classList.remove('disable');
@@ -83,6 +80,7 @@ class Overlay extends Component {
     document.querySelector('main').classList.remove('disable');
     document.querySelector('.results').classList.add('disable');
   }
+
   clearResults() {
     document.querySelectorAll('.statsWord').forEach((item) => {
       item.remove();

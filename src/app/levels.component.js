@@ -7,7 +7,7 @@ class Levels extends Component {
   initComponent() {
     storageService.setSound(0);
     this.setLevelPage();
-    
+
     document.querySelector('.level-button').addEventListener('click', () => { this.choseLevel(); });
     document.querySelectorAll('.level-list li').forEach((item) => {
       item.addEventListener('click', () => this.choseLevel(event.target.value));
@@ -16,7 +16,7 @@ class Levels extends Component {
     document.querySelectorAll('.page-list li').forEach((item) => {
       item.addEventListener('click', () => this.chosePage(event.target.value));
     });
-    
+
     document.querySelector('.start-button').addEventListener('click', () => { this.startNewGame(); });
     document.querySelector('.melody-button').addEventListener('click', () => {
       event.target.classList.toggle('active-tip');
@@ -25,7 +25,7 @@ class Levels extends Component {
       } else {
         storageService.setSound('1');
       }
-    })
+    });
   }
 
   async startNewGame() {
@@ -38,20 +38,20 @@ class Levels extends Component {
     puzzle.createBackground(data[0], data[1]);
     document.querySelector('.game-field').innerHTML = '';
     document.querySelector('.game-prepare').innerHTML = '';
-    document.querySelector('.speaker-button').addEventListener('click', () => { 
+    document.querySelector('.speaker-button').addEventListener('click', () => {
       document.querySelector('.audio-tip').classList.remove('disable');
       event.target.classList.add('active-tip');
     });
-    document.querySelector('.list-button').addEventListener('click', () => { 
+    document.querySelector('.list-button').addEventListener('click', () => {
       document.querySelector('.translate-tip').classList.remove('disable');
       event.target.classList.add('active-tip');
     });
     document.querySelector('.picture-button').addEventListener('click', () => {
-      event.target.classList.add('active-tip'); 
+      event.target.classList.add('active-tip');
       document.querySelectorAll('.hide-background').forEach((item) => {
         item.classList.remove('hide-background');
-      });  
-    });    
+      });
+    });
   }
 
   choseLevel(levelId) {
@@ -61,7 +61,7 @@ class Levels extends Component {
       storageService.setLevel(levelId);
     }
   }
-  
+
   chosePage(pageId) {
     document.querySelector('.page-list').classList.toggle('hidden');
     if (pageId) {
@@ -69,15 +69,15 @@ class Levels extends Component {
       storageService.setPage(pageId);
     }
   }
-  
+
   setLevelPage() {
-    if (!storageService.getLevel()) { 
-      storageService.setLevel('1'); 
+    if (!storageService.getLevel()) {
+      storageService.setLevel('1');
     } else {
       document.querySelector('.level-button').innerHTML = `LEVEL ${storageService.getLevel()}`;
     }
-    
-    if (!storageService.getPage()) { 
+
+    if (!storageService.getPage()) {
       storageService.setPage('1');
     } else {
       document.querySelector('.page-button').innerHTML = `PAGE ${storageService.getPage()}`;
