@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // -----------------Click-------------
 
 document.onclick = function change() {
