@@ -1,9 +1,7 @@
 import { Component } from './core.component';
-import overlay from './overlay.component';
 import rounds from './rounds.component';
 import network from './network.service';
 import stats from './stats.service';
-
 
 class Game extends Component {
   constructor(config) {
@@ -12,7 +10,7 @@ class Game extends Component {
     this.currentAnswer = '';
   }
 
-  initComponent(){
+  initComponent() {
     this.startNewGame();
     document.querySelector('.new-game-btn').addEventListener('click', () => this.startNewGame());
     document.querySelector('.tip-5050').addEventListener('click', () => this.tip5050());
@@ -28,7 +26,7 @@ class Game extends Component {
     document.querySelector('.win').classList.add('disable');
     document.querySelectorAll('.tip').forEach((item) => {
       item.classList.remove('used-tip');
-    })
+    });
     this.currentRound = 1;
     rounds.drawRounds();
     this.startNewRound();
@@ -42,7 +40,7 @@ class Game extends Component {
     const question = arr[1];
     this.drawQuestion(wordsArray, question);
     this.currentRound += 1;
-    this.currentAnswer = wordsArray[0];
+    [this.currentAnswer] = wordsArray;
   }
 
   drawQuestion(wordsArray, question) {
@@ -59,7 +57,6 @@ class Game extends Component {
       } else {
         document.querySelector('.answers').prepend(option);
       }
-
     });
     document.querySelectorAll('.option').forEach((item) => {
       item.addEventListener('click', () => {
@@ -71,7 +68,7 @@ class Game extends Component {
           });
           event.currentTarget.classList.add('active-answer');
         }
-      })
+      });
     });
   }
 
@@ -81,12 +78,12 @@ class Game extends Component {
     });
 
     for (let i = 0; i <= 800; i += 200) {
-      setTimeout(() => { document.getElementById('option0').classList.toggle('correct-answer') }, i);
+      setTimeout(() => { document.getElementById('option0').classList.toggle('correct-answer'); }, i);
     }
     setTimeout(() => {
       if (answer.id === 'option0') {
         document.querySelector('.currentRound').innerHTML = answer.dataWord;
-        if(this.currentRound === 16) {
+        if (this.currentRound === 16) {
           stats.correct(answer.dataId);
           this.winGame();
         } else {
@@ -97,14 +94,15 @@ class Game extends Component {
         this.loseGame(answer.dataId);
       }
     }, 1500);
-  };
+  }
 
-  winGame(){
+  winGame() {
     document.querySelectorAll('.option').forEach((obj) => {
       obj.style.pointerEvents = 'none';
     });
     document.querySelector('.new-game-btn').classList.remove('disable');
     document.querySelector('.win').classList.remove('disable');
+    stats.updateStats('millionaire', true);
   }
 
   loseGame(answerId) {
@@ -113,6 +111,7 @@ class Game extends Component {
     });
     document.querySelector('.new-game-btn').classList.remove('disable');
     stats.wrong(answerId);
+    stats.updateStats('millionaire', false);
   }
 
   tip5050() {
@@ -123,13 +122,13 @@ class Game extends Component {
     document.getElementById('option3').style.pointerEvents = 'none';
   }
 
-  tipExpert(){
+  tipExpert() {
     document.querySelector('.tip-expert').classList.add('used-tip');
-    document.querySelectorAll('.option').forEach((item) => { item.classList.remove('active-answer') })
+    document.querySelectorAll('.option').forEach((item) => { item.classList.remove('active-answer'); });
     document.getElementById('option0').classList.add('active-answer');
   }
 
-  tipLang(){
+  tipLang() {
     document.querySelector('.tip-lang').classList.add('used-tip');
     document.querySelectorAll('.opt-word').forEach((item) => item.classList.add('disable'));
     document.querySelectorAll('.opt-trans').forEach((item) => item.classList.remove('disable'));

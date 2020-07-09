@@ -1,8 +1,7 @@
 import { Component } from './core.component';
-import game from './game.component';
 
 class Overlay extends Component {
-  constructor(config){
+  constructor(config) {
     super(config);
     this.iKnow = [];
     this.iDontKnow = [];

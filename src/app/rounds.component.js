@@ -1,7 +1,4 @@
 import { Component } from './core.component';
-import game from './game.component';
-import network from './network.service';
-
 
 class Rounds extends Component {
   constructor(config) {
@@ -20,12 +17,11 @@ class Rounds extends Component {
       document.querySelector('.rounds-wrapper').append(wordRow);
     }
   }
-  
+
   changeRound(round) {
-    document.querySelectorAll('.wordRow').forEach((item) => { item.classList.remove('currentRound') });
+    document.querySelectorAll('.wordRow').forEach((item) => { item.classList.remove('currentRound'); });
     document.getElementById(`round${round}`).classList.add('currentRound');
   }
-
 }
 
 const rounds = new Rounds({

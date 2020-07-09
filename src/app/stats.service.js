@@ -66,7 +66,7 @@ class Stats {
         lastTime: `${now}`,
       },
     };
-    const res = await fetch(url, {
+    await fetch(url, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${this.getToken()}`,
@@ -75,8 +75,41 @@ class Stats {
       },
       body: JSON.stringify(body),
     });
-    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    console.log(data);
+  }
+
+  async getStats() {
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/statistics`;
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await (res.ok ? res.json() : false);
+    return data;
+  }
+
+  async updateStats(gameName, gameResult) {
+    const body = await this.getStats();
+    body.optional[`${gameName}All`] += 1;
+    if (gameResult) {
+      body.optional[`${gameName}Win`] += 1;
+    } else {
+      body.optional[`${gameName}Lose`] += 1;
+    }
+    delete body.id;
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/statistics`;
+    await fetch(url, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
   }
 
   // изменяет сложность слова на "3"
