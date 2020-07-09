@@ -119,6 +119,7 @@ background-color: inherit;
 color: rgba(246, 28, 32, 1);
 border: 1px solid rgba(246, 28, 32, 1);
 border-radius: 20px;
+min-width: 80px;
 font-size: 1rem;
 font-weight: 600;
 line-height: 1.75;
@@ -129,12 +130,69 @@ transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 2
 .button-input:hover{background-color: rgba(246, 28, 32, .3);
 cursor: pointer;}
 
+.button-input a {
+color: rgba(246, 28, 32, 1);
+}
+
 a {
 text-decoration: none;
 color: #232323;
 cursor: pointer;
 }
 
+#autoriz{
+  display: block;
+}
+
+.button-input-autoriz {
+background-color: inherit;
+color: rgb(144, 238, 144);
+border: 1px solid rgb(144, 238, 144);
+border-radius: 20px;
+min-width: 80px;
+font-size: 1rem;
+font-weight: 600;
+line-height: 1.75;
+padding: 6px 16px;
+transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+
+.button-input, .button-input-autoriz {
+  background: transparent;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.button-input-autoriz:hover {
+  background-color: rgb(144, 238, 144, .3);
+}
+
+/*button:before (attr data-hover)*/
+.button-input-autoriz:hover:before {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.button-input-autoriz:before {
+  content: attr(data-hover);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translate(-100%, 0);
+  transition: all 0.3s ease-in-out;
+}
+/*button div (button text before hover)*/
+.button-input-autoriz:hover a {
+  opacity: 0;
+  transform: translate(100%, 0);
+}
+.button-input-autoriz a {
+  transition: all 0.3s ease-in-out;
+  color: rgb(144, 238, 144);
+}
 
 /*------------боковое меню-----------------*/
 
