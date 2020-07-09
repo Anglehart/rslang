@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-use-before-define */
 const togglerSignIn = document.getElementById('toggler-sign-in');
 const togglerSignUp = document.getElementById('toggler-sign-up');
 const tabSignIn = document.getElementById('tab-sign-in');
@@ -208,8 +210,8 @@ function setBasicSettings() {
 }
 
 function transition() {
-  if(localStorage.userId !== undefined || localStorage.userId !== null){
-  document.location.href = "../../main/index.html";
+  if (localStorage.userId !== undefined || localStorage.userId !== null) {
+    document.location.href = '../../main/index.html';
   }
 }
 
