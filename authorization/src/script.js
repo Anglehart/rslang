@@ -207,6 +207,12 @@ function setBasicSettings() {
   console.log(data);
 }
 
+function transition() {
+  if(localStorage.userId !== undefined || localStorage.userId !== null){
+  document.location.href = "../../main/index.html";
+  }
+}
+
 modalWindow.addEventListener('click', (event) => {
   if (event.target === togglerSignIn) {
     transformPassword(togglerSignIn, passwordSignIn);
@@ -223,9 +229,11 @@ modalWindow.addEventListener('click', (event) => {
     event.preventDefault();
     createUser({ email: emailSignUp.value, password: passwordSignUp.value });
     setBasicSettings();
+    setTimeout(transition, 2000);
   } else if (event.target === buttonSignIn) {
     event.preventDefault();
     loginUser({ email: emailSignIn.value, password: passwordSignIn.value });
+    setTimeout(transition, 2000);
   }
 });
 console.log(localStorage.getItem('email'));
