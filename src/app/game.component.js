@@ -50,8 +50,13 @@ class Game extends Component {
       option.dataWord = item.word;
       option.dataId = item.id;
       option.innerHTML = `<span class="opt-word">${item.word}</span><span class="opt-trans disable">${item.wordTranslate}</span>`;
-      option.style.order = network.randomInteger(0, 20);
-      document.querySelector('.answers').append(option);
+      if (network.randomInteger(0, 1) === 0) {
+        console.log(0)
+        document.querySelector('.answers').append(option);
+      } else {
+        document.querySelector('.answers').prepend(option);
+      }
+
     });
     document.querySelectorAll('.option').forEach((item) => {
       item.addEventListener('click', () => {
