@@ -252,14 +252,14 @@ body {
 }
 @keyframes move {
   0% {
-    transform: translateY(-5vh) scale(2.5);
+    transform: translateY(-15vh) scale(1.5);
     opacity: 0.5;
   }
   5% {
       opacity: 1;
   }
   10% {
-      transform: translateY(5vh) scale(1);
+      transform: translateY(-5vh) scale(1);
   }
   90% {
       transform: translateY(45vh) scale(1);
@@ -267,7 +267,7 @@ body {
   }
 
   100% {
-    transform: translateY(50vh) scale(3);
+    transform: translateY(50vh) scale(1.5);
     opacity: 0;
   }
 }
