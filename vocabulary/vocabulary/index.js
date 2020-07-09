@@ -36,7 +36,7 @@ function change() {
   const changeOn = changeOnElement.getAttribute('data-mode_color');
   const main = document.querySelector('main.main');
 
-  if (activeColor !== changeOn && window.event.target.nodeName === 'DIV') {
+  if (activeColor !== changeOn && window.event.target.nodeName === 'DIV' && changeOn !== null) {
     activeColorElement.classList.remove('active-bg');
     changeOnElement.classList.add('active-bg');
     main.classList = (`main bg-${changeOn}`);
@@ -51,7 +51,8 @@ function deletWords() {
   if (words){
     words.forEach(element => {
       const wordId = element.getAttribute('data-wordid');
-      wordLibrary.remove(wordId)
+      wordLibrary.remove(wordId);
+      tableContent.removeRow(element);
     });
   }else{
     console.log('nothing to delet!');
@@ -64,6 +65,7 @@ function restoreWords() {
     words.forEach(element => {
       const wordId = element.getAttribute('data-wordid');
       wordLibrary.restore(wordId)
+      tableContent.removeRow(element);
     });
   }else{
     console.log('nothing to delet!');

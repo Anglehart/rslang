@@ -35,6 +35,11 @@ class TableContent {
     return words;
   }
 
+  removeRow(row){
+    const tableBody = document.querySelector('div.tableBody');
+    tableBody.removeChild(row);
+  }
+
   addRow(data) {
     const tableBody = document.querySelector('div.tableBody');
     const rowDiv = document.createElement('div');

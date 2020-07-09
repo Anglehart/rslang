@@ -8,9 +8,11 @@ class WordLibrary {
     localStorage.setItem('password', 'RsSchool2020!');
     localStorage.setItem('userId', '5eefa4639896e10017eea40c');
     localStorage.setItem('token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDMwMjU4NywiZXhwIjoxNTk0MzE2OTg3fQ.cncZmFBWLleXjrhFQC7s_rZY34ELH7_X4q_DuuhC8PQ');
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDMyMjczNiwiZXhwIjoxNTk0MzM3MTM2fQ.mQa12XO9IjneKi1JM4ZMlNplA1hJCLY3D91Dnc2aeFM');
   }
-
+  showError(value){
+    console.log(value);
+  }
   // служебные методы
   getEmail() {
     return localStorage.getItem('email');
@@ -36,7 +38,9 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
+    })
+      .catch(err =>   // сделать модальное окно с выводом ошибок
+        showError(`Ошибка запроса: ${err}`));
     const data = await res.json();
     return data;
   }
@@ -51,9 +55,11 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
+    })
+      .catch(err =>   // сделать модальное окно с выводом ошибок
+        showError(`Ошибка запроса: ${err}`));
     const data = await res.json();
-    console.log(data);
+    return data;
   }
 
   // TODO: изменить консольлог на ретурн
@@ -77,8 +83,10 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    });
-    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
+    })
+      .catch(err =>   // сделать модальное окно с выводом ошибок
+        showError(`Ошибка запроса: ${err}`));;
+    const data = await res.json();
     return data;
   }
 
@@ -92,7 +100,9 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
+    })
+      .catch(err =>   // сделать модальное окно с выводом ошибок
+        showError(`Ошибка запроса: ${err}`));
     const data = await res.json();
     return data;
   }
@@ -109,8 +119,10 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
-    const data = await (res.ok ? res.json() : `${res.status}: ${res.text()}`);
+    })
+      .catch(err =>   // сделать модальное окно с выводом ошибок
+        showError(`Ошибка запроса: ${err}`));
+    const data = await res.json();
     return data;
   }
 
@@ -135,9 +147,11 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    });
-    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    console.log(data);
+    })
+      .catch(err =>   // сделать модальное окно с выводом ошибок
+        showError(`Ошибка запроса: ${err}`));
+    const data = await res.json();
+    return data;
   }
 
   // TODO: изменить консольлог на ретурн
@@ -145,7 +159,8 @@ class WordLibrary {
   async updateWord(wordId, difficulty) {
     const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words/${wordId}`;
     const now = new Date();
-    const firstTime = await this.checkFirstTime(wordId);
+    const firstTime = new Date();
+    firstTime.setTime(await this.checkFirstTime(wordId));
     const body = {
       difficulty: `${difficulty}`,
       optional: {
@@ -161,9 +176,11 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    });
-    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    console.log(data);
+    })
+      .catch(err =>   // сделать модальное окно с выводом ошибок
+        showError(`Ошибка запроса: ${err}`));
+    const data = await res.json();
+    return  data;
   }
 
   // возвращает сложность (int)
@@ -174,7 +191,7 @@ class WordLibrary {
 
   async checkFirstTime(wordId) {
     const data = await this.checkWord(wordId);
-    if (!data.optional.firstTime) {
+    if (!data.optional.firstTime || isNaN(data.optional.firstTime)) {
       data.optional.firstTime = new Date();
     }
     return data.optional.firstTime;
@@ -215,7 +232,9 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
+    })
+      .catch(err =>   // сделать модальное окно с выводом ошибок
+        showError(`Ошибка запроса: ${err}`));
     const data = await res.json();
     return data[0].paginatedResults;
   }
