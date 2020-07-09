@@ -88,7 +88,6 @@ function changeWord() {
 changeWord();
 setInterval(changeWord, 4000);
 
-
 // -----------------Click-------------
 
 document.onclick = function change() {
@@ -116,3 +115,42 @@ document.onclick = function change() {
 
   hamburger.initialize();
 }());
+
+// -----------------Delete-------------
+function deleteInform() {
+  document.getElementById('butSide').textContent = 'Вход';
+  document.getElementById('but2').textContent = 'Авторизация';
+  localStorage.removeItem('email');
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  document.getElementById('autoriz').textContent = 'Вход';
+  document.getElementById('but-autoriz').classList.remove('button-input-autoriz');
+}
+
+// -----------------login-------------
+if (localStorage.getItem('userId') !== null) {
+  document.getElementById('but-autoriz').onclick = '';
+  document.getElementById('autoriz').textContent = localStorage.email;
+  document.getElementById('but-autoriz').classList.add('button-input-autoriz');
+  document.getElementById('but2').textContent = 'Выход';
+  document.getElementById('butSide').textContent = 'Выход';
+  document.getElementById('but-autoriz').onclick = function remove() {
+    deleteInform();
+  };
+}
+
+function changePageSide() {
+  if (localStorage.getItem('userId') === null) {
+    document.location.href = '../authorization/src/index.html';
+  } else {
+    deleteInform();
+  }
+}
+
+// -----------------changePage-------------
+
+function changePage(href) {
+  if (localStorage.getItem('userId') === null) {
+    document.location.href = '../authorization/src/index.html';
+  } else { document.location.href = href; }
+}
