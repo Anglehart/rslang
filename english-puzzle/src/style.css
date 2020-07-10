@@ -156,7 +156,7 @@ h1 {
   display: flex;
 }
 .div-item {
-  background-color: gray;
+  background-color: #484848;
   cursor: pointer;
   color: #fff;
   box-sizing: border-box;
@@ -187,8 +187,8 @@ h1 {
   margin: auto;
   width: 1200px;
   margin-top: 20px;
-  height: 61px;
-  background: aliceblue;
+  height: 60px;
+  border: 1px solid black;
 }
 .game-prepare p {
   text-align: center;
