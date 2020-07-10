@@ -194,6 +194,8 @@ h1 {
   font-size: 22px;
   line-height: 60px;
   color: #555;
+  margin: 0;
+  background: #fff;
 }
 .game-field {
   height: 609px;
