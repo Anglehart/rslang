@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable class-methods-use-this */
 class TableContent {
   rowCount() {
@@ -29,13 +30,13 @@ class TableContent {
     `;
   }
 
-  checkActiveRow(){
+  checkActiveRow() {
     const tableBody = document.querySelector('div.tableBody');
     const words = tableBody.querySelectorAll('div.active-row');
     return words;
   }
 
-  removeRow(row){
+  removeRow(row) {
     const tableBody = document.querySelector('div.tableBody');
     tableBody.removeChild(row);
   }
@@ -54,7 +55,7 @@ class TableContent {
       <div class="tableCell statistic_1Cell">${this.getDate(data.userWord.optional.firstTime)}</div>
       <div class="tableCell statistic_2Cell">${this.getDate(data.userWord.optional.lastTime)}</div>
     `;
-    rowDiv.setAttribute('data-wordId', `${data['_id']}`)
+    rowDiv.setAttribute('data-wordId', `${data['_id']}`);
     tableBody.appendChild(rowDiv);
 
     rowDiv.querySelector('i.fa-play').addEventListener('click', () => {
@@ -66,7 +67,7 @@ class TableContent {
     rowDiv.querySelector('input.cell--checkbox').addEventListener('change', () => {
       const parentRow = window.event.target.parentNode.parentNode;
       parentRow.classList.toggle('active-row');
-    })
+    });
   }
 }
 

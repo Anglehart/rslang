@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable class-methods-use-this */
 
 class WordLibrary {
@@ -8,11 +9,13 @@ class WordLibrary {
     localStorage.setItem('password', 'RsSchool2020!');
     localStorage.setItem('userId', '5eefa4639896e10017eea40c');
     localStorage.setItem('token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDMyMjczNiwiZXhwIjoxNTk0MzM3MTM2fQ.mQa12XO9IjneKi1JM4ZMlNplA1hJCLY3D91Dnc2aeFM');
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDM4NTAzMCwiZXhwIjoxNTk0Mzk5NDMwfQ.XLIVbwQ-hWG0-oWZc0mcT9HcC6cdrZEtFHuo1inYpzU');
   }
-  showError(value){
+
+  showError(value) {
     console.log(value);
   }
+
   // служебные методы
   getEmail() {
     return localStorage.getItem('email');
@@ -39,10 +42,9 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
     })
-      .catch(err =>   // сделать модальное окно с выводом ошибок
-        showError(`Ошибка запроса: ${err}`));
-    const data = await res.json();
-    return data;
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка удаления: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // Удаляем слово из словая пользователя
@@ -56,10 +58,9 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
     })
-      .catch(err =>   // сделать модальное окно с выводом ошибок
-        showError(`Ошибка запроса: ${err}`));
-    const data = await res.json();
-    return data;
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка удаления: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // TODO: изменить консольлог на ретурн
@@ -84,10 +85,9 @@ class WordLibrary {
       },
       body: JSON.stringify(body),
     })
-      .catch(err =>   // сделать модальное окно с выводом ошибок
-        showError(`Ошибка запроса: ${err}`));;
-    const data = await res.json();
-    return data;
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка добавления: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // выдает список (массив объектов) всех слов пользователя
@@ -101,10 +101,9 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
     })
-      .catch(err =>   // сделать модальное окно с выводом ошибок
-        showError(`Ошибка запроса: ${err}`));
-    const data = await res.json();
-    return data;
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка при получении списка слов: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // TODO: изменить консольлог на ретурн
@@ -120,10 +119,9 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
     })
-      .catch(err =>   // сделать модальное окно с выводом ошибок
-        showError(`Ошибка запроса: ${err}`));
-    const data = await res.json();
-    return data;
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка при получении слова: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // для тестового изменения даты слов
@@ -148,10 +146,9 @@ class WordLibrary {
       },
       body: JSON.stringify(body),
     })
-      .catch(err =>   // сделать модальное окно с выводом ошибок
-        showError(`Ошибка запроса: ${err}`));
-    const data = await res.json();
-    return data;
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка тестового обновления слова: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // TODO: изменить консольлог на ретурн
@@ -177,10 +174,9 @@ class WordLibrary {
       },
       body: JSON.stringify(body),
     })
-      .catch(err =>   // сделать модальное окно с выводом ошибок
-        showError(`Ошибка запроса: ${err}`));
-    const data = await res.json();
-    return  data;
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка при обновлении слова: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // возвращает сложность (int)
@@ -233,10 +229,9 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
     })
-      .catch(err =>   // сделать модальное окно с выводом ошибок
-        showError(`Ошибка запроса: ${err}`));
-    const data = await res.json();
-    return data[0].paginatedResults;
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка при получении списка слов: (${err.name}: ${err.message})`));
+    return res[0].paginatedResults;
   }
 }
 

@@ -25,8 +25,8 @@ async function changeTable(color) {
     filter = '3';
   }
   tableContent.clearTable();
-  const allWords = await await wordLibrary.loadAggregatedWords(filter);
-  allWords.forEach(async (element) => { tableContent.addRow(element); });
+  const allWords = await wordLibrary.loadAggregatedWords(filter);
+  allWords.forEach(async (element) => { await tableContent.addRow(element); });
 }
 
 function change() {
@@ -47,27 +47,27 @@ function change() {
 changeTable('green');
 
 function deletWords() {
-  const words = tableContent.checkActiveRow()
-  if (words){
-    words.forEach(element => {
+  const words = tableContent.checkActiveRow();
+  if (words) {
+    words.forEach((element) => {
       const wordId = element.getAttribute('data-wordid');
       wordLibrary.remove(wordId);
       tableContent.removeRow(element);
     });
-  }else{
+  } else {
     console.log('nothing to delet!');
   }
 }
 
 function restoreWords() {
-  const words = tableContent.checkActiveRow()
-  if (words){
-    words.forEach(element => {
+  const words = tableContent.checkActiveRow();
+  if (words) {
+    words.forEach((element) => {
       const wordId = element.getAttribute('data-wordid');
-      wordLibrary.restore(wordId)
+      wordLibrary.restore(wordId);
       tableContent.removeRow(element);
     });
-  }else{
+  } else {
     console.log('nothing to delet!');
   }
 }
