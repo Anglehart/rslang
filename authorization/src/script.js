@@ -210,8 +210,8 @@ function setBasicSettings() {
 }
 
 function transition() {
-  if (localStorage.userId !== undefined || localStorage.userId !== null) {
-    document.location.href = '../../main/index.html';
+  if (localStorage.getItem('userId') !== null) {
+    document.location.href = '../../index.html';
   }
 }
 
