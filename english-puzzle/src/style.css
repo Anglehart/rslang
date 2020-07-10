@@ -148,8 +148,7 @@ h1 {
 .group-words {
   display: none;
   margin-bottom: 1px;
-  height: 61px;
-  background: aliceblue;
+  height: 60px;
   padding-left: 19px;
 }
 .show-group-row {
