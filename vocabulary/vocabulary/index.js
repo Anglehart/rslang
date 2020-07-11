@@ -39,6 +39,8 @@ function change() {
     changeOnElement.classList.add('active-bg');
     main.classList = (`main bg-${changeOn}`);
     changeTable(changeOn);
+    console.log(tableContent.checkActiveRow());
+    tableContent.checkButton();
   }
 }
 

@@ -36,6 +36,21 @@ class TableContent {
     return words;
   }
 
+  checkButton() {
+    const addButton = document.querySelector('button.add-button');
+    const delButton = document.querySelector('button.del-button');
+    const parentRow = window.event.target.parentNode.parentNode.parentNode;
+    if (!window.event.target.classList.contains('tab--link') ||
+      document.querySelector('.active-row')) {
+      parentRow.classList.toggle('active-row');
+      addButton.classList.add('allowed');
+      delButton.classList.add('allowed')
+    } else {
+      addButton.classList.remove('allowed');
+      delButton.classList.remove('allowed');
+    }
+  }
+
   removeRow(row) {
     const tableBody = document.querySelector('div.tableBody');
     tableBody.removeChild(row);
@@ -68,10 +83,7 @@ class TableContent {
       audio.play();
     });
 
-    rowDiv.querySelector('.checkboxCell').addEventListener('click', () => {
-      const parentRow = window.event.target.parentNode.parentNode.parentNode;
-      parentRow.classList.toggle('active-row');
-    });
+    rowDiv.querySelector('.checkboxCell').addEventListener('click', this.checkButton);
   }
 }
 
