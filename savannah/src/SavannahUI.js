@@ -1,7 +1,7 @@
 
 class SavannahUI {
 
-  constructor () {  
+  constructor () {
     this.createContainer();
     this.createMainPage();
     this.createGamePage();
@@ -124,7 +124,7 @@ class SavannahUI {
     this.iconsContainer = document.createElement('div');
     this.iconsContainer.className = 'icons-container';
     this.header.append(this.iconsContainer);
-    
+
     this.closeButton = document.createElement('div');
     this.closeButton.className = 'close';
     this.closeButton.id = 'closeButton';
@@ -196,7 +196,7 @@ class SavannahUI {
     const wordContainer = document.createElement('div');
     wordContainer.className = 'word-container';
     parent.append(wordContainer);
-    
+
     const audioIcon = document.createElement('i');
     audioIcon.className = 'fa fa-volume-down';
     wordContainer.append(audioIcon);
@@ -240,12 +240,12 @@ class SavannahUI {
     let words = [];
     if (type === this.typeResult.fail) {
       results.className = 'failied-results';
-      resultsText.innerText = 'ошибок: ';
+      resultsText.innerText = 'Wrong answers: ';
       resultsNumber.innerText = statistics.fail.length;
       words = statistics.fail;
     } else {
       results.className = 'success-results';
-      resultsText.innerText = 'знаю: ';
+      resultsText.innerText = 'I know: ';
       resultsNumber.innerText = statistics.success.length;
       words = statistics.success;
     }
@@ -254,7 +254,7 @@ class SavannahUI {
       this.createStatisticWord(container, word);
     });
 
-    
+
   }
 
   createFinalPage(statistics) {
@@ -272,7 +272,7 @@ class SavannahUI {
     this.finalPage.append(this.finalContainer);
 
     this.continueButton = document.createElement('button');
-    this.continueButton.innerText = 'Restart'; 
+    this.continueButton.innerText = 'Restart';
     this.continueButton.id = 'continueButton';
     this.continueButton.className = 'continue-button';
     this.finalPage.append(this.continueButton);

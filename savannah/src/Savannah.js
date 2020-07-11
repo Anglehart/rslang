@@ -1,13 +1,12 @@
 import SavannahUI from './SavannahUI.js';
 import Stats from './Stats.js';
 import stats from './Stats.js';
-// const timeForAnswer = 5000;
 
 class Savannah {
 
   constructor() {
     this.saveUserId('5eefa4639896e10017eea40c');
-    this.saveToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDQ1NzE5MiwiZXhwIjoxNTk0NDcxNTkyfQ.6FzK7O5_Cq1rvFNQj2ltXVUsDHRxuQAGQ5arq-DLvd4');
+    this.saveToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDQ4MDQwMSwiZXhwIjoxNTk0NDk0ODAxfQ.huKN1eEOrSRA_tFoB-7S_1LDeAxxkZplZrLZNl4mrrg');
     this.answerHandled = false;
     this.countRoundsGame = 0;
     this.ui = new SavannahUI;
@@ -18,6 +17,7 @@ class Savannah {
 
     this.ui.gamePage.addEventListener('click', (event) => {
       this.ui.word.classList.remove('animation');
+      this.ui.word.innerText = '';
       const selectedTranslation = event.target.closest('.translation');
       if (selectedTranslation && !this.answerHandled) {
         this.checkAnswer(selectedTranslation);
@@ -25,15 +25,20 @@ class Savannah {
     });
 
     this.ui.word.addEventListener('animationend', () => {
-      // if (!this.answerHandled)
       this.ui.word.classList.remove('animation');
+      this.ui.word.innerText = '';
       this.handleFailAnswer(this.questionWord);
-      this.startNextRound();
-    })
+      setTimeout(() => this.startNextRound(), 1000);
+    });
+
+    // this.ui.word.addEventListener('animationcancel', () => {
+    //   this.startNextRound();
+    // });
 
     document.addEventListener('keypress', (event) => {
       if (!this.gameStarted || this.answerHandled) return;
       this.ui.word.classList.remove('animation');
+      this.ui.word.innerText = '';
       const keyName = event.key;
       switch (keyName) {
         case '1':
@@ -71,7 +76,7 @@ class Savannah {
 
   handleFailAnswer(word) {
     this.createFailIcon();
-    this.searchRightTranslation(); 
+    this.searchRightTranslation();
     new Audio('audio/failed.mp3').play();
     this.gameStatistics.fail.push(word);
     stats.wrong(word.id);
@@ -182,7 +187,7 @@ class Savannah {
     this.gameStatistics.fail = [];
     this.gameStatistics.success = [];
     this.ui.finalPage.remove();
-    this.countdownContainer.remove(); 
+    this.countdownContainer.remove();
     this.current_count = 3;
     clearInterval(this.count);
     Array.from(this.ui.iconsContainer.children).forEach((icon) => {
@@ -219,12 +224,12 @@ class Savannah {
     }
   }
 
- 
+
   randomInteger(min, max) {
     let rand = min + Math.random() * (max - min);
     return Math.floor(rand);
   }
- 
+
   wordsToLearn = [];
 
   getWords() {
@@ -252,7 +257,6 @@ class Savannah {
       },
     }).then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         Array.prototype.push.apply(this.wordsToLearn, data[0].paginatedResults);
         console.log(this.wordsToLearn.length);
       });
@@ -302,7 +306,7 @@ class Savannah {
         }
       }
 
-      if (!found) { 
+      if (!found) {
         numReserve[numReserve.length] = randomNumber;
       }
     }

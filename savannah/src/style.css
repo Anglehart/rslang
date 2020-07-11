@@ -6,7 +6,7 @@ body {
 
 }
 .container {
-  background-size: cover; 
+  background-size: cover;
   display: none;
   width: 100vw;
   height: 100vh;
@@ -244,8 +244,9 @@ body {
 }
 
 .animation {
-  animation: move 5s linear;  
+  animation: move 5s linear;
   animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
 }
 .animation-fail {
 

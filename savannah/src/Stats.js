@@ -1,4 +1,4 @@
-class Stats {
+  class Stats {
   getUserId() {
     return localStorage.getItem('userId');
   }
@@ -92,6 +92,7 @@ class Stats {
   }
 
   async updateStats(gameName, gameResult) {
+    const now = new Date();
     const body = await this.getStats();
     body.optional[`${gameName}All`] += 1;
     if (gameResult) {
@@ -99,6 +100,7 @@ class Stats {
     } else {
       body.optional[`${gameName}Lose`] += 1;
     }
+    body.optional[`${gameName}Last`] = now;
     delete body.id;
     const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/statistics`;
     await fetch(url, {
@@ -130,7 +132,6 @@ class Stats {
     } else {
       this.addWord(wordId, 0);
     }
-    console.log(wordId);
   }
 }
 
