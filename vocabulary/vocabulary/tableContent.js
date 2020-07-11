@@ -46,7 +46,11 @@ class TableContent {
     const rowDiv = document.createElement('div');
     rowDiv.classList.add('tableRow');
     rowDiv.innerHTML = `
-      <div class="tableCell checkboxCell"><input type='checkbox' class='cell--checkbox'></div>
+      <div class="tableCell checkboxCell">
+        <label class='checkbox--label for='${data['_id']}'>
+          <input type='checkbox' class='cell--checkbox' id='${data['_id']}'>
+        </label>
+      </div>
       <div class="tableCell idCell" data-wordId='${data['_id']}'>${this.rowCount()}</div>
       <div class="tableCell audioCell "><i class="fas fa-play"></i></div>
       <div class="tableCell wordCell">${data.word}</div>
@@ -64,8 +68,8 @@ class TableContent {
       audio.play();
     });
 
-    rowDiv.querySelector('input.cell--checkbox').addEventListener('change', () => {
-      const parentRow = window.event.target.parentNode.parentNode;
+    rowDiv.querySelector('.checkboxCell').addEventListener('click', () => {
+      const parentRow = window.event.target.parentNode.parentNode.parentNode;
       parentRow.classList.toggle('active-row');
     });
   }

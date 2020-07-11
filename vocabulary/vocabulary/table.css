@@ -48,7 +48,7 @@
   display: table-row-group;
 }
 
-.active-row>div.tableCell{
+.active-row>div.tableCell {
   background: rgb(32, 32, 32);
 }
 
@@ -64,11 +64,11 @@
   background: rgba(128, 128, 128, 0.404);
 }
 
-.active-row:nth-child(n)>div.tableCell{
+.active-row:nth-child(n)>div.tableCell {
   background: rgb(32, 32, 32);
 }
 
-.checkboxCell, .audioCell, .idCell, .statistic_1Cell, .statistic_2Cell {
+.checkboxCell, .audioCell, .idCell, .statistic_1Cell, .statistic_2Cell, .firstCheckboxCell {
   width: 5%;
 }
 
@@ -79,5 +79,19 @@
 .fa-play {
   font-size: 1.5em;
   padding: 20px 0 0 0;
+  cursor: pointer;
+}
+
+.checkboxCell{
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox--label, .cell--checkbox{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
   cursor: pointer;
 }
