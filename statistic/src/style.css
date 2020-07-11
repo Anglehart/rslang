@@ -4,5 +4,39 @@ body {
 
 .chart {
   width: 500px;
+  height: 400px;
   margin: auto;
+  margin-bottom: 50px;
+}
+
+.game-promo,
+.game-statistic,
+.game-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 500px;
+  margin: auto;
+}
+.game-container {
+  margin-bottom: 50px !important;
+}
+.game-promo {
+  font-size: 1.5em;
+}
+.game-statistic {
+  margin-right: 20px;
+}
+.game-time {
+
+}
+
+.game-container {
+  margin: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  border-radius: 20px;
 }
