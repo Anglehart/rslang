@@ -15,12 +15,12 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 500px;
   margin: auto;
 }
 
 .game-container {
   margin-bottom: 50px !important;
+  min-width: 400px;
 }
 
 .game-promo {

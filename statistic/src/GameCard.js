@@ -35,22 +35,15 @@ class GameCard {
     this.totalCount.innerText = `Total: ${all}`;
     totalContainer.append(this.totalCount);
 
-    const stat = document.createElement('div');
-    totalContainer.append(stat);
-
-    this.winCount = document.createElement('span');
+    this.winCount = document.createElement('div');
     this.winCount.innerText = `You win: ${win}`;
-    stat.append(this.winCount);
+    totalContainer.append(this.winCount);
 
-    this.loseCount = document.createElement('span');
+    this.loseCount = document.createElement('div');
     this.loseCount.innerText = `You lose: ${lose}`;
-    stat.append(this.loseCount);
+    totalContainer.append(this.loseCount);
 
     parent.append(this.gameCardConainer);
   }
-
-  // getGameCardContainer() {
-  //   return this.gameCardConainer;
-  // }
 }
 export default GameCard;
