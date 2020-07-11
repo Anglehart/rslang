@@ -8,6 +8,7 @@ class SavannahUI {
 
     window.addEventListener('load', () => {
       this.container.style.display = 'block';
+
     });
   }
 
@@ -137,7 +138,6 @@ class SavannahUI {
     this.word = document.createElement('div');
     this.word.className = 'word';
     this.word.id = 'word';
-    this.word.innerText = 'word';
     this.question.append(this.word);
 
     this.answers = document.createElement('div');
@@ -184,8 +184,6 @@ class SavannahUI {
     this.translationWord4 = document.createElement('span');
     this.translationWord4.className = 'translationWord';
     this.translation4.append(this.translationWord4);
-    this.answerHandled = false;
-    this.countRoundsGame = 0;
     this.backgroundPosition = 100;
     this.closeButton.addEventListener('click', () => {
       clearInterval(this.timer);
@@ -287,6 +285,13 @@ class SavannahUI {
 
     this.createFinalResults(this.typeResult.fail, statistics);
     this.createFinalResults(this.typeResult.success, statistics);
+  }
+
+  clearAnswers() {
+    Array.from(this.answers.children).forEach((answer) => {
+      answer.classList.remove('active');
+      answer.classList.remove('fail');
+    });
   }
 }
 

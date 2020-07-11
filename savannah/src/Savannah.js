@@ -1,9 +1,15 @@
 import SavannahUI from './SavannahUI.js';
+import Stats from './Stats.js';
+import stats from './Stats.js';
 // const timeForAnswer = 5000;
 
 class Savannah {
 
   constructor() {
+    this.saveUserId('5eefa4639896e10017eea40c');
+    this.saveToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDQ1NzE5MiwiZXhwIjoxNTk0NDcxNTkyfQ.6FzK7O5_Cq1rvFNQj2ltXVUsDHRxuQAGQ5arq-DLvd4');
+    this.answerHandled = false;
+    this.countRoundsGame = 0;
     this.ui = new SavannahUI;
 
     this.ui.startButton.addEventListener('click', () => {
@@ -13,23 +19,20 @@ class Savannah {
     this.ui.gamePage.addEventListener('click', (event) => {
       this.ui.word.classList.remove('animation');
       const selectedTranslation = event.target.closest('.translation');
-      if (selectedTranslation && !this.ui.answerHandled) {
-        this.handleAnswer(selectedTranslation);
+      if (selectedTranslation && !this.answerHandled) {
+        this.checkAnswer(selectedTranslation);
       }
     });
+
     this.ui.word.addEventListener('animationend', () => {
-      if(!this.ui.answerHandled)
+      // if (!this.answerHandled)
       this.ui.word.classList.remove('animation');
+      this.handleFailAnswer(this.questionWord);
       this.startNextRound();
-      new Audio ('audio/failed.mp3').play();
-      this.createFailIcon();
-      this.searchRightTranslation(); 
-      const word = this.questionWord;
-      this.gameStatistics.fail.push(word);
     })
 
     document.addEventListener('keypress', (event) => {
-      if (!this.gameStarted || this.ui.answerHandled) return;
+      if (!this.gameStarted || this.answerHandled) return;
       this.ui.word.classList.remove('animation');
       const keyName = event.key;
       switch (keyName) {
@@ -38,48 +41,46 @@ class Savannah {
         case '3':
         case '4':
           Array.from(this.ui.answers.querySelectorAll('.translation')).forEach((translation) => {
-            const selectedTranslation = translation;
             if (keyName === translation.innerText.charAt(0)) {
-              this.handleAnswer(selectedTranslation);
+              this.checkAnswer(translation);
             }
           });
       }
     });
-  }
 
-  handleAnswer(selectedTranslation) {
-    this.ui.answerHandled = true;
-    // clearInterval(this.timer);
-    this.checkAnswer(selectedTranslation);
+    this.getEnglishWords(); // to be prepared before we press start game
   }
 
   checkAnswer(selectedTranslation) {
+    this.answerHandled = true;
     const translationWord = selectedTranslation.querySelector('.translationWord');
     const word = this.questionWord;
     if (translationWord.innerText === word.wordTranslate) {
       selectedTranslation.classList.add('active');
       new Audio('audio/correct.mp3').play();
-      // let part =  this.ui.backgroundPosition/10;
-      this.ui.backgroundPosition -= 15;
+      this.ui.backgroundPosition -= 10;
       this.ui.container.style.backgroundPositionY = `${this.ui.backgroundPosition}%`;
       this.gameStatistics.success.push(word);
+      stats.correct(word.id);
     } else {
       selectedTranslation.classList.add('fail');
-      this.createFailIcon();
-      this.searchRightTranslation(); 
-      new Audio ('audio/failed.mp3').play();
-      this.gameStatistics.fail.push(word);
-      console.log(this.gameStatistics.fail);
-      //add sound
+      this.handleFailAnswer(word);
     }
-    this.startNextRound();
+    setTimeout(() => this.startNextRound(), 1000);
+  }
+
+  handleFailAnswer(word) {
+    this.createFailIcon();
+    this.searchRightTranslation(); 
+    new Audio('audio/failed.mp3').play();
+    this.gameStatistics.fail.push(word);
+    stats.wrong(word.id);
   }
 
   searchRightTranslation() {
     let rightWord;
-    const translationWords = Array.from(this.ui.answers.querySelectorAll('.translationWord'));
-    translationWords.forEach((translationWord) => {
-      if(translationWord.innerText === this.ui.word.getAttribute('data')) {
+    Array.from(this.ui.answers.querySelectorAll('.translationWord')).forEach((translationWord) => {
+      if (translationWord.innerText === this.questionWord.wordTranslate) {
         rightWord = translationWord;
         translationWord.parentNode.classList.add('active');
       }
@@ -88,18 +89,15 @@ class Savannah {
   }
 
   gameStatistics = {
-    fail : [],
-    success : []
+    fail: [],
+    success: []
   }
 
   finishGame() {
     this.ui.createFinalPage(this.gameStatistics);
-    new Audio('audio/notification.mp3').play();
-
     this.ui.finalPage.addEventListener('click', (event) => {
       if (event.target.className === "fa fa-volume-down") {
         event.target.firstElementChild.play();
-        console.log(event.target);
       } else if (event.target.id === 'homePageButton') {
         this.clearPreviousDataGame();
         //choose a game
@@ -109,6 +107,13 @@ class Savannah {
         setTimeout(() => this.ui.mainPage.style.display = 'block', 1000);
       }
     });
+
+    if (this.gameStatistics.fail.length === 0) {
+      stats.updateStats('savanna', true);
+    } else {
+      stats.updateStats('savanna', false);
+    }
+    new Audio('audio/notification.mp3').play();
   }
 
   createFailIcon() {
@@ -145,6 +150,21 @@ class Savannah {
     this.countdownNumber.innerText = countVal;
   }
 
+  saveUserId(id) {
+    localStorage.setItem('userId', id);
+  }
+
+  saveToken(token) {
+    localStorage.setItem('token', token);
+  }
+
+  getUserId() {
+    return localStorage.getItem('userId');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
 
   startClicked() {
     this.ui.mainPage.style.display = 'none';
@@ -152,56 +172,61 @@ class Savannah {
     this.createCountdown();
     this.countDown();
     this.count = setInterval(() => this.countDown(), 1000);
-    setTimeout(() => this.startNextRound(), 3000);
+    setTimeout(() => {
+      this.ui.gamePage.style.display = 'block';
+      this.startNextRound();
+    }, 3000);
   }
 
   clearPreviousDataGame() {
-  this.gameStatistics.fail = [];
-  this.gameStatistics.success = [];
-  this.ui.finalPage.remove();
-  this.countdownContainer.remove(); 
-  this.current_count = 3;
-  clearInterval(this.count);
+    this.gameStatistics.fail = [];
+    this.gameStatistics.success = [];
+    this.ui.finalPage.remove();
+    this.countdownContainer.remove(); 
+    this.current_count = 3;
+    clearInterval(this.count);
     Array.from(this.ui.iconsContainer.children).forEach((icon) => {
       icon.classList.remove('fail-icon');
     });
-    this.ui.countRoundsGame = 0;
+    this.countRoundsGame = 0;
     this.ui.backgroundPosition = 100;
     this.ui.container.style.backgroundPositionY = `${this.ui.backgroundPosition}%`;
   }
 
+  getEnglishWords() {
+    if (this.getUserId() && this.getToken()) {
+      return this.getUseraggregatedWords();
+    } else {
+      return this.getWords();
+    }
+  }
+
   startNextRound() {
-    if (this.ui.iconsContainer.children[3].closest('.fail-icon') || this.ui.countRoundsGame === 10 ) {
-      // clearInterval(this.timer);
+    if (this.ui.iconsContainer.children[3].closest('.fail-icon') || this.countRoundsGame === 10 ) {
       this.ui.gamePage.style.display = 'none';
       setTimeout(() => this.finishGame(), 1000);
       this.gameStarted = false;
     } else {
+      this.ui.clearAnswers();
       this.gameStarted = true;
-      this.getWords()
-      .then(() => {
-        this.ui.mainPage.style.display = 'none';
-        this.ui.gamePage.style.display = 'block';
-        this.ui.word.classList.add('animation');
-        // this.timer = setInterval(() => this.moveWordDown(), 8);
-        // this.timeStarted = Date.now();
-        // this.wordPosition = 0;
-        Array.from(this.ui.answers.children).forEach((answer) => {
-          answer.classList.remove('active');
-          answer.classList.remove('fail');
-        });
-        this.ui.answerHandled = false;
-        this.ui.countRoundsGame += 1;
-      });
+      this.countRoundsGame += 1;
+      if (this.wordsToLearn.length < 10) {
+          this.getEnglishWords()
+          .then(() => this.setAnswers());
+      } else {
+        this.setAnswers();
+      }
     }
   }
+
  
-  
   randomInteger(min, max) {
-    let rand = min + Math.random() * (max + 1 - min);
+    let rand = min + Math.random() * (max - min);
     return Math.floor(rand);
   }
  
+  wordsToLearn = [];
+
   getWords() {
     const page = this.randomInteger(0, 29);
     const group = this.ui.level;
@@ -209,41 +234,66 @@ class Savannah {
     return fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        this.setAnswers(data);
+        Array.prototype.push.apply(this.wordsToLearn, data);
       });
   }
 
-  setAnswers(data) {
-    let arrayOfAnswers = this.getArrayOfAnswers(data);
+  getUseraggregatedWords() {
+    const userId = this.getUserId();
+    const token = this.getToken();
+    const filter = '{"$or":[{"userWord.difficulty":"1"},{"userWord.difficulty":"2"},{"userWord.difficulty":"3"}]}';
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/aggregatedWords?wordsPerPage=100&onlyUserWords=true&filter=${filter}`;
+    return fetch(url, {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
+    }).then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        Array.prototype.push.apply(this.wordsToLearn, data[0].paginatedResults);
+        console.log(this.wordsToLearn.length);
+      });
+  }
+
+  setAnswers() {
+    let arrayOfAnswers = this.getArrayOfAnswers();
     this.shuffle(arrayOfAnswers);
     this.ui.translationWord1.innerText = arrayOfAnswers[0];
     this.ui.translationWord2.innerText = arrayOfAnswers[1];
     this.ui.translationWord3.innerText = arrayOfAnswers[2];
     this.ui.translationWord4.innerText = arrayOfAnswers[3];
+    this.answerHandled = false;
   }
 
-  getArrayOfAnswers(data) {
-    let numReserve = this.getArrayOfRandomNumbers();
-    this.getQuestionWord(data);
-    let arrayOfAnswers = [this.questionWord.wordTranslate, data[numReserve[0]].wordTranslate, data[numReserve[1]].wordTranslate, data[numReserve[2]].wordTranslate];
+  getArrayOfAnswers() {
+    const numReserve = this.getArrayOfRandomNumbers();
+    this.questionWord = this.generateQuestionWord();
+    let arrayOfAnswers = [
+      this.questionWord.wordTranslate,
+      this.wordsToLearn[numReserve[0]].wordTranslate,
+      this.wordsToLearn[numReserve[1]].wordTranslate,
+      this.wordsToLearn[numReserve[2]].wordTranslate
+    ];
+    this.ui.word.classList.add('animation');
     this.ui.word.innerText = this.questionWord.word;
-    this.ui.word.setAttribute('data', this.questionWord.wordTranslate);
     return arrayOfAnswers;
   }
-  questionWord;
 
-  getQuestionWord(data) {
-    const randomWord = this.randomInteger(0,19);
-    this.questionWord = data[randomWord];
-    console.log(this.questionWord);
-    return this.questionWord;
+  generateQuestionWord() {
+    const random = this.randomInteger(0, this.wordsToLearn.length);
+    let word = this.wordsToLearn[random];
+    this.wordsToLearn.splice(random, 1);
+    if (word._id) word.id = word._id;
+    return word;
   }
 
   getArrayOfRandomNumbers() {
   let numReserve = [];
     while (numReserve.length < 3) {
-      let randomNumber = Math.ceil(Math.random() * 19);
+      let randomNumber = Math.ceil(Math.random() * this.wordsToLearn.length - 1);
       let found = false;
       for (let i = 0; i < numReserve.length; i++) {
         if (numReserve[i] === randomNumber){
@@ -251,29 +301,16 @@ class Savannah {
           break;
         }
       }
-      if (!found) { numReserve[numReserve.length]=randomNumber; }
+
+      if (!found) { 
+        numReserve[numReserve.length] = randomNumber;
+      }
     }
     return numReserve;
   }
 
   shuffle(array) {
     array.sort(() => Math.random() - 0.5);
-  }
-
-  moveWordDown() {
-    // const now = Date.now();
-    if (now - this.timeStarted > timeForAnswer) {
-      // clearInterval(this.timer);
-      this.startNextRound();
-      new Audio ('audio/failed.mp3').play();
-      this.createFailIcon();
-      this.searchRightTranslation(); 
-      const word = this.questionWord;
-      this.gameStatistics.fail.push(word);
-      return;
-    }
-    this.wordPosition += 0.1;
-    this.ui.word.style.top = `${this.wordPosition}vh`;
   }
 
   setLevel() {

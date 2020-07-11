@@ -15,7 +15,7 @@ body {
   background-position-y: 100%;
   min-height: calc(100vh - 20px);
   transition: all 1s ease;
-  background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, 0.4)),url(images/back.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, 0.4)),url(images/Jungle.jpg);
   position: relative;
   overflow: hidden;
 }
