@@ -2,16 +2,6 @@
 /* eslint-disable class-methods-use-this */
 
 class WordLibrary {
-  // TODO: удалить перед пулреквестом
-  // для тестов
-  setLocalStorage() {
-    localStorage.setItem('email', 'team17@mail.ru');
-    localStorage.setItem('password', 'RsSchool2020!');
-    localStorage.setItem('userId', '5eefa4639896e10017eea40c');
-    localStorage.setItem('token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDM4NTAzMCwiZXhwIjoxNTk0Mzk5NDMwfQ.XLIVbwQ-hWG0-oWZc0mcT9HcC6cdrZEtFHuo1inYpzU');
-  }
-
   showError(value) {
     console.log(value);
   }
@@ -63,7 +53,6 @@ class WordLibrary {
     return res;
   }
 
-  // TODO: изменить консольлог на ретурн
   // добавляет слово пользователю. возвращает слово если добавилось успешно или текст ошибки
   // можно не проверять слово. т.к. если слово уже существует, то будет соответсвующая ошибка
   async addWord(wordId, difficulty) {
@@ -106,7 +95,6 @@ class WordLibrary {
     return res;
   }
 
-  // TODO: изменить консольлог на ретурн
   // проверка слова на его нахождение в базе
   // возвращает слово если есть, и текст с ошибкой если нет
   async checkWord(wordId) {
@@ -151,7 +139,6 @@ class WordLibrary {
     return res;
   }
 
-  // TODO: изменить консольлог на ретурн
   // изменяет слово. возвращает измененное слово, иначе возвращает ошибку
   async updateWord(wordId, difficulty) {
     const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words/${wordId}`;
@@ -185,6 +172,7 @@ class WordLibrary {
     return data.difficulty;
   }
 
+  // возвращает дату создания слова (Date())
   async checkFirstTime(wordId) {
     const data = await this.checkWord(wordId);
     if (!data.optional.firstTime || isNaN(data.optional.firstTime)) {
@@ -216,7 +204,7 @@ class WordLibrary {
   }
 
   // фильтр только по сложности
-  // принимает цифры сложности через запятую
+  // принимает цифру/цифры сложности через запятую
   async loadAggregatedWords(str) {
     const args = str.split(',');
     const filter = args.map((e) => `{"userWord.difficulty":"${e}"}`);
@@ -236,5 +224,4 @@ class WordLibrary {
 }
 
 const word = new WordLibrary();
-
 export default word;

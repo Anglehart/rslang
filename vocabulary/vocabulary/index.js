@@ -7,8 +7,6 @@ import table from './table.css';
 const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
 
-wordLibrary.setLocalStorage();
-
 async function changeTable(color) {
   let filter = [];
   if (color === 'red') {
@@ -44,8 +42,6 @@ function change() {
   }
 }
 
-changeTable('green');
-
 function deletWords() {
   const words = tableContent.checkActiveRow();
   if (words) {
@@ -55,7 +51,7 @@ function deletWords() {
       tableContent.removeRow(element);
     });
   } else {
-    console.log('nothing to delet!');
+    wordLibrary.showError('Nothing to delet!');
   }
 }
 
@@ -68,11 +64,12 @@ function restoreWords() {
       tableContent.removeRow(element);
     });
   } else {
-    console.log('nothing to delet!');
+    wordLibrary.showError('Nothing to restore!');
   }
 }
 
+changeTable('green');
+
 document.querySelector('button.del-button').addEventListener('click', deletWords);
 document.querySelector('button.add-button').addEventListener('click', restoreWords);
-
 document.querySelector('div.tabs-row').addEventListener('click', change);
