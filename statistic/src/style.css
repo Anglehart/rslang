@@ -18,17 +18,17 @@ body {
   width: 500px;
   margin: auto;
 }
+
 .game-container {
   margin-bottom: 50px !important;
 }
+
 .game-promo {
   font-size: 1.5em;
 }
+
 .game-statistic {
   margin-right: 20px;
-}
-.game-time {
-
 }
 
 .game-container {

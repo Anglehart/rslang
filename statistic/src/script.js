@@ -1,14 +1,47 @@
-function getUserWord(data) {
-  const url = `https://afternoon-falls-25894.herokuapp.com/users/${data.userId}/words`;
+import GameCard from './GameCard.js';
+
+/* eslint no-new: "off" */
+function createGamesStatistics(stats) {
+  new GameCard(
+    document.body, 'Millionaire',
+    stats.millionaireAll, stats.millionaireWin,
+    stats.millionaireLose, stats.millionaireLast,
+  );
+  new GameCard(
+    document.body, 'Audition',
+    stats.audioAll, stats.audioWin,
+    stats.audioLose, stats.audioLast,
+  );
+  new GameCard(
+    document.body, 'English-puzzle',
+    stats.puzzleAll, stats.puzzleWin,
+    stats.puzzleLose, stats.puzzleLast,
+  );
+  new GameCard(
+    document.body, 'Savannah',
+    stats.savannaAll, stats.savannaeWin,
+    stats.savannaLose, stats.savannaLast,
+  );
+  new GameCard(
+    document.body, 'Speakit',
+    stats.speakitAll, stats.speakiteWin,
+    stats.speakitLose, stats.speakitLast,
+  );
+}
+
+function getUserWord(user) {
+  const url = `https://afternoon-falls-25894.herokuapp.com/users/${user.userId}/words`;
   return fetch(url, {
     method: 'GET',
     withCredentials: true,
     headers: {
-      Authorization: `Bearer ${data.token}`,
+      Authorization: `Bearer ${user.token}`,
       Accept: 'application/json',
     },
   }).then((res) => res.json())
-    .then(() => {});
+    .then((data) => {
+      console.log(data);
+    });
 }
 
 const points = [];
@@ -84,6 +117,22 @@ function getUseraggregatedWords(data) {
     });
 }
 
+function getGameStatistic(user) {
+  const url = `https://afternoon-falls-25894.herokuapp.com/users/${user.userId}/statistics`;
+  return fetch(url, {
+    method: 'GET',
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+      Accept: 'application/json',
+    },
+  }).then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      createGamesStatistics(data.optional);
+    });
+}
+
 function loginUser(user) {
   const url = 'https://afternoon-falls-25894.herokuapp.com/signin';
   return fetch(url, {
@@ -98,6 +147,7 @@ function loginUser(user) {
       console.log(data);
       getUserWord(data);
       getUseraggregatedWords(data);
+      getGameStatistic(data);
     });
 }
 
