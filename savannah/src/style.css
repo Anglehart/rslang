@@ -248,9 +248,7 @@ body {
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
 }
-.animation-fail {
 
-}
 @keyframes move {
   0% {
     transform: translateY(-15vh) scale(1.5);
