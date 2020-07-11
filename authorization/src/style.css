@@ -1,6 +1,13 @@
 *,:after,:before{box-sizing:border-box}
 .clearfix:after,.clearfix:before{content:'';display:table}
 .clearfix:after{clear:both;display:block}
+input {outline: 0 !important;}
+button:active, button:focus {
+  outline: none !important;
+}
+button::-moz-focus-inner {
+  border: 0 !important;
+}
 a{color:inherit;text-decoration:none}
 
 .active {
@@ -12,6 +19,32 @@ body{
 	color:#6a6f8c;
 	background:#c8c8c8;
 	font:600 16px/18px 'Open Sans',sans-serif;
+}
+
+.close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.6;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: black;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }
 
 .button:hover {
@@ -89,7 +122,6 @@ body{
 .login-card .group .input,
 .login-card .group .button{
 	width:100%;
-	color:#fff;
 	display:block;
 }
 
@@ -98,18 +130,28 @@ body{
 	border:none;
 	padding:15px 30px;
 	border-radius:25px;
-	background:rgba(255,255,255,.1);
+	background:rgba(255,255,255,.8);
 }
 
 .login-card .group .label{
-	color:#aaa;
 	font-size:12px;
+  padding-left: 15px;
 }
 
 .login-card .group .button{
-	background:#1161ee;
-  padding-top: 10px;
+  background: inherit;
   cursor: pointer;
+  max-width: 200px;
+  margin: 0 auto;
+  border: 2px solid rgba(0, 0, 0, .6);
+  color: rgba(0, 0, 0, .6);
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.login-card .group .button:hover{
+  border: 2px solid rgba(0, 0, 0);
+  color: rgba(0, 0, 0);
 }
 
 .login-card .group label .icon{
@@ -163,7 +205,7 @@ body{
 	width:100%;
 	margin:auto;
 	max-width:525px;
-	min-height:530px;
+	min-height:620px;
 	position:relative;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
@@ -173,7 +215,7 @@ body{
 	height:100%;
 	position:absolute;
 	padding:90px 70px 50px 70px;
-	background:rgba(45, 60, 100, 0.9);
+	background-image: linear-gradient( to bottom, #AFEEEE, #B0E0E6 );
 }
 
 .modal_window .sign-in-card,
@@ -204,7 +246,7 @@ body{
 	font-size:22px;
 	margin-right:15px;
 	padding-bottom:5px;
-	margin:0 15px 10px 0;
+  margin: 0 15px 30px 0;
 	display:inline-block;
 	border-bottom:2px solid transparent;
 }
@@ -212,7 +254,7 @@ body{
 .modal_window .sign-in:checked + .tab,
 .modal_window .sign-up:checked + .tab{
 	color:#fff;
-	border-color:#1161ee;
+	border-color: rgba(0, 0, 0, .6);
 }
 
 .modal_window .sign-in:checked + .tab + .sign-up + .tab + .login-card .sign-in-card{
@@ -224,5 +266,6 @@ body{
 }
 
 small {
-	color: red
+	color: red;
+  padding-left: 15px;
 }

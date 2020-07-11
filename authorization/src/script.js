@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-use-before-define */
 const togglerSignIn = document.getElementById('toggler-sign-in');
 const togglerSignUp = document.getElementById('toggler-sign-up');
 const tabSignIn = document.getElementById('tab-sign-in');
@@ -207,6 +209,12 @@ function setBasicSettings() {
   console.log(data);
 }
 
+function transition() {
+  if (localStorage.getItem('userId') !== null) {
+    document.location.href = '../../index.html';
+  }
+}
+
 modalWindow.addEventListener('click', (event) => {
   if (event.target === togglerSignIn) {
     transformPassword(togglerSignIn, passwordSignIn);
@@ -223,9 +231,11 @@ modalWindow.addEventListener('click', (event) => {
     event.preventDefault();
     createUser({ email: emailSignUp.value, password: passwordSignUp.value });
     setBasicSettings();
+    setTimeout(transition, 2000);
   } else if (event.target === buttonSignIn) {
     event.preventDefault();
     loginUser({ email: emailSignIn.value, password: passwordSignIn.value });
+    setTimeout(transition, 2000);
   }
 });
 console.log(localStorage.getItem('email'));
