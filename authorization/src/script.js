@@ -25,7 +25,7 @@ const alertPasswordSignUp = document.getElementById('alert-password-sign-up');
 
 const responsesSignUp = {
   422: 'Неверный адрес электронной почты или пароль',
-  200: 'Вы успешно зарегестрированы',
+  200: 'Вы успешно зарегистрированы',
   417: 'Адрес электронной почты уже используется',
 };
 
