@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <title>RS Lang</title>
+  <link rel="icon" href="../../Main/img/logo.png" type="image/x-icon">
+</head>
+<body>
+  <div id="modal-background" class="modal_background">
+    <div id="modal_window" class="modal_window">
+        <input id="tab-sign-in" type="radio" name="tab" class="sign-in" checked><label for="tab-sign-in" class="tab">Вход</label>
+        <input id="tab-sign-up" type="radio" name="tab" class="sign-up"><label for="tab-sign-up" class="tab">Регистрация</label>
+        <div class="login-card">
+          <form action="https://afternoon-falls-25894.herokuapp.com/" id="form-sign-in" class="sign-in-card" name="form-sign-in" method="post">
+            <div id="email-group-sign-in" class="group">
+              <label for="pass" class="label">Электронная почта</label>
+              <input id="email-sign-in" type="email" name = "email" class="input" autocomplete="off" autofocus title="Введите адрес электронной почты" required>
+              <small id="alert-email-sign-in" class="small"></small>
+            </div>
+            <div class="group">
+              <label for="pass" class="label">Пароль</label>
+              <input id="sign-in-password" name="pass" type="password" class="input" autocomplete="off" title="Должен содержать не менее 8 символов, как минимум одно число, одну заглавную и строчную буквы и один специальный символ"
+               required>
+              <div class="form-toggler">
+                <i id="form-icon" class="fas fa-eye form-icon"></i>
+                <input id="toggler-sign-in" type="checkbox" class="form-checkbox">
+              </div>
+            </div>
+            <small id="alert-password-sign-in" class="small"></small>
+            <div id="sign-in-answer" class="form-answer"></div>
+            <div class="group">
+              <input id="sign-in" type="submit" class="button" value="Вход">
+            </div>
+          </form>
+          <form action="https://afternoon-falls-25894.herokuapp.com/users" id="form-sign-up" class="sign-up-card" name="form-sign-up" method="post">
+            <div class="group">
+              <label for="pass" class="label">Электронная почта</label>
+              <input id="email-sign-up" type="email" name = "email" class="input email-input" autocomplete="off" title="Введите адрес электронной почты" required>
+              <small id="alert-email-sign-up" class="small"></small>
+            </div>
+            <div class="group">
+              <label for="pass" class="label">Пароль</label>
+              <input id="sign-up-password" type="password" class="input" autocomplete="off" title="Должен содержать не менее 8 символов, как минимум одно число, одну заглавную и строчную буквы и один специальный символ"
+              pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[+-_@$!%*?&#.,;:])[A-Za-z\d+-_@$!%*?&#.,;:]{8,}$/" required>
+              <div class="form-toggler">
+                <i id="form-icon" class="fas fa-eye form-icon"></i>
+                <input id="toggler-sign-up" type="checkbox" class="form-checkbox">
+              </div>
+            </div>
+            <small id="alert-password-sign-up" class="small"></small>
+            <div class="group">
+              <label for="pass" class="label">Подтверждение пароля</label>
+              <input id="password-confirm" type="password" class="input" autocomplete="off" title="Должен содержать не менее 8 символов, как минимум одно число, одну заглавную и строчную буквы и один специальный символ"
+              required>
+              <small id="alert-confirm-password" class="small"></small>
+            </div>
+            <div id="sign-up-answer" class="form-answer"></div>
+
+            <div class="group">
+              <input id="sign-up" type="submit" class="button" value="Регистрация">
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
