@@ -29,6 +29,7 @@ class GameCard {
     card.append(this.gameTimeContainer);
 
     const totalContainer = document.createElement('div');
+    totalContainer.className = 'total';
     card.append(totalContainer);
 
     this.totalCount = document.createElement('div');

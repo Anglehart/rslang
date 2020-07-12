@@ -19,12 +19,12 @@ function createGamesStatistics(stats) {
   );
   new GameCard(
     document.body, 'Savannah',
-    stats.savannaAll, stats.savannaeWin,
+    stats.savannaAll, stats.savannaWin,
     stats.savannaLose, stats.savannaLast,
   );
   new GameCard(
     document.body, 'Speakit',
-    stats.speakitAll, stats.speakiteWin,
+    stats.speakitAll, stats.speakitWin,
     stats.speakitLose, stats.speakitLast,
   );
 }
