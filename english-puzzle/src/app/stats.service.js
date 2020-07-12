@@ -56,7 +56,8 @@ class Stats {
   async checkFirstTime(wordId) {
     const data = await this.checkWord(wordId);
     if (!data.optional.firstTime) {
-      data.optional.firstTime = new Date();
+      const time = new Date();
+      data.optional.firstTime = time.getTime();
     }
     return data.optional.firstTime;
   }
@@ -69,7 +70,7 @@ class Stats {
       difficulty: `${difficulty}`,
       optional: {
         firstTime: `${firstTime}`,
-        lastTime: `${now}`,
+        lastTime: now.getTime(),
       },
     };
     await fetch(url, {

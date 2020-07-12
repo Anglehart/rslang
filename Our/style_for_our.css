@@ -119,6 +119,7 @@ background-color: inherit;
 color: rgba(246, 28, 32, 1);
 border: 1px solid rgba(246, 28, 32, 1);
 border-radius: 20px;
+min-width: 80px;
 font-size: 1rem;
 font-weight: 600;
 line-height: 1.75;
@@ -129,10 +130,62 @@ transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 2
 .button-input:hover{background-color: rgba(246, 28, 32, .3);
 cursor: pointer;}
 
-a {
-text-decoration: none;
-color: #232323;
-cursor: pointer;
+.button-input a {
+color: rgba(246, 28, 32, 1);
+}
+
+#autorization{
+  display: block;
+}
+
+.button-input-autorization {
+background-color: inherit;
+color: rgb(144, 238, 144);
+border: 1px solid rgb(144, 238, 144);
+border-radius: 20px;
+min-width: 80px;
+font-size: 1rem;
+font-weight: 600;
+line-height: 1.75;
+padding: 6px 16px;
+transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+
+.button-input, .button-input-autorization {
+  background: transparent;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.button-input-autorization:hover {
+  background-color: rgb(144, 238, 144, .3);
+}
+
+/*button:before (attr data-hover)*/
+.button-input-autorization:hover:before {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.button-input-autorization:before {
+  content: attr(data-hover);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translate(-100%, 0);
+  transition: all 0.3s ease-in-out;
+}
+/*button div (button text before hover)*/
+.button-input-autorization:hover a {
+  opacity: 0;
+  transform: translate(100%, 0);
+}
+.button-input-autorization a {
+  transition: all 0.3s ease-in-out;
+  color: rgb(144, 238, 144);
 }
 
 
@@ -206,7 +259,7 @@ cursor: pointer;
   top:0px;
   padding: 30px;
   position: fixed;
-  left: -320px;
+  left: -430px;
   transition: left 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
   height: calc(100vh + 20px);
   z-index: 998;
@@ -270,8 +323,8 @@ ul{
     position: absolute;
     border:5px solid;
     border-color: transparent transparent transparent black;
-    top: 1.4em;
-    right: .1em;
+    top: 1em;
+    right: .7em;
     transition: 0.5s;
 }
 .p_menu:hover::after{
@@ -282,6 +335,7 @@ p {
   display: inline-block;
   vertical-align: top;
   margin: 0;
+  display: list-item;
 }
 
 * {
@@ -421,7 +475,7 @@ li .web img{
 }
 
 li .web{
-  margin: 24px 0;
+  margin: 10px 0;
   padding-bottom: 20px;
 }
 
@@ -433,14 +487,18 @@ li .title {
 
 li a {
   text-decoration: none;
-  font-size: 22px;
   color: black;
+  cursor: pointer;
 }
 
 li button:hover, a:hover {
   opacity: 0.7;
 }
 
+.toDo{
+    min-height: 55px;
+    padding: 0 15px;
+}
 
 /*--------------------------------Footer------------------------------ */
 

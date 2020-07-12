@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="style_for_our.css" rel="stylesheet">
-<title>RS Lang</title>
+<title>О команде</title>
 <link rel="icon" href="../Main/img/logo.png" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -18,21 +18,20 @@
 
   <nav id="nav" class="nav">
       <ul class="menu">
-        <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Изучение слов</a></li>
-        <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Статистика</a></li>
-        <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Словарь</a></li>
+        <li><a onclick="changePage('../learning-words/build/target/index.html')">Изучение слов</a></li>
+        <li><a onclick="changePage('../statistic/src/index.html')">Статистика</a></li>
+        <li><a onclick="changePage('../vocabulary/dist/index.html')">Словарь</a></li>
           <li class="p_menu"><a class = "link">Мини-игры</a>
               <ul class="v_menu">
-                <li><a href="#">SpeakIt</a></li>
-                <li><a href="#">English puzzle</a></li>
-                <li><a href="#">Саванна</a></li>
-                <li><a href="https://rs-lang-audition.netlify.app/">Аудиовызов</a></li>
-                <li><a href="#">Спринт</a></li>
-                <li><a href="#">Своя игра</a></li>
+                <li><a target="_blank" href="../speakit/dist/index.html">SpeakIt</a></li>
+                <li><a target="_blank" href="../english-puzzle/dist/index.html">English puzzle</a></li>
+                <li><a target="_blank" href="../savannah/src/index.html">Саванна</a></li>
+                <li><a target="_blank" href="../Audition/index.html">Аудиовызов</a></li>
+                <li><a target="_blank" href="../millionaire/dist/index.html">Миллионер</a></li>
               </ul>
           </li>
-          <li><a href="../main/index.html">Промо-страница</a></li>
-          <li><a onclick="changePageSide()" id="butSide">Вход</a></li>
+          <li><a href="../index.html">Промо-страница</a></li>
+          <li><a onclick="changePageSide()" id="butExit">Вход</a></li>
             </ul>
     </nav>
 
@@ -41,30 +40,29 @@
     <h3 class="dropdown">RS Lang</h3>
     <span class = "contener">
       <div class="dropdown">
-      <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Изучение слов</a>
+      <a onclick="changePage('../learning-words/build/target/index.html')" class="dropbtn">Изучение слов</a>
       </div>
   <div class="dropdown">
-    <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Статистика</a>
+    <a onclick="changePage('../statistic/src/index.html')" class="dropbtn">Статистика</a>
   </div>
   <div class="dropdown">
-  <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Словарь</a>
+  <a onclick="changePage('../vocabulary/dist/index.html')" class="dropbtn">Словарь</a>
   </div>
   <div class="dropdown">
     <button class="dropbtn">Мини-игры</button>
     <div class="dropdown-content">
-      <a href="#">SpeakIt</a>
-      <a href="#">English puzzle</a>
-      <a href="#">Саванна</a>
-      <a href="https://rs-lang-audition.netlify.app/">Аудиовызов</a>
-      <a href="#">Спринт</a>
-      <a href="#">Своя игра</a>
+      <a target="_blank" href="../speakit/dist/index.html">SpeakIt</a>
+      <a target="_blank" href="../english-puzzle/dist/index.html">English puzzle</a>
+      <a target="_blank" href="../savannah/src/index.html">Саванна</a>
+      <a target="_blank" href="../Audition/index.html">Аудиовызов</a>
+      <a target="_blank" href="../millionaire/dist/index.html">Миллионер</a>
     </div>
   </div>
   <div class="dropdown">
-  <a href="../main/index.html" class="dropbtn">Промо-страница</a>
+  <a href="../index.html" class="dropbtn">Промо-страница</a>
   </div>
   <div class="dropdown">
-    <button class="button-input" id = "but-autoriz" data-hover="Выход" onclick="changePage()"><a id = "autoriz" onclick="changePage('../authorization/src/index.html')">Вход</a></button>
+    <button class="button-input" id = "but-autorization" data-hover="Выход" onclick="changePage()"><a id = "autorization" onclick="changePage('../authorization/src/index.html')">Вход</a></button>
   </div>
 </span>
 </div>
@@ -95,10 +93,10 @@
   <ul>
     <li>
   <div class="card">
-  <img src="https://avatars2.githubusercontent.com/u/20026090?s=400&u=ccb13c91c57750791bde9bcd5751e78ed2b557ad&v=4" alt="John" style="width:100%">
+  <img src="https://cdn.discordapp.com/attachments/731895344148774922/731905366765600788/image0.jpg" alt="Слабко Дмитрий" style="width:100%">
   <h1>Слабко Дмитрий</h1>
   <p class="title">Руководитель проекта</p>
-  <p>Курировал нашу команду</p>
+  <p class="toDo">Курировал нашу команду</p>
   <div class="web">
     <a href="https://github.com/slabkodima90"><img class="icon" src="img/github.svg"></img></a>
   </div>
@@ -107,21 +105,22 @@
 
     <li>
         <div class="card">
-          <img src="https://cdn.discordapp.com/attachments/724631049732096092/730139116850642974/1zGWEgAhIRI.jpg" alt="John" style="width:100%">
+          <img src="https://cdn.discordapp.com/attachments/724631049732096092/730139116850642974/1zGWEgAhIRI.jpg" alt="Кобзарев Борис" style="width:100%">
           <h1>Кобзарев Борис</h1>
-          <p class="title">Генеральный директор и основатель, пример</p>
-          <p>Гарвардский университет</p>
+          <p class="title">Тимлид, разработчик</p>
+          <p class="toDo">Создавал игры: English Puzzle, Speak It и Миллионер, а также страницу настроек</p>
           <div class="web">
             <a href="https://github.com/Anglehart"><img class="icon" src="img/github.svg"></img></a>
           </div>
         </div>
     </li>
+
 <li>
     <div class="card">
-      <img src="https://sun9-35.userapi.com/c850336/v850336821/68a04/ZofGQsQCz1I.jpg" alt="John" style="width:100%">
+      <img src="https://sun9-35.userapi.com/c850336/v850336821/68a04/ZofGQsQCz1I.jpg" alt="Данченко Дарья" style="width:100%">
       <h1>Данченко Дарья</h1>
-      <p class="title">Генеральный директор и основатель, пример</p>
-      <p>Гарвардский университет</p>
+      <p class="title">Разработчик</p>
+      <p class="toDo">Создавала страницы: промо, о нас. А также игру Аудиовызов</p>
       <div class="web">
         <a href="https://github.com/DaryaDan"><img class="icon" src="img/github.svg"></img></a>
       </div>
@@ -130,10 +129,10 @@
 
 <li>
     <div class="card">
-      <img src="https://avatars0.githubusercontent.com/u/57707166?s=400&u=4085d43346b945b621a855ce92decb106d6f5cea&v=4" alt="John" style="width:100%">
+      <img src="https://avatars0.githubusercontent.com/u/57707166?s=400&u=4085d43346b945b621a855ce92decb106d6f5cea&v=4" alt="Киянко Виктория" style="width:100%">
       <h1>Киянко Виктория</h1>
-      <p class="title">Генеральный директор и основатель, пример</p>
-      <p>Гарвардский университет</p>
+      <p class="title">Разработчик</p>
+      <p class="toDo">Создавала игру Саванна, авторизацию и страницу статистики</p>
       <div class="web">
         <a href="https://github.com/Mikisum"><img class="icon" src="img/github.svg"></img></a>
       </div>
@@ -142,10 +141,10 @@
 
 <li>
     <div class="card">
-      <img src="https://sun9-42.userapi.com/c845217/v845217566/227da/51nVlvvYe-A.jpg" alt="John" style="width:100%">
+      <img src="https://sun9-42.userapi.com/c845217/v845217566/227da/51nVlvvYe-A.jpg" alt="Свич Анастасия" style="width:100%">
       <h1>Свич Анастасия</h1>
-      <p class="title">Генеральный директор и основатель, пример</p>
-      <p>Гарвардский университет</p>
+      <p class="title">Разработчик</p>
+      <p class="toDo">Создавала страницы: промо, о нас. А также игру Аудиовызов</p>
       <div class="web">
         <a href="https://github.com/NastyaSvich"><img class="icon" src="img/github.svg"></img></a>
       </div>
@@ -154,10 +153,10 @@
 
 <li>
     <div class="card">
-      <img src="https://avatars3.githubusercontent.com/u/60578979?s=400&u=6a519458f4c166623b252f9c7eb314e4b22dc6d8&v=4" alt="John" style="width:100%">
-      <h1>Щипунов Антон</h1>
-      <p class="title">Генеральный директор и основатель, пример</p>
-      <p>Гарвардский университет</p>
+      <img src="https://avatars3.githubusercontent.com/u/60578979?s=400&u=6a519458f4c166623b252f9c7eb314e4b22dc6d8&v=4" alt="Свирский Антон" style="width:100%">
+      <h1>Свирский Антон</h1>
+      <p class="title">Разработчик</p>
+      <p class="toDo">Создавал главную страницу приложения</p>
       <div class="web">
         <a href="https://github.com/SvirskiA"><img class="icon" src="img/github.svg"></img></a>
       </div>
@@ -166,10 +165,10 @@
 
 <li>
     <div class="card">
-      <img src="https://avatars2.githubusercontent.com/u/20026090?s=400&u=ccb13c91c57750791bde9bcd5751e78ed2b557ad&v=4" alt="John" style="width:100%">
-      <h1>Щипунов Никита</h1>
-      <p class="title">Генеральный директор и основатель, пример</p>
-      <p>Гарвардский университет</p>
+      <img src="https://media.discordapp.net/attachments/731557012290273321/731885320605532231/IMG_20200712_150923.jpg?width=281&height=375" alt="Казюка Никита" style="width:100%">
+      <h1>Казюка Никита</h1>
+      <p class="title">Разработчик</p>
+      <p class="toDo">Разрабатывал словарь</p>
       <div class="web">
         <a href="https://github.com/niko07335"><img class="icon" src="img/github.svg"></img></a>
       </div>
@@ -184,6 +183,7 @@
         <p class = "School">RS School 2020q1</p>
       </div>
 </footer>
+
 
 <script src="script_for_our.js"></script>
 </body>
