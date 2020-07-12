@@ -44,7 +44,7 @@ class GameCard {
     this.loseCount.innerText = `You lose: ${lose}`;
     totalContainer.append(this.loseCount);
 
-    parent.append(this.gameCardConainer);
+    parent.after(this.gameCardConainer);
   }
 }
 export default GameCard;
