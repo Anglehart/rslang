@@ -1,0 +1,70 @@
+<!-- real DOM -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i&display=swap&subset=cyrillic"
+    rel="stylesheet">
+  <title>words</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="menu">
+      <a class="link" href="#">Main menu</a>
+      <a class="link" href="#">Settings</a>
+    </div>
+    <div class="check-boxes">
+      <div class="card_sound">
+        <input type="checkbox" checked="checked" id="sound" name="sound" class="checkbox-sound">
+        <label for="sound">Play sound</label>
+      </div>
+      <div class="card_translate">
+        <input type="checkbox" checked="checked" id="translate" name="translate" class="checkbox-translate">
+        <label for="translate">Show translation</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card_img"></div>
+      <div class="card_phrase"></div>
+      <div class="card_phrase-translate"></div>
+      <div class="card_meaning"></div>
+      <div class="card_meaning-translate"></div>
+      <div class="card_word-transcription"></div>
+      
+      <div class="card_main-input">
+        <div class="card_word-hidden">
+          <form class="word-hidden">
+            <input class="word-hidden_input" type="text" autofocus>
+            <input class="word-hidden_btn" type="submit" value="Сheck word">
+          </form>
+        </div>
+        <div class="answer_btn"></div>
+        <div class="difficult_btn"></div>
+        <div class="delete_btn"></div>
+      </div>
+      <div class="card_word-translate"></div>
+      <div class="difficulty_btns"></div>
+    </div>
+    <div class="notification"></div>
+    <div class="bars">
+      <p>New words progress</p>
+      <div class="progress-bar blue stripes shine glow">
+        <span></span>
+      </div>
+      <p>Max cards per day progress</p>
+      <div class="progress-bar-all blue stripes shine glow">
+        <span></span>
+      </div>
+    </div>
+
+    <audio id="audio"></audio>
+    <audio id="audio-example"></audio>
+    <audio id="audio-meaning"></audio>
+  </div>
+
+<script type="text/javascript" src="main.bundle.js"></script></body>
+
+</html>

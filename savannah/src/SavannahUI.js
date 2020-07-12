@@ -36,11 +36,6 @@ class SavannahUI {
     this.levelButtons.className = 'level-buttons';
     this.levelContainer.append(this.levelButtons);
 
-    this.closeButton = document.createElement('div');
-    this.closeButton.className = 'close';
-    this.closeButton.id = 'closeButton';
-    this.header.append(this.closeButton);
-
     this.level1 = document.createElement('li');
     this.level1.innerText = '1';
     this.level1.className = 'active';
@@ -97,7 +92,6 @@ class SavannahUI {
       if (event.target.closest('li')){
         event.target.classList.add('active');
         this.level = +event.target.innerText - 1;;
-        console.log(this.level);
       }
     });
   }
@@ -124,11 +118,6 @@ class SavannahUI {
     this.iconsContainer = document.createElement('div');
     this.iconsContainer.className = 'icons-container';
     this.header.append(this.iconsContainer);
-
-    this.closeButton = document.createElement('div');
-    this.closeButton.className = 'close';
-    this.closeButton.id = 'closeButton';
-    this.header.append(this.closeButton);
 
     this.createReaultsIcon();
     this.question = document.createElement('div');
@@ -185,11 +174,6 @@ class SavannahUI {
     this.translationWord4.className = 'translationWord';
     this.translation4.append(this.translationWord4);
     this.backgroundPosition = 100;
-    this.closeButton.addEventListener('click', () => {
-      clearInterval(this.timer);
-      this.gamePage.style.display = 'none';
-      this.mainPage.style.display = 'block';
-    });
   }
 
   createStatisticWord(parent, word) {
@@ -253,8 +237,6 @@ class SavannahUI {
     words.forEach((word) => {
       this.createStatisticWord(container, word);
     });
-
-
   }
 
   createFinalPage(statistics) {
