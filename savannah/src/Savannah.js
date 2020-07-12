@@ -5,8 +5,6 @@ import stats from './Stats.js';
 class Savannah {
 
   constructor() {
-    this.saveUserId('5eefa4639896e10017eea40c');
-    this.saveToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDQ4MDQwMSwiZXhwIjoxNTk0NDk0ODAxfQ.huKN1eEOrSRA_tFoB-7S_1LDeAxxkZplZrLZNl4mrrg');
     this.answerHandled = false;
     this.countRoundsGame = 0;
     this.ui = new SavannahUI;
@@ -31,10 +29,6 @@ class Savannah {
       setTimeout(() => this.startNextRound(), 1000);
     });
 
-    // this.ui.word.addEventListener('animationcancel', () => {
-    //   this.startNextRound();
-    // });
-
     document.addEventListener('keypress', (event) => {
       if (!this.gameStarted || this.answerHandled) return;
       this.ui.word.classList.remove('animation');
@@ -52,8 +46,7 @@ class Savannah {
           });
       }
     });
-
-    this.getEnglishWords(); // to be prepared before we press start game
+    this.getEnglishWords();
   }
 
   checkAnswer(selectedTranslation) {
