@@ -29,7 +29,7 @@ class Stats {
   }
 
   async checkWord(wordId) {
-    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words/${wordId}`;
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words`;
     const res = await fetch(url, {
       method: 'GET',
       headers: {
@@ -37,10 +37,14 @@ class Stats {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    })
-      .catch(() => false);
-    const data = await (res.ok ? res.json() : false);
-    return data;
+    });
+    const data = await res.json();
+    data.forEach((item) => {
+      if (item.wordId === wordId) {
+        return item;
+      }
+      return false;
+    });
   }
 
   async checkDifficulty(wordId) {
