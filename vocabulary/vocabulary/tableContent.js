@@ -55,6 +55,12 @@ class TableContent {
     const tableBody = document.querySelector('div.tableBody');
     tableBody.removeChild(row);
   }
+  countWords() {
+    const cells = document.querySelectorAll('.numberCell');
+    cells.forEach((item, index) => {
+      item.innerHTML = index + 1;
+    });
+  }
 
   addRow(data) {
     const tableBody = document.querySelector('div.tableBody');
@@ -66,7 +72,7 @@ class TableContent {
           <input type='checkbox' class='cell--checkbox' id='${data['_id']}'>
         </label>
       </div>
-      <div class="tableCell idCell" data-wordId='${data['_id']}'>${this.rowCount()}</div>
+      <div class="tableCell idCell numberCell" data-wordId='${data['_id']}'>${this.rowCount()}</div>
       <div class="tableCell audioCell "><i class="fas fa-play"></i></div>
       <div class="tableCell wordCell">${data.word}</div>
       <div class="tableCell transcriptCell">${data.transcription}</div></div>

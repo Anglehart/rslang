@@ -52,6 +52,7 @@ function deletWords() {
       wordLibrary.remove(wordId);
       tableContent.removeRow(element);
     });
+    tableContent.countWords();
   } else {
     wordLibrary.showError('Nothing to delet!');
   }
@@ -65,6 +66,7 @@ function restoreWords() {
       wordLibrary.restore(wordId);
       tableContent.removeRow(element);
     });
+    tableContent.countWords();
   } else {
     wordLibrary.showError('Nothing to restore!');
   }
