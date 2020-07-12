@@ -45,6 +45,7 @@ function change() {
 }
 
 function deletWords() {
+  const delButton = document.querySelector('button.del-button');
   const words = tableContent.checkActiveRow();
   if (words) {
     words.forEach((element) => {
@@ -52,12 +53,15 @@ function deletWords() {
       wordLibrary.remove(wordId);
       tableContent.removeRow(element);
     });
+    tableContent.countWords();
+    delButton.classList.remove('allowed');
   } else {
     wordLibrary.showError('Nothing to delet!');
   }
 }
 
 function restoreWords() {
+  const addButton = document.querySelector('button.add-button');
   const words = tableContent.checkActiveRow();
   if (words) {
     words.forEach((element) => {
@@ -65,6 +69,8 @@ function restoreWords() {
       wordLibrary.restore(wordId);
       tableContent.removeRow(element);
     });
+    tableContent.countWords();
+    addButton.classList.remove('allowed');
   } else {
     wordLibrary.showError('Nothing to restore!');
   }
