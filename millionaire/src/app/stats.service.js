@@ -39,12 +39,13 @@ class Stats {
       },
     });
     const data = await res.json();
+    let result = false;
     data.forEach((item) => {
       if (item.wordId === wordId) {
-        return item;
+        result = item;
       }
-      return false;
     });
+    return result;
   }
 
   async checkDifficulty(wordId) {
@@ -97,6 +98,9 @@ class Stats {
   }
 
   async updateStats(gameName, gameResult) {
+    if (!this.getToken()) {
+      return false;
+    }
     const now = new Date();
     const body = await this.getStats();
     body.optional[`${gameName}All`] += 1;
@@ -117,19 +121,28 @@ class Stats {
       },
       body: JSON.stringify(body),
     });
+    return false;
   }
 
   // изменяет сложность слова на "3"
   async wrong(wordId) {
+    if (!this.getToken()) {
+      return false;
+    }
     if (await this.checkWord(wordId)) {
       this.updateWord(wordId, 3);
     } else {
       this.addWord(wordId, 3);
     }
+    return false;
   }
 
   // уменьшает сложность слова на "1", если его текущая сложность > 0
   async correct(wordId) {
+    if (!this.getToken()) {
+      return false;
+    }
+
     if (await this.checkWord(wordId) !== false) {
       const currDiffuculty = await this.checkDifficulty(wordId);
       const difficulty = (currDiffuculty > 0 ? currDiffuculty - 1 : currDiffuculty);
@@ -137,6 +150,7 @@ class Stats {
     } else {
       this.addWord(wordId, 0);
     }
+    return false;
   }
 }
 
