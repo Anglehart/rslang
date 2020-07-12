@@ -10,7 +10,6 @@ body {
 }
 
 .game-promo,
-.game-statistic,
 .game-container {
   display: flex;
   justify-content: space-around;
@@ -20,21 +19,30 @@ body {
 
 .game-container {
   margin-bottom: 50px !important;
-  min-width: 400px;
+  min-width: 450px;
 }
 
 .game-promo {
-  font-size: 1.5em;
+  font-size: 24px;
+  color: #3c3c3c;
+}
+
+.total div{
+  margin: 10px 0;
 }
 
 .game-statistic {
   margin-right: 20px;
+  padding-top: 10px;
+  text-align: start;
+  color: #777;
+  font-size: 17px;
 }
 
 .game-container {
   margin: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
+  max-width: 400px;
   margin: auto;
   text-align: center;
   font-family: arial;
