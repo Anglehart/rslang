@@ -142,7 +142,7 @@ function createUser(user) {
   }).then((res) => {
     answerSignUpForm(responsesSignUp[res.status]);
     if (res.status === 200) {
-      signUpFormAnswer.style.color = '#BEEE62';
+      signUpFormAnswer.style.color = '#0be931';
       return res.json();
     }
   })
@@ -164,7 +164,7 @@ function loginUser(user) {
   }).then((res) => {
     answerSignInForm(responsesSignIn[res.status]);
     if (res.status === 200) {
-      signInFormAnswer.style.color = '#BEEE62';
+      signInFormAnswer.style.color = '#0be931';
       return res.json();
     }
   })

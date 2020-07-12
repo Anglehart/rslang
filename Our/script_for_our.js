@@ -29,39 +29,37 @@ document.onclick = function change() {
 
 // -----------------Delete-------------
 function deleteInform() {
-  document.getElementById('butSide').textContent = 'Вход';
-   localStorage.removeItem('email');
-   localStorage.removeItem('token');
-   localStorage.removeItem('userId');
-   document.getElementById('autoriz').textContent = 'Вход';
-   document.getElementById('but-autoriz').classList.remove('button-input-autoriz');
-};
+  document.getElementById('butExit').textContent = 'Вход';
+  localStorage.removeItem('email');
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  document.getElementById('autorization').textContent = 'Вход';
+  document.getElementById('but-autorization').classList.remove('button-input-autorization');
+}
 
 // -----------------login-------------
-if(localStorage.getItem('userId') !== null){
-  document.getElementById('but-autoriz').onclick = '';
-  document.getElementById('autoriz').textContent = localStorage.email;
-  document.getElementById('but-autoriz').classList.add('button-input-autoriz');
-  document.getElementById('butSide').textContent = 'Выход';
-  document.getElementById('but-autoriz').onclick = function remove() {
-     deleteInform();
- };
+if (localStorage.getItem('userId') !== null) {
+  document.getElementById('but-autorization').onclick = '';
+  document.getElementById('autorization').textContent = localStorage.email;
+  document.getElementById('but-autorization').classList.add('button-input-autorization');
+  document.getElementById('butExit').textContent = 'Выход';
+  document.getElementById('but-autorization').onclick = function remove() {
+    deleteInform();
+  };
 }
 
 function changePageSide() {
-if(localStorage.getItem('userId') === null){
-  document.location.href = "../authorization/src/index.html";
-}
-else {
- deleteInform();
-}
+  if (localStorage.getItem('userId') === null) {
+    document.location.href = '../authorization/src/index.html';
+  } else {
+    deleteInform();
+  }
 }
 
 // -----------------changePage-------------
 
 function changePage(href) {
-if(localStorage.getItem('userId') === null){
-  document.location.href = "../authorization/src/index.html";
-}
-else {  document.location.href = href;}
+  if (localStorage.getItem('userId') === null) {
+    document.location.href = '../authorization/src/index.html';
+  } else { document.location.href = href; }
 }

@@ -27,7 +27,7 @@ body{
   top: 32px;
   width: 32px;
   height: 32px;
-  opacity: 0.6;
+  opacity: 0.3;
 }
 .close:hover {
   opacity: 1;
@@ -53,11 +53,11 @@ body{
 	color: #232323;
 }
 
-.complete{
-  position: absolute;
-  top: 50%;
-  right: 3%;
-  color: #BEEE62;
+.complete {
+    position: absolute;
+    top: 33px;
+    right: 3%;
+    color: #0be931;
 }
 
 .form-toggler,
@@ -143,8 +143,8 @@ body{
   cursor: pointer;
   max-width: 200px;
   margin: 0 auto;
-  border: 2px solid rgba(0, 0, 0, .6);
-  color: rgba(0, 0, 0, .6);
+  border: 2px solid rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, .5);
   font-weight: 600;
   letter-spacing: 2px;
 }
@@ -254,7 +254,7 @@ body{
 .modal_window .sign-in:checked + .tab,
 .modal_window .sign-up:checked + .tab{
 	color:#fff;
-	border-color: rgba(0, 0, 0, .6);
+	border-color:#1161ee;
 }
 
 .modal_window .sign-in:checked + .tab + .sign-up + .tab + .login-card .sign-in-card{

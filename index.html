@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="style_for_main.css" rel="stylesheet">
+<link href="Main/style_for_main.css" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <title>RS Lang</title>
-<link rel="icon" href="img/logo.png" type="image/x-icon">
+<link rel="icon" href="Main/img/logo.png" type="image/x-icon">
 </head>
 <body>
 
@@ -19,53 +19,51 @@
 
   <nav id="nav" class="nav">
       <ul class="menu">
-          <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Изучение слов</a></li>
-          <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Статистика</a></li>
-          <li><a onclick="changePage('https://github.com/Anglehart/rslang')">Словарь</a></li>
+          <li><a onclick="changePage('learning-words/build/target/index.html')">Изучение слов</a></li>
+          <li><a onclick="changePage('statistic/src/index.html')">Статистика</a></li>
+          <li><a onclick="changePage('vocabulary/dist/index.html')">Словарь</a></li>
           <li class="p_menu"><a class = "link">Мини-игры</a>
               <ul class="v_menu">
-                <li><a href="#">SpeakIt</a></li>
-                <li><a href="#">English puzzle</a></li>
-                <li><a href="#">Саванна</a></li>
-                <li><a href="https://rs-lang-audition.netlify.app/">Аудиовызов</a></li>
-                <li><a href="#">Спринт</a></li>
-                <li><a href="#">Своя игра</a></li>
+                <li><a target="_blank" href="speakit/dist/index.html">SpeakIt</a></li>
+                <li><a target="_blank" href="english-puzzle/dist/index.html">English puzzle</a></li>
+                <li><a target="_blank" href="savannah/src/index.html">Саванна</a></li>
+                <li><a target="_blank" href="Audition/index.html">Аудиовызов</a></li>
+                <li><a target="_blank" href="millionaire/dist/index.html">Миллионер</a></li>
               </ul>
           </li>
-          <li><a href="../Our/index-about.html">О команде</a></li>
-          <li><a onclick="changePageSide()" id="butSide">Вход</a></li>
+          <li><a href="Our/index-about.html">О команде</a></li>
+          <li><a onclick="changePageSide()" id="butExit">Вход</a></li>
             </ul>
     </nav>
 
   <div class="line">
-    <p class="dropdown"><img src="img/logo.png" alt="Логотип"></p>
+    <p class="dropdown"><img src="Main/img/logo.png" alt="Логотип"></p>
     <h3 class="dropdown">RS Lang</h3>
     <span class = "contener">
       <div class="dropdown">
-      <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Изучение слов</a>
+      <a onclick="changePage('learning-words/build/target/index.html')" class="dropbtn">Изучение слов</a>
       </div>
   <div class="dropdown">
-    <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Статистика</a>
+    <a onclick="changePage('statistic/src/index.html')" class="dropbtn">Статистика</a>
   </div>
   <div class="dropdown">
-  <a onclick="changePage('https://github.com/Anglehart/rslang')" class="dropbtn">Словарь</a>
+  <a onclick="changePage('vocabulary/dist/index.html')" class="dropbtn">Словарь</a>
   </div>
   <div class="dropdown">
     <button class="dropbtn">Мини-игры</button>
     <div class="dropdown-content">
-      <a href="#">SpeakIt</a>
-      <a href="#">English puzzle</a>
-      <a href="#">Саванна</a>
-      <a href="https://rs-lang-audition.netlify.app/">Аудиовызов</a>
-      <a href="#">Спринт</a>
-      <a href="#">Своя игра</a>
+      <a target="_blank" href="speakit/dist/index.html">SpeakIt</a>
+      <a target="_blank" href="english-puzzle/dist/index.html">English puzzle</a>
+      <a target="_blank" href="savannah/src/index.html">Саванна</a>
+      <a target="_blank" href="Audition/index.html">Аудиовызов</a>
+      <a target="_blank" href="millionaire/dist/index.html">Миллионер</a>
     </div>
   </div>
   <div class="dropdown">
-  <a href="../Our/index-about.html" class="dropbtn">О команде</a>
+  <a href="Our/index-about.html" class="dropbtn">О команде</a>
   </div>
   <div class="dropdown">
-    <button class="button-input" id = "but-autoriz" data-hover="Выход" onclick="changePage()"><a id = "autoriz" onclick="changePage('../authorization/src/index.html')">Вход</a></button>
+    <button class="button-input" id = "but-autorization" data-hover="Выход" onclick="changePage()"><a id = "autorization" onclick="changePage('authorization/src/index.html')">Вход</a></button>
   </div>
 </span>
 </div>
@@ -73,7 +71,7 @@
 
 <main>
 <section  id="section1">
-      <img src="img/london.png" alt="london">
+      <img src="Main/img/london.png" alt="london">
       <div class="text">
   <p>Изучаем английский </p>
   <p class="newstr">
@@ -95,7 +93,7 @@
   <div class="dividing-line-background"></div>
   <div><h2 class = "headline">Выучите новые слова!</h2>
     <div class="dividing-line-text">Обучение новым словам происходит легко и быстро, если делать это правильно. Учите слова вместе с RS Lang!</div>
-    <a class="dividing-line-opisanie" onclick="changePage('https://github.com/Anglehart/rslang')">Изучить слова</a>
+    <a class="dividing-line-opisanie" onclick="changePage('learning-words/build/target/index.html')">Изучить слова</a>
   </div>
 </div>
 
@@ -104,7 +102,7 @@
 <div class="dividing-line square">
   <div><h2 class = "headline">Следите за своим прогрессом!</h2>
     <div class="dividing-line-text">Расширяйте свой словарный запас. Изучаемые, сложные и удалённые слова Вы всегда можете посмотреть в словаре.</div>
-    <a class="dividing-line-opisanie" onclick="changePage('https://github.com/Anglehart/rslang')">Посмотреть словарь</a>
+    <a class="dividing-line-opisanie" onclick="changePage('vocabulary/dist/index.html')">Посмотреть словарь</a>
   </div>
   <div class="dividing-line-background1"></div>
 </div>
@@ -122,7 +120,7 @@
             <div class="content">
               <h2 class="title">SpeakIt</h2>
               <p class="copy">Проверьте правильность своего произношения</p>
-              <a href="#" class="btn">Играть</a>
+              <a target="_blank" href="speakit/dist/index.html" class="btn">Играть</a>
             </div>
           </div></div>
 
@@ -130,7 +128,7 @@
               <div class="content">
                 <h2 class="title">English Puzzle</h2>
                 <p class="copy">Соберите предложения из предложенных английских слов</p>
-                <a href="#" class="btn">Играть</a>
+                <a target="_blank" href="english-puzzle/dist/index.html" class="btn">Играть</a>
               </div>
             </div></div>
 
@@ -138,7 +136,7 @@
         <div class="content">
           <h2 class="title">Саванна</h2>
           <p class="copy">Подберите правильный перевод для слов</p>
-          <a href="#" class="btn">Играть</a>
+          <a target="_blank" href="savannah/src/index.html" class="btn">Играть</a>
         </div>
       </div></div>
 
@@ -146,23 +144,15 @@
       <div class="content">
         <h2 class="title">Аудиовызов</h2>
         <p class="copy">Выбрите перевод озвученного слова</p>
-        <a href="https://rs-lang-audition.netlify.app/" class="btn">Играть</a>
-      </div>
-    </div></div>
-
-    <div class="swiper-slide">  <div class="card five">
-      <div class="content">
-        <h2 class="title">Спринт</h2>
-        <p class="copy">Определите, принадлежит ли перевод этому слову</p>
-        <a href="#" class="btn">Играть</a>
+        <a target="_blank" href="Audition/index.html" class="btn">Играть</a>
       </div>
     </div></div>
 
     <div class="swiper-slide">  <div class="card six">
         <div class="content">
-          <h2 class="title">Своя игра</h2>
-          <p class="copy">Описание нашей игры</p>
-          <a href="#" class="btn">Играть</a>
+          <h2 class="title">Миллионер</h2>
+          <p class="copy">Получайте баллы за правильные слова</p>
+          <a target="_blank" href="millionaire/dist/index.html" class="btn">Играть</a>
         </div>
       </div></div>
 
@@ -189,7 +179,7 @@
 <div class="dividing-line square">
 <div><h2 class = "headline">Наша команда!</h2>
   <div class="dividing-line-text">Узнайте о вкладе каждого участника команды в разработку приложения. Да, нас немного, но мы сильные :D</div>
-  <a class="dividing-line-opisanie" href="../Our/index-about.html">Посмотреть наших разработчиков</a>
+  <a class="dividing-line-opisanie" href="Our/index-about.html">Посмотреть наших разработчиков</a>
 </div>
 <div class="dividing-line-background3"></div>
 </div>
@@ -206,6 +196,6 @@
 
 <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="script_for_main.js"></script>
+<script src="Main/script_for_main.js"></script>
 </body>
 </html>
