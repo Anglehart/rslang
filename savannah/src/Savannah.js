@@ -97,7 +97,7 @@ class Savannah {
         event.target.firstElementChild.play();
       } else if (event.target.id === 'homePageButton') {
         this.clearPreviousDataGame();
-        //choose a game
+        document.location.href = '../../index.html';
         this.ui.mainPage.style.display = 'block';
       } else if (event.target.id === 'continueButton') {
         this.clearPreviousDataGame();
