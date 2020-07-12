@@ -1,0 +1,50 @@
+body {
+  font-size: 14px;
+}
+
+.chart {
+  width: 500px;
+  height: 400px;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.game-promo,
+.game-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+
+.game-container {
+  margin-bottom: 50px !important;
+  min-width: 450px;
+}
+
+.game-promo {
+  font-size: 24px;
+  color: #3c3c3c;
+}
+
+.total div{
+  margin: 10px 0;
+}
+
+.game-statistic {
+  margin-right: 20px;
+  padding-top: 10px;
+  text-align: start;
+  color: #777;
+  font-size: 17px;
+}
+
+.game-container {
+  margin: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  border-radius: 20px;
+}
