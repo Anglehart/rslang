@@ -1,41 +1,54 @@
 import GameCard from './GameCard.js';
 
 /* eslint no-new: "off" */
+const chart = document.getElementById('chartContainer');
+
 function createGamesStatistics(stats) {
   new GameCard(
-    document.body, 'Millionaire',
+    chart, 'Millionaire',
     stats.millionaireAll, stats.millionaireWin,
     stats.millionaireLose, stats.millionaireLast,
   );
   new GameCard(
-    document.body, 'Audition',
+    chart, 'Audition',
     stats.audioAll, stats.audioWin,
     stats.audioLose, stats.audioLast,
   );
   new GameCard(
-    document.body, 'English-puzzle',
+    chart, 'English-puzzle',
     stats.puzzleAll, stats.puzzleWin,
     stats.puzzleLose, stats.puzzleLast,
   );
   new GameCard(
-    document.body, 'Savannah',
+    chart, 'Savannah',
     stats.savannaAll, stats.savannaWin,
     stats.savannaLose, stats.savannaLast,
   );
   new GameCard(
-    document.body, 'Speakit',
+    chart, 'Speakit',
     stats.speakitAll, stats.speakitWin,
     stats.speakitLose, stats.speakitLast,
   );
 }
 
-function getUserWord(user) {
-  const url = `https://afternoon-falls-25894.herokuapp.com/users/${user.userId}/words`;
+function getUserId() {
+  return localStorage.getItem('userId');
+}
+
+function getToken() {
+  return localStorage.getItem('token');
+}
+
+const userId = getUserId();
+const token = getToken();
+
+function getUserWord() {
+  const url = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/words`;
   return fetch(url, {
     method: 'GET',
     withCredentials: true,
     headers: {
-      Authorization: `Bearer ${user.token}`,
+      Authorization: `Bearer ${token}`,
       Accept: 'application/json',
     },
   }).then((res) => res.json())
@@ -94,20 +107,13 @@ function drawChart() {
   chart.render();
 }
 
-function getUseraggregatedWords(data) {
-  const url = `https://afternoon-falls-25894.herokuapp.com/users/${data.userId}/aggregatedWords?wordsPerPage=20&onlyUserWords=true&filter={"userWord.difficulty":"0"}`;
+function getUseraggregatedWords() {
+  const url = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/aggregatedWords?wordsPerPage=100&onlyUserWords=true&filter={"userWord.difficulty":"0"}`;
   return fetch(url, {
     method: 'GET',
     withCredentials: true,
     headers: {
-      Authorization: `Bearer ${data.token}`,
-      Accept: 'application/json',
-      filter: {
-        $or: [
-          { 'userWord.difficulty': 2 },
-          { userWord: null },
-        ],
-      },
+      Authorization: `Bearer ${token}`,
     },
   }).then((res) => res.json())
     .then((responsesData) => {
@@ -117,13 +123,13 @@ function getUseraggregatedWords(data) {
     });
 }
 
-function getGameStatistic(user) {
-  const url = `https://afternoon-falls-25894.herokuapp.com/users/${user.userId}/statistics`;
+function getGameStatistic() {
+  const url = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/statistics`;
   return fetch(url, {
     method: 'GET',
     withCredentials: true,
     headers: {
-      Authorization: `Bearer ${user.token}`,
+      Authorization: `Bearer ${token}`,
       Accept: 'application/json',
     },
   }).then((res) => res.json())
@@ -133,25 +139,73 @@ function getGameStatistic(user) {
     });
 }
 
-function loginUser(user) {
-  const url = 'https://afternoon-falls-25894.herokuapp.com/signin';
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+window.addEventListener('load', () => {
+  getUserWord();
+  getUseraggregatedWords();
+  getGameStatistic();
+});
+
+// -----------------Click-------------
+
+document.onclick = function change() {
+  if (event.target.className !== 'p_menu' && event.target.className !== 'link' && event.target.className !== 'nav-toggle expanded' && event.target.className !== 'nav-toggle-bar') {
+    document.querySelector('.nav-toggle').classList.remove('expanded');
+    document.querySelector('#nav').classList.remove('expanded');
+  }
+};
+
+(function menu() {
+  const hamburger = {
+    nav: document.querySelector('#nav'),
+    navToggle: document.querySelector('.nav-toggle'),
+
+    initialize() {
+      this.navToggle.addEventListener('click',
+        () => { this.toggle(); });
     },
-    body: JSON.stringify(user),
-  }).then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      getUserWord(data);
-      getUseraggregatedWords(data);
-      getGameStatistic(data);
-    });
+
+    toggle() {
+      this.navToggle.classList.toggle('expanded');
+      this.nav.classList.toggle('expanded');
+    },
+  };
+
+  hamburger.initialize();
+}());
+
+// -----------------Delete-------------
+function deleteInform() {
+  document.getElementById('butExit').textContent = 'Вход';
+  localStorage.removeItem('email');
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  document.getElementById('autorization').textContent = 'Вход';
+  document.getElementById('but-autorization').classList.remove('button-input-autorization');
 }
 
-window.addEventListener('load', () => {
-  loginUser({ email: 'team17@mail.ru', password: 'RsSchool2020!' });
-  // loginUser({emeail: localStorage.getItem('email'), password: localStorage.getItem('email')});
-});
+// -----------------login-------------
+if (localStorage.getItem('userId') !== null) {
+  document.getElementById('but-autorization').onclick = '';
+  document.getElementById('autorization').textContent = localStorage.email;
+  document.getElementById('but-autorization').classList.add('button-input-autorization');
+  document.getElementById('butExit').textContent = 'Выход';
+  document.getElementById('but-autorization').onclick = function remove() {
+    deleteInform();
+  };
+}
+
+function changePageSide() {
+  if (localStorage.getItem('userId') === null) {
+    document.location.href = '../authorization/src/index.html';
+  } else {
+    deleteInform();
+  }
+}
+
+// -----------------changePage-------------
+
+function changePage(href) {
+  if (localStorage.getItem('userId') === null) {
+    document.location.href = '../authorization/src/index.html';
+  } else { document.location.href = href; }
+}
