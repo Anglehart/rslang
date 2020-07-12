@@ -1,158 +1,265 @@
-import addCardFields from './layout/scripts/add-fields';
-import getRandomWord from './layout/scripts/get-random-word';
+/* eslint-disable no-use-before-define */
+import './layout/css/style.css';
+import './layout/css/progress.css';
 
-// import checkInput from './layout/scripts/check-word';
-import getUserWords from './layout/scripts/get-user-words';
-import getWordById from './layout/scripts/get-word-by-id';
 
-import createUserWord from './layout/scripts/create-user-word';
-import updateUserWord from './layout/scripts/update-user-word';
+import {
+  addCardFields, addTextExampleTranslateInCard,
+  addWordMeaningTranslateInCard, addWordTranslateInCard,
+} from './layout/scripts/add-fields';
+import { showFullTextExample, showFullTextMeaning } from './layout/scripts/show-full-text';
+import {
+  showDifficultyBtns, hideDifficultyBtns, showAnswerBtn, showDifficultWordBtn, showDeleteWordBtn,
+} from './layout/scripts/show-btns';
+
+import setInputWidth from './layout/scripts/set-input-width';
+import addMultiColorResult from './layout/scripts/multi-color-result';
+
+import createWordsArrayForToday from './layout/scripts/create-words-array-for-today';
+
+import getSettings from './layout/scripts/get-settings';
+
+import createOrUpdateWord from './layout/scripts/create-or-update-word';
+
+import progress from './layout/scripts/progress';
+
+
+// eslint-disable-next-line import/no-cycle
+import sayWord from './layout/scripts/say';
+
+import loginUser from './layout/scripts/login-test';
 
 const userId = '5eefa4639896e10017eea40c';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDAyNDg2MywiZXhwIjoxNTk0MDM5MjYzfQ.1pFogLqXLdx3Ca_jU0cfOhodyRL_0Fd-JFuoqfQz2XQ';
 
-const newWordsPerDay = 10; // min words
-const maxCardsPerDay = 20; // max words
+async function getToken() {
+  const token = await loginUser({ email: 'team17@mail.ru', password: 'RsSchool2020!' });
+  return token.token;
+}
+const token = getToken();
 
 
-// const showAnswerBtn = document.getElementById('show-answer');
+async function seeSettings() {
+  const myToken = await token;
+  const settings = await getSettings(userId, myToken);
+  return settings;
+}
+const settings = seeSettings();
+
+async function createArray() {
+  const myToken = await token;
+  const setSettings = await settings;
+  const wordsArrayForToday = await createWordsArrayForToday(
+    setSettings.wordsPerDay, setSettings.optional.cardsPerDay, myToken, userId,
+  );
+  const shufledWordsArrayForToday = wordsArrayForToday.sort((a, b) => (a.group > b.group ? 1 : -1));
+  return shufledWordsArrayForToday;
+}
+const wordsArrayForToday = createArray();
+
+async function startApp() {
+  const arrayOfWords = await wordsArrayForToday;
+  const myToken = await token;
+
+  if (arrayOfWords.length === 0) {
+    progress(myToken, userId);
+  } else {
+    const word = arrayOfWords[arrayOfWords.length - 1];
+    app(word, arrayOfWords);
+  }
+}
+startApp();
+
+async function correctAnswer(wordInfo, arrayOfWords, myToken) {
+  const setSettings = await settings;
+  const isSoundOn = document.getElementById('sound').checked;
+  const isTranslateOn = document.getElementById('translate').checked;
+  const arr = arrayOfWords.slice(0, arrayOfWords.length - 1);
+
+  if (setSettings.optional.showWordsStatusButtons && arr.length > 0) {
+    if (isSoundOn) {
+      sayWord(wordInfo, arr, userId, myToken, false);
+    }
+
+    showDifficultyBtns();
+    const diff3btn = document.getElementById('difficulty_3_btn');
+    diff3btn.onclick = () => {
+      createOrUpdateWord(wordInfo.id, myToken, userId, '3');
+      hideDifficultyBtns();
+      app(arr[arr.length - 1], arr);
+    };
+
+    const diff2btn = document.getElementById('difficulty_2_btn');
+    diff2btn.onclick = () => {
+      createOrUpdateWord(wordInfo.id, myToken, userId, '2');
+      hideDifficultyBtns();
+      app(arr[arr.length - 1], arr);
+    };
+
+    const diff1btn = document.getElementById('difficulty_1_btn');
+    diff1btn.onclick = () => {
+      createOrUpdateWord(wordInfo.id, myToken, userId, '1');
+      hideDifficultyBtns();
+      app(arr[arr.length - 1], arr);
+    };
+
+    const diff0btn = document.getElementById('difficulty_0_btn');
+    diff0btn.onclick = () => {
+      createOrUpdateWord(wordInfo.id, myToken, userId, '0');
+      hideDifficultyBtns();
+      app(arr[arr.length - 1], arr);
+    };
+  } else if (isSoundOn) {
+    createOrUpdateWord(wordInfo.id, myToken, userId);
+    sayWord(wordInfo, arr, userId, myToken, true);
+  } else if (arr.length > 0) {
+    createOrUpdateWord(wordInfo.id, myToken, userId);
+    app(arr[arr.length - 1], arr);
+  } else if (arr.length === 0) {
+    startApp();
+  }
+  if (arr.length > 0) {
+    if (setSettings.optional.showTextExample) { showFullTextExample(wordInfo); }
+    if (setSettings.optional.showTextMeaning) { showFullTextMeaning(wordInfo); }
+
+    if (isTranslateOn) {
+      addWordTranslateInCard(wordInfo);
+    }
+    if (isTranslateOn && setSettings.optional.showTextExample) {
+      addTextExampleTranslateInCard(wordInfo);
+    }
+    if (isTranslateOn && setSettings.optional.showTextMeaning) {
+      addWordMeaningTranslateInCard(wordInfo);
+    }
+  }
+}
+
+async function checkInput(wordInfo, arrayOfWords) {
+  const myToken = await token;
+
+  const { word } = wordInfo;
+
+  const multiColorResultWrapper = document.querySelector('.multi-color');
+  const input = document.querySelector('.word-hidden_input');
+  multiColorResultWrapper.textContent = '';
+
+  if (word === input.value) { // GOOD ANSWER
+    correctAnswer(wordInfo, arrayOfWords, myToken);
+  } else { // BAD ANSWER
+    createOrUpdateWord(wordInfo.id, myToken, userId, '3');
+
+    for (let i = 0; i < input.value.length; i += 1) {
+      const span = document.createElement('span');
+      span.textContent = input.value[i];
+
+      if (input.value[i] === word[i]) {
+        span.style.color = 'green';
+      } else {
+        span.style.color = 'red';
+      }
+      multiColorResultWrapper.append(span);
+    }
+  }
+  input.value = '';
+}
+
+async function app(word, arrayOfWords) {
+  const myToken = await token;
+  if (arrayOfWords.length === 0) {
+    startApp();
+  } else {
+    const cardMeaningTranslate = document.querySelector('.card_meaning-translate');
+    const cardTranslate = document.querySelector('.card_phrase-translate');
+    cardMeaningTranslate.textContent = '';
+    cardTranslate.textContent = '';
+
+    addCardFields(word, userId, myToken);
+    setInputWidth(word);
+    addMultiColorResult();
+
+    const input = document.querySelector('.word-hidden');
 
 
-// const loginUser = async (user) => {
-//   const rawResponse = await fetch('https://afternoon-falls-25894.herokuapp.com/signin', {
-//     method: 'POST',
+    input.onsubmit = (e) => {
+      e.preventDefault();
+      checkInput(word, arrayOfWords);
+    };
+
+    const colorWrapper = document.querySelector('.multi-color');
+    colorWrapper.onclick = () => {
+      colorWrapper.textContent = '';
+      input.focus();
+    };
+
+    input.addEventListener('input', () => {
+      colorWrapper.textContent = '';
+      input.focus();
+    });
+
+    const setSettings = await settings;
+    if (setSettings.optional.showAnswerButton) {
+      showAnswerBtn();
+      const answerBtn = document.getElementById('answer_btn');
+      answerBtn.onclick = () => {
+        correctAnswer(word, arrayOfWords, myToken);
+      };
+    }
+    if (setSettings.optional.showDeleteButton) {
+      showDeleteWordBtn();
+      const deleteWordbtn = document.getElementById('delete_btn');
+      deleteWordbtn.onclick = () => {
+        createOrUpdateWord(word.id, myToken, userId, '-1');
+        app(arrayOfWords[arrayOfWords.length - 2], arrayOfWords.slice(0, arrayOfWords.length - 1));
+      };
+    }
+    if (setSettings.optional.showDifficultWordsButton) {
+      showDifficultWordBtn();
+      const difficultWordbtn = document.getElementById('difficult_btn');
+      difficultWordbtn.onclick = () => {
+        createOrUpdateWord(word.id, myToken, userId, '20');
+        app(arrayOfWords[arrayOfWords.length - 2], arrayOfWords.slice(0, arrayOfWords.length - 1));
+      };
+    }
+  }
+  progress(myToken, userId);
+}
+
+// const updateSettings = async ({
+//   userId, token, wordId, settings,
+// }) => {
+//   const myToken = await token;
+//   const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
+//     method: 'PUT',
 //     headers: {
+//       Authorization: `Bearer ${myToken}`,
 //       Accept: 'application/json',
 //       'Content-Type': 'application/json',
 //     },
-//     body: JSON.stringify(user),
+//     body: JSON.stringify(settings),
 //   });
-//   const content = await rawResponse.json();
+//   const updatedSets = await rawResponse.json();
 
-//   const { token } = content;
-//   const { userId } = content;
-//   console.log(content, token, userId);
+//   console.log(updatedSets, myToken);
+//   return updatedSets;
 // };
 
-// loginUser({ email: 'team17@mail.ru', password: 'RsSchool2020!' });
-
-
-const now = new Date();
-
-async function startApp() {
-  const allUserWods = await getUserWords(token);
-  const arrayOfWordsForToday = [];
-
-
-  for (let i = 0; i < newWordsPerDay; i += 1) {
-    const randomWord = await getRandomWord();
-    arrayOfWordsForToday.push(randomWord);
-  }
-
-  const allUserWodsId = allUserWods.map((elem) => elem.wordId);
-  console.log(allUserWodsId);
-  for (let i = 0; i < arrayOfWordsForToday.length; i += 1) {
-    if (allUserWodsId.includes(arrayOfWordsForToday[i].wordId)) {
-      console.log('повторка');
-    } else {
-      console.log(allUserWodsId.includes(arrayOfWordsForToday[i].wordId), 'повторок нет');
-    }
-  }
-
-  const difficultUserWords = allUserWods.filter((item) => +item.difficulty === 3);
-  for (let i = 0; i < difficultUserWords.length; i += 1) {
-    if (arrayOfWordsForToday.length <= maxCardsPerDay) {
-      const difficultUserWord = await getWordById(difficultUserWords[i].wordId);
-      arrayOfWordsForToday.push(difficultUserWord);
-    }
-  }
-
-  const notEasyUserWords = allUserWods.filter((item) => +item.difficulty === 2);
-  for (let i = 0; i < notEasyUserWords.length; i += 1) {
-    if (arrayOfWordsForToday.length <= maxCardsPerDay
-      && (now.getTime() - notEasyUserWords[i].optional.time) / 60000 / 60 > 22) { // если больше 22 часов не повторялось
-      const notEasyUserWord = await getWordById(notEasyUserWords[i].wordId);
-      arrayOfWordsForToday.push(notEasyUserWord);
-    }
-  }
-
-  const easyUserWords = allUserWods.filter((item) => +item.difficulty === 1);
-  for (let i = 0; i < easyUserWords.length; i += 1) {
-    if (arrayOfWordsForToday.length <= maxCardsPerDay
-      && (now.getTime() - easyUserWords[i].optional.time) / 60000 / 60 > 70) { // если больше 70 часов не повторялось
-      const easyUserWord = await getWordById(easyUserWords[i].wordId);
-      arrayOfWordsForToday.push(easyUserWord);
-    }
-  }
-
-  console.log(difficultUserWords);
-  console.log(notEasyUserWords);
-  console.log(easyUserWords);
-  console.log(arrayOfWordsForToday);
-}
-
-startApp();
-
-async function changeInputValue() {
-  // const word = await addCardFields();
-  const randomWord = await getRandomWord();
-  const allUserWods = await getUserWords(token);
-  const sortedFromNewAllUserWods = allUserWods.sort((a, b) => (a.optional.time < b.optional.time ? 1 : -1));
-  console.log(sortedFromNewAllUserWods);
-
-
-  const allUserWodsId = allUserWods.map((elem) => elem.wordId);
-  console.log(allUserWodsId.includes(randomWord.id));
-
-  const differenseOfTimeInMinuts = (now.getTime() - sortedFromNewAllUserWods[0].optional.time) / 60000;
-  console.log(differenseOfTimeInMinuts);
-
-  const splittedWord = randomWord.textExample.split('<b>')[1].split('</b>')[0];
-  const splittedWordLength = splittedWord.length;
-
-  addCardFields(randomWord, splittedWordLength);
-
-  const multiColorResultWrapper = document.querySelector('.multi-color');
-  const input = document.querySelector('.card_phrase > b > input');
-  console.log(input.value);
-  input.onchange = function () {
-    // input.oninput = function () {
-
-    multiColorResultWrapper.textContent = '';
-    if (splittedWord === input.value) {
-      console.log(true, splittedWord);
-
-      // createUserWord({
-      //   userId,
-      //   token,
-      //   wordId: randomWord.id,
-      //   word: { difficulty: '3', optional: { time: now.getTime() } },
-      // });
-    } else {
-      console.log(false, splittedWord);
-
-      for (let i = 0; i < input.value.length; i += 1) {
-        const span = document.createElement('span');
-        span.textContent = input.value[i];
-
-        if (input.value[i] === splittedWord[i]) {
-          span.style.color = 'green';
-        } else {
-          span.style.color = 'red';
-        }
-        multiColorResultWrapper.append(span);
-      }
-    }
-    console.log(input.value);
-    input.value = '';
-  };
-}
-
-changeInputValue();
-
-// updateUserWord({
+// updateSettings({
 //   userId,
 //   token,
-//   wordId: '5efe34e3635aec001764d725',
-//   word: { difficulty: '-1', optional: { time: now.getTime() } },
+//   settings: {
+//     wordsPerDay: 40,
+//     optional: {
+//       cardsPerDay: 40,
+//       showTranslation: true,
+//       showTextMeaning: true,
+//       showTextExample: true,
+//       showTranscription: true,
+//       showImage: true,
+//       showAnswerButton: true,
+//       showDeleteButton: true,
+//       showDifficultWordsButton: true,
+//       showWordsStatusButtons: false,
+//     },
+//   },
 // });
+
+export default app;

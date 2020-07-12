@@ -1,33 +1,41 @@
-import addMultiColorResult from './multi-color-result';
-import getRandomWord from './get-random-word';
-// import checkInput from './check-word';/
+import getSettings from './get-settings';
 
 function addImg(wordInfo) {
   const imageWrapper = document.querySelector('.card_img');
+  imageWrapper.textContent = '';
   const img = document.createElement('img');
-  img.src = `https://raw.githubusercontent.com/svirskia/rslang-data/master/${wordInfo.image}`;
-
+  if (wordInfo.image.length > 100) {
+    img.src = `data:image/jpg;base64,${wordInfo.image}`;
+  } else {
+    img.src = `https://raw.githubusercontent.com/svirskia/rslang-data/master/${wordInfo.image}`;
+  }
   imageWrapper.append(img);
 }
 
 function addTextExampleInCard(wordInfo) {
   const cardPhrase = document.querySelector('.card_phrase');
   cardPhrase.innerHTML = wordInfo.textExample;
-}
 
-function addTextExampleTranslateInCard(wordInfo) {
-  const cardTranslate = document.querySelector('.card_phrase-translate');
-  cardTranslate.textContent = wordInfo.textExampleTranslate;
+  const cardPhraseB = document.querySelector('.card_phrase b');
+
+  cardPhraseB.textContent = '';
+  const span = document.createElement('span');
+  span.textContent = '[ ? ]';
+  cardPhraseB.append(span);
 }
 
 function addWordMeaningInCard(wordInfo) {
   const cardMeaning = document.querySelector('.card_meaning');
   cardMeaning.innerHTML = wordInfo.textMeaning;
-}
 
-function addWordMeaningTranslateInCard(wordInfo) {
-  const cardMeaningTranslate = document.querySelector('.card_meaning-translate');
-  cardMeaningTranslate.textContent = wordInfo.textMeaningTranslate;
+  const cardMeaningI = document.querySelector('.card_meaning i');
+  cardMeaningI.textContent = '';
+
+  const span = document.createElement('span');
+  span.textContent = '[ ? ]';
+  span.style.fontStyle = 'normal';
+  span.style.fontWeight = 'bold';
+  cardMeaningI.append(span);
 }
 
 function addWordTranslateInCard(wordInfo) {
@@ -40,53 +48,41 @@ function addWordTranscriptionInCard(wordInfo) {
   wordTranscription.textContent = wordInfo.transcription;
 }
 
-
-function addInputInTextExample(length) {
-  const cardPhrase = document.querySelector('.card_phrase b');
-
-  cardPhrase.textContent = '';
-
-  const input = document.createElement('input');
-  input.style.width = `${length / 2 + 0.4}rem`;
-  input.style.fontSize = '1em';
-  cardPhrase.append(input);
-
-  // const input = document.createElement('div');
-  // input.setAttribute('contenteditable', true);
-  // cardPhrase.append(input);
+function addTextExampleTranslateInCard(wordInfo) {
+  const cardTranslate = document.querySelector('.card_phrase-translate');
+  cardTranslate.textContent = wordInfo.textExampleTranslate;
 }
 
-function addInputInWordMeaning() {
-  const cardMeaning = document.querySelector('.card_meaning i');
-  cardMeaning.textContent = '';
-  // console.log(cardMeaning);
-
-  const input = document.createElement('input');
-  cardMeaning.append(input);
+function addWordMeaningTranslateInCard(wordInfo) {
+  const cardMeaningTranslate = document.querySelector('.card_meaning-translate');
+  cardMeaningTranslate.textContent = wordInfo.textMeaningTranslate;
 }
 
-async function addCardFields(word, wordLength) {
-  // const randomWord = await getRandomWord();
-  // const splittedWord = randomWord.textExample.split('<b>')[1].split('</b>')[0];
-  // const splittedWordLength = splittedWord.length;
+async function addCardFields(word, userId, token) {
+  const settings = await getSettings(userId, token);
 
-  addImg(word);
+  if (settings.optional.showImage) {
+    addImg(word);
+  }
 
-  addTextExampleInCard(word);
-  addInputInTextExample(wordLength);
+  if (settings.optional.showTextExample) {
+    addTextExampleInCard(word);
+  }
 
-  addTextExampleTranslateInCard(word);
+  if (settings.optional.showTextMeaning) {
+    addWordMeaningInCard(word);
+  }
 
-  addMultiColorResult();
+  if (settings.optional.showTranslation) {
+    addWordTranslateInCard(word);
+  }
 
-  addWordMeaningInCard(word);
-  addInputInWordMeaning();
-
-  addWordMeaningTranslateInCard(word);
-
-  addWordTranslateInCard(word);
-
-  addWordTranscriptionInCard(word);
+  if (settings.optional.showTranscription) {
+    addWordTranscriptionInCard(word);
+  }
 }
 
-export default addCardFields;
+export {
+  addCardFields, addTextExampleTranslateInCard,
+  addWordMeaningTranslateInCard, addWordTranslateInCard,
+};

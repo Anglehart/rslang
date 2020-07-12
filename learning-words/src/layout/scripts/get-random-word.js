@@ -13,8 +13,6 @@ const getRandomWord = async (words) => {
   });
   const content = await rawResponse.json();
 
-  // console.log(content[randomWord]);
-
   return content[randomWord];
 };
 

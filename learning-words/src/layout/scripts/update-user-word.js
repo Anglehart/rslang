@@ -1,4 +1,3 @@
-
 const updateUserWord = async ({
   userId, token, wordId, word,
 }) => {
@@ -13,9 +12,7 @@ const updateUserWord = async ({
   });
   const updatedWord = await rawResponse.json();
 
-  console.log(updatedWord);
   return updatedWord;
 };
-
 
 export default updateUserWord;
