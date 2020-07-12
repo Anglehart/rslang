@@ -1,5 +1,4 @@
 import SavannahUI from './SavannahUI.js';
-import Stats from './Stats.js';
 import stats from './Stats.js';
 
 class Savannah {
@@ -146,14 +145,6 @@ class Savannah {
         clearInterval(this.count);
       }
     this.countdownNumber.innerText = countVal;
-  }
-
-  saveUserId(id) {
-    localStorage.setItem('userId', id);
-  }
-
-  saveToken(token) {
-    localStorage.setItem('token', token);
   }
 
   getUserId() {
