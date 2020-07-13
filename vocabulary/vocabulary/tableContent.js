@@ -75,7 +75,6 @@ class TableContent {
   }
 
   addRow(data) {
-    console.log(data.userWord.optional);
     const tableBody = document.querySelector('div.tableBody');
     const rowDiv = document.createElement('div');
     rowDiv.classList.add('tableRow');

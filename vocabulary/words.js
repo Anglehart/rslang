@@ -152,7 +152,6 @@ class WordLibrary {
         lastTime: `${now.getTime()}`,
       },
     };
-    console.log(body);
     const res = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -176,7 +175,6 @@ class WordLibrary {
   // возвращает дату создания слова (Date())
   async checkFirstTime(wordId) {
     const data = await this.checkWord(wordId);
-    console.log(data);
     if (!data.optional.firstTime || isNaN(data.optional.firstTime)) {
       data.optional.firstTime = new Date().getTime();
     }
