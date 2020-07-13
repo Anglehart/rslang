@@ -5,6 +5,10 @@ window.onload = function() {
 function saveSettings() {
   const WordsPerDay = Number(document.getElementById('wordsPerDay').value);
   const CardsPerDay = Number(document.getElementById('cardsPerDay').value);
+  if (!WordsPerDay || !CardsPerDay) {
+    showMessage(false);
+    return false;
+  }
   if (WordsPerDay < 10 || WordsPerDay > 100 || CardsPerDay < 10 || CardsPerDay > 100) {
     showMessage(false);
     return false;
