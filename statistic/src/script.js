@@ -35,7 +35,6 @@ function createGamesStatistics(stats) {
     stats.speakitLose, stats.speakitLast,
   );
 }
-
 function getUserId() {
   return localStorage.getItem('userId');
 }

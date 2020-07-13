@@ -105,3 +105,18 @@
   background: rgb(32, 32, 32);
   color: #fff;
 }
+
+.addMoreButton{
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  line-height: 1.8;
+  border-radius: 10px;
+  border: 1px solid black;
+  color: #000;
+  background: #fff;
+  position: fixed;
+  left: calc(50% - 76px);
+  cursor: pointer;
+  bottom: 50px;
+}

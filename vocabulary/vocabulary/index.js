@@ -1,4 +1,6 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
+
 import wordLibrary from '../words';
 import tableContent from './tableContent';
 import css from './index.css';
@@ -8,6 +10,8 @@ const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
 
 async function changeTable(color) {
+  const addMoreButton = document.querySelector('div.addMoreButton');
+  let page = 1;
   let filter = [];
   if (color === 'red') {
     del.classList.add('none');
@@ -23,8 +27,26 @@ async function changeTable(color) {
     filter = '3';
   }
   tableContent.clearTable();
-  const allWords = await wordLibrary.loadAggregatedWords(filter);
+
+  const allWords = await wordLibrary.loadAggregatedWords(filter, page);
   allWords.forEach(async (element) => { await tableContent.addRow(element); });
+
+  async function loadMoreWords() {
+    addMoreButton.classList.add('none');
+    const newWords = await wordLibrary.loadAggregatedWords(filter, page + 1);
+    newWords.forEach(async (element) => {
+      await tableContent.addRow(element);
+    });
+    page += 1;
+  }
+  addMoreButton.addEventListener('click', loadMoreWords);
+  window.addEventListener('scroll', async () => {
+    if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+      addMoreButton.classList.remove('none');
+    } else {
+      addMoreButton.classList.add('none');
+    }
+  });
 }
 
 function change() {
@@ -39,7 +61,6 @@ function change() {
     changeOnElement.classList.add('active-bg');
     main.classList = (`main bg-${changeOn}`);
     changeTable(changeOn);
-    console.log(tableContent.checkActiveRow());
     tableContent.checkButton();
   }
 }
