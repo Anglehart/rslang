@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 class Stats {
   getUserId() {
     return localStorage.getItem('userId');
@@ -156,5 +157,3 @@ class Stats {
 }
 
 const stats = new Stats();
-
-export default stats;

@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+/* eslint-disable no-underscore-dangle */
+
 function speech1(data, item, imageUrl, mini, syllable) {
   if (data.wordTranslate === item.textContent) {
     changeImage(imageUrl);
@@ -20,12 +22,14 @@ function speech1(data, item, imageUrl, mini, syllable) {
     if (sessionStorage.truefalse !== '1') {
       arrTrue.push(mini);
       if (localStorage.getItem('userId') !== null) {
-      stats.correct(data._id);}
+        stats.correct(data._id);
+      }
       sessionStorage.truefalse = 0;
     } else {
       arrFalse.push(mini);
       if (localStorage.getItem('userId') !== null) {
-      stats.wrong(data._id);}
+        stats.wrong(data._id);
+      }
       sessionStorage.truefalse = 0;
     }
   } else if (data.wordTranslate !== item.textContent) {
