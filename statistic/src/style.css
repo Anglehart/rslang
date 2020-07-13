@@ -1,18 +1,87 @@
 body {
   font-size: 14px;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background: #fbfcfe;
 }
 .container {
-  min-height: ;
+  max-width: 1120px;
+  margin: auto;
+}
+.container a {
+  text-decoration: none;
+  color:  #777;
 }
 
+.word-statistic {
+  padding-top: 64px;
+}
+
+.description-container {
+  background: #e9f5f7;
+  padding-left: 40px;
+}
+
+.description {
+  max-width: 1065px;
+  margin: auto;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.title {
+  color: #3c3c3c;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 26px;
+  margin: 0 0 25px;
+}
+
+.image {
+  margin-right: 48px;
+  width: 130px;
+  height: 130px;
+}
+.image img {
+  width: inherit;
+}
+.promo-image {
+  width: 130px;
+  height: 130px;
+}
+
+.text {
+  color: #777;
+  flex-grow: 1;
+  font-size: 17px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.games-statistic {
+  padding-top: 50px;
+  height: 1150px;
+}
+
+.games {
+  margin: auto;
+  padding-top: 50px;
+}
 .chart {
+  padding-top: 50px;
   width: 500px;
   height: 400px;
   margin: auto;
   margin-bottom: 50px;
 }
 
-.game-promo,
+.link-title {
+  position: absolute;
+  top: 35%;
+  left: 10%;
+}
 .game-container {
   display: flex;
   justify-content: space-around;
@@ -26,6 +95,7 @@ body {
 }
 
 .game-promo {
+  position: relative;
   font-size: 24px;
   color: #3c3c3c;
 }
@@ -35,6 +105,7 @@ body {
 }
 
 .game-statistic {
+  
   margin-right: 20px;
   padding-top: 10px;
   text-align: start;

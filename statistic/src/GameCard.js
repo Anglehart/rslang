@@ -1,5 +1,5 @@
 class GameCard {
-  constructor(parent, name, all, win, lose, last) {
+  constructor(parent, name, image, link, all, win, lose, last) {
     this.gameCardConainer = document.createElement('div');
     this.gameCardConainer.className = 'game-container';
 
@@ -11,12 +11,19 @@ class GameCard {
     gamePromo.append(promo);
 
     this.link = document.createElement('a');
-    this.link.setAttribute('href', '');
+    // this.link.innerText = name;
+    this.link.setAttribute('href', `${link}`);
     promo.append(this.link);
 
+    this.image = document.createElement('img');
+    this.image.className = 'promo-image';
+    this.image.setAttribute('src', `${image}`);
+    this.link.append(this.image);
+
     this.title = document.createElement('span');
+    this.title.className = 'link-title';
     this.title.innerText = name;
-    promo.append(this.title);
+    this.link.append(this.title);
 
     const card = document.createElement('div');
     card.className = 'game-statistic';
@@ -44,7 +51,7 @@ class GameCard {
     this.loseCount.innerText = `You lose: ${lose}`;
     totalContainer.append(this.loseCount);
 
-    parent.after(this.gameCardConainer);
+    parent.append(this.gameCardConainer);
   }
 }
 export default GameCard;
