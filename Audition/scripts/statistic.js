@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 function statistic() {
-    if (localStorage.getItem('userId') !== null) {
-  if (arrFalse.length === 0) {
-     stats.updateStats('audio', true);
-   } else {
-     stats.updateStats('audio', false);
-   }}
+  if (localStorage.getItem('userId') !== null) {
+    if (arrFalse.length === 0) {
+      stats.updateStats('audio', true);
+    } else {
+      stats.updateStats('audio', false);
+    }
+  }
   document.querySelector('.b-popup').classList.remove('hide');
   const outArr = document.getElementById('consequence');
   let str1 = ' ';

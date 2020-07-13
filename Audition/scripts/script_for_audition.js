@@ -9,7 +9,9 @@ let arrFalse = [];
 if (localStorage.allCounter === undefined || localStorage.allCounter === null) {
   localStorage.allCounter = 5;
 }
-if (localStorage.levelForAudition === undefined || localStorage.levelForAudition === null) { localStorage.levelForAudition = 0; }
+if (localStorage.levelForAudition === undefined || localStorage.levelForAudition === null) {
+  localStorage.levelForAudition = 0;
+}
 
 function repeat() {
   const num = Number(localStorage.allCounter);
