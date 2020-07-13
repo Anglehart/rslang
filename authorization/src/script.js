@@ -25,7 +25,7 @@ const alertPasswordSignUp = document.getElementById('alert-password-sign-up');
 
 const responsesSignUp = {
   422: 'Неверный адрес электронной почты или пароль',
-  200: 'Вы успешно зарегестрированы',
+  200: 'Вы успешно зарегистрированы',
   417: 'Адрес электронной почты уже используется',
 };
 
@@ -142,7 +142,7 @@ function createUser(user) {
   }).then((res) => {
     answerSignUpForm(responsesSignUp[res.status]);
     if (res.status === 200) {
-      signUpFormAnswer.style.color = '#BEEE62';
+      signUpFormAnswer.style.color = '#0be931';
       return res.json();
     }
   })
@@ -164,7 +164,7 @@ function loginUser(user) {
   }).then((res) => {
     answerSignInForm(responsesSignIn[res.status]);
     if (res.status === 200) {
-      signInFormAnswer.style.color = '#BEEE62';
+      signInFormAnswer.style.color = '#0be931';
       return res.json();
     }
   })

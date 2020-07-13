@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="style_for_audition.css" rel="stylesheet">
+<title>Аудиовызов</title>
+<link rel="icon" href="../Main/img/logo.png" type="image/x-icon">
+</head>
+  <body>
+    <div class="intro">
+      <div class="backgr">
+        <h3><span>AUDITION</span></h3>
+        <p>Sounds the pronunciation of the word in English, you need to choose the translation of the word from the five proposed answer options.</p>
+        <div class="intro-btn btn-main">Continue</div>
+      </div>
+    </div>
+
+    <div class="wordСount">
+      <div class="backgr">
+      <h1>Setting</h1>
+      <p>Select level</p>
+      <div id ="catalog-level">
+        <ul>
+        <li><div id = "level1" data-item="0" class="continue-btn btn1" onClick = "getdetails1(this)">1</div></li>
+        <li><div id = "level2" data-item="1" class="continue-btn btn1" onClick = "getdetails1(this)">2</div></li>
+        <li><div id = "level3" data-item="2" class="continue-btn btn1" onClick = "getdetails1(this)">3</div></li>
+        <li><div id = "level4" data-item="3" class="continue-btn btn1" onClick = "getdetails1(this)">4</div></li>
+        <li><div id = "level5" data-item="4" class="continue-btn btn1" onClick = "getdetails1(this)">5</div></li>
+        <li><div id = "level6" data-item="5" class="continue-btn btn1" onClick = "getdetails1(this)">6</div></li>
+        </ul>
+      </div>
+      <p>Choose the number of words</p>
+      <div id ="catalog">
+        <ul>
+        <li><div id = "five" data-item="5" class="continue-btn2 btn" onClick = "getdetails(this)">5</div></li>
+        <li><div id = "ten" data-item="10" class="continue-btn2 btn" onClick = "getdetails(this)">10</div></li>
+        <li><div id = "fifteen" data-item="15" class="continue-btn2 btn" onClick = "getdetails(this)">15</div></li>
+        <li><div id = "twenty" data-item="20" class="continue-btn2 btn" onClick = "getdetails(this)">20</div></li>
+        <li><div id = "twentyfive" data-item="25" class="continue-btn2 btn" onClick = "getdetails(this)">25</div></li>
+        <li><div id = "thirty" data-item="30" class="continue-btn2 btn" onClick = "getdetails(this)">30</div></li>
+        </ul>
+      </div>
+        <div class="start btn-main">Start</div>
+      </div>
+    </div>
+
+  <div class="acting" id="acting">
+    <div class="sound" id="sound"></div>
+    <div class = "cont"><div class="photo"></div></div>
+    <div class="obj noise"><div class="little-sound noise" id="little-sound"></div>
+    <div class = "word noise"></div></div>
+    <div id = "words">
+      <ol>
+        <li><p class="cell" id = "c1"></p></li>
+        <li><p class="cell" id = "c2"></p></li>
+        <li><p class="cell" id = "c3"></p></li>
+        <li><p class="cell" id = "c4"></p></li>
+        <li><p class="cell" id = "c5"></p></li>
+      </ol>
+    </div>
+    <div class="btn-main dontKnow">I don't know</div>
+    <div class="btn-main hide next">Next</div>
+  </div>
+
+
+  <div class="b-popup hide">
+      <div class="b-popup-content" id="consequence"></div>
+  </div>
+
+<script src="scripts/script_for_audition.js"></script>
+<script src="scripts/level.js"></script>
+<script src="scripts/switch.js"></script>
+<script src="scripts/getWords.js"></script>
+<script src="scripts/dontKnow.js"></script>
+<script src="scripts/random.js"></script>
+<script src="scripts/render.js"></script>
+<script src="scripts/speech1.js"></script>
+<script src="scripts/background.js"></script>
+<script src="scripts/statistic.js"></script>
+<script src="scripts/stats.service.js"></script>
+</body>
+</html>
