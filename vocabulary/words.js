@@ -205,10 +205,10 @@ class WordLibrary {
 
   // фильтр только по сложности
   // принимает цифру/цифры сложности через запятую
-  async loadAggregatedWords(str) {
+  async loadAggregatedWords(str, page) {
     const args = str.split(',');
     const filter = args.map((e) => `{"userWord.difficulty":"${e}"}`);
-    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/aggregatedWords?filter=%7B%22%24or%22%3A%5B${filter.join()}%5D%7D`;
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/aggregatedWords?wordsPerPage=100&page=${page}&filter=%7B%22%24or%22%3A%5B${filter.join()}%5D%7D`;
     const res = await fetch(url, {
       method: 'GET',
       headers: {

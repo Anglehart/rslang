@@ -1,5 +1,7 @@
 /* eslint-disable dot-notation */
 /* eslint-disable class-methods-use-this */
+import wordLibrary from '../words';
+
 class TableContent {
   rowCount() {
     const tableBody = document.querySelector('div.tableBody');
@@ -85,7 +87,7 @@ class TableContent {
 
     rowDiv.querySelector('i.fa-play').addEventListener('click', () => {
       const audio = new Audio();
-      audio.src = `../${data.audio}`;
+      audio.src = `https://raw.githubusercontent.com/Anglehart/rslang-data/master/${data.audio}`;
       audio.play();
     });
 

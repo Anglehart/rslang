@@ -8,6 +8,7 @@ const del = document.querySelector('button.del-button');
 const add = document.querySelector('button.add-button');
 
 async function changeTable(color) {
+  let page = 1;
   let filter = [];
   if (color === 'red') {
     del.classList.add('none');
@@ -23,8 +24,19 @@ async function changeTable(color) {
     filter = '3';
   }
   tableContent.clearTable();
-  const allWords = await wordLibrary.loadAggregatedWords(filter);
+
+  const allWords = await wordLibrary.loadAggregatedWords(filter, page);
   allWords.forEach(async (element) => { await tableContent.addRow(element); });
+
+  window.addEventListener('scroll', async () => {
+    if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+      const newWords = await wordLibrary.loadAggregatedWords(filter, page + 1);
+      newWords.forEach(async (element) => { 
+        await tableContent.addRow(element);
+      });
+      page += 1;
+    };
+  });
 }
 
 function change() {
@@ -76,7 +88,14 @@ function restoreWords() {
   }
 }
 
+function onScroll() {
+  if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+    tableContent.loadPaginator();
+  }
+}
+
 changeTable('green');
+
 
 document.querySelector('button.del-button').addEventListener('click', deletWords);
 document.querySelector('button.add-button').addEventListener('click', restoreWords);
