@@ -4,26 +4,28 @@ class GameCard {
     this.gameCardConainer.className = 'game-container';
 
     const gamePromo = document.createElement('div');
-    gamePromo.className = 'game-promo';
     this.gameCardConainer.append(gamePromo);
 
-    const promo = document.createElement('div');
-    gamePromo.append(promo);
-
     this.link = document.createElement('a');
-    // this.link.innerText = name;
+    this.link.setAttribute('target', '_blank');
     this.link.setAttribute('href', `${link}`);
-    promo.append(this.link);
+    gamePromo.append(this.link);
 
-    this.image = document.createElement('img');
-    this.image.className = 'promo-image';
-    this.image.setAttribute('src', `${image}`);
-    this.link.append(this.image);
+    const promo = document.createElement('div');
+    promo.className = 'game-promo';
+    promo.style.background = `linear-gradient(rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center / cover fixed, url('${image}') center center no-repeat`;
+    promo.style.backgroundSize = 'cover';
+    this.link.append(promo);
+
+    // this.image = document.createElement('img');
+    // this.image.className = 'promo-image';
+    // this.image.setAttribute('src', `${image}`);
+    // promo.append(this.image);
 
     this.title = document.createElement('span');
     this.title.className = 'link-title';
     this.title.innerText = name;
-    this.link.append(this.title);
+    promo.append(this.title);
 
     const card = document.createElement('div');
     card.className = 'game-statistic';
