@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="Main/style_for_main.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<title>RS Lang</title>
+<link rel="icon" href="Main/img/logo.png" type="image/x-icon">
+</head>
+<body>
+
+<header class="header">
+
+  <div class="nav-toggle">
+  	<div class="nav-toggle-bar"></div>
+  </div>
+
+  <nav id="nav" class="nav">
+      <ul class="menu">
+          <li><a onclick="changePage('learning-words/build/target/index.html')">Изучение слов</a></li>
+          <li><a onclick="changePage('statistic/src/index.html')">Статистика</a></li>
+          <li><a onclick="changePage('vocabulary/dist/index.html')">Словарь</a></li>
+          <li class="p_menu"><a class = "link">Мини-игры</a>
+              <ul class="v_menu">
+                <li><a target="_blank" href="speakit/dist/index.html">SpeakIt</a></li>
+                <li><a target="_blank" href="english-puzzle/dist/index.html">English puzzle</a></li>
+                <li><a target="_blank" href="savannah/src/index.html">Саванна</a></li>
+                <li><a target="_blank" href="Audition/index.html">Аудиовызов</a></li>
+                <li><a target="_blank" href="millionaire/dist/index.html">Миллионер</a></li>
+              </ul>
+          </li>
+          <li><a href="Our/index-about.html">О команде</a></li>
+          <li><a onclick="changePageSide()" id="butExit">Вход</a></li>
+            </ul>
+    </nav>
+
+  <div class="line">
+    <p class="dropdown"><img src="Main/img/logo.png" alt="Логотип"></p>
+    <h3 class="dropdown">RS Lang</h3>
+    <span class = "contener">
+      <div class="dropdown">
+      <a onclick="changePage('learning-words/build/target/index.html')" class="dropbtn">Изучение слов</a>
+      </div>
+  <div class="dropdown">
+    <a onclick="changePage('statistic/src/index.html')" class="dropbtn">Статистика</a>
+  </div>
+  <div class="dropdown">
+  <a onclick="changePage('vocabulary/dist/index.html')" class="dropbtn">Словарь</a>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Мини-игры</button>
+    <div class="dropdown-content">
+      <a target="_blank" href="speakit/dist/index.html">SpeakIt</a>
+      <a target="_blank" href="english-puzzle/dist/index.html">English puzzle</a>
+      <a target="_blank" href="savannah/src/index.html">Саванна</a>
+      <a target="_blank" href="Audition/index.html">Аудиовызов</a>
+      <a target="_blank" href="millionaire/dist/index.html">Миллионер</a>
+    </div>
+  </div>
+  <div class="dropdown">
+  <a href="Our/index-about.html" class="dropbtn">О команде</a>
+  </div>
+  <div class="dropdown">
+    <button class="button-input" id = "but-autorization" data-hover="Выход" onclick="changePage()"><a id = "autorization" onclick="changePage('authorization/src/index.html')">Вход</a></button>
+  </div>
+</span>
+</div>
+</header>
+
+<main>
+<section  id="section1">
+      <img src="Main/img/london.png" alt="london">
+      <div class="text">
+  <p>Изучаем английский </p>
+  <p class="newstr">
+    <span class="word wisteria">весело!</span>
+    <span class="word belize">онлайн!</span>
+    <span class="word pomegranate">удобно!</span>
+    <span class="word green">быстро!</span>
+    <span class="word orange">вместе!</span>
+  </p>
+</div>
+  <div class="aut-but">
+    <a href="#section3"><button id="but1">Играть в мини-игры</button></a>
+    <a onclick="changePageSide()"><button id="but2">Авторизация</button></a>
+  </div>
+  </section>
+
+  <section id="section2" class="new-word">
+<div class="dividing-line">
+  <div class="dividing-line-background"></div>
+  <div><h2 class = "headline">Выучите новые слова!</h2>
+    <div class="dividing-line-text">Обучение новым словам происходит легко и быстро, если делать это правильно. Учите слова вместе с RS Lang!</div>
+    <a class="dividing-line-opisanie" onclick="changePage('learning-words/build/target/index.html')">Изучить слова</a>
+  </div>
+</div>
+
+<div class="grey-line"></div>
+
+<div class="dividing-line square">
+  <div><h2 class = "headline">Следите за своим прогрессом!</h2>
+    <div class="dividing-line-text">Расширяйте свой словарный запас. Изучаемые, сложные и удалённые слова Вы всегда можете посмотреть в словаре.</div>
+    <a class="dividing-line-opisanie" onclick="changePage('vocabulary/dist/index.html')">Посмотреть словарь</a>
+  </div>
+  <div class="dividing-line-background1"></div>
+</div>
+
+  </section>
+
+
+<section id="section3">
+  <h1 class="headline center">Изучайте иностранные слова и отслеживайте свой прогресс с помощью мини-игр!</h1>
+<!-- Swiper -->
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+
+    <div class="swiper-slide">  <div class="card fi">
+            <div class="content">
+              <h2 class="title">SpeakIt</h2>
+              <p class="copy">Проверьте правильность своего произношения</p>
+              <a target="_blank" href="speakit/dist/index.html" class="btn">Играть</a>
+            </div>
+          </div></div>
+
+          <div class="swiper-slide">  <div class="card se">
+              <div class="content">
+                <h2 class="title">English Puzzle</h2>
+                <p class="copy">Соберите предложения из предложенных английских слов</p>
+                <a target="_blank" href="english-puzzle/dist/index.html" class="btn">Играть</a>
+              </div>
+            </div></div>
+
+    <div class="swiper-slide">  <div class="card third">
+        <div class="content">
+          <h2 class="title">Саванна</h2>
+          <p class="copy">Подберите правильный перевод для слов</p>
+          <a target="_blank" href="savannah/src/index.html" class="btn">Играть</a>
+        </div>
+      </div></div>
+
+    <div class="swiper-slide">  <div class="card four">
+      <div class="content">
+        <h2 class="title">Аудиовызов</h2>
+        <p class="copy">Выбрите перевод озвученного слова</p>
+        <a target="_blank" href="Audition/index.html" class="btn">Играть</a>
+      </div>
+    </div></div>
+
+    <div class="swiper-slide">  <div class="card six">
+        <div class="content">
+          <h2 class="title">Миллионер</h2>
+          <p class="copy">Получайте баллы за правильные слова</p>
+          <a target="_blank" href="millionaire/dist/index.html" class="btn">Играть</a>
+        </div>
+      </div></div>
+
+  </div>
+  <!-- Add Arrows -->
+  <div class="swiper-button-next" id = "right"></div>
+  <div class="swiper-button-prev" id = "left"></div>
+  <!-- Add Pagination -->
+  <div class="swiper-pagination"></div>
+</div>
+</section>
+
+<section id="section4" class="new-word">
+<div class="dividing-line">
+<div class="dividing-line-background2"></div>
+<div><h2 class = "headline">Узнайте о работе нашего приложения!</h2>
+  <div class="dividing-line-text">Вы можете ознакомиться с преимуществами работы нашего сайта просто посмотрев видео!</div>
+  <div class = "video"><iframe src="https://www.youtube.com/embed/Zv4hIaVvFVI" frameborder="0" allowfullscreen></iframe></div>
+</div>
+</div>
+
+<div class="grey-line"></div>
+
+<div class="dividing-line square">
+<div><h2 class = "headline">Наша команда!</h2>
+  <div class="dividing-line-text">Узнайте о вкладе каждого участника команды в разработку приложения. Да, нас немного, но мы сильные :D</div>
+  <a class="dividing-line-opisanie" href="Our/index-about.html">Посмотреть наших разработчиков</a>
+</div>
+<div class="dividing-line-background3"></div>
+</div>
+
+</section>
+
+</main>
+
+<footer class="footer-distributed">
+        <div class="footer-left">
+        <p class = "School">RS School 2020q1</p>
+      </div>
+</footer>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="Main/script_for_main.js"></script>
+</body>
+</html>

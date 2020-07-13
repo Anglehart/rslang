@@ -44,8 +44,6 @@
 }
 
 .tab--button {
-  padding: 10px 20px;
-  /* height: ; */
   margin: 0% 10%;
   width: 80%;
   min-width: 160px;
@@ -54,7 +52,27 @@
   font-size: 18px;
   background: grey;
   color: rgb(241, 232, 232);
-  border: 0
+  border: 0;
+  cursor: not-allowed;
+}
+
+.allowed {
+  cursor: pointer;
+  width: calc(80% - 2px);
+  min-width: 160px;
+  background: #fff;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 3px;
+  color: #000;
+}
+
+.allowed.del-button {
+  color: red;
+}
+
+.allowed.add-button {
+  color: green;
 }
 
 .main {
@@ -81,4 +99,9 @@
 
 .none {
   display: none;
+}
+
+.active-row {
+  background: rgb(32, 32, 32);
+  color: #fff;
 }

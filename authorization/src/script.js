@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-use-before-define */
 const togglerSignIn = document.getElementById('toggler-sign-in');
 const togglerSignUp = document.getElementById('toggler-sign-up');
 const tabSignIn = document.getElementById('tab-sign-in');
@@ -23,7 +25,7 @@ const alertPasswordSignUp = document.getElementById('alert-password-sign-up');
 
 const responsesSignUp = {
   422: 'Неверный адрес электронной почты или пароль',
-  200: 'Вы успешно зарегестрированы',
+  200: 'Вы успешно зарегистрированы',
   417: 'Адрес электронной почты уже используется',
 };
 
@@ -140,7 +142,7 @@ function createUser(user) {
   }).then((res) => {
     answerSignUpForm(responsesSignUp[res.status]);
     if (res.status === 200) {
-      signUpFormAnswer.style.color = '#BEEE62';
+      signUpFormAnswer.style.color = '#0be931';
       return res.json();
     }
   })
@@ -162,7 +164,7 @@ function loginUser(user) {
   }).then((res) => {
     answerSignInForm(responsesSignIn[res.status]);
     if (res.status === 200) {
-      signInFormAnswer.style.color = '#BEEE62';
+      signInFormAnswer.style.color = '#0be931';
       return res.json();
     }
   })
@@ -183,6 +185,8 @@ function setBasicSettings() {
     wordsPerDay: 20,
     optional: {
       cardsPerDay: 20,
+      showImage: true,
+      showTranscription: true,
       showTranslation: true,
       showTextMeaning: true,
       showTextExample: true,
@@ -205,6 +209,12 @@ function setBasicSettings() {
   console.log(data);
 }
 
+function transition() {
+  if (localStorage.getItem('userId') !== null) {
+    document.location.href = '../../index.html';
+  }
+}
+
 modalWindow.addEventListener('click', (event) => {
   if (event.target === togglerSignIn) {
     transformPassword(togglerSignIn, passwordSignIn);
@@ -221,9 +231,11 @@ modalWindow.addEventListener('click', (event) => {
     event.preventDefault();
     createUser({ email: emailSignUp.value, password: passwordSignUp.value });
     setBasicSettings();
+    setTimeout(transition, 2000);
   } else if (event.target === buttonSignIn) {
     event.preventDefault();
     loginUser({ email: emailSignIn.value, password: passwordSignIn.value });
+    setTimeout(transition, 2000);
   }
 });
 console.log(localStorage.getItem('email'));

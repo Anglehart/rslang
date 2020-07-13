@@ -1,15 +1,9 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable class-methods-use-this */
-import addRow from './vocabulary/tableContent';
 
 class WordLibrary {
-  // TODO: удалить перед пулреквестом
-  // для тестов
-  setLocalStorage() {
-    localStorage.setItem('email', 'team17@mail.ru');
-    localStorage.setItem('password', 'RsSchool2020!');
-    localStorage.setItem('userId', '5eefa4639896e10017eea40c');
-    localStorage.setItem('token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDIwMTM1NywiZXhwIjoxNTk0MjE1NzU3fQ.OT1p6QJcYXcR8z4TqgDylQd4e6mP5hKAK58pA91SE3k');
+  showError(value) {
+    console.log(value);
   }
 
   // служебные методы
@@ -28,9 +22,8 @@ class WordLibrary {
   // TODO: не забыть потом поменять на sessionStorage
   // возможно вначале стоит проверить данные на существование, а потом отдавать
   // на случай если кто-то будет баловаться и вручную удалит данные из консоли
-  async getWordData(b) {
-    const a = await b;
-    const url = `https://afternoon-falls-25894.herokuapp.com/words/${a.wordId}`;
+  async getWordData(word) {
+    const url = `https://afternoon-falls-25894.herokuapp.com/words/${word.id}`;
     const res = await fetch(url, {
       method: 'GET',
       headers: {
@@ -38,12 +31,10 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
-    const data = await res.json();
-    data.difficulty = a.difficulty;
-    data.firstTime = a.optional.firstTime;
-    data.lastTime = a.optional.lastTime;
-    addRow(data);
+    })
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка удаления: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // Удаляем слово из словая пользователя
@@ -56,12 +47,12 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
-    const data = await res.json();
-    console.log(data);
+    })
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка удаления: (${err.name}: ${err.message})`));
+    return res;
   }
 
-  // TODO: изменить консольлог на ретурн
   // добавляет слово пользователю. возвращает слово если добавилось успешно или текст ошибки
   // можно не проверять слово. т.к. если слово уже существует, то будет соответсвующая ошибка
   async addWord(wordId, difficulty) {
@@ -82,9 +73,10 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    });
-    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    return data;
+    })
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка добавления: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // выдает список (массив объектов) всех слов пользователя
@@ -97,12 +89,12 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
-    const data = await res.json();
-    return data;
+    })
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка при получении списка слов: (${err.name}: ${err.message})`));
+    return res;
   }
 
-  // TODO: изменить консольлог на ретурн
   // проверка слова на его нахождение в базе
   // возвращает слово если есть, и текст с ошибкой если нет
   async checkWord(wordId) {
@@ -114,9 +106,10 @@ class WordLibrary {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
-    const data = await (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    return data;
+    })
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка при получении слова: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // для тестового изменения даты слов
@@ -125,8 +118,6 @@ class WordLibrary {
     const now = new Date();
     await now.setDate(now.getDate() - minus);
     const firstTime = now;
-    console.log(firstTime);
-    // const firstTime = await this.checkFirstTime(wordId);
     const body = await {
       difficulty: `${difficulty}`,
       optional: {
@@ -142,17 +133,18 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    });
-    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    console.log(data);
+    })
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка тестового обновления слова: (${err.name}: ${err.message})`));
+    return res;
   }
 
-  // TODO: изменить консольлог на ретурн
   // изменяет слово. возвращает измененное слово, иначе возвращает ошибку
   async updateWord(wordId, difficulty) {
     const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/words/${wordId}`;
     const now = new Date();
-    const firstTime = await this.checkFirstTime(wordId);
+    const firstTime = new Date();
+    firstTime.setTime(await this.checkFirstTime(wordId));
     const body = {
       difficulty: `${difficulty}`,
       optional: {
@@ -168,9 +160,10 @@ class WordLibrary {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    });
-    const data = (res.ok ? res.json() : `${res.status}: ${res.text()}`);
-    console.log(data);
+    })
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка при обновлении слова: (${err.name}: ${err.message})`));
+    return res;
   }
 
   // возвращает сложность (int)
@@ -179,9 +172,10 @@ class WordLibrary {
     return data.difficulty;
   }
 
+  // возвращает дату создания слова (Date())
   async checkFirstTime(wordId) {
     const data = await this.checkWord(wordId);
-    if (!data.optional.firstTime) {
+    if (!data.optional.firstTime || isNaN(data.optional.firstTime)) {
       data.optional.firstTime = new Date();
     }
     return data.optional.firstTime;
@@ -208,8 +202,26 @@ class WordLibrary {
     const difficulty = (currDiffuculty > 0 ? currDiffuculty - 1 : currDiffuculty);
     this.updateWord(wordId, difficulty);
   }
+
+  // фильтр только по сложности
+  // принимает цифру/цифры сложности через запятую
+  async loadAggregatedWords(str) {
+    const args = str.split(',');
+    const filter = args.map((e) => `{"userWord.difficulty":"${e}"}`);
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/aggregatedWords?filter=%7B%22%24or%22%3A%5B${filter.join()}%5D%7D`;
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .catch((err) => this.showError(`Ошибка при получении списка слов: (${err.name}: ${err.message})`));
+    return res[0].paginatedResults;
+  }
 }
 
 const word = new WordLibrary();
-
 export default word;
