@@ -5,38 +5,37 @@ const cards = document.getElementById('cards');
 
 function createGamesStatistics(stats) {
   new GameCard(
-    cards, 'Millionaire', '../millionaire/src/app/assets/bg.jpg',
-    '../millionaire/dist/index.html',
+    cards, 'Millionaire', '../../millionaire/src/app/assets/bg.jpg',
+    '../../millionaire/dist/index.html',
     stats.millionaireAll, stats.millionaireWin,
     stats.millionaireLose, stats.millionaireLast,
   );
   new GameCard(
-    cards, 'Audition', '../Audition/img/b.jpg',
-    '../Audition/index.html',
+    cards, 'Audition', '../../Audition/img/b.jpg',
+    '../../Audition/index.html',
     stats.audioAll, stats.audioWin,
     stats.audioLose, stats.audioLast,
   );
   new GameCard(
-    cards, 'English-puzzle', '../english-puzzle/src/app/assets/bg.jpg',
-    '../english-puzzle/dist/index.html',
+    cards, 'English-puzzle', '../../english-puzzle/src/app/assets/bg.jpg',
+    '../../english-puzzle/dist/index.html',
     stats.puzzleAll, stats.puzzleWin,
     stats.puzzleLose, stats.puzzleLast,
   );
   new GameCard(
-    cards, 'Savannah', '../savannah/src/images/Jungle.jpg',
-    '../savannah/src/index.html',
+    cards, 'Savannah', '../../savannah/src/images/Jungle.jpg',
+    '../../savannah/src/index.html',
     stats.savannaAll, stats.savannaWin,
     stats.savannaLose, stats.savannaLast,
   );
   new GameCard(
-    cards, 'Speakit', '../speakit/src/app/assets/bg.jpg',
-    '../speakit/dist/index.html',
+    cards, 'Speakit', '../../speakit/src/app/assets/bg.png',
+    '../../speakit/dist/index.html',
     stats.speakitAll, stats.speakitWin,
     stats.speakitLose, stats.speakitLast,
   );
 }
-// const userId = '5eefa4639896e10017eea40c';
-// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDYzMzYzMSwiZXhwIjoxNTk0NjQ4MDMxfQ.R8xH4rPd8RH02ZkEz5US2YfHPxB3Ydv2AWF-gczuS_Q';
+
 function getUserId() {
   return localStorage.getItem('userId');
 }
@@ -45,8 +44,8 @@ function getToken() {
   return localStorage.getItem('token');
 }
 
-const userId = getUserId();
-const token = getToken();
+let userId;
+let token;
 
 function getUserWord() {
   const url = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/words`;
@@ -143,72 +142,9 @@ function getGameStatistic() {
 }
 
 window.addEventListener('load', () => {
+  userId = getUserId();
+  token = getToken();
   getUserWord();
   getUseraggregatedWords();
   getGameStatistic();
 });
-
-// -----------------Click-------------
-
-document.onclick = function change() {
-  if (event.target.className !== 'p_menu' && event.target.className !== 'link' && event.target.className !== 'nav-toggle expanded' && event.target.className !== 'nav-toggle-bar') {
-    document.querySelector('.nav-toggle').classList.remove('expanded');
-    document.querySelector('#nav').classList.remove('expanded');
-  }
-};
-
-(function menu() {
-  const hamburger = {
-    nav: document.querySelector('#nav'),
-    navToggle: document.querySelector('.nav-toggle'),
-
-    initialize() {
-      this.navToggle.addEventListener('click',
-        () => { this.toggle(); });
-    },
-
-    toggle() {
-      this.navToggle.classList.toggle('expanded');
-      this.nav.classList.toggle('expanded');
-    },
-  };
-
-  hamburger.initialize();
-}());
-
-// -----------------Delete-------------
-function deleteInform() {
-  document.getElementById('butExit').textContent = 'Вход';
-  localStorage.removeItem('email');
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  document.getElementById('autorization').textContent = 'Вход';
-  document.getElementById('but-autorization').classList.remove('button-input-autorization');
-}
-
-// -----------------login-------------
-if (localStorage.getItem('userId') !== null) {
-  document.getElementById('but-autorization').onclick = '';
-  document.getElementById('autorization').textContent = localStorage.email;
-  document.getElementById('but-autorization').classList.add('button-input-autorization');
-  document.getElementById('butExit').textContent = 'Выход';
-  document.getElementById('but-autorization').onclick = function remove() {
-    deleteInform();
-  };
-}
-
-function changePageSide() {
-  if (localStorage.getItem('userId') === null) {
-    document.location.href = '../authorization/src/index.html';
-  } else {
-    deleteInform();
-  }
-}
-
-// -----------------changePage-------------
-
-function changePage(href) {
-  if (localStorage.getItem('userId') === null) {
-    document.location.href = '../authorization/src/index.html';
-  } else { document.location.href = href; }
-}
