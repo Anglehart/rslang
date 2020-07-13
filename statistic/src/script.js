@@ -1,9 +1,7 @@
 import GameCard from './GameCard.js';
 
 /* eslint no-new: "off" */
-const chart = document.getElementById('chartContainer');
 const cards = document.getElementById('cards');
-const container = document.getElementById('container');
 
 function createGamesStatistics(stats) {
   new GameCard(
@@ -37,8 +35,8 @@ function createGamesStatistics(stats) {
     stats.speakitLose, stats.speakitLast,
   );
 }
-const userId = '5eefa4639896e10017eea40c';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDYzMzYzMSwiZXhwIjoxNTk0NjQ4MDMxfQ.R8xH4rPd8RH02ZkEz5US2YfHPxB3Ydv2AWF-gczuS_Q';
+// const userId = '5eefa4639896e10017eea40c';
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWZhNDYzOTg5NmUxMDAxN2VlYTQwYyIsImlhdCI6MTU5NDYzMzYzMSwiZXhwIjoxNTk0NjQ4MDMxfQ.R8xH4rPd8RH02ZkEz5US2YfHPxB3Ydv2AWF-gczuS_Q';
 function getUserId() {
   return localStorage.getItem('userId');
 }
@@ -47,8 +45,8 @@ function getToken() {
   return localStorage.getItem('token');
 }
 
-// const userId = getUserId();
-// const token = getToken();
+const userId = getUserId();
+const token = getToken();
 
 function getUserWord() {
   const url = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/words`;
