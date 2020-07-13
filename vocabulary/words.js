@@ -116,13 +116,13 @@ class WordLibrary {
   async updateWordTest(wordId, difficulty, minus) {
     const url = `https://afternoon-falls-25894.herokuapp.com/users/${await this.getUserId()}/words/${wordId}`;
     const now = new Date();
-    await now.setDate(now.getDate() - minus);
+    await now.setDate(now.getTime() - minus);
     const firstTime = now;
     const body = await {
       difficulty: `${difficulty}`,
       optional: {
-        firstTime: `${await firstTime}`,
-        lastTime: ` ${now}`,
+        firstTime: `${await firstTime.getTime()}`,
+        lastTime: ` ${now.getTime()}`,
       },
     };
     const res = await fetch(url, {
@@ -148,10 +148,11 @@ class WordLibrary {
     const body = {
       difficulty: `${difficulty}`,
       optional: {
-        firstTime: `${firstTime}`,
-        lastTime: `${now}`,
+        firstTime: `${firstTime.getTime()}`,
+        lastTime: `${now.getTime()}`,
       },
     };
+    console.log(body);
     const res = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -175,8 +176,9 @@ class WordLibrary {
   // возвращает дату создания слова (Date())
   async checkFirstTime(wordId) {
     const data = await this.checkWord(wordId);
+    console.log(data);
     if (!data.optional.firstTime || isNaN(data.optional.firstTime)) {
-      data.optional.firstTime = new Date();
+      data.optional.firstTime = new Date().getTime();
     }
     return data.optional.firstTime;
   }
@@ -208,7 +210,7 @@ class WordLibrary {
   async loadAggregatedWords(str, page) {
     const args = str.split(',');
     const filter = args.map((e) => `{"userWord.difficulty":"${e}"}`);
-    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/aggregatedWords?wordsPerPage=100&page=${page}&filter=%7B%22%24or%22%3A%5B${filter.join()}%5D%7D`;
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${this.getUserId()}/aggregatedWords?wordsPerPage=20&page=${page}&filter=%7B%22%24or%22%3A%5B${filter.join()}%5D%7D`;
     const res = await fetch(url, {
       method: 'GET',
       headers: {
