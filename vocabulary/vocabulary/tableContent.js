@@ -1,5 +1,7 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable dot-notation */
 /* eslint-disable class-methods-use-this */
+
 class TableContent {
   rowCount() {
     const tableBody = document.querySelector('div.tableBody');
@@ -7,7 +9,16 @@ class TableContent {
   }
 
   getDate(time) {
-    const rowtime = new Date(time);
+    // console.log(`time ${time}`);
+    let rowtime = new Date();
+    rowtime.setTime(time);
+    if (isNaN(rowtime)) {
+      rowtime = new Date(time);
+    }
+    // console.log(`is number? ${Number.isInteger(time)}`);
+    // console.log(`rowtime ${time}`);
+    // console.log(`rowtime ${rowtime.getMonth()}`);
+    // console.log(`gettime ${rowtime.getTime()}`);
     const day = rowtime.getDate() > 9 ? rowtime.getDate() : `0${rowtime.getDate()}`;
     const month = rowtime.getMonth() + 1 > 9 ? rowtime.getMonth() + 1 : `0${rowtime.getMonth() + 1}`;
     const year = rowtime.getFullYear();
@@ -40,11 +51,11 @@ class TableContent {
     const addButton = document.querySelector('button.add-button');
     const delButton = document.querySelector('button.del-button');
     const parentRow = window.event.target.parentNode.parentNode.parentNode;
-    if (!window.event.target.classList.contains('tab--link') ||
-      document.querySelector('.active-row')) {
+    if (!window.event.target.classList.contains('tab--link')
+      || document.querySelector('.active-row')) {
       parentRow.classList.toggle('active-row');
       addButton.classList.add('allowed');
-      delButton.classList.add('allowed')
+      delButton.classList.add('allowed');
     } else {
       addButton.classList.remove('allowed');
       delButton.classList.remove('allowed');
@@ -55,6 +66,7 @@ class TableContent {
     const tableBody = document.querySelector('div.tableBody');
     tableBody.removeChild(row);
   }
+
   countWords() {
     const cells = document.querySelectorAll('.numberCell');
     cells.forEach((item, index) => {
@@ -85,7 +97,7 @@ class TableContent {
 
     rowDiv.querySelector('i.fa-play').addEventListener('click', () => {
       const audio = new Audio();
-      audio.src = `../${data.audio}`;
+      audio.src = `https://raw.githubusercontent.com/Anglehart/rslang-data/master/${data.audio}`;
       audio.play();
     });
 
