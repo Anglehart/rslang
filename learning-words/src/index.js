@@ -28,7 +28,10 @@ import progress from './layout/scripts/progress';
 import sayWord from './layout/scripts/say';
 
 import loginUser from './layout/scripts/login-test';
-
+/*
+const userId = localStorage.getItem('userId');
+const token = localStorage.getItem('token');
+*/
 const userId = '5eefa4639896e10017eea40c';
 
 async function getToken() {
@@ -223,43 +226,43 @@ async function app(word, arrayOfWords) {
   progress(myToken, userId);
 }
 
-// const updateSettings = async ({
-//   userId, token, wordId, settings,
-// }) => {
-//   const myToken = await token;
-//   const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
-//     method: 'PUT',
-//     headers: {
-//       Authorization: `Bearer ${myToken}`,
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(settings),
-//   });
-//   const updatedSets = await rawResponse.json();
+const updateSettings = async ({
+  userId, token, wordId, settings,
+}) => {
+  const myToken = await token;
+  const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${myToken}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(settings),
+  });
+  const updatedSets = await rawResponse.json();
 
-//   console.log(updatedSets, myToken);
-//   return updatedSets;
-// };
+  console.log(updatedSets, myToken);
+  return updatedSets;
+};
 
-// updateSettings({
-//   userId,
-//   token,
-//   settings: {
-//     wordsPerDay: 40,
-//     optional: {
-//       cardsPerDay: 40,
-//       showTranslation: true,
-//       showTextMeaning: true,
-//       showTextExample: true,
-//       showTranscription: true,
-//       showImage: true,
-//       showAnswerButton: true,
-//       showDeleteButton: true,
-//       showDifficultWordsButton: true,
-//       showWordsStatusButtons: false,
-//     },
-//   },
-// });
+updateSettings({
+  userId,
+  token,
+  settings: {
+    wordsPerDay: 40,
+    optional: {
+      cardsPerDay: 40,
+      showTranslation: true,
+      showTextMeaning: true,
+      showTextExample: true,
+      showTranscription: true,
+      showImage: true,
+      showAnswerButton: true,
+      showDeleteButton: true,
+      showDifficultWordsButton: true,
+      showWordsStatusButtons: true,
+    },
+  },
+});
 
 export default app;
