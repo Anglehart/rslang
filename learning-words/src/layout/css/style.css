@@ -2,6 +2,7 @@
 	margin: 0 auto;
 	padding: 0;
 	box-sizing: border-box;
+	font-size: 1rem;
 }
 
 body {
@@ -11,9 +12,11 @@ body {
 	height: 100vh; 
 	color: #000;
 	font-family: "Roboto", sans-serif;
+
 	color: rgba(0, 0, 0, 0.54);
 }
 .container{
+	padding-top: 70px;
 	width: 70%;
 	display: flex;
 	flex-wrap: wrap;
@@ -33,7 +36,7 @@ body {
     font-weight: 600;
     text-decoration: none;
 }
-.menu,
+.settings,
 .check-boxes {
     color: rgba(0, 0, 0, 0.54);
     font-size: 1rem;
@@ -49,13 +52,15 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 0 auto 10px;
     text-align: center;
-    font-family: arial;
+	font-family: arial;
     border-radius: 20px;
     background: #2eddef52;
 }
 .card_img{
 	margin: 20px auto;
+	max-width: 100%;
 }
+
 
 .card_main-input{
 	width: 95%;
@@ -119,7 +124,8 @@ button{
 	justify-content: center;
 }
 .bars {
-	margin-top: 10px;
+    margin: 10px auto;
+    width: 100%;
 }
 .notification {
 	text-align: center;
@@ -135,16 +141,26 @@ button{
 	font-size: 1.2em;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1032px) {
 	.container{
-		width: 95%;
+		width: 80%;
 		/* font-size: 3.5vw; */
+	}
+	.card_word-hidden {
+		width: 85%;
+		display: flex;
+	}
+	.word-hidden {
+		margin: 0;
+	}
+	button{
+		margin: 15px 5px 5px;
 	}
 }
 
 @media (max-width: 600px) {
 	.container{
-		width: 98%;
+		width: 90%;
 		/* font-size: 4vw; */
 	}
 } 
