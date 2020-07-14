@@ -95,3 +95,48 @@
   top: 0;
   cursor: pointer;
 }
+
+/* @media (min-width: 1401px) {
+  .nav {
+    display: none;
+  }
+} */
+
+@media (max-width: 1339px) {
+  .statistic_1Cell {
+    display: none;
+  }
+  .statistic_2Cell {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .tableBody {
+    font-size: 0.8rem;
+  }
+  .tabs-row {
+    width: 100%;
+  }
+  .tab--link {
+    font-size: 0.8rem;
+  }
+  .tab--button {
+    margin: 0% 5px;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 440px) {
+  .idCell {
+    display: none;
+  }
+  .tab--link {
+    font-size: 0.8em;
+  }
+  .tab--button {
+    font-size: 0.8rem;
+    margin: 0%;
+    min-width: 100px;
+  }
+}

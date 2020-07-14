@@ -26,7 +26,7 @@ class TableContent {
     <div class="tableRow">
       <div class="tableCell checkboxCell">Выбрать</div>
       <div class="tableCell idCell">№ п/п </div>
-      <div class="tableCell audioCell">Иконка прослушивания</div>
+      <div class="tableCell audioCell">Воспроизвести</div>
       <div class="tableCell wordCell">Слово</div>
       <div class="tableCell transcriptCell">Транскрипция</div>
       <div class="tableCell translateCell">Перевод</div>
