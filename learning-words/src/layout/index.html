@@ -11,9 +11,65 @@
 </head>
 
 <body>
+  <header class="header">
+
+    <div class="nav-toggle">
+      <div class="nav-toggle-bar"></div>
+    </div>
+  
+    <nav id="nav" class="nav">
+        <ul class="menu">
+          <li><a onclick="changePage('../../learning-words/build/target/index.html')">Изучение слов</a></li>
+          <li><a href="../../Our/index-about.html">О команде</a></li>
+          <li><a onclick="changePage('../../vocabulary/dist/index.html')">Словарь</a></li>
+            <li class="p_menu"><a class = "link">Мини-игры</a>
+                <ul class="v_menu">
+                  <li><a target="_blank" href="../../speakit/dist/index.html">SpeakIt</a></li>
+                  <li><a target="_blank" href="../../english-puzzle/dist/index.html">English puzzle</a></li>
+                  <li><a target="_blank" href="../../savannah/src/index.html">Саванна</a></li>
+                  <li><a target="_blank" href="../../Audition/index.html">Аудиовызов</a></li>
+                  <li><a target="_blank" href="../../millionaire/dist/index.html">Миллионер</a></li>
+                </ul>
+            </li>
+            <li><a href="../../index.html">Промо-страница</a></li>
+            <li><a onclick="changePageSide()" id="butExit">Вход</a></li>
+              </ul>
+      </nav>
+  
+    <div class="line">
+      <p class="dropdown"><img src="../../Main/img/logo.png" alt="Логотип"></p>
+      <h3 class="dropdown">RS Lang</h3>
+      <span class = "contener">
+        <div class="dropdown">
+        <a onclick="changePage('../../learning-words/build/target/index.html')" class="dropbtn">Изучение слов</a>
+        </div>
+    <div class="dropdown">
+  <a href="../../Our/index-about.html" class="dropbtn">О команде</a>
+    </div>
+    <div class="dropdown">
+    <a onclick="changePage('../../vocabulary/dist/index.html')" class="dropbtn">Словарь</a>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Мини-игры</button>
+      <div class="dropdown-content">
+        <a target="_blank" href="../../speakit/dist/index.html">SpeakIt</a>
+        <a target="_blank" href="../../english-puzzle/dist/index.html">English puzzle</a>
+        <a target="_blank" href="../../savannah/src/index.html">Саванна</a>
+        <a target="_blank" href="../../Audition/index.html">Аудиовызов</a>
+        <a target="_blank" href="../../millionaire/dist/index.html">Миллионер</a>
+      </div>
+    </div>
+    <div class="dropdown">
+    <a href="../../index.html" class="dropbtn">Промо-страница</a>
+    </div>
+    <div class="dropdown">
+      <button class="button-input" id = "but-autorization" data-hover="Выход" onclick="changePage()"><a id = "autorization" onclick="changePage('../../authorization/src/index.html')">Вход</a></button>
+    </div>
+  </span>
+  </div>
+  </header>
   <div class="container">
-    <div class="menu">
-      <a class="link" href="#">Main menu</a>
+    <div class="settings">
       <a class="link" href="#">Settings</a>
     </div>
     <div class="check-boxes">
@@ -64,7 +120,11 @@
     <audio id="audio-example"></audio>
     <audio id="audio-meaning"></audio>
   </div>
-
+  <footer class="footer-distributed">
+    <div class="footer-left">
+    <p class = "School">RS School 2020q1</p>
+  </div>
+</footer>
 </body>
 
 </html>

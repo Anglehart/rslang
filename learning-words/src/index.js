@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import './layout/css/style.css';
+import './layout/css/header-footer.css';
 import './layout/css/progress.css';
-
 
 import {
   addCardFields, addTextExampleTranslateInCard,
@@ -22,7 +22,6 @@ import getSettings from './layout/scripts/get-settings';
 import createOrUpdateWord from './layout/scripts/create-or-update-word';
 
 import progress from './layout/scripts/progress';
-
 
 // eslint-disable-next-line import/no-cycle
 import sayWord from './layout/scripts/say';
@@ -226,43 +225,43 @@ async function app(word, arrayOfWords) {
   progress(myToken, userId);
 }
 
-const updateSettings = async ({
-  userId, token, wordId, settings,
-}) => {
-  const myToken = await token;
-  const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${myToken}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(settings),
-  });
-  const updatedSets = await rawResponse.json();
+// const updateSettings = async ({
+//   userId, token, wordId, settings,
+// }) => {
+//   const myToken = await token;
+//   const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
+//     method: 'PUT',
+//     headers: {
+//       Authorization: `Bearer ${myToken}`,
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(settings),
+//   });
+//   const updatedSets = await rawResponse.json();
 
-  console.log(updatedSets, myToken);
-  return updatedSets;
-};
+//   console.log(updatedSets, myToken);
+//   return updatedSets;
+// };
 
-updateSettings({
-  userId,
-  token,
-  settings: {
-    wordsPerDay: 40,
-    optional: {
-      cardsPerDay: 40,
-      showTranslation: true,
-      showTextMeaning: true,
-      showTextExample: true,
-      showTranscription: true,
-      showImage: true,
-      showAnswerButton: true,
-      showDeleteButton: true,
-      showDifficultWordsButton: true,
-      showWordsStatusButtons: true,
-    },
-  },
-});
+// updateSettings({
+//   userId,
+//   token,
+//   settings: {
+//     wordsPerDay: 40,
+//     optional: {
+//       cardsPerDay: 40,
+//       showTranslation: true,
+//       showTextMeaning: true,
+//       showTextExample: true,
+//       showTranscription: true,
+//       showImage: true,
+//       showAnswerButton: true,
+//       showDeleteButton: true,
+//       showDifficultWordsButton: true,
+//       showWordsStatusButtons: true,
+//     },
+//   },
+// });
 
 export default app;

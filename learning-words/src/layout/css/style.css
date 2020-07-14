@@ -16,6 +16,7 @@ body {
 	color: rgba(0, 0, 0, 0.54);
 }
 .container{
+	padding-top: 70px;
 	width: 70%;
 	display: flex;
 	flex-wrap: wrap;
@@ -35,7 +36,7 @@ body {
     font-weight: 600;
     text-decoration: none;
 }
-.menu,
+.settings,
 .check-boxes {
     color: rgba(0, 0, 0, 0.54);
     font-size: 1rem;
