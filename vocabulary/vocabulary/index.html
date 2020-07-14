@@ -6,10 +6,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vocabulary</title>
   <script src="https://kit.fontawesome.com/94a2764cbd.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-  <header class="header"></header>
+  <header class="header">
+    <seciont class="nav-toggle">
+      <seciont class="nav-toggle-bar"></seciont>
+    </seciont>
+    <nav id="nav" class="nav">
+      <ul class="menu">
+        <li><a onclick="changePage('../../learning-words/build/target/index.html')">Изучение слов</a></li>
+        <li><a href="../../Our/index-about.html">О команде</a></li>
+        <li><a onclick="changePage('../../statistic/src/index.html')">Статистика</a></li>
+        <li class="p_menu"><a class="link">Мини-игры</a>
+          <ul class="v_menu">
+            <li><a target="_blank" href="../../speakit/dist/index.html">SpeakIt</a></li>
+            <li><a target="_blank" href="../../english-puzzle/dist/index.html">English puzzle</a></li>
+            <li><a target="_blank" href="../../savannah/src/index.html">Саванна</a></li>
+            <li><a target="_blank" href="../../Audition/index.html">Аудиовызов</a></li>
+            <li><a target="_blank" href="../../millionaire/dist/index.html">Миллионер</a></li>
+          </ul>
+        </li>
+        <li><a href="../../index.html">Промо-страница</a></li>
+        <li><a onclick="changePageSide()" id="butExit">Вход</a></li>
+      </ul>
+    </nav>
+    <seciont class="line">
+      <p class="dropdown"><img src="../../Main/img/logo.png" alt="Логотип"></p>
+      <h3 class="dropdown">RS Lang</h3>
+      <span class="contener">
+        <seciont class="dropdown">
+          <a onclick="changePage('../../learning-words/build/target/index.html')" class="dropbtn">Изучение слов</a>
+        </seciont>
+        <seciont class="dropdown">
+          <a href="../../Our/index-about.html" class="dropbtn">О команде</a>
+        </seciont>
+        <seciont class="dropdown">
+          <a onclick="changePage('../../statistic/src/index.html')" class="dropbtn">Статистика</a>
+        </seciont>
+        <seciont class="dropdown">
+          <button class="dropbtn">Мини-игры</button>
+          <seciont class="dropdown-content">
+            <a target="_blank" href="../../speakit/dist/index.html">SpeakIt</a>
+            <a target="_blank" href="../../english-puzzle/dist/index.html">English puzzle</a>
+            <a target="_blank" href="../../savannah/src/index.html">Саванна</a>
+            <a target="_blank" href="../../Audition/index.html">Аудиовызов</a>
+            <a target="_blank" href="../../millionaire/dist/index.html">Миллионер</a>
+          </seciont>
+        </seciont>
+        <seciont class="dropdown">
+          <a href="../../index.html" class="dropbtn">Промо-страница</a>
+        </seciont>
+        <seciont class="dropdown">
+          <button class="button-input" id="but-autorization" data-hover="Выход" onclick="changePage()"><a
+              id="autorization" onclick="changePage('../../authorization/src/index.html')">Вход</a></button>
+        </seciont>
+      </span>
+    </seciont>
+  </header>
   <main class="main bg-green">
     <div class="tabs-row">
       <div class="tab--link bg-green active-bg" data-mode_color="green">К изучению</div>
@@ -34,7 +89,11 @@
     </div>
     <div class="addMoreButton none"> Загрузить больше</div>
   </main>
-  <footer class="footer"></footer>
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <p class="School">RS School 2020q1</p>
+    </div>
+  </footer>
 </body>
 
 </html>

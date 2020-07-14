@@ -9,16 +9,11 @@ class TableContent {
   }
 
   getDate(time) {
-    // console.log(`time ${time}`);
     let rowtime = new Date();
     rowtime.setTime(time);
     if (isNaN(rowtime)) {
       rowtime = new Date(time);
     }
-    // console.log(`is number? ${Number.isInteger(time)}`);
-    // console.log(`rowtime ${time}`);
-    // console.log(`rowtime ${rowtime.getMonth()}`);
-    // console.log(`gettime ${rowtime.getTime()}`);
     const day = rowtime.getDate() > 9 ? rowtime.getDate() : `0${rowtime.getDate()}`;
     const month = rowtime.getMonth() + 1 > 9 ? rowtime.getMonth() + 1 : `0${rowtime.getMonth() + 1}`;
     const year = rowtime.getFullYear();
