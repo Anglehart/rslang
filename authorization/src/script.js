@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-use-before-define */
 const togglerSignIn = document.getElementById('toggler-sign-in');
 const togglerSignUp = document.getElementById('toggler-sign-up');
 const tabSignIn = document.getElementById('tab-sign-in');
@@ -63,11 +61,13 @@ function createCheckmarkIcon(parent) {
   checkmarkIcon.setAttribute('aria-hidden', 'true');
   parent.after(checkmarkIcon);
 }
+
 const answerValidation = {
-  empty: 'Введите адрес электронной почты',
-  invalid: 'Неверный адрес электронной почты',
+  empty: 'Введите данные',
+  invalid: 'Неверные данные',
   valid: '',
 };
+
 function showInvalidData(inputAlert, submit, invalidText) {
   inputAlert.innerHTML = invalidText;
   if (checkmarkIcon) {
@@ -275,6 +275,3 @@ modalWindow.addEventListener('click', (event) => {
     setTimeout(transition, 2000);
   }
 });
-console.log(localStorage.getItem('email'));
-console.log(localStorage.getItem('userId'));
-console.log(localStorage.getItem('token'));
