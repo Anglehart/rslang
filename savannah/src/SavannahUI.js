@@ -7,7 +7,6 @@ class SavannahUI {
 
     window.addEventListener('load', () => {
       this.container.style.display = 'block';
-
     });
   }
 
@@ -37,7 +36,6 @@ class SavannahUI {
 
     this.level1 = document.createElement('li');
     this.level1.innerText = '1';
-    this.level1.className = 'active';
     this.levelButtons.append(this.level1);
     this.level2 = document.createElement('li');
     this.level2.innerText = '2';
@@ -54,6 +52,15 @@ class SavannahUI {
     this.level6 = document.createElement('li');
     this.level6.innerText = '6';
     this.levelButtons.append(this.level6);
+
+    this.savannahLevel = localStorage.getItem('level');
+    if (!this.savannahLevel) this.savannahLevel = `1`;
+
+    Array.from(this.levelButtons.children).forEach((levelButton) => {
+      if (+levelButton.innerText === +this.savannahLevel + 1) {
+        levelButton.classList.add('active');
+      }
+    });
 
     this.description = document.createElement('div');
     this.description.className = 'description';
@@ -82,15 +89,15 @@ class SavannahUI {
     this.startButton.type = 'button';
     this.startButton.innerHTML = 'Start';
     this.description.append(this.startButton);
-    this.level = 0;
-
+     
     this.levelButtons.addEventListener('click', (event) => {
       Array.from(this.levelButtons.children).forEach((levelButton) => {
         levelButton.classList.remove('active');
       });
       if (event.target.closest('li')){
         event.target.classList.add('active');
-        this.level = +event.target.innerText - 1;;
+        this.level = +event.target.innerText - 1;
+        localStorage.setItem('level', this.level);
       }
     });
   }

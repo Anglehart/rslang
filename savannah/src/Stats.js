@@ -104,6 +104,7 @@ class Stats {
     }
     const now = new Date();
     const body = await this.getStats();
+    console.log(body);
     body.optional[`${gameName}All`] += 1;
     if (gameResult) {
       body.optional[`${gameName}Win`] += 1;

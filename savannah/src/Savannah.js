@@ -184,6 +184,7 @@ class Savannah {
 
   getEnglishWords() {
     if (this.getUserId() && this.getToken()) {
+  
       return this.getUseraggregatedWords();
     } else {
       return this.getWords();
@@ -200,14 +201,13 @@ class Savannah {
       this.gameStarted = true;
       this.countRoundsGame += 1;
       if (this.wordsToLearn.length < 10) {
-          this.getEnglishWords()
+          this.getWords()
           .then(() => this.setAnswers());
       } else {
         this.setAnswers();
       }
     }
   }
-
 
   randomInteger(min, max) {
     let rand = min + Math.random() * (max - min);
@@ -218,7 +218,7 @@ class Savannah {
 
   getWords() {
     const page = this.randomInteger(0, 29);
-    const group = this.ui.level;
+    const group = this.ui.savannahLevel;
     const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
     return fetch(url)
       .then((res) => res.json())
@@ -242,7 +242,6 @@ class Savannah {
     }).then((res) => res.json())
       .then((data) => {
         Array.prototype.push.apply(this.wordsToLearn, data[0].paginatedResults);
-        console.log(this.wordsToLearn.length);
       });
   }
 
@@ -257,8 +256,8 @@ class Savannah {
   }
 
   getArrayOfAnswers() {
-    const numReserve = this.getArrayOfRandomNumbers();
     this.questionWord = this.generateQuestionWord();
+    const numReserve = this.getArrayOfRandomNumbers();
     let arrayOfAnswers = [
       this.questionWord.wordTranslate,
       this.wordsToLearn[numReserve[0]].wordTranslate,
@@ -289,7 +288,6 @@ class Savannah {
           break;
         }
       }
-
       if (!found) {
         numReserve[numReserve.length] = randomNumber;
       }
@@ -299,12 +297,6 @@ class Savannah {
 
   shuffle(array) {
     array.sort(() => Math.random() - 0.5);
-  }
-
-  setLevel() {
-    this.ui.levelButtons.forEach((element) => {
-      element.classList.add('active');
-    });
   }
 
   getContainer() {
