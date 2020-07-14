@@ -9,19 +9,52 @@
   </head>
   <body>
     <form onsubmit="saveSettings(); return false" class="settings-form">
-      <p><input type="number" name="wordsPerDay" id="wordsPerDay" value="" placeholder="10-100"> Words per day</p>
-      <p><input type="number" name="cardsPerDay" id="cardsPerDay" value="" placeholder="10-100"> Cards per day </p>
-      <p><input type="checkbox" id="showTranslation" /> Show translation</p>
-      <p><input type="checkbox" id="showTextMeaning" /> Show text meaning</p>
-      <p><input type="checkbox" id="showTextExample" /> Show text example</p>
-      <p><input type="checkbox" id="showImage" /> Show image</p>
-      <p><input type="checkbox" id="showTranscription" /> Show transcription</p>
-      <p><input type="checkbox" id="showAnswerButton" /> Show "Answer" button</p>
-      <p><input type="checkbox" id="showDeleteButton" /> Show "Delete" button</p>
-      <p><input type="checkbox" id="showDifficultWordsButton" /> Show "Difficult words" button</p>
-      <p><input type="checkbox" id="showWordsStatusButtons" /> Show "Words status" button</p>
+      <div class="text-box">
+        <input type="text" name="wordsPerDay" id="wordsPerDay" value="" placeholder="10-100">
+        <label for="wordsPerDay">Words per day</label>
+      </div>
+      <div class="text-box">
+        <input type="text" name="cardsPerDay" id="cardsPerDay" value="" placeholder="10-100">
+        <label for="cardsPerDay">Cards per day</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showTranslation" name="showTranslation">
+        <label for="showTranslation">Show translation</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showTextMeaning" name="showTextMeaning">
+        <label for="showTextMeaning">Show text meaning</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showTextExample" name="showTextExample">
+        <label for="showTextExample">Show text example</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showImage" name="showImage">
+        <label for="showImage">Show image</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showTranscription" name="showTranscription">
+        <label for="showTranscription">Show transcription</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showAnswerButton" name="showAnswerButton">
+        <label for="showAnswerButton">Show "Answer" button</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showDeleteButton" name="showDeleteButton">
+        <label for="showDeleteButton">Show "Delete" button</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showDifficultWordsButton" name="showDifficultWordsButton">
+        <label for="showDifficultWordsButton">Show "Difficult words" button</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showWordsStatusButtons" name="showWordsStatusButtons">
+        <label for="showWordsStatusButtons">Show "Words status" button</label>
+      </div>
       <div class="message"></div>
-      <input type="submit" value="Save">
+      <input type="submit" value="Save" class="save-btn">
     </form>
   </body>
 </html>
