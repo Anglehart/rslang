@@ -146,9 +146,14 @@ function createUser(user) {
       return res.json();
     }
   })
-    .then(() => loginUser({ email: emailSignUp.value, password: passwordSignUp.value }))
+    .then(() => {
+      loginUser({ email: emailSignUp.value, password: passwordSignUp.value })
+      .then(() => {
+        setBasicSettings();
+        setUserStatistic();
+      })
+    })
     .catch((error) => {
-      console.log(error.message);
     });
 }
 
@@ -169,7 +174,6 @@ function loginUser(user) {
     }
   })
     .then((data) => {
-      console.log(data);
       localStorage.setItem('email', user.email);
       localStorage.setItem('userId', data.userId);
       localStorage.setItem('token', data.token);
@@ -178,6 +182,7 @@ function loginUser(user) {
       console.log(error.message);
     });
 }
+
 function setBasicSettings() {
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
@@ -206,13 +211,46 @@ function setBasicSettings() {
     },
     body: JSON.stringify(data),
   });
-  console.log(data);
 }
 
 function transition() {
   if (localStorage.getItem('userId') !== null) {
     document.location.href = '../../index.html';
   }
+}
+function setUserStatistic() {
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
+  const data = {
+    learnedWords: 0,
+    optional: {
+      audioAll: 0,
+      audioLose: 0,
+      audioWin: 0,
+      millionaireAll: 0,
+      millionaireLose: 0,
+      millionaireWin: 0,
+      puzzleAll: 0,
+      puzzleLose: 0,
+      puzzleWin: 0,
+      savannaAll: 0,
+      savannaLose: 0,
+      savannaWin: 0,
+      speakitAll: 0,
+      speakitLose: 0,
+      speakitWin: 0,
+    },
+  };
+
+  fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/statistics`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
 }
 
 modalWindow.addEventListener('click', (event) => {
@@ -230,7 +268,6 @@ modalWindow.addEventListener('click', (event) => {
   } else if (event.target === buttonSignUp) {
     event.preventDefault();
     createUser({ email: emailSignUp.value, password: passwordSignUp.value });
-    setBasicSettings();
     setTimeout(transition, 2000);
   } else if (event.target === buttonSignIn) {
     event.preventDefault();
