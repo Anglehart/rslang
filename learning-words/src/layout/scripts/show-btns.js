@@ -1,23 +1,24 @@
 function showDifficultyBtns() {
   const btnsWrapper = document.querySelector('.difficulty_btns');
+  if (btnsWrapper.innerHTML === '') {
+    const difficulty3btn = document.createElement('button');
+    difficulty3btn.setAttribute('id', 'difficulty_3_btn');
+    difficulty3btn.textContent = 'Again';
 
-  const difficulty3btn = document.createElement('button');
-  difficulty3btn.setAttribute('id', 'difficulty_3_btn');
-  difficulty3btn.textContent = 'Again';
+    const difficulty2btn = document.createElement('button');
+    difficulty2btn.setAttribute('id', 'difficulty_2_btn');
+    difficulty2btn.textContent = 'Hard';
 
-  const difficulty2btn = document.createElement('button');
-  difficulty2btn.setAttribute('id', 'difficulty_2_btn');
-  difficulty2btn.textContent = 'Hard';
+    const difficulty1btn = document.createElement('button');
+    difficulty1btn.setAttribute('id', 'difficulty_1_btn');
+    difficulty1btn.textContent = 'Normal';
 
-  const difficulty1btn = document.createElement('button');
-  difficulty1btn.setAttribute('id', 'difficulty_1_btn');
-  difficulty1btn.textContent = 'Normal';
+    const difficulty0btn = document.createElement('button');
+    difficulty0btn.setAttribute('id', 'difficulty_0_btn');
+    difficulty0btn.textContent = 'Easy';
 
-  const difficulty0btn = document.createElement('button');
-  difficulty0btn.setAttribute('id', 'difficulty_0_btn');
-  difficulty0btn.textContent = 'Easy';
-
-  btnsWrapper.append(difficulty3btn, difficulty2btn, difficulty1btn, difficulty0btn);
+    btnsWrapper.append(difficulty3btn, difficulty2btn, difficulty1btn, difficulty0btn);
+  }
   return btnsWrapper;
 }
 

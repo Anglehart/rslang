@@ -7,8 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i&display=swap&subset=cyrillic"
     rel="stylesheet">
-  <title>Изучение слов</title>
-  <link rel="icon" href="../../../Main/img/logo.png" type="image/x-icon">
+  <title>words</title>
 </head>
 
 <body>
@@ -20,20 +19,20 @@
 
     <nav id="nav" class="nav">
       <ul class="menu">
-        <li><a href="../../../settings/index.html">Настройки</a></li>
-        <li><a href="../../../statistic/src/index.html">Статистика</a></li>
-        <li><a href="../../../Our/index-about.html">О команде</a></li>
-        <li><a href="../../../vocabulary/dist/index.html">Словарь</a></li>
+        <li><a href="/settings">Настройки</a></li>
+        <li><a href="/statistic/src/index.html">Статистика</a></li>
+        <li><a href="/Our/index-about.html">О команде</a></li>
+        <li><a href="/vocabulary/dist/index.html">Словарь</a></li>
         <li class="p_menu"><a class="links">Мини-игры</a>
           <ul class="v_menu">
-            <li><a target="_blank" href="../../../speakit/dist/index.html">SpeakIt</a></li>
-            <li><a target="_blank" href="../../../english-puzzle/dist/index.html">English puzzle</a></li>
-            <li><a target="_blank" href="../../../savannah/src/index.html">Саванна</a></li>
-            <li><a target="_blank" href="../../../Audition/index.html">Аудиовызов</a></li>
-            <li><a target="_blank" href="../../../millionaire/dist/index.html">Миллионер</a></li>
+            <li><a target="_blank" href="/speakit/dist/index.html">SpeakIt</a></li>
+            <li><a target="_blank" href="/english-puzzle/dist/index.html">English puzzle</a></li>
+            <li><a target="_blank" href="/savannah/src/index.html">Саванна</a></li>
+            <li><a target="_blank" href="/Audition/index.html">Аудиовызов</a></li>
+            <li><a target="_blank" href="/millionaire/dist/index.html">Миллионер</a></li>
           </ul>
         </li>
-        <li><a href="../../../index.html">Промо-страница</a></li>
+        <li><a href="/index.html">Промо-страница</a></li>
         <li><a onclick="changePageSide()" id="butExit">Вход</a></li>
       </ul>
     </nav>
@@ -43,33 +42,33 @@
       <h3 class="dropdown">RS Lang</h3>
       <span class="contener">
         <div class="dropdown">
-          <a class="dropbtn" href="../../../settings/index.html">Настройки</a>
+          <a class="dropbtn" href="/settings">Настройки</a>
         </div>
         <div class="dropdown">
-          <a href="../../../statistic/src/index.html" class="dropbtn">Статистика</a>
+          <a href="/statistic/src/index.html" class="dropbtn">Статистика</a>
         </div>
         <div class="dropdown">
-          <a href="../../../Our/index-about.html" class="dropbtn">О команде</a>
+          <a href="/Our/index-about.html" class="dropbtn">О команде</a>
         </div>
         <div class="dropdown">
-          <a href="../../../vocabulary/dist/index.html" class="dropbtn">Словарь</a>
+          <a href="/vocabulary/dist/index.html" class="dropbtn">Словарь</a>
         </div>
         <div class="dropdown">
           <button class="dropbtn">Мини-игры</button>
           <div class="dropdown-content">
-            <a target="_blank" href="../../../speakit/dist/index.html">SpeakIt</a>
-            <a target="_blank" href="../../../english-puzzle/dist/index.html">English puzzle</a>
-            <a target="_blank" href="../../../savannah/src/index.html">Саванна</a>
-            <a target="_blank" href="../../../Audition/index.html">Аудиовызов</a>
-            <a target="_blank" href="../../../millionaire/dist/index.html">Миллионер</a>
+            <a target="_blank" href="/speakit/dist/index.html">SpeakIt</a>
+            <a target="_blank" href="/english-puzzle/dist/index.html">English puzzle</a>
+            <a target="_blank" href="/savannah/src/index.html">Саванна</a>
+            <a target="_blank" href="/Audition/index.html">Аудиовызов</a>
+            <a target="_blank" href="/millionaire/dist/index.html">Миллионер</a>
           </div>
         </div>
         <div class="dropdown">
-          <a href="../../../index.html" class="dropbtn">Промо-страница</a>
+          <a href="/index.html" class="dropbtn">Промо-страница</a>
         </div>
         <div class="dropdown">
           <button class="button-input" id="but-autorization" data-hover="Выход" onclick="changePage()"><a
-              id="autorization" href="../../../index.html">Вход</a></button>
+              id="autorization" href="/authorization/src/index.html">Вход</a></button>
         </div>
       </span>
     </div>
@@ -171,7 +170,6 @@
       localStorage.removeItem('userId');
       document.getElementById('autorization').textContent = 'Вход';
       document.getElementById('but-autorization').classList.remove('button-input-autorization');
-      document.location.href = '../../../index.html';
     }
 
     if (localStorage.getItem('userId') !== null) {
@@ -186,7 +184,7 @@
 
     function changePageSide() {
       if (localStorage.getItem('userId') === null) {
-        document.location.href = '../../../index.html';
+        document.location.href = '/authorization/src/index.html';
       } else {
         deleteInform();
       }
@@ -194,7 +192,7 @@
 
     function changePage(href) {
       if (localStorage.getItem('userId') === null) {
-        document.location.href = '../../../index.html';
+        document.location.href = '/authorization/src/index.html';
       } else { document.location.href = href; }
     }
   </script>
