@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
+<polygon style="fill:#DD3232;" points="184,104 240,104 296,104 296,8 184,8 "/>
+<g>
+	<polygon style="fill:#06AED5;" points="184,192 184,240 184,288 240,288 296,288 296,240 296,192 240,192 	"/>
+	<polygon style="fill:#06AED5;" points="360,240 360,288 472,288 472,192 360,192 	"/>
+	<polygon style="fill:#06AED5;" points="8,288 64,288 120,288 120,240 120,192 8,192 	"/>
+</g>
+<g>
+	<polygon style="fill:#FFB40E;" points="360,432 360,472 472,472 472,376 360,376 	"/>
+	<polygon style="fill:#FFB40E;" points="8,376 8,472 120,472 120,376 64,376 	"/>
+</g>
+<g>
+	<rect x="208" y="32" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="208" y="64" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="208" y="216" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="208" y="248" style="fill:#242A40;" width="64" height="16"/>
+	<path style="fill:#242A40;" d="M472,184H360c-4.416,0-8,3.576-8,8v40h-48v-40c0-4.424-3.584-8-8-8h-48v-72h48c4.416,0,8-3.576,8-8
+		V8c0-4.424-3.584-8-8-8H184c-4.416,0-8,3.576-8,8v96c0,4.424,3.584,8,8,8h48v72h-48c-4.416,0-8,3.576-8,8v40h-48v-40
+		c0-4.424-3.584-8-8-8H8c-4.416,0-8,3.576-8,8v96c0,4.424,3.584,8,8,8h48v72H8c-4.416,0-8,3.576-8,8v96c0,4.424,3.584,8,8,8h112
+		c4.416,0,8-3.576,8-8v-96c0-4.424-3.584-8-8-8H72v-72h48c4.416,0,8-3.576,8-8v-40h48v40c0,4.424,3.584,8,8,8h48v136
+		c0,4.424,3.584,8,8,8h112v32c0,4.424,3.584,8,8,8h112c4.416,0,8-3.576,8-8v-96c0-4.424-3.584-8-8-8H360c-4.416,0-8,3.576-8,8v48
+		H248V296h48c4.416,0,8-3.576,8-8v-40h48v40c0,4.424,3.584,8,8,8h112c4.416,0,8-3.576,8-8v-96C480,187.576,476.416,184,472,184z
+		 M192,16h96v80h-96V16z M112,464H16v-80h96V464z M112,280H16v-80h96V280z M368,384h96v80h-96V384z M288,280h-40h-16h-40v-80h96V280
+		z M464,280h-96v-80h96V280z"/>
+	<rect x="384" y="216" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="384" y="248" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="32" y="216" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="32" y="248" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="384" y="400" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="384" y="432" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="32" y="400" style="fill:#242A40;" width="64" height="16"/>
+	<rect x="32" y="432" style="fill:#242A40;" width="64" height="16"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
