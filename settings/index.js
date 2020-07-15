@@ -93,5 +93,8 @@ function showMessage(boolean) {
   Message.innerHTML = '<p class="error">Number of words and cards must be between 10 and 50.</p>';
   if (boolean) Message.innerHTML = '<p class="success">Settings saved!</p>';
   Message.classList.add('showMessage');
-  setTimeout(() => { Message.classList.remove('showMessage') }, 3000);
+  setTimeout(() => { 
+    Message.classList.remove('showMessage');
+    if (boolean === true ) document.location.href = '/learning-words/build/target/';
+  }, 3000);
 }
