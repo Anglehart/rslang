@@ -35,13 +35,6 @@ function createGamesStatistics(stats) {
     stats.speakitLose, stats.speakitLast,
   );
 }
-function getUserId() {
-  return localStorage.getItem('userId');
-}
-
-function getToken() {
-  return localStorage.getItem('token');
-}
 
 let userId;
 let token;
@@ -96,7 +89,6 @@ function drawChart() {
     },
     axisY: {
       title: 'Words',
-
     },
     data: [{
       type: 'spline',
@@ -107,6 +99,7 @@ function drawChart() {
   });
   chart.render();
 }
+const container = document.getElementById('container');
 
 function getUseraggregatedWords() {
   const url = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/aggregatedWords?wordsPerPage=100&onlyUserWords=true&filter={"userWord.difficulty":"0"}`;
@@ -117,10 +110,14 @@ function getUseraggregatedWords() {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => res.json())
-    .then((responsesData) => {
-      console.log(responsesData);
-      getPoints(responsesData);
+    .then((data) => {
+      console.log(data);
+     if (data[0].paginatedResults.length > 0) {
+      getPoints(data);
       drawChart();
+     } else {
+      container.innerHTML = '<div class="load-container"><img class="load-image" src="images/learn.png" alt="icon"><div class="text">You need to learn more words!<a class="link" href="../../learning-words/build/target/index.html">Learning words</a></div></div>';
+     }
     });
 }
 
@@ -141,8 +138,8 @@ function getGameStatistic() {
 }
 
 window.addEventListener('load', () => {
-  userId = getUserId();
-  token = getToken();
+  userId = localStorage.getItem('userId');
+  token = localStorage.getItem('token');
   getUserWord();
   getUseraggregatedWords();
   getGameStatistic();

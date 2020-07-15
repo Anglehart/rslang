@@ -6,12 +6,34 @@ body {
 }
 
 .container {
-  max-width: 1120px;
+  max-width: 600px;
+  height: 400px;
   margin: auto;
 }
 
 a {
   text-decoration: none !important;
+}
+
+.link {
+  color: rgba(246, 28, 32, .7);
+  text-decoration: none !important;
+  font-size: 1.5rem;
+  display: block;
+}
+
+.load-container {
+  max-width: 500px;
+  padding-top: 15%;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.load-image {
+  width: 200px;
 }
 
 .word-statistic {
@@ -65,7 +87,7 @@ a {
 
 .games-statistic {
   padding-top: 50px;
-  min-height: 100vh;
+  min-height: 1130px;
 }
 
 .games {
@@ -119,6 +141,7 @@ a {
   text-align: start;
   color: #777;
   font-size: 17px;
+  min-width: 175px;
 }
 
 .header {

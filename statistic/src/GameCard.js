@@ -17,11 +17,6 @@ class GameCard {
     promo.style.backgroundSize = 'cover';
     this.link.append(promo);
 
-    // this.image = document.createElement('img');
-    // this.image.className = 'promo-image';
-    // this.image.setAttribute('src', `${image}`);
-    // promo.append(this.image);
-
     this.title = document.createElement('span');
     this.title.className = 'link-title';
     this.title.innerText = name;
@@ -33,9 +28,11 @@ class GameCard {
 
     this.gameTimeContainer = document.createElement('div');
     this.gameTimeContainer.className = 'game-time';
-    const date = new Date(last);
-    this.gameTimeContainer.innerText = `Last played: ${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.toTimeString().slice(0, 5)}`;
-    card.append(this.gameTimeContainer);
+    if (last) {
+      const date = new Date(last);
+      this.gameTimeContainer.innerText = `Last played: ${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.toTimeString().slice(0, 5)}`;
+      card.append(this.gameTimeContainer);
+    }
 
     const totalContainer = document.createElement('div');
     totalContainer.className = 'total';
