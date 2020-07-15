@@ -29,7 +29,7 @@
           </ul>
         </li>
         <li><a href="../../index.html">Промо-страница</a></li>
-        <li><a onclick="changePageSide()" id="butExit">Вход</a></li>
+        <li><a href="../../index.html" id="butExit">Вход</a></li>
       </ul>
     </nav>
     <seciont class="line">
@@ -59,8 +59,10 @@
           <a href="../../index.html" class="dropbtn">Промо-страница</a>
         </seciont>
         <seciont class="dropdown">
-          <button class="button-input" id="but-autorization" data-hover="Выход" onclick="changePage()"><a
-              id="autorization" href="../../authorization/src/index.html">Вход</a></button>
+          <!-- <button class="button-input" id="but-autorization" data-hover="Выход" onclick="changePage()"><a
+              id="autorization" href="../../authorization/src/index.html">Вход</a></button> -->
+                <button class="button-input" id = "but-autorization" data-hover="Выход" href="../../index.html">
+                  <a id = "autorization" onclick="changePage('../../index.html')">Вход</a></button>
         </seciont>
       </span>
     </seciont>

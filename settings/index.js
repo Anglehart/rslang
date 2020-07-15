@@ -20,9 +20,9 @@ function saveSettings() {
   data.wordsPerDay = WordsPerDay;
   data.optional.cardsPerDay = CardsPerDay;
   document.querySelectorAll('input[type=checkbox]').forEach((item) => {
-    data.optional[item.id] = item.checked; 
+    data.optional[item.id] = item.checked;
   });
-      
+
   fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
     method: 'PUT',
     headers: {
@@ -62,12 +62,12 @@ function loadSettings() {
 function drawForm(data) {
   document.querySelector('#wordsPerDay').value = data.wordsPerDay;
   document.querySelector('#cardsPerDay').value = data.optional.cardsPerDay;
-  
+
   for (key in data.optional) {
     if (key !== 'cardsPerDay') {
       document.getElementById(key).checked = data.optional[key];
       document.getElementById(key).addEventListener('click', () => { checkRequired(); })
-    } 
+    }
   }
   checkRequired();
 }
@@ -79,7 +79,7 @@ function checkRequired() {
   translation.disabled = '';
   meaning.disabled = '';
   example.disabled = '';
-  if (translation.checked == false && meaning.checked == false) { 
+  if (translation.checked == false && meaning.checked == false) {
     example.disabled = 'true';
   } else if(translation.checked == false && example.checked == false) {
     meaning.disabled = 'true';
@@ -93,8 +93,8 @@ function showMessage(boolean) {
   Message.innerHTML = '<p class="error">Number of words and cards must be between 10 and 50.</p>';
   if (boolean) Message.innerHTML = '<p class="success">Settings saved!</p>';
   Message.classList.add('showMessage');
-  setTimeout(() => { 
+  setTimeout(() => {
     Message.classList.remove('showMessage');
-    if (boolean === true ) document.location.href = '/learning-words/build/target/';
+    if (boolean === true ) document.location.href = '../learning-words/build/target/index.html';
   }, 3000);
 }

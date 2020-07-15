@@ -44,6 +44,7 @@ function deleteInform() {
   localStorage.removeItem('userId');
   document.getElementById('autorization').textContent = 'Вход';
   document.getElementById('but-autorization').classList.remove('button-input-autorization');
+  document.location.href = '../../index.html';
 }
 
 // -----------------login-------------
@@ -59,7 +60,7 @@ if (localStorage.getItem('userId') !== null) {
 
 function changePageSide() {
   if (localStorage.getItem('userId') === null) {
-    document.location.href = '../../authorization/src/index.html';
+    document.location.href = '../../index.html';
   } else {
     deleteInform();
   }
@@ -69,7 +70,7 @@ function changePageSide() {
 
 function changePage(href) {
   if (localStorage.getItem('userId') === null) {
-    document.location.href = '../../authorization/src/index.html';
+    document.location.href = '../../index.html';
   } else { document.location.href = href; }
 }
 

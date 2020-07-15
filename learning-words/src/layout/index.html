@@ -23,7 +23,7 @@
         <li><a href="/statistic/src/index.html">Статистика</a></li>
         <li><a href="/Our/index-about.html">О команде</a></li>
         <li><a href="/vocabulary/dist/index.html">Словарь</a></li>
-        <li class="p_menu"><a class="link">Мини-игры</a>
+        <li class="p_menu"><a class="links">Мини-игры</a>
           <ul class="v_menu">
             <li><a target="_blank" href="/speakit/dist/index.html">SpeakIt</a></li>
             <li><a target="_blank" href="/english-puzzle/dist/index.html">English puzzle</a></li>
@@ -138,7 +138,7 @@
   </footer>
   <script>
     document.onclick = function change() {
-      if (event.target.className !== 'p_menu' && event.target.className !== 'link' && event.target.className !== 'nav-toggle expanded' && event.target.className !== 'nav-toggle-bar') {
+      if (event.target.className !== 'p_menu' && event.target.className !== 'links' && event.target.className !== 'nav-toggle expanded' && event.target.className !== 'nav-toggle-bar') {
         document.querySelector('.nav-toggle').classList.remove('expanded');
         document.querySelector('#nav').classList.remove('expanded');
       }
