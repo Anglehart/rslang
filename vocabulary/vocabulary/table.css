@@ -1,0 +1,146 @@
+/* DivTable.com */
+
+.table {
+  display: table;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  max-width: 1065px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.tableRow {
+  display: table-row;
+}
+
+.tableRow:not(:last-child)>.tableCell {
+  border-bottom: 1px solid #ffffffff;
+}
+
+.tableHeading {
+  background-color: #EEE;
+  display: table-header-group;
+}
+
+.tableCell, .tableHead {
+  border-left: 1px solid #ffffffff;
+  display: table-cell;
+  padding: 3px 10px;
+  width: 5%;
+  height: 3vw;
+  vertical-align: middle;
+}
+
+.tableCell:first-child, .tableHead:first-child {
+  border-left: 0;
+}
+
+.tableHeading {
+  background-color: #EEE;
+  display: table-header-group;
+  font-weight: bold;
+}
+
+.tableFoot {
+  background-color: #EEE;
+  display: table-footer-group;
+  font-weight: bold;
+}
+
+.tableBody {
+  display: table-row-group;
+  background: #e9f5f7;
+}
+
+.active-row>div.tableCell {
+  background: rgb(32, 32, 32);
+}
+
+.tableRow:nth-child(2n)>.tableCell {
+  background: #ffffff00;
+}
+
+.tableRow:nth-child(2n-1)>.tableCell {
+  background: #fbfcfe9e;
+}
+
+.tableRow:first-child>.tableCell {
+  background: rgba(128, 128, 128, 0.404);
+}
+
+.active-row:nth-child(n)>div.tableCell {
+  background: rgb(129, 142, 166);
+}
+
+.checkboxCell, .audioCell, .idCell {
+  width: 2%;
+}
+
+.wordCell, .transcriptCell, .translateCell {
+  /*width: 25%;*/
+}
+
+.fa-play {
+  font-size: 1em;
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+.checkboxCell {
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox--label, .cell--checkbox {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+/* @media (min-width: 1401px) {
+  .nav {
+    display: none;
+  }
+} */
+
+@media (max-width: 1339px) {
+  .statistic_1Cell {
+    display: none;
+  }
+  .statistic_2Cell {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .tableBody {
+    font-size: 0.9rem;
+  }
+  .tabs-row {
+    width: 100%;
+  }
+  .tab--link {
+
+  }
+  .tab--button {
+
+  }
+}
+
+@media (max-width: 440px) {
+  .idCell, .transcriptCell {
+    display: none;
+  }
+  .tab--link {
+    font-size: 18px;
+    max-width: 140px;
+  }
+  .tab--button {
+    font-size: 18px;
+    max-width: 140px;
+  }
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./style.css">
+<script src="./index.js" type="text/javascript"></script>
+<title>Настройки</title>
+<link rel="icon" href="../Main/img/logo.png" type="image/x-icon">
+</head>
+
+  <body>
+    <header class="header">
+      <div class="nav-toggle">
+        <div class="nav-toggle-bar"></div>
+      </div>
+
+      <nav id="nav" class="nav">
+        <ul class="menu">
+          <li><a href="../learning-words/build/target/index.html">Изучение слов</a></li>
+          <li><a href="../statistic/src/index.html">Статистика</a></li>
+          <li><a href="../Our/index-about.html">О команде</a></li>
+          <li><a href="../vocabulary/dist/index.html">Словарь</a></li>
+          <li class="p_menu"><a class="link">Мини-игры</a>
+            <ul class="v_menu">
+              <li><a target="_blank" href="../speakit/dist/index.html">SpeakIt</a></li>
+              <li><a target="_blank" href="../english-puzzle/dist/index.html">English puzzle</a></li>
+              <li><a target="_blank" href="../savannah/src/index.html">Саванна</a></li>
+              <li><a target="_blank" href="../Audition/index.html">Аудиовызов</a></li>
+              <li><a target="_blank" href="../millionaire/dist/index.html">Миллионер</a></li>
+            </ul>
+          </li>
+          <li><a href="../index.html">Промо-страница</a></li>
+          <li><a onclick="changePageSide()" id="butExit">Вход</a></li>
+        </ul>
+      </nav>
+
+      <div class="line">
+        <p class="dropdown"><img src="../Main/img/logo.png" alt="Логотип"></p>
+        <h3 class="dropdown">RS Lang</h3>
+        <span class="contener">
+          <div class="dropdown">
+            <a class="dropbtn" href="../learning-words/build/target/index.html">Изучение слов</a>
+          </div>
+          <div class="dropdown">
+            <a href="../statistic/src/index.html" class="dropbtn">Статистика</a>
+          </div>
+          <div class="dropdown">
+            <a href="../Our/index-about.html" class="dropbtn">О команде</a>
+          </div>
+          <div class="dropdown">
+            <a href="../vocabulary/dist/index.html" class="dropbtn">Словарь</a>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn">Мини-игры</button>
+            <div class="dropdown-content">
+              <a target="_blank" href="../speakit/dist/index.html">SpeakIt</a>
+              <a target="_blank" href="../english-puzzle/dist/index.html">English puzzle</a>
+              <a target="_blank" href="../savannah/src/index.html">Саванна</a>
+              <a target="_blank" href="../Audition/index.html">Аудиовызов</a>
+              <a target="_blank" href="../millionaire/dist/index.html">Миллионер</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a href="../index.html" class="dropbtn">Промо-страница</a>
+          </div>
+          <div class="dropdown">
+            <button class="button-input" id="but-autorization" data-hover="Выход" onclick="changePage()"><a
+                id="autorization" href="../index.html">Вход</a></button>
+          </div>
+        </span>
+      </div>
+    </header>
+    <main>
+      <div class="conteiner">
+    <form onsubmit="saveSettings(); return false" class="settings-form">
+      <div class="text-box">
+        <input type="text" name="wordsPerDay" id="wordsPerDay" value="">
+        <label for="wordsPerDay">Words per day</label>
+      </div>
+      <div class="text-box">
+        <input type="text" name="cardsPerDay" id="cardsPerDay" value="">
+        <label for="cardsPerDay">Cards per day</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showTranslation" name="showTranslation">
+        <label for="showTranslation">Show translation</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showTextMeaning" name="showTextMeaning">
+        <label for="showTextMeaning">Show text meaning</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showTextExample" name="showTextExample">
+        <label for="showTextExample">Show text example</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showImage" name="showImage">
+        <label for="showImage">Show image</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showTranscription" name="showTranscription">
+        <label for="showTranscription">Show transcription</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showAnswerButton" name="showAnswerButton">
+        <label for="showAnswerButton">Show "Answer" button</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showDeleteButton" name="showDeleteButton">
+        <label for="showDeleteButton">Show "Delete" button</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showDifficultWordsButton" name="showDifficultWordsButton">
+        <label for="showDifficultWordsButton">Show "Difficult words" button</label>
+      </div>
+      <div class="checkbox">
+        <input class="custom-checkbox" type="checkbox" id="showWordsStatusButtons" name="showWordsStatusButtons">
+        <label for="showWordsStatusButtons">Show "Words status" button</label>
+      </div>
+      <div class="message"></div>
+      <input type="submit" value="Save" class="save-btn">
+    </form>
+  </div>
+  </main>
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <p class="School">RS School 2020q1</p>
+    </div>
+  </footer>
+  <script type="text/javascript">
+    document.onclick = function change() {
+      if (event.target.className !== 'p_menu' && event.target.className !== 'link' && event.target.className !== 'nav-toggle expanded' && event.target.className !== 'nav-toggle-bar') {
+        document.querySelector('.nav-toggle').classList.remove('expanded');
+        document.querySelector('#nav').classList.remove('expanded');
+      }
+    };
+
+    (function menu() {
+      const hamburger = {
+        nav: document.querySelector('#nav'),
+        navToggle: document.querySelector('.nav-toggle'),
+
+        initialize() {
+          this.navToggle.addEventListener('click',
+            () => { this.toggle(); });
+        },
+
+        toggle() {
+          this.navToggle.classList.toggle('expanded');
+          this.nav.classList.toggle('expanded');
+        },
+      };
+
+      hamburger.initialize();
+    }());
+
+    function deleteInform() {
+      document.getElementById('butExit').textContent = 'Вход';
+      localStorage.removeItem('email');
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      document.getElementById('autorization').textContent = 'Вход';
+      document.getElementById('but-autorization').classList.remove('button-input-autorization');
+      document.location.href = '../index.html';
+    }
+
+    if (localStorage.getItem('userId') !== null) {
+      document.getElementById('but-autorization').onclick = '';
+      document.getElementById('autorization').textContent = localStorage.email;
+      document.getElementById('but-autorization').classList.add('button-input-autorization');
+      document.getElementById('butExit').textContent = 'Выход';
+      document.getElementById('but-autorization').onclick = function remove() {
+        deleteInform();
+      };
+    }
+
+    function changePageSide() {
+      if (localStorage.getItem('userId') === null) {
+        document.location.href = '../authorization/src/index.html';
+      } else {
+        deleteInform();
+      }
+    }
+
+    function changePage(href) {
+      if (localStorage.getItem('userId') === null) {
+        document.location.href = '../index.html';
+      } else { document.location.href = href; }
+    }
+  </script>
+  </body>
+</html>

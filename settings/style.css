@@ -1,0 +1,518 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  min-height: calc(100vh - 50px);
+}
+
+.settings-form {
+  width: 300px;
+  background: #e9f5f7;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.conteiner{
+  position: relative;
+  padding-top: 100px;
+}
+
+.message {
+  opacity: 0;
+  transition: .5s;
+  height: 50px;
+}
+.showMessage {
+  opacity: 1;
+}
+.error {
+  color: red;
+  text-align: center;
+}
+.success {
+  color: green;
+  text-align: center;
+}
+
+/* для элемента input c type="checkbox" */
+.custom-checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* для элемента label, связанного с .custom-checkbox */
+.custom-checkbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+/* создание в label псевдоэлемента before со следующими стилями */
+.custom-checkbox+label::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 0.25em;
+  margin: 0 25px 0 14px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+/* стили при наведении курсора на checkbox */
+.custom-checkbox:not(:disabled):not(:checked)+label:hover::before {
+  border-color: #b3d7ff;
+}
+
+/* стили для активного чекбокса (при нажатии на него) */
+.custom-checkbox:not(:disabled):active+label::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+/* стили для чекбокса, находящегося в фокусе */
+.custom-checkbox:focus+label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.custom-checkbox:focus:not(:checked)+label::before {
+  border-color: #80bdff;
+}
+
+/* стили для чекбокса, находящегося в состоянии checked */
+.custom-checkbox:checked+label::before {
+  border-color: #0b76ef;
+  background-color: #0b76ef;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+/* стили для чекбокса, находящегося в состоянии disabled */
+.custom-checkbox:disabled+label::before {
+  background-color: #e9ecef;
+}
+
+.checkbox, .text-box {
+  margin-bottom: 1em;
+  font-size: 16px;
+}
+
+.text-box input {
+  margin-left: 5px;
+  margin-right: 12px;
+  text-align: center;
+  width: 35px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 4px;
+}
+.save-btn {
+  display: block;
+  margin: auto;
+  font-size: 16px;
+  background-color: #0b76ef;
+  color: #fff;
+  border: none;
+  padding: 5px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*--------------------------------Header------------------------------------- */
+
+.header{
+  line-height: 1.6;
+  width: 100%;
+  height: 64px;
+  background: #fbfcfe;
+  color: black;
+  font-size: 1rem;
+position: fixed;
+ z-index: 100;
+}
+
+a {
+text-decoration: none;
+color: #232323;
+cursor: pointer;
+}
+
+.main{
+background: #fbfcfe;
+}
+
+.line{
+  position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.dropbtn {
+    background-color: inherit;
+    padding: 1rem;
+    border: none;
+    margin: 0 0.5rem 0 0.5rem;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.contener{
+      position: relative;
+      bottom: -33px;
+      float: right;
+      margin-right: 50px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 10rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border: 1px solid;
+    border-radius: 12px;
+    background-image: linear-gradient(
+          to bottom,
+          #AFEEEE,
+          #B0E0E6
+        );
+      border: 2px solid black;
+}
+
+.dropdown-content a{
+    color: black;
+    font-weight: bold;
+    padding: 1rem 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+
+.dropbtn a {
+    display: block;
+}
+
+
+.dropdown-content a:hover{
+  color: rgba(246, 28, 32, 1);}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {
+  cursor: pointer;
+  text-decoration: underline;
+  color:black;
+}
+
+.dropdown img {
+  width: 3rem;
+  height: 3rem;
+  margin: 2rem 0.6rem -10px 3rem;
+}
+
+h3.dropdown{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.button-input {
+background-color: inherit;
+color: rgba(246, 28, 32, 1);
+border: 1px solid rgba(246, 28, 32, 1);
+border-radius: 20px;
+min-width: 80px;
+font-size: 1rem;
+font-weight: 600;
+line-height: 1.75;
+padding: 6px 16px;
+transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.button-input:hover{background-color: rgba(246, 28, 32, .3);
+cursor: pointer;}
+
+.button-input a {
+color: rgba(246, 28, 32, 1);
+}
+
+#autorization{
+  display: block;
+}
+
+.button-input-autorization {
+background-color: inherit;
+color: rgb(144, 238, 144);
+border: 1px solid rgb(144, 238, 144);
+border-radius: 20px;
+min-width: 80px;
+font-size: 1rem;
+font-weight: 600;
+line-height: 1.75;
+padding: 6px 16px;
+transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+
+.button-input, .button-input-autorization {
+  background: transparent;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.button-input-autorization:hover {
+  background-color: rgb(144, 238, 144, .3);
+}
+
+/*button:before (attr data-hover)*/
+.button-input-autorization:hover:before {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.button-input-autorization:before {
+  content: attr(data-hover);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translate(-100%, 0);
+  transition: all 0.3s ease-in-out;
+}
+/*button div (button text before hover)*/
+.button-input-autorization:hover a {
+  opacity: 0;
+  transform: translate(100%, 0);
+}
+.button-input-autorization a {
+  transition: all 0.3s ease-in-out;
+  color: rgb(144, 238, 144);
+}
+
+
+/*------------боковое меню-----------------*/
+
+/* nav toggle */
+
+.nav-toggle {
+  cursor: pointer;
+  height: 2rem;
+  left: 2rem;
+  position: fixed;
+  top: 1rem;
+  width: 2.2rem;
+  z-index: 99992;
+  display: none;
+}
+.nav-toggle:hover {
+  opacity: 0.8;
+}
+.nav-toggle .nav-toggle-bar,
+.nav-toggle .nav-toggle-bar::after,
+.nav-toggle .nav-toggle-bar::before {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background: black;
+  content: '';
+  height: 3px;
+  transition: all .5s;
+  width: 100%;
+}
+.nav-toggle .nav-toggle-bar {
+  margin-top: 0;
+}
+.nav-toggle .nav-toggle-bar::after {
+  margin-top: 8px;
+}
+.nav-toggle .nav-toggle-bar::before {
+  margin-top: -8px;
+}
+.nav-toggle.expanded .nav-toggle-bar {
+  background: transparent;
+}
+.nav-toggle.expanded .nav-toggle-bar::after, .nav-toggle.expanded .nav-toggle-bar::before {
+  background: black;
+  margin-top: 0;
+}
+.nav-toggle.expanded .nav-toggle-bar::after {
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.nav-toggle.expanded .nav-toggle-bar::before {
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+
+.nav {
+  width: 260px;
+  height: auto;
+  background-image: linear-gradient(
+        to bottom,
+        #AFEEEE,
+        #B0E0E6
+      );
+  top:0px;
+  padding: 30px;
+  position: fixed;
+  left: -430px;
+  transition: left 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  height: calc(100vh + 20px);
+  z-index: 998;
+  padding-top: 130px;
+}
+.nav.expanded {
+  left: 0;
+}
+
+
+/*--------------------выпадающий список----------------------*/
+
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.menu a{
+    color: black;
+    padding: 10px;
+    display: block;
+    border-bottom: 1px solid #666;
+    transition: 0.5s all;
+}
+.menu a:hover{
+    background: #666;
+    padding: 10px 0 10px 20px;
+}
+.menu li:first-child a, .menu li .v_menu li:first-child a{
+    border-radius: 3px 3px 0 0;
+}
+.menu li:last-child a, .menu li .v_menu li:last-child a{
+    border-radius: 0 0 3px 3px;
+    border-bottom: 0;
+}
+.menu li .v_menu li a{
+    border-radius: 0;
+}
+.p_menu{position: relative;}
+.v_menu{
+    position: absolute;
+    width: 100%;
+    left: 100%;
+    top: -9999px;
+    opacity: 0;
+    border-left: 10px solid transparent;
+    transition: 0.5s opacity;
+    background-image: linear-gradient(
+          to bottom,
+          #AFEEEE,
+          #B0E0E6
+        );
+      border: 2px solid black;
+}
+.p_menu:hover .v_menu{
+    opacity: 1;
+    top: 0;
+}
+.p_menu::after{
+    content: "";
+    position: absolute;
+    border:5px solid;
+    border-color: transparent transparent transparent black;
+    top: 1em;
+    right: .7em;
+    transition: 0.5s;
+}
+.p_menu:hover::after{
+    transform: scaleX(-1);
+}
+
+p {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  display: list-item;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+footer {
+   position: relative;
+   bottom: 0;
+   width: 100%;
+   background: #e9f5f7;
+   color: white;
+   text-align: center;
+   height: 50px;
+}
+
+
+.footer-distributed .footer-left p {
+  color: black;
+  font-size: 20px;
+  position: relative;
+  top: 10px;
+}
+
+@media (min-width: 1401px) {
+.nav{display: none;}
+}
+
+@media (max-width: 1339px) {
+.nav-toggle {display: block;}
+
+.contener{display: none;}
+
+.line {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+}
+
+}
+
+@media (max-width: 440px) {
+
+  .nav {width: 200px;}
+
+  .dropdown img {
+    width: 2rem;
+    height: 2rem;
+    margin: 1.6rem 0.6rem -10px 3rem;
+  }
+
+  h3.dropdown{
+      font-size: 1.5rem;
+      font-weight: 600;
+  }
+}

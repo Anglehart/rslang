@@ -1,0 +1,147 @@
+body,  main, section {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.header {
+  width: 100%;
+  height: 64px;
+  background: #fbfcfe;
+  color: black;
+  font-size: 1rem;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  box-shadow: 0 5px 5px -5px #333;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  background: #e9f5f7;
+  color: white;
+  text-align: center;
+  height: 50px;
+  box-shadow: 0 -5px 5px -5px #333;
+}
+
+.tabs-row {
+  display: flex;
+  width: 800px;
+  justify-content: space-around;
+  margin: auto;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab--link {
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  min-width: 160px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #fff;
+  margin: 10px;
+}
+
+.tab--link:hover {
+  cursor: pointer;
+  background: #1119;
+}
+
+.tab--button {
+  min-width: 160px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  background: grey;
+  color: rgb(241, 232, 232);
+  border: 0;
+  cursor: not-allowed;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px 10px;
+}
+
+.allowed {
+  cursor: pointer;
+  min-width: 160px;
+  background: #fff;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 3px;
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.allowed.del-button {
+  background: red;
+}
+
+.allowed.add-button {
+  background: green;
+}
+
+.main {
+  width: 100%;
+  min-height: calc(100vh - 114px);
+  padding: 90px 0px;
+}
+
+.bg-green {
+  background: url('./bg-pattern.jpg');
+  background-size: 300px;
+}
+
+.bg-blue {
+  background: url('./bg-pattern.jpg');
+  background-size: 300px;
+}
+
+.bg-red {
+  background: url('./bg-pattern.jpg');
+  background-size: 300px;
+}
+
+.active-bg {
+  background: #5e5e5e;
+  color: #fff;
+}
+
+.none {
+  display: none;
+}
+
+.active-row {
+  background: rgb(32, 32, 32);
+  color: #fff;
+}
+
+.addMoreButton {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid black;
+  color: #000;
+  background: #fff;
+  position: fixed;
+  left: calc(50% - 76px);
+  cursor: pointer;
+  bottom: 70px;
+  padding: 10px;
+}
+.addMoreButton:hover {
+  color: #fff;
+  background: #5e5e5e;
+}
+
+
+@media (max-width: 800px) {
+  main{
+    font-size: 0.8rem;
+  }
+}

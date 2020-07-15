@@ -1,0 +1,173 @@
+* {
+	margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+	font-size: 1rem;
+}
+
+body {
+	background: #e9f5f7;
+	/* position: relative; */
+    width: 100vw;
+	height: 100vh;
+	color: #000;
+	font-family: "Roboto", sans-serif;
+
+	color: rgba(0, 0, 0, 0.54);
+}
+.container{
+	padding-top: 70px;
+	width: 70%;
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 1.5vw;
+	min-height: calc(100vh - 50px);
+}
+/* .menu {
+	width: 45%;
+	font-weight: 600;
+} */
+.link {
+	background-color: inherit;
+    padding: 1rem;
+    border: none;
+    margin: 0 0.5rem 0 0.5rem;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.settings,
+.check-boxes {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 1rem;
+    font-weight: 600;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 45%;
+}
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 0 auto 10px;
+    text-align: center;
+	font-family: arial;
+    border-radius: 20px;
+    background: #2eddef52;
+}
+.card-hide {
+	display: none;
+}
+.card_img{
+	margin: 20px auto;
+	max-width: 100%;
+}
+
+
+.card_main-input{
+	width: 95%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+.card_phrase,
+.card_phrase-translate,
+.card_meaning,
+.card_meaning-translate,
+.card_word-transcription,
+.difficulty_btns,
+.card_word-translate {
+	width: 95%;
+	margin: 3px auto;
+}
+.word-hidden {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+button,
+.word-hidden_btn {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: inherit;
+    padding: 0.1em 0.4em;
+    border-radius: 20px;
+    border: none;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 1.2rem;
+    background: #429fafc9;
+    font-weight: 600;
+}
+button{
+    margin: 0px 5px 5px;
+}
+.word-hidden_btn {
+	margin-left: 10px;
+}
+.word-hidden_input {
+	font-size: 1.5em;
+	height: 1.1em;
+	font-weight: normal;
+}
+.card_word-translate {
+	font-size: 1.5rem;
+}
+.multi-color {
+	position: absolute;
+	bottom: 0px;
+	left: 2px;
+	font-size: 1.5em;
+	font-weight: normal;
+}
+.difficulty_btns {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.bars {
+    margin: 10px auto;
+    width: 100%;
+}
+.bars-hide {
+	display: none;
+}
+.notification {
+	text-align: center;
+	font-weight: normal;
+}
+.para1 {
+	font-size: 1.5em;
+}
+.para2 {
+	font-size: 1.3em;
+}
+.para3 {
+	font-size: 1.2em;
+}
+
+@media (max-width: 1032px) {
+	.container{
+		width: 80%;
+		/* font-size: 3.5vw; */
+	}
+	.card_word-hidden {
+		width: 85%;
+		display: flex;
+	}
+	.word-hidden {
+		margin: 0;
+	}
+	button{
+		margin: 15px 5px 5px;
+	}
+}
+
+@media (max-width: 600px) {
+	.container{
+		width: 90%;
+		/* font-size: 4vw; */
+	}
+}
