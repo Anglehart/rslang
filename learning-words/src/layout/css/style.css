@@ -56,6 +56,9 @@ body {
     border-radius: 20px;
     background: #2eddef52;
 }
+.card-hide {
+	display: none;
+}
 .card_img{
 	margin: 20px auto;
 	max-width: 100%;
@@ -126,6 +129,9 @@ button{
 .bars {
     margin: 10px auto;
     width: 100%;
+}
+.bars-hide {
+	display: none;
 }
 .notification {
 	text-align: center;
