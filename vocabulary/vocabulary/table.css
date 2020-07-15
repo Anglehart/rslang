@@ -4,7 +4,10 @@
   display: table;
   width: 100%;
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
+  max-width: 1065px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .tableRow {
@@ -26,6 +29,7 @@
   padding: 3px 10px;
   width: 5%;
   height: 3vw;
+  vertical-align: middle;
 }
 
 .tableCell:first-child, .tableHead:first-child {
@@ -46,6 +50,7 @@
 
 .tableBody {
   display: table-row-group;
+  background: #e9f5f7;
 }
 
 .active-row>div.tableCell {
@@ -65,20 +70,20 @@
 }
 
 .active-row:nth-child(n)>div.tableCell {
-  background: rgb(32, 32, 32);
+  background: rgb(129, 142, 166);
 }
 
-.checkboxCell, .audioCell, .idCell, .statistic_1Cell, .statistic_2Cell, .firstCheckboxCell {
-  width: 5%;
+.checkboxCell, .audioCell, .idCell {
+  width: 2%;
 }
 
 .wordCell, .transcriptCell, .translateCell {
-  width: 25%;
+  /*width: 25%;*/
 }
 
 .fa-play {
-  font-size: 1.5em;
-  padding: 20px 0 0 0;
+  font-size: 1em;
+  padding: 12px 0;
   cursor: pointer;
 }
 
@@ -113,30 +118,29 @@
 
 @media (max-width: 800px) {
   .tableBody {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   .tabs-row {
     width: 100%;
   }
   .tab--link {
-    font-size: 0.8rem;
+
   }
   .tab--button {
-    margin: 0% 5px;
-    min-width: 140px;
+
   }
 }
 
 @media (max-width: 440px) {
-  .idCell {
+  .idCell, .transcriptCell {
     display: none;
   }
   .tab--link {
-    font-size: 0.8em;
+    font-size: 18px;
+    max-width: 140px;
   }
   .tab--button {
-    font-size: 0.8rem;
-    margin: 0%;
-    min-width: 100px;
+    font-size: 18px;
+    max-width: 140px;
   }
 }

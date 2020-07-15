@@ -24,14 +24,14 @@ class TableContent {
     const tableBody = document.querySelector('div.tableBody');
     tableBody.innerHTML = `
     <div class="tableRow">
-      <div class="tableCell checkboxCell">Выбрать</div>
-      <div class="tableCell idCell">№ п/п </div>
-      <div class="tableCell audioCell">Воспроизвести</div>
+      <div class="tableCell checkboxCell"></div>
+      <div class="tableCell idCell">№</div>
+      <div class="tableCell audioCell">Аудио</div>
       <div class="tableCell wordCell">Слово</div>
       <div class="tableCell transcriptCell">Транскрипция</div>
       <div class="tableCell translateCell">Перевод</div>
-      <div class="tableCell statistic_1Cell">Дата добавления</div>
-      <div class="tableCell statistic_2Cell">Дата изменения</div>
+      <div class="tableCell statistic_1Cell">Добавлен</div>
+      <div class="tableCell statistic_2Cell">Изменен</div>
     </div>
     `;
   }
@@ -75,7 +75,7 @@ class TableContent {
     rowDiv.classList.add('tableRow');
     rowDiv.innerHTML = `
       <div class="tableCell checkboxCell">
-        <label class='checkbox--label for='${data['_id']}'>
+        <label class='checkbox--label' for='${data['_id']}'>
           <input type='checkbox' class='cell--checkbox' id='${data['_id']}'>
         </label>
       </div>
