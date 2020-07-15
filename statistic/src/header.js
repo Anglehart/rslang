@@ -34,6 +34,7 @@ function deleteInform() {
   localStorage.removeItem('userId');
   document.getElementById('autorization').textContent = 'Вход';
   document.getElementById('but-autorization').classList.remove('button-input-autorization');
+  document.location.href = '../../index.html';
 }
 
 // -----------------login-------------
