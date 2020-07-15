@@ -9,7 +9,7 @@ body {
 	background: #e9f5f7;
 	/* position: relative; */
     width: 100vw;
-	height: 100vh; 
+	height: 100vh;
 	color: #000;
 	font-family: "Roboto", sans-serif;
 
@@ -21,6 +21,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	font-size: 1.5vw;
+	min-height: calc(100vh - 50px);
 }
 /* .menu {
 	width: 45%;
@@ -115,7 +116,7 @@ button{
 	font-size: 1.5rem;
 }
 .multi-color {
-	position: absolute; 
+	position: absolute;
 	bottom: 0px;
 	left: 2px;
 	font-size: 1.5em;
@@ -169,4 +170,4 @@ button{
 		width: 90%;
 		/* font-size: 4vw; */
 	}
-} 
+}

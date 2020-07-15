@@ -1,7 +1,7 @@
 body {
 	overflow: hidden;
   }
-  
+
   .preloader-container {
 	display: flex;
 	justify-content: center;
@@ -9,11 +9,12 @@ body {
 	height: 80vh;
 	overflow: hidden;
 	animation-delay: 1s;
+	padding: 0 10px;
   }
   .preloader-hide {
 	  display: none;
   }
-  
+
   .item-1 {
 	width: 20px;
 	height: 20px;
@@ -50,7 +51,7 @@ body {
 	transition: 0.5s all ease;
 	transform: scale(1);
   }
-  
+
   .item-2 {
 	width: 20px;
 	height: 20px;
@@ -87,7 +88,7 @@ body {
 	transition: 0.5s all ease;
 	transform: scale(1);
   }
-  
+
   .item-3 {
 	width: 20px;
 	height: 20px;
@@ -124,7 +125,7 @@ body {
 	transition: 0.5s all ease;
 	transform: scale(1);
   }
-  
+
   .item-4 {
 	width: 20px;
 	height: 20px;
@@ -161,7 +162,7 @@ body {
 	transition: 0.5s all ease;
 	transform: scale(1);
   }
-  
+
   .item-5 {
 	width: 20px;
 	height: 20px;
@@ -198,4 +199,3 @@ body {
 	transition: 0.5s all ease;
 	transform: scale(1);
   }
-  

@@ -9,25 +9,26 @@
 	font-size: 1rem;
   position: fixed;
    z-index: 100;
+	 box-shadow: 0 5px 5px -5px #333;
   }
-  
+
   a {
   text-decoration: none;
   color: #232323;
   cursor: pointer;
   }
-  
+
   .main{
   background: #fbfcfe;
   }
-  
+
   .line{
 	position: absolute;
 	  top: 50%;
 	  transform: translateY(-50%);
 	  width: 100%;
   }
-  
+
   .dropbtn {
 	  background-color: inherit;
 	  padding: 1rem;
@@ -37,20 +38,22 @@
 	  font-size: 1rem;
 	  font-weight: 600;
 	  text-decoration: none;
+		box-shadow: none;
+		border: 0;
   }
-  
+
   .contener{
 		position: relative;
 		/* bottom: -33px; */
 		float: right;
 		margin-right: 50px;
   }
-  
+
   .dropdown {
 	  position: relative;
 	  display: inline-block;
   }
-  
+
   .dropdown-content {
 	  display: none;
 	  position: absolute;
@@ -66,7 +69,7 @@
 		  );
 		border: 2px solid black;
   }
-  
+
   .dropdown-content a{
 	  color: black;
 	  font-weight: bold;
@@ -74,35 +77,35 @@
 	  text-decoration: none;
 	  display: block;
   }
-  
-  
+
+
   .dropbtn a {
 	  display: block;
   }
-  
-  
+
+
   .dropdown-content a:hover{
 	color: rgba(246, 28, 32, 1);}
-  
+
   .dropdown:hover .dropdown-content {display: block;}
-  
+
   .dropdown:hover .dropbtn {
 	cursor: pointer;
 	text-decoration: underline;
 	color:black;
   }
-  
+
   .dropdown img {
 	width: 3rem;
 	height: 3rem;
-	margin: 2rem 0.6rem -10px 3rem;
+	margin: 0px 20px 0px 50px;
   }
-  
+
   h3.dropdown{
 	  font-size: 2rem;
 	  font-weight: 600;
   }
-  
+
   .button-input {
   background-color: inherit;
   color: rgba(246, 28, 32, 1);
@@ -115,18 +118,18 @@
   padding: 6px 16px;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
-  
+
   .button-input:hover{background-color: rgba(246, 28, 32, .3);
   cursor: pointer;}
-  
+
   .button-input a {
   color: rgba(246, 28, 32, 1);
   }
-  
+
   #autorization{
 	display: block;
   }
-  
+
   .button-input-autorization {
   background-color: inherit;
   color: rgb(144, 238, 144);
@@ -139,8 +142,8 @@
   padding: 6px 16px;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
-  
-  
+
+
   .button-input, .button-input-autorization {
 	background: transparent;
 	outline: none;
@@ -148,11 +151,11 @@
 	overflow: hidden;
 	max-width: 300px;
   }
-  
+
   .button-input-autorization:hover {
 	background-color: rgb(144, 238, 144, .3);
   }
-  
+
   /*button:before (attr data-hover)*/
   .button-input-autorization:hover:before {
 	opacity: 1;
@@ -176,12 +179,12 @@
 	transition: all 0.3s ease-in-out;
 	color: rgb(144, 238, 144);
   }
-  
-  
+
+
   /*------------боковое меню-----------------*/
-  
+
   /* nav toggle */
-  
+
   .nav-toggle {
 	cursor: pointer;
 	height: 2rem;
@@ -235,8 +238,8 @@
 	-webkit-transform: rotate(-45deg);
 	transform: rotate(-45deg);
   }
-  
-  
+
+
   .nav {
 	width: 260px;
 	height: auto;
@@ -257,10 +260,10 @@
   .nav.expanded {
 	left: 0;
   }
-  
-  
+
+
   /*--------------------выпадающий список----------------------*/
-  
+
   ul{
 	  margin: 0;
 	  padding: 0;
@@ -319,18 +322,18 @@
   .p_menu:hover::after{
 	  transform: scaleX(-1);
   }
-  
+
   p {
 	display: inline-block;
 	vertical-align: top;
 	margin: 0;
 	display: list-item;
   }
-  
+
   * {
 	box-sizing: border-box;
   }
-  
+
   footer {
 	 position: relative;
 	 bottom: 0;
@@ -340,24 +343,24 @@
 	 text-align: center;
 	 height: 50px;
   }
-  
-  
+
+
   .footer-distributed .footer-left p {
 	color: black;
 	font-size: 20px;
 	position: relative;
 	top: 10px;
   }
-  
+
   @media (min-width: 1401px) {
   .nav{display: none;}
   }
-  
+
   @media (max-width: 1339px) {
   .nav-toggle {display: block;}
-  
+
   .contener{display: none;}
-  
+
   .line {
 	  position: absolute;
 	  top: 50%;
@@ -365,19 +368,19 @@
 	  width: 100%;
 	  text-align: center;
   }
-  
+
   }
-  
+
   @media (max-width: 440px) {
-  
+
 	.nav {width: 200px;}
-  
+
 	.dropdown img {
 	  width: 2rem;
 	  height: 2rem;
 	  margin: 1.6rem 0.6rem -10px 3rem;
 	}
-  
+
 	h3.dropdown{
 		font-size: 1.5rem;
 		font-weight: 600;
