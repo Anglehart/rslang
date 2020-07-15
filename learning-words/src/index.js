@@ -2,6 +2,7 @@
 import './layout/css/style.css';
 import './layout/css/header-footer.css';
 import './layout/css/progress.css';
+import './layout/css/preloader.css';
 
 import {
   addCardFields, addTextExampleTranslateInCard,
@@ -11,6 +12,7 @@ import { showFullTextExample, showFullTextMeaning } from './layout/scripts/show-
 import {
   showDifficultyBtns, hideDifficultyBtns, showAnswerBtn, showDifficultWordBtn, showDeleteWordBtn,
 } from './layout/scripts/show-btns';
+import { clearCard, showCard } from './layout/scripts/clear-for-loading';
 
 import setInputWidth from './layout/scripts/set-input-width';
 import addMultiColorResult from './layout/scripts/multi-color-result';
@@ -26,10 +28,8 @@ import progress from './layout/scripts/progress';
 // eslint-disable-next-line import/no-cycle
 import sayWord from './layout/scripts/say';
 
-
 const userId = localStorage.getItem('userId');
 const token = localStorage.getItem('token');
-
 
 async function seeSettings() {
   const settings = await getSettings(userId, token);
@@ -42,7 +42,9 @@ async function createArray() {
   const wordsArrayForToday = await createWordsArrayForToday(
     setSettings.wordsPerDay, setSettings.optional.cardsPerDay, token, userId,
   );
+  console.log(wordsArrayForToday);
   const shufledWordsArrayForToday = wordsArrayForToday.sort((a, b) => (a.group > b.group ? 1 : -1));
+  showCard();
   return shufledWordsArrayForToday;
 }
 const wordsArrayForToday = createArray();
@@ -50,14 +52,15 @@ const wordsArrayForToday = createArray();
 async function startApp() {
   const arrayOfWords = await wordsArrayForToday;
 
-
   if (arrayOfWords.length === 0) {
     progress(token, userId);
   } else {
     const word = arrayOfWords[arrayOfWords.length - 1];
+    console.log(arrayOfWords);
     app(word, arrayOfWords);
   }
 }
+clearCard();
 startApp();
 
 async function correctAnswer(wordInfo, arrayOfWords) {
